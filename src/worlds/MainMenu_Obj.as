@@ -9,7 +9,7 @@ package worlds
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
-	import objects.GlobalVariables;
+	import GlobalVariables;
 	/**
 	 * ...
 	 * @author konsnos

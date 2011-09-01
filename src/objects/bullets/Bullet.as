@@ -4,7 +4,7 @@ package objects.bullets
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	
-	import objects.GlobalVariables;
+	import GlobalVariables;
 	
 	/**
 	 * ...

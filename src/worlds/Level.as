@@ -10,10 +10,10 @@ package worlds
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
 	
-	import enemies.Little;
-	import player.Player;
+	import objects.enemies.Little;
+	import objects.player.Player;
 	import objects.bullets.Bullet;
-	import objects.GlobalVariables;
+	import GlobalVariables;
 	
 	/**
 	 * ...
