@@ -25,7 +25,7 @@ package worlds
 			addGraphic(GlobalVariables.backdrop1);
 			addGraphic(GlobalVariables.backdrop2);
 			
-			add(new Menu_Obj);
+			add(new MainMenu_Obj);
 		}
 	}
 

@@ -14,35 +14,9 @@ package worlds
 	 * ...
 	 * @author konsnos
 	 */
-	public class Menu_Obj extends Entity
+	public class MainMenu_Obj extends Menu_Obj
 	{
-		private var title:Text;
-		private var selection:Array;
-		private var menu:Graphiclist;
-		private var choice:int = 1;
-		private function get choiceG():int
-		{
-			return choice;
-		}
-		private function set choiceS(setValue:int):void 
-		{
-			if (setValue == 0)
-			{
-				choice = 0;
-			}else
-			{
-				choice += setValue;
-				if (choice < 0)
-				{
-					choice = 2;
-				}else if (choice > 2)
-				{
-					choice = 0;
-				}
-			}
-		}
-		
-		public function Menu_Obj() 
+		public function MainMenu_Obj() 
 		{
 			selection = new Array();
 			title = new Text(String("Space Invaders"));
@@ -79,19 +53,19 @@ package worlds
 				choiceS = -1;
 			}
 			
-			if (choice == 0)
+			if (choiceG == 0)
 			{
 				Text(selection[0]).alpha = 1;
 				Text(selection[1]).alpha = 0.5;
 				Text(selection[2]).alpha = 0.5;
 			}
-			else if (choice == 1)
+			else if (choiceG == 1)
 			{
 				Text(selection[0]).alpha = 0.5;
 				Text(selection[1]).alpha = 1;
 				Text(selection[2]).alpha = 0.5;
 			}
-			else if (choice == 2)
+			else if (choiceG == 2)
 			{
 				Text(selection[0]).alpha = 0.5;
 				Text(selection[1]).alpha = 0.5;
@@ -100,7 +74,7 @@ package worlds
 			
 			if (Input.pressed(Key.ENTER))
 			{
-				switch (choice) 
+				switch (choiceG) 
 				{
 					case 0:
 						GlobalVariables.RESETSCORE();

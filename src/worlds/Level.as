@@ -1,5 +1,6 @@
 package worlds 
 {
+	import net.flashpunk.Entity;
 	import net.flashpunk.tweens.misc.Alarm;
 	import net.flashpunk.graphics.Canvas;
 	import net.flashpunk.FP;
@@ -33,6 +34,8 @@ package worlds
 		// GAME
 		private var score:Number;
 		private var gameState:Number;
+		private var pause:Boolean;
+		private var wasPaused:Boolean;
 		
 		// PLAYER
 		private var playerY:Number;
@@ -47,6 +50,7 @@ package worlds
 		private var changeLine:Boolean;
 		
 		private var littles_e:Array;
+		private var entitiesToRemove:Array;
 		
 		// TEMPORARY VARS
 		private var i:Number;
@@ -71,6 +75,8 @@ package worlds
 			super.begin();
 			
 			score = 0;
+			pause = false;
+			wasPaused = false;
 			
 			addGraphic(background1);
 			addGraphic(background2);
@@ -100,6 +106,7 @@ package worlds
 			enemiesMoveTime = 1;
 			
 			littles_e = new Array();
+			entitiesToRemove = new Array();
 			little_e = null;
 		}
 		
@@ -107,6 +114,38 @@ package worlds
 		{
 			super.update();
 			
+			if (Input.pressed("pause"))
+			{
+				if (pause)
+				{
+					pause = false;
+					getClass(Pause_Obj, entitiesToRemove);
+					if (entitiesToRemove)
+					{
+						remove(entitiesToRemove.pop())
+					}
+					getClass(Pause_Obj, entitiesToRemove);
+				}
+				else
+				{
+					pause = true;
+					add(new Pause_Obj);
+				}
+			}
+			if (!pause)
+			{
+				updateGameplay();
+			}
+		}
+		
+		public function getEnemies():void 
+		{
+			littles_e = new Array();
+			getType("little", littles_e);
+		}
+		
+		private function updateGameplay():void 
+		{
 			timeElapsed += FP.elapsed;
 			
 			if (littles_e.length == 0)
@@ -126,13 +165,7 @@ package worlds
 			updateEnemies();
 		}
 		
-		public function getEnemies():void 
-		{
-			littles_e = new Array();
-			getType("little", littles_e);
-		}
-		
-		public function updateEnemies():void 
+		private function updateEnemies():void 
 		{
 			if (timeElapsed > enemiesMoveTime)
 			{
