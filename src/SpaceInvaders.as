@@ -28,7 +28,7 @@ package
 			Input.define("left", Key.LEFT, Key.A);
 			Input.define("up", Key.UP, Key.W);
 			Input.define("down", Key.DOWN, Key.S);
-			Input.define("shoot", Key.SPACE);
+			Input.define("shoot", Key.SPACE, Key.ENTER);
 			Input.define("pause", Key.P);
 			
 			FP.world = new MainMenu;

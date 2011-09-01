@@ -4,6 +4,7 @@ package enemies
 	import net.flashpunk.graphics.Image;
 	
 	import objects.bullets.Bullet;
+	import objects.bullets.BulletEnemy;
 	import objects.GlobalVariables;
 	/**
 	 * ...
@@ -16,12 +17,14 @@ package enemies
 		
 		private static var speed:Number;
 		
-		private static var listUpdate:Boolean;
-		public function get listUpdateP():Boolean 
+		private static var listUpdate:Boolean; // Checks if the list with the Little aliens needs to be updated
+		
+		// Gets-Sets
+		public function get listUpdateG():Boolean
 		{ 
 			return listUpdate;
 		}
-		public function set listUpdateP(setValue:Boolean):void 
+		public function set listUpdateS(setValue:Boolean):void 
 		{
 			listUpdate = setValue;
 		}
@@ -32,12 +35,13 @@ package enemies
 			
 			image.scale *= 0.7;
 			
-			listUpdate = false;
+			listUpdateS = false;
 			
 			super(x, y);
 			
-			hp = 1;
+			hp = 1; // Να δοκιμάσω να χρησιμοποιήσω την Set
 			speed = 15;
+			fireChance = 0.0003;
 			
 			width = image.width * image.scale;
 			height = image.height * image.scale;
@@ -50,7 +54,23 @@ package enemies
 		{
 			super.update();
 			
-			CollisionDetection();
+			ShootCheck();
+			
+			CheckIfShot();
+		}
+		
+		private function ShootCheck():void 
+		{
+			var checkIfShoot:Number = FP.random;
+			if (checkIfShoot < fireChance)
+			{
+				spawnBullet(this.x + halfWidth, this.y + height);
+			}
+		}
+		
+		private function spawnBullet(x:Number, y:Number):void 
+		{
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y);
 		}
 		
 		public function walkOn():void 
@@ -63,20 +83,20 @@ package enemies
 			speed *= -1;
 		}
 		
-		public function comeCloser():void 
+		public function ComeCloser():void 
 		{
 			this.y += Math.abs(speed) * 2;
 		}
 		
-		public function CollisionDetection():void 
+		public function CheckIfShot():void 
 		{
 			var b:Bullet = collide("bullet_P", x, y) as Bullet;
 			
 			if (b)
 			{
+				takeDamage(b.damageG);
 				b.destroy();
-				this.destroy();
-				listUpdate = true;
+				listUpdateS = true;
 			}
 		}
 	}

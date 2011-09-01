@@ -20,7 +20,8 @@ package objects.bullets
 		{
 			super();
 			
-			speed = 300;
+			speed = -300;
+			damage = 1;
 			
 			type = "bullet_P";
 		}
@@ -28,11 +29,6 @@ package objects.bullets
 		override public function update():void 
 		{
 			super.update();
-			
-			if (this.y + image.height < 0)
-			{
-				destroy();
-			}
 		}
 		
 		override public function reset(x:Number, y:Number):void

@@ -72,7 +72,7 @@ package worlds
 				Text(selection[2]).alpha = 1;
 			}
 			
-			if (Input.pressed(Key.ENTER))
+			if (Input.pressed("shoot"))
 			{
 				switch (choiceG) 
 				{

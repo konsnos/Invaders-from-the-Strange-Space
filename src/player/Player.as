@@ -6,7 +6,9 @@ package player
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
+	import worlds.Lost_Obj;
 	import objects.bullets.BulletPlayer;
+	import objects.bullets.Bullet;
 	import objects.GlobalVariables;
 	import enemies.Little;
 	
@@ -19,16 +21,26 @@ package player
 		private var image:Image;
 		
 		private var hp:Number;
-		public function set hpS(setValue:Number):void // Να θυμηθώ να το δοκιμάσω
-		{
-			hp += setValue;
-		}
 		private var speed:Number;
 		
 		private var BulletsMax:Number;
 		private var BulletsShot:Number;
 		
 		private var little:Little;
+		
+		// Gets-Sets
+		public function get hpG():Number
+		{
+			return hp;
+		}
+		public function set hpS(setValue:Number):void 
+		{
+			hp += setValue;
+			if (hp <= 0)
+			{
+				destroy();
+			}
+		}
 		
 		public function Player(x:Number, y:Number) 
 		{
@@ -63,6 +75,9 @@ package player
 			{
 				shoot();
 			}
+			
+			/**************** Check if shot by enemies ****************/
+			checkIfShot();
 			
 			/**************** ALIENS COLLIDED WITH PLAYER ****************/
 			little = collide("little", x, y) as Little;
@@ -99,7 +114,7 @@ package player
 		{
 			if (BulletPlayer.PlayerShotsG < BulletsMax )
 			{
-				spawnBullet(this.x + width / 2, this.y);
+				spawnBullet(this.x + halfWidth, this.y);
 			}
 		}
 		
@@ -108,9 +123,26 @@ package player
 			BulletPlayer(world.create(BulletPlayer)).reset(x, y);
 		}
 		
+		public function checkIfShot():void 
+		{
+			var b:Bullet = collide("bullet_L", x, y) as Bullet;
+			
+			if (b)
+			{
+				takeDamage(b.damageG);
+				b.destroy();
+			}
+		}
+		
+		public function takeDamage(damageTaken:Number):void 
+		{
+			hpS = -damageTaken;
+		}
+		
 		public function destroy():void 
 		{
 			FP.world.recycle(this);
+			FP.world.add(new Lost_Obj);
 		}
 		
 	}

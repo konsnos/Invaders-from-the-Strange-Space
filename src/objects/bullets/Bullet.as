@@ -14,6 +14,13 @@ package objects.bullets
 	{
 		protected var image:Image;
 		protected var speed:Number;
+		protected var damage:Number;
+		
+		// Gets-Sets
+		public function get damageG():Number 
+		{
+			return damage;
+		}
 		
 		public function Bullet() 
 		{
@@ -28,7 +35,16 @@ package objects.bullets
 		
 		override public function update():void
 		{
-			this.y -= speed * FP.elapsed;
+			this.y += speed * FP.elapsed;
+			
+			if (this.y + height < 0)
+			{
+				destroy();
+			}
+			else if (this.y > FP.height)
+			{
+				destroy();
+			}
 		}
 		
 		public function destroy():void 

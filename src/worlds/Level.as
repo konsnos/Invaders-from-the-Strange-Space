@@ -173,10 +173,10 @@ package worlds
 				{
 					if (i == 0)
 					{
-						if (little_e.listUpdateP)
+						if (little_e.listUpdateG)
 						{
 							getEnemies();
-							little_e.listUpdateP = false;
+							little_e.listUpdateS = false;
 						}
 					}
 					
@@ -200,7 +200,7 @@ package worlds
 					
 					for (i = 0, little_e = littles_e[i] as Little; i < littles_e.length; i++, little_e = littles_e[i] as Little)
 					{
-						little_e.comeCloser();
+						little_e.ComeCloser();
 					}
 					changeLine = false;
 				}

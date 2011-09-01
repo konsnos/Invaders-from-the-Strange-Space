@@ -13,6 +13,8 @@ package worlds
 		protected var selection:Array;
 		protected var menu:Graphiclist;
 		private var choice:Number = 1;
+		
+		// Gets-Sets
 		protected function get choiceG():Number
 		{
 			return choice;
