@@ -1,4 +1,4 @@
-package enemies 
+package objects.enemies 
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -39,7 +39,7 @@ package enemies
 			
 			super(x, y);
 			
-			hp = 1; // Να δοκιμάσω να χρησιμοποιήσω την Set
+			hpS = 1;
 			speed = 15;
 			fireChance = 0.0003;
 			

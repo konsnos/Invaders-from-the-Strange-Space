@@ -13,7 +13,7 @@ package worlds
 	import enemies.Little;
 	import player.Player;
 	import objects.bullets.Bullet;
-	import objects.GlobalVariables;
+	import GlobalVariables;
 	
 	/**
 	 * ...

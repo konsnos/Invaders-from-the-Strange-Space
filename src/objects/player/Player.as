@@ -1,26 +1,23 @@
-package player 
+package objects.player 
 {
-	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import objects.Actor;
 	
 	import worlds.Lost_Obj;
 	import objects.bullets.BulletPlayer;
 	import objects.bullets.Bullet;
 	import GlobalVariables;
-	import enemies.Little;
+	import objects.enemies.Little;
 	
 	/**
 	 * ...
 	 * @author konsnos
 	 */
-	public class Player extends Entity 
+	public class Player extends Actor 
 	{
-		private var image:Image;
-		
-		private var hp:Number;
 		private var speed:Number;
 		
 		private var BulletsMax:Number;
@@ -28,26 +25,14 @@ package player
 		
 		private var little:Little;
 		
-		// Gets-Sets
-		public function get hpG():Number
-		{
-			return hp;
-		}
-		public function set hpS(setValue:Number):void 
-		{
-			hp += setValue;
-			if (hp <= 0)
-			{
-				destroy();
-			}
-		}
-		
 		public function Player(x:Number, y:Number) 
 		{
+			super();
+			
 			graphic = image = new Image(GlobalVariables.IMG_PLAYER);
 			image.scale = 0.8;
 			
-			hp = 3;
+			hpS = 3;
 			speed = 270;
 			
 			this.x = x - image.width / 2;
@@ -82,9 +67,9 @@ package player
 			/**************** ALIENS COLLIDED WITH PLAYER ****************/
 			little = collide("little", x, y) as Little;
 			
-			if (little) // Γιατί το έκανα αυτό;
+			if (little)
 			{
-				hp -= little.hpG;
+				hpS = -little.hpG;
 			}
 			
 			little = null;
@@ -134,14 +119,10 @@ package player
 			}
 		}
 		
-		public function takeDamage(damageTaken:Number):void 
+		override public function destroy():void 
 		{
-			hpS = -damageTaken;
-		}
-		
-		public function destroy():void 
-		{
-			FP.world.recycle(this);
+			super.destroy();
+			
 			FP.world.add(new Lost_Obj);
 		}
 		
