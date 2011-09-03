@@ -1,0 +1,5 @@
+Build 7
+
+- Fixed Issue 7 "Stars are flying in front of the ship".
+- Added Win screen.
+- Fixed minor bugs.
