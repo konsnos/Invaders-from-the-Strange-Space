@@ -188,19 +188,11 @@ package worlds
 				getEnemies();
 				Little.listUpdateS = false;
 			}
+			
 			if (timeElapsed > enemiesMoveTime)
 			{
 				for (i = 0, little_e = littles_e[i] as Little; i < littles_e.length; i++, little_e = littles_e[i] as Little)
 				{
-					/*if (i == 0)
-					{
-						if (little_e.listUpdateG)
-						{
-							getEnemies();
-							little_e.listUpdateS = false;
-						}
-					}*/
-					
 					little_e.walkOn();
 					
 					if ((little_e.x + little_e.width * 2 > FP.width || little_e.x < little_e.width ) && (!changeLine))
