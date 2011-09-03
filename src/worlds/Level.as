@@ -78,8 +78,8 @@ package worlds
 			pause = false;
 			wasPaused = false;
 			
-			addGraphic(background1);
-			addGraphic(background2);
+			addGraphic(background1, 1);
+			addGraphic(background2, 0);
 			
 			background1.y = 245;
 			background1.x = 345;
@@ -116,9 +116,9 @@ package worlds
 			
 			if (Input.pressed("pause"))
 			{
-				if (pause)
+				if (!gameState == GlobalVariables.PAUSE)
 				{
-					pause = false;
+					gameState = GlobalVariables.PLAYING;
 					getClass(Pause_Obj, entitiesToRemove);
 					if (entitiesToRemove)
 					{
@@ -128,11 +128,14 @@ package worlds
 				}
 				else
 				{
-					pause = true;
+					gameState = GlobalVariables.PAUSE;
 					add(new Pause_Obj);
 				}
+			}else if (Input.pressed("shoot") && gameState == GlobalVariables.WIN)
+			{
+				returnToMainMenu();
 			}
-			if (!pause)
+			if (gameState == GlobalVariables.PLAYING)
 			{
 				updateGameplay();
 			}
@@ -148,14 +151,13 @@ package worlds
 		{
 			timeElapsed += FP.elapsed;
 			
-			if (littles_e.length == 0)
+			if (littles_e.length == 0 && gameState == GlobalVariables.PLAYING)
 			{
 				getEnemies();
 				if (littles_e.length == 0)
 				{
 					gameState = GlobalVariables.WIN; // WIN!!!
-					trace("Won");
-					returnToMainMenu();
+					add(new Win_Obj);
 				}
 			}
 			
