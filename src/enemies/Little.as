@@ -20,11 +20,11 @@ package enemies
 		private static var listUpdate:Boolean; // Checks if the list with the Little aliens needs to be updated
 		
 		// Gets-Sets
-		public function get listUpdateG():Boolean
+		public static function get listUpdateG():Boolean
 		{ 
 			return listUpdate;
 		}
-		public function set listUpdateS(setValue:Boolean):void 
+		public static function set listUpdateS(setValue:Boolean):void 
 		{
 			listUpdate = setValue;
 		}

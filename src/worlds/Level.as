@@ -56,6 +56,12 @@ package worlds
 		private var i:Number;
 		private var little_e:Little;
 		
+		// Gets-Sets
+		public function set gameStateS(setValue:Number):void
+		{
+			gameState = setValue;
+		}
+		
 		public function Level() 
 		{
 			layer1Y = 1.2;
@@ -114,15 +120,23 @@ package worlds
 		{
 			super.update();
 			
+			if (gameState == GlobalVariables.LOST)
+			{
+				if (Input.pressed("shoot"))
+				{
+					returnToMainMenu(); // Break
+				}
+			}
+			
 			if (Input.pressed("pause"))
 			{
-				if (!gameState == GlobalVariables.PAUSE)
+				if (gameState == GlobalVariables.PAUSE)
 				{
 					gameState = GlobalVariables.PLAYING;
 					getClass(Pause_Obj, entitiesToRemove);
 					if (entitiesToRemove)
 					{
-						remove(entitiesToRemove.pop())
+						remove(entitiesToRemove.pop());
 					}
 					getClass(Pause_Obj, entitiesToRemove);
 				}
@@ -169,18 +183,23 @@ package worlds
 		
 		private function updateEnemies():void 
 		{
+			if (Little.listUpdateG)
+			{
+				getEnemies();
+				Little.listUpdateS = false;
+			}
 			if (timeElapsed > enemiesMoveTime)
 			{
 				for (i = 0, little_e = littles_e[i] as Little; i < littles_e.length; i++, little_e = littles_e[i] as Little)
 				{
-					if (i == 0)
+					/*if (i == 0)
 					{
 						if (little_e.listUpdateG)
 						{
 							getEnemies();
 							little_e.listUpdateS = false;
 						}
-					}
+					}*/
 					
 					little_e.walkOn();
 					

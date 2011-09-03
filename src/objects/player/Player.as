@@ -7,10 +7,11 @@ package objects.player
 	import objects.Actor;
 	
 	import worlds.Lost_Obj;
+	import worlds.Level;
 	import objects.bullets.BulletPlayer;
 	import objects.bullets.Bullet;
-	import GlobalVariables;
 	import objects.enemies.Little;
+	import GlobalVariables;
 	
 	/**
 	 * ...
@@ -122,6 +123,8 @@ package objects.player
 		override public function destroy():void 
 		{
 			super.destroy();
+			
+			gameStateS(GlobalVariables.LOST);
 			
 			FP.world.add(new Lost_Obj);
 		}

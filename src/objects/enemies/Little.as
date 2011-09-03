@@ -52,7 +52,7 @@ package objects.enemies
 		
 		override public function update():void 
 		{
-			super.update();
+			// super.update();
 			
 			ShootCheck();
 			
