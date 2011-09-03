@@ -4,7 +4,7 @@ package worlds
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	
-	import GlobalVariables;
+	import objects.GlobalVariables;
 	
 	/**
 	 * ...
