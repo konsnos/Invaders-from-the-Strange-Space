@@ -1,3 +1,7 @@
+Build 8
+
+- Fixed a bug where an enemy was left behind in movement.
+
 Build 7
 
 - Fixed Issue 7 "Stars are flying in front of the ship".
