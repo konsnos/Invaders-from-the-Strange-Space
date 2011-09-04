@@ -10,8 +10,8 @@ package worlds
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
 	
-	import enemies.Little;
-	import player.Player;
+	import objects.enemies.Little;
+	import objects.player.Player;
 	import objects.bullets.Bullet;
 	import GlobalVariables;
 	
@@ -38,7 +38,7 @@ package worlds
 		private var wasPaused:Boolean;
 		
 		// PLAYER
-		private var playerY:Number;
+		private var player:Player;
 		
 		// ENEMIES
 		private var rows:Number;
@@ -92,8 +92,8 @@ package worlds
 			background2.y = 376;
 			background2.x = 123;
 			
-			playerY = FP.height / 10 * 8;
-			add(new Player(FP.width / 2, playerY));
+			player = new Player(FP.halfWidth, FP.height / 10 * 8);
+			add(player);
 			
 			columns = 8;
 			rows = 5;
@@ -165,6 +165,12 @@ package worlds
 		{
 			timeElapsed += FP.elapsed;
 			
+			if (player.hpG <= 0)
+			{
+				gameStateS = GlobalVariables.LOST;
+				add(new Lost_Obj);
+			}
+			
 			if (littles_e.length == 0 && gameState == GlobalVariables.PLAYING)
 			{
 				getEnemies();
@@ -200,7 +206,7 @@ package worlds
 						changeLine = true;
 					}
 					
-					if (little_e.bottom > playerY)
+					if (little_e.bottom > player.y)
 					{
 						gameState = GlobalVariables.LOST;
 						returnToMainMenu();

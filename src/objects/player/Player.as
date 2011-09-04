@@ -124,9 +124,9 @@ package objects.player
 		{
 			super.destroy();
 			
-			gameStateS(GlobalVariables.LOST);
+			//Level.gameStateS(GlobalVariables.LOST);
 			
-			FP.world.add(new Lost_Obj);
+			//FP.world.add(new Lost_Obj);
 		}
 		
 	}
