@@ -5,6 +5,7 @@ package objects.enemies
 	
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
+	import worlds.Stats_Obj;
 	import GlobalVariables;
 	/**
 	 * ...
@@ -14,6 +15,7 @@ package objects.enemies
 	{
 		private static var image:Image;
 		public static var points:Number;
+		public static var list:Number;
 		
 		private static var speed:Number;
 		
@@ -47,7 +49,8 @@ package objects.enemies
 			height = image.height * image.scale;
 			
 			type = "little";
-			points = 10;
+			
+			list++;
 		}
 		
 		override public function update():void 
@@ -83,6 +86,12 @@ package objects.enemies
 			speed *= -1;
 		}
 		
+		public static function resetList():void // Total number of entities existing.
+		{
+			list = 0;
+			points = 10;
+		}
+		
 		public function ComeCloser():void 
 		{
 			this.y += Math.abs(speed) * 2;
@@ -98,6 +107,13 @@ package objects.enemies
 				b.destroy();
 				listUpdateS = true;
 			}
+		}
+		
+		override public function destroy():void 
+		{
+			Stats_Obj.scoreS = points;
+			list--;
+			super.destroy();
 		}
 	}
 	

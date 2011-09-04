@@ -16,7 +16,7 @@ package worlds
 	 */
 	public class MainMenu_Obj extends Menu_Obj
 	{
-		public function MainMenu_Obj() 
+		public function MainMenu_Obj()
 		{
 			selection = new Array();
 			title = new Text(String("Space Invaders"));

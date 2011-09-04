@@ -20,6 +20,8 @@ package
 		
 		[Embed(source = '../assets/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
 		
+		[Embed(source = '../assets/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
+		
 		private static var score:Number; // Να βάλω get/set
 		
 		public static var backdrop1:Backdrop;

@@ -10,6 +10,8 @@ package worlds
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
 	
+	import objects.Actor;
+	import objects.enemies.Alien;
 	import objects.enemies.Little;
 	import objects.player.Player;
 	import objects.bullets.Bullet;
@@ -32,7 +34,6 @@ package worlds
 		private var layer2X:Number;
 		
 		// GAME
-		private var score:Number;
 		private var gameState:Number;
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
@@ -73,6 +74,9 @@ package worlds
 			timeElapsed = 0;
 			changeLine = false;
 			
+			littles_e = new Array();
+			entitiesToRemove = new Array();
+			
 			gameState = GlobalVariables.PLAYING;
 		}
 		
@@ -80,12 +84,17 @@ package worlds
 		{
 			super.begin();
 			
-			score = 0;
+			// RESET EVERYTHING
 			pause = false;
 			wasPaused = false;
 			
+			Actor.resetList();
+			Alien.resetList();
+			Little.resetList();
+			
 			addGraphic(background1, 1);
 			addGraphic(background2, 0);
+			add(new Stats_Obj);
 			
 			background1.y = 245;
 			background1.x = 345;
@@ -110,9 +119,7 @@ package worlds
 			}
 			
 			enemiesMoveTime = 1;
-			
-			littles_e = new Array();
-			entitiesToRemove = new Array();
+			Little.listUpdateS = true;
 			little_e = null;
 		}
 		
@@ -171,14 +178,10 @@ package worlds
 				add(new Lost_Obj);
 			}
 			
-			if (littles_e.length == 0 && gameState == GlobalVariables.PLAYING)
+			if(Alien.list == 0 && gameState == GlobalVariables.PLAYING)
 			{
-				getEnemies();
-				if (littles_e.length == 0)
-				{
-					gameState = GlobalVariables.WIN; // WIN!!!
-					add(new Win_Obj);
-				}
+				gameState = GlobalVariables.WIN; // WIN!!!
+				add(new Win_Obj);
 			}
 			
 			background1.y += layer1Y;

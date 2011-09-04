@@ -12,6 +12,7 @@ package objects
 	{
 		protected var image:Image;
 		private var hp:Number;
+		public static var list:Number; // Total number of actors instantiated.
 		
 		// Gets-Sets
 		public function get hpG():Number
@@ -40,6 +41,11 @@ package objects
 		public function destroy():void 
 		{
 			FP.world.recycle(this);
+		}
+		
+		public static function resetList():void 
+		{
+			list = 0;
 		}
 		
 	}
