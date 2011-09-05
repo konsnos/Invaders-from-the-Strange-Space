@@ -1,3 +1,7 @@
+Build 11
+
+- Fixed Issue 8 "Enemies and player are able to fire when paused."
+
 Build 10
 
 - Added a score system to the level.

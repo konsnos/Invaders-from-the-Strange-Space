@@ -15,7 +15,6 @@ package objects.enemies
 		public function Alien(x:Number, y:Number) 
 		{
 			super();
-			
 			this.x = x;
 			this.y = y;
 			

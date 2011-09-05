@@ -5,6 +5,7 @@ package objects.enemies
 	
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
+	import worlds.Level;
 	import worlds.Stats_Obj;
 	import GlobalVariables;
 	/**
@@ -55,11 +56,12 @@ package objects.enemies
 		
 		override public function update():void 
 		{
-			// super.update();
-			
-			ShootCheck();
-			
-			CheckIfShot();
+			if (Level.gameStateG == GlobalVariables.PLAYING)
+			{
+				ShootCheck();
+				
+				CheckIfShot();
+			}
 		}
 		
 		private function ShootCheck():void 

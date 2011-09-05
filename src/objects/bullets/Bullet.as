@@ -4,6 +4,7 @@ package objects.bullets
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	
+	import worlds.Level;
 	import GlobalVariables;
 	
 	/**
@@ -35,15 +36,18 @@ package objects.bullets
 		
 		override public function update():void
 		{
-			this.y += speed * FP.elapsed;
-			
-			if (this.y + height < 0)
+			if (Level.gameStateG == GlobalVariables.PLAYING)
 			{
-				destroy();
-			}
-			else if (this.y > FP.height)
-			{
-				destroy();
+				this.y += speed * FP.elapsed;
+				
+				if (this.y + height < 0)
+				{
+					destroy();
+				}
+				else if (this.y > FP.height)
+				{
+					destroy();
+				}
 			}
 		}
 		

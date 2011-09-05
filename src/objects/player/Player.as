@@ -53,27 +53,30 @@ package objects.player
 		
 		override public function update():void 
 		{
-			/**************** MOVEMENT ****************/
-			movement();
-			
-			/**************** SHOOT BULLET ****************/
-			if (Input.pressed("shoot"))
+			if (Level.gameStateG == GlobalVariables.PLAYING)
 			{
-				shoot();
+				/**************** MOVEMENT ****************/
+				movement();
+				
+				/**************** SHOOT BULLET ****************/
+				if (Input.pressed("shoot"))
+				{
+					shoot();
+				}
+				
+				/**************** Check if shot by enemies ****************/
+				checkIfShot();
+				
+				/**************** ALIENS COLLIDED WITH PLAYER ****************/
+				little = collide("little", x, y) as Little;
+				
+				if (little)
+				{
+					hpS = -little.hpG;
+				}
+				
+				little = null;
 			}
-			
-			/**************** Check if shot by enemies ****************/
-			checkIfShot();
-			
-			/**************** ALIENS COLLIDED WITH PLAYER ****************/
-			little = collide("little", x, y) as Little;
-			
-			if (little)
-			{
-				hpS = -little.hpG;
-			}
-			
-			little = null;
 		}
 		
 		public function movement():void 

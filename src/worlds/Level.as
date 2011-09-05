@@ -34,7 +34,7 @@ package worlds
 		private var layer2X:Number;
 		
 		// GAME
-		private var gameState:Number;
+		private static var gameState:Number;
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
 		
@@ -58,9 +58,13 @@ package worlds
 		private var little_e:Little;
 		
 		// Gets-Sets
-		public function set gameStateS(setValue:Number):void
+		public static function set gameStateS(setValue:Number):void
 		{
 			gameState = setValue;
+		}
+		public static function get gameStateG():Number 
+		{
+			return gameState;
 		}
 		
 		public function Level() 
