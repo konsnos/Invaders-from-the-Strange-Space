@@ -1,4 +1,4 @@
-package worlds 
+package worlds.objs 
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
@@ -31,14 +31,6 @@ package worlds
 			graphic = menu;
 		}
 		
-		override public function update():void 
-		{
-			if (Input.pressed("shoot"))
-			{
-				FP.world.removeAll();
-				FP.world = new MainMenu;
-			}
-		}
 	}
 
 }

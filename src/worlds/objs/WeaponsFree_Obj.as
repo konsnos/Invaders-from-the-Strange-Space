@@ -3,8 +3,9 @@ package worlds.objs
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Text;
+	
 	import worlds.Level;
-	import worlds.Menu_Obj;
+	import worlds.objs.Menu_Obj;
 	
 	/**
 	 * ...

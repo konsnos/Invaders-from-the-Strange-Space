@@ -1,4 +1,4 @@
-package worlds 
+package worlds.objs 
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -42,11 +42,6 @@ package worlds
 		
 		public static function resetScore():void 
 		{
-			
-		}
-		
-		override public function update():void 
-		{ 
 			
 		}
 		

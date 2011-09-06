@@ -1,4 +1,4 @@
-package worlds
+package worlds.objs
 {
 	import flash.display.ShaderParameter;
 	import flash.events.TextEvent;
@@ -8,6 +8,7 @@ package worlds
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import worlds.Level;
 	
 	import GlobalVariables;
 	/**
@@ -72,7 +73,7 @@ package worlds
 				Text(selection[2]).alpha = 1;
 			}
 			
-			if (Input.pressed("shoot"))
+			if (Input.pressed("enter"))
 			{
 				switch (choiceG) 
 				{

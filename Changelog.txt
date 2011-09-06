@@ -1,3 +1,28 @@
+Build 17
+
+- Added some sound effects.
+
+Build 16
+
+- Changed the hiearchy of some folders.
+
+Build 15
+
+- Changed some values to make the game more competitive.
+- Added PREPARING screen.
+
+Build 14
+
+- Changed the way aliens shoot to a more realistic one.
+
+Build 13
+
+- Maintenance fixes.
+
+Build 12
+
+- Added particles.
+
 Build 11
 
 - Fixed Issue 8 "Enemies and player are able to fire when paused."

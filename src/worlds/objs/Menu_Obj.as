@@ -1,4 +1,4 @@
-package worlds 
+package worlds.objs 
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Text;

@@ -2,12 +2,13 @@ package objects.enemies
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.Sfx;
 	
 	import objects.Explosion;
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
 	import worlds.Level;
-	import worlds.Stats_Obj;
+	import worlds.objs.Stats_Obj;
 	import GlobalVariables;
 	/**
 	 * ...
@@ -50,6 +51,7 @@ package objects.enemies
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);
 			
 			image.scale *= 0.7;
+			soundExplosion = new Sfx(GlobalVariables.EXPLOSION);
 			
 			listUpdateS = false;
 			

@@ -10,19 +10,25 @@ package
 	 */
 	public class GlobalVariables 
 	{
-		[Embed(source='../assets/space01.png')] private static const IMG_BACKGROUND:Class;
+		/****************** IMAGES ******************/
+		[Embed(source='../assets/images/space01.png')] private static const IMG_BACKGROUND:Class;
 		
-		[Embed(source = '../assets/player.png')] public static const IMG_PLAYER:Class;
-		
-		[Embed(source = '../assets/small_enemy.png')] public static const IMG_ENEMY_S:Class;
-		[Embed(source = '../assets/medium_enemy.png')] public static const IMG_ENEMY_M:Class;
-		[Embed(source = '../assets/large_enemy.png')] public static const IMG_ENEMY_L:Class;
-		[Embed(source = '../assets/bonus_enemy.png')] public static const IMG_ENEMY_B:Class;
-		
-		[Embed(source = '../assets/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
+		[Embed(source = '../assets/images/player.png')] public static const IMG_PLAYER:Class;
+		[Embed(source = '../assets/images/small_enemy.png')] public static const IMG_ENEMY_S:Class;
+		[Embed(source = '../assets/images/medium_enemy.png')] public static const IMG_ENEMY_M:Class;
+		[Embed(source = '../assets/images/large_enemy.png')] public static const IMG_ENEMY_L:Class;
+		[Embed(source = '../assets/images/bonus_enemy.png')] public static const IMG_ENEMY_B:Class;
+		[Embed(source = '../assets/images/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
 		public static const IMG_BULLET_REDRECT:Image = new Image(new BitmapData(2, 10, false, 0xee0000));
 		
-		[Embed(source = '../assets/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
+		/****************** SOUNDS ******************/
+		[Embed(source = '../assets/sounds/effects/explosion01.mp3')] public static const EXPLOSION:Class;
+		[Embed(source = '../assets/sounds/effects/explosionP.mp3')] public static const EXPLOSIONP:Class;
+		[Embed(source = '../assets/sounds/effects/explosionPm.mp3')] public static const EXPLOSIONPM:Class;
+		[Embed(source='../assets/sounds/effects/shoot.mp3')] public static const SHOOT:Class;
+		
+		/****************** FONTS ******************/
+		[Embed(source = '../assets/fonts/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
 		
 		private static var score:Number; // Να βάλω get/set
 		

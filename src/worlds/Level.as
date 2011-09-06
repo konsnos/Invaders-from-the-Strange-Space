@@ -11,6 +11,10 @@ package worlds
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import worlds.objs.Lost_Obj;
+	import worlds.objs.Pause_Obj;
+	import worlds.objs.Stats_Obj;
+	import worlds.objs.Win_Obj;
 	
 	import objects.Actor;
 	import objects.enemies.Alien;
@@ -20,6 +24,7 @@ package worlds
 	import objects.bullets.BulletEnemy;
 	import objects.bullets.BulletPlayer;
 	import worlds.objs.WeaponsFree_Obj;
+	import worlds.objs.Menu_Obj;
 	import GlobalVariables;
 	
 	/**
@@ -145,7 +150,7 @@ package worlds
 			
 			if (gameState == GlobalVariables.LOST)
 			{
-				if (Input.pressed("shoot"))
+				if (Input.pressed("enter"))
 				{
 					returnToMainMenu(); // Break
 				}
@@ -170,7 +175,7 @@ package worlds
 				}
 			}
 			
-			if (gameState == GlobalVariables.WIN && Input.pressed("shoot"))
+			if (gameState == GlobalVariables.WIN && Input.pressed("enter"))
 			{
 				returnToMainMenu();
 			}
@@ -249,7 +254,6 @@ package worlds
 				if (changeLine)
 				{
 					Little.reverseDirection();
-					
 					for (i = 0, little_e = littles_e[i] as Little; i < littles_e.length; i++, little_e = littles_e[i] as Little)
 					{
 						little_e.ComeCloser();

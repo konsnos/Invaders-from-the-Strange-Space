@@ -5,10 +5,11 @@ package objects.player
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
-	import worlds.Lost_Obj;
+	import worlds.objs.Lost_Obj;
 	import worlds.Level;
 	import objects.Actor;
 	import objects.Explosion;
@@ -21,7 +22,7 @@ package objects.player
 	 * ...
 	 * @author konsnos
 	 */
-	public class Player extends Actor 
+	public class Player extends Actor
 	{
 		private var speed:Number;
 		
@@ -29,6 +30,10 @@ package objects.player
 		private var BulletsShot:Number;
 		
 		private var little:Little;
+		
+		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
+		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
+		private var soundExplosionm:Sfx = new Sfx(GlobalVariables.EXPLOSIONPM);
 		
 		public function Player(x:Number, y:Number) 
 		{
@@ -105,6 +110,7 @@ package objects.player
 		{
 			if (BulletPlayer.list < BulletsMax )
 			{
+				soundShoot.play();
 				spawnBullet(this.x + halfWidth, this.y);
 			}
 		}
@@ -114,21 +120,23 @@ package objects.player
 			BulletPlayer(world.create(BulletPlayer)).reset(x, y);
 		}
 		
-		public function checkIfShot():void 
+		public function checkIfShot():void
 		{
 			var b:Bullet = collide("bullet_L", x, y) as Bullet;
 			
 			if (b)
 			{
 				takeDamage(b.damageG);
+				soundExplosionm.play();
 				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 				b.destroy();
 			}
 		}
 		
-		override public function destroy():void 
+		override public function destroy():void
 		{
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
+			soundExplosion.play();
 			super.destroy();
 		}
 		

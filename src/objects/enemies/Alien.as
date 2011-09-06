@@ -1,6 +1,7 @@
 package objects.enemies 
 {
 	import net.flashpunk.FP;
+	import net.flashpunk.Sfx;
 	import objects.Actor;
 	
 	/**
@@ -11,6 +12,8 @@ package objects.enemies
 	{
 		protected static var fireChance:Number; // Shows the possibility of firing. 0 < value < 1. 1 means fire in every frame.
 		public static var list:Number; // Total number of aliens in the game.
+		
+		protected var soundExplosion:Sfx;
 		
 		public function Alien(x:Number, y:Number) 
 		{
@@ -33,6 +36,7 @@ package objects.enemies
 		
 		override public function destroy():void 
 		{
+			soundExplosion.play();
 			list--;
 			super.destroy();
 		}
