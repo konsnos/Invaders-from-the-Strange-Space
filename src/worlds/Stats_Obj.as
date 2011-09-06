@@ -21,14 +21,14 @@ package worlds
 		public static function set scoreS(setValue:Number):void 
 		{
 			score += setValue;
-			title.text = new String("Score: " + score + " Rank: Rookie");
+			title.text = new String("Level 1 Score: " + score + " Rank: Rookie");
 		}
 		
 		public function Stats_Obj() 
 		{
 			score = 0;
 			
-			title = new Text(String("Score: " + score + " Rank: Rookie"));
+			title = new Text(String("Level 1 Score: " + score + " Rank: Rookie"));
 			title.size = 16;
 			title.y = 1;
 			title.x = 10;

@@ -121,6 +121,7 @@ package objects.player
 			if (b)
 			{
 				takeDamage(b.damageG);
+				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 				b.destroy();
 			}
 		}

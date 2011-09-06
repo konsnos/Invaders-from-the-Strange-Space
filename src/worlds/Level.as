@@ -19,6 +19,7 @@ package worlds
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
 	import objects.bullets.BulletPlayer;
+	import worlds.objs.WeaponsFree_Obj;
 	import GlobalVariables;
 	
 	/**
@@ -41,6 +42,7 @@ package worlds
 		private static var gameState:Number;
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
+		private var obj:Menu_Obj;
 		
 		// PLAYER
 		private var player:Player;
@@ -86,7 +88,7 @@ package worlds
 			littles_e = new Array();
 			entitiesToRemove = new Array();
 			
-			gameState = GlobalVariables.PLAYING;
+			gameState = GlobalVariables.PREPARING;
 		}
 		
 		override public function begin():void 
@@ -97,16 +99,13 @@ package worlds
 			pause = false;
 			wasPaused = false;
 			
-			Actor.resetList();
-			Bullet.resetList();
-			BulletEnemy.resetList();
-			BulletPlayer.resetList();
-			Alien.resetList();
-			Little.resetList();
+			resetAllLists();
 			
 			addGraphic(background1, 1);
 			addGraphic(background2, 0);
 			add(new Stats_Obj);
+			obj = new WeaponsFree_Obj;
+			add(obj);
 			
 			background1.y = 245;
 			background1.x = 345;
@@ -139,6 +138,11 @@ package worlds
 		
 		override public function update():void 
 		{
+			if (gameState == GlobalVariables.PREPARING)
+			{
+				preparing();
+			}
+			
 			if (gameState == GlobalVariables.LOST)
 			{
 				if (Input.pressed("shoot"))
@@ -164,15 +168,20 @@ package worlds
 					gameState = GlobalVariables.PAUSE;
 					add(new Pause_Obj);
 				}
-			}else if (Input.pressed("shoot") && gameState == GlobalVariables.WIN)
+			}
+			
+			if (gameState == GlobalVariables.WIN && Input.pressed("shoot"))
 			{
 				returnToMainMenu();
 			}
+			
 			if (gameState == GlobalVariables.PLAYING)
 			{
 				updateGameplay();
 			}
 			
+			background1.y += layer1Y;
+			background2.y += layer2Y;
 			super.update();
 		}
 		
@@ -198,9 +207,6 @@ package worlds
 				add(new Win_Obj);
 			}
 			
-			background1.y += layer1Y;
-			background2.y += layer2Y;
-			
 			updateEnemies();
 		}
 		
@@ -217,9 +223,6 @@ package worlds
 			if (Little.timeElapsed > Little.shootInterval && BulletEnemy.list < Little.maxShotsG)
 			{
 				littleShooting = Little.calculateWhichShoot();
-				trace("Littles.list: " + Little.list);
-				trace("littleShooting: " + littleShooting);
-				trace("littles_e.length: " + littles_e.length);
 				little_e = littles_e[littleShooting];
 				little_e.Shoot();
 				Little.timeElapsed = 0;
@@ -262,6 +265,25 @@ package worlds
 		{
 			FP.world.removeAll();
 			FP.world = new MainMenu;
+		}
+		
+		public function resetAllLists():void 
+		{
+			Actor.resetList();
+			Bullet.resetList();
+			BulletEnemy.resetList();
+			BulletPlayer.resetList();
+			Alien.resetList();
+			Little.resetList();
+		}
+		
+		public function preparing():void 
+		{
+			timeElapsed += FP.elapsed;
+			if (timeElapsed > 1)
+			{
+				gameState = GlobalVariables.PLAYING;
+			}
 		}
 	}
 

@@ -12,8 +12,12 @@ package objects.bullets
 		{
 			super();
 			
-			speed = 200;
+			graphic = GlobalVariables.IMG_BULLET_REDRECT;
+			
+			speed = 350;
 			damage = 1;
+			
+			layer = 1;
 			
 			type = "bullet_L"
 		}

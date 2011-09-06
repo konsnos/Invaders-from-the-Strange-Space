@@ -1,0 +1,48 @@
+package worlds.objs 
+{
+	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Graphiclist;
+	import net.flashpunk.graphics.Text;
+	import worlds.Level;
+	import worlds.Menu_Obj;
+	
+	/**
+	 * ...
+	 * @author konsnos
+	 */
+	public class WeaponsFree_Obj extends Menu_Obj 
+	{
+		
+		public function WeaponsFree_Obj() 
+		{
+			title = new Text(String("Weapons Free"));
+			title.size = 30;
+			title.x = FP.halfWidth - title.width / 2;
+			title.y = FP.height / 10 * 7;
+			title.color = 0xbff0000; // dark red
+			title.alpha = 1;
+			
+			graphic = menu = new Graphiclist(title);
+		}
+		
+		public function setAlpha(alpha:Number):Number 
+		{
+			return title.alpha -= alpha;
+		}
+		
+		override public function update():void 
+		{
+			if (Level.gameStateG == GlobalVariables.PLAYING)
+			{
+				title.alpha -= FP.elapsed;
+				
+				if (title.alpha < 0)
+				{
+					FP.world.remove(this);
+				}
+			}
+		}
+		
+	}
+
+}

@@ -45,7 +45,6 @@ package objects.enemies
 			return maxShots;
 		}
 		
-		// Να βάλω maxshots, και shotsInterval ούτως ώστε ακόμα και με λιγότερους εχθρούς η ροή των σφαιρών να είναι η ίδια.
 		public function Little(x:Number, y:Number)
 		{
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);

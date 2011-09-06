@@ -1,5 +1,6 @@
 package 
 {
+	import flash.display.BitmapData;
 	import net.flashpunk.graphics.Backdrop;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -19,6 +20,7 @@ package
 		[Embed(source = '../assets/bonus_enemy.png')] public static const IMG_ENEMY_B:Class;
 		
 		[Embed(source = '../assets/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
+		public static const IMG_BULLET_REDRECT:Image = new Image(new BitmapData(2, 10, false, 0xee0000));
 		
 		[Embed(source = '../assets/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
 		
@@ -27,10 +29,11 @@ package
 		public static var backdrop1:Backdrop;
 		public static var backdrop2:Backdrop;
 		
-		public static const PLAYING:Number = 1;
-		public static const PAUSE:Number = 2;
-		public static const WIN:Number = 3;
-		public static const LOST:Number = 4;
+		public static const PLAYING:uint = 1;
+		public static const PAUSE:uint = 2;
+		public static const WIN:uint = 3;
+		public static const LOST:uint = 4;
+		public static const PREPARING:uint = 5;
 		
 		public function GlobalVariables()
 		{
