@@ -1,20 +1,24 @@
 package worlds 
 {
+	import flash.display.BitmapData;
 	import net.flashpunk.Entity;
-	import net.flashpunk.tweens.misc.Alarm;
-	import net.flashpunk.graphics.Canvas;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
+	import net.flashpunk.World;
+	import net.flashpunk.tweens.misc.Alarm;
+	import net.flashpunk.graphics.Canvas;
+	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
-	import net.flashpunk.World;
 	
 	import objects.Actor;
 	import objects.enemies.Alien;
 	import objects.enemies.Little;
 	import objects.player.Player;
 	import objects.bullets.Bullet;
+	import objects.bullets.BulletEnemy;
+	import objects.bullets.BulletPlayer;
 	import GlobalVariables;
 	
 	/**
@@ -56,6 +60,7 @@ package worlds
 		// TEMPORARY VARS
 		private var i:Number;
 		private var little_e:Little;
+		private var littleShooting:uint;
 		
 		// Gets-Sets
 		public static function set gameStateS(setValue:Number):void
@@ -93,6 +98,9 @@ package worlds
 			wasPaused = false;
 			
 			Actor.resetList();
+			Bullet.resetList();
+			BulletEnemy.resetList();
+			BulletPlayer.resetList();
 			Alien.resetList();
 			Little.resetList();
 			
@@ -124,13 +132,13 @@ package worlds
 			
 			enemiesMoveTime = 1;
 			Little.listUpdateS = true;
+			Little.calculateMaxShots();
 			little_e = null;
+			littleShooting = 0;
 		}
 		
 		override public function update():void 
 		{
-			super.update();
-			
 			if (gameState == GlobalVariables.LOST)
 			{
 				if (Input.pressed("shoot"))
@@ -164,6 +172,8 @@ package worlds
 			{
 				updateGameplay();
 			}
+			
+			super.update();
 		}
 		
 		public function getEnemies():void 
@@ -196,10 +206,23 @@ package worlds
 		
 		private function updateEnemies():void 
 		{
+			Little.timeElapsed += FP.elapsed;
+			
 			if (Little.listUpdateG)
 			{
 				getEnemies();
 				Little.listUpdateS = false;
+			}
+			
+			if (Little.timeElapsed > Little.shootInterval && BulletEnemy.list < Little.maxShotsG)
+			{
+				littleShooting = Little.calculateWhichShoot();
+				trace("Littles.list: " + Little.list);
+				trace("littleShooting: " + littleShooting);
+				trace("littles_e.length: " + littles_e.length);
+				little_e = littles_e[littleShooting];
+				little_e.Shoot();
+				Little.timeElapsed = 0;
 			}
 			
 			if (timeElapsed > enemiesMoveTime)

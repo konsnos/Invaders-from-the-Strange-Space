@@ -6,15 +6,8 @@ package objects.bullets
 	 */
 	public class BulletPlayer extends Bullet 
 	{
+		public static var list:uint;
 		private static var BulletsExisting:Number;
-		public static function set PlayerShotsS(setValue:Number):void
-		{
-			BulletsExisting = setValue;
-		}
-		public static function get PlayerShotsG():Number
-		{
-			return BulletsExisting;
-		}
 		
 		public function BulletPlayer() 
 		{
@@ -34,14 +27,18 @@ package objects.bullets
 		override public function reset(x:Number, y:Number):void
 		{
 			super.reset(x, y);
-			BulletsExisting++;
+			BulletPlayer.list++;
 		}
 		
 		override public function removed():void 
 		{
-			BulletsExisting--;
+			super.removed();
+			BulletPlayer.list--;
 		}
 		
+		public static function resetList():void 
+		{
+			list = 0;
+		}
 	}
-
 }

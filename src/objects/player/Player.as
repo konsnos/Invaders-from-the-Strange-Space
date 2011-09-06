@@ -1,13 +1,17 @@
 package objects.player 
 {
+	import flash.display.BitmapData;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Emitter;
+	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
-	import objects.Actor;
 	
 	import worlds.Lost_Obj;
 	import worlds.Level;
+	import objects.Actor;
+	import objects.Explosion;
 	import objects.bullets.BulletPlayer;
 	import objects.bullets.Bullet;
 	import objects.enemies.Little;
@@ -45,10 +49,8 @@ package objects.player
 			type = "player";
 			
 			BulletsMax = 2;
-			BulletPlayer.PlayerShotsS = 0;
 			
 			layer = 1;
-			
 		}
 		
 		override public function update():void 
@@ -101,7 +103,7 @@ package objects.player
 		
 		public function shoot():void 
 		{
-			if (BulletPlayer.PlayerShotsG < BulletsMax )
+			if (BulletPlayer.list < BulletsMax )
 			{
 				spawnBullet(this.x + halfWidth, this.y);
 			}
@@ -125,11 +127,8 @@ package objects.player
 		
 		override public function destroy():void 
 		{
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 			super.destroy();
-			
-			//Level.gameStateS(GlobalVariables.LOST);
-			
-			//FP.world.add(new Lost_Obj);
 		}
 		
 	}

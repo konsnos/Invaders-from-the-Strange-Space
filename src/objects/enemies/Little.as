@@ -3,6 +3,7 @@ package objects.enemies
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	
+	import objects.Explosion;
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
 	import worlds.Level;
@@ -17,10 +18,14 @@ package objects.enemies
 		private static var image:Image;
 		public static var points:Number;
 		public static var list:Number;
+		public static var timeElapsed:Number;
 		
 		private static var speed:Number;
+		private static var maxShots:uint; // The amount of shots little aliens can shoot in game.
+		private static var littleShooting:uint; // The Little that shoots.
+		public static var shootInterval:Number; // The interval the Littles shoots.
 		
-		private static var listUpdate:Boolean; // Checks if the list with the Little aliens needs to be updated
+		private static var listUpdate:Boolean; // Checks if the list with the Little aliens needs to be updated.
 		
 		// Gets-Sets
 		public static function get listUpdateG():Boolean
@@ -31,8 +36,17 @@ package objects.enemies
 		{
 			listUpdate = setValue;
 		}
+		public static function get littleShootingG():uint
+		{
+			return littleShooting;
+		}
+		public static function get maxShotsG():uint 
+		{
+			return maxShots;
+		}
 		
-		public function Little(x:Number, y:Number) 
+		// Να βάλω maxshots, και shotsInterval ούτως ώστε ακόμα και με λιγότερους εχθρούς η ροή των σφαιρών να είναι η ίδια.
+		public function Little(x:Number, y:Number)
 		{
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);
 			
@@ -58,19 +72,13 @@ package objects.enemies
 		{
 			if (Level.gameStateG == GlobalVariables.PLAYING)
 			{
-				ShootCheck();
-				
 				CheckIfShot();
 			}
 		}
 		
-		private function ShootCheck():void 
+		public function Shoot():void 
 		{
-			var checkIfShoot:Number = FP.random;
-			if (checkIfShoot < fireChance)
-			{
-				spawnBullet(this.x + halfWidth, this.y + height);
-			}
+			spawnBullet(this.x + halfWidth, this.y + height);
 		}
 		
 		private function spawnBullet(x:Number, y:Number):void 
@@ -92,6 +100,19 @@ package objects.enemies
 		{
 			list = 0;
 			points = 10;
+			shootInterval = 0.5;
+			timeElapsed = 0;
+		}
+		
+		public static function calculateMaxShots():void 
+		{
+			maxShots = (list / 10) as uint;
+
+		}
+		
+		public static function calculateWhichShoot():uint
+		{
+			return littleShooting = FP.random * list;
 		}
 		
 		public function ComeCloser():void 
@@ -105,9 +126,8 @@ package objects.enemies
 			
 			if (b)
 			{
-				takeDamage(b.damageG);
+ 				takeDamage(b.damageG);
 				b.destroy();
-				listUpdateS = true;
 			}
 		}
 		
@@ -115,6 +135,12 @@ package objects.enemies
 		{
 			Stats_Obj.scoreS = points;
 			list--;
+			listUpdateS = true;
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00);
+			if (list % 10 == 0)
+			{
+				Little.calculateMaxShots();
+			}
 			super.destroy();
 		}
 	}

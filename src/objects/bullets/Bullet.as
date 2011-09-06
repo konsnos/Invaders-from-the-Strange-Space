@@ -13,6 +13,7 @@ package objects.bullets
 	 */
 	public class Bullet extends Entity 
 	{
+		public static var list:uint;
 		protected var image:Image;
 		protected var speed:Number;
 		protected var damage:Number;
@@ -60,6 +61,17 @@ package objects.bullets
 		{
 			this.x = x;
 			this.y = y;
+			Bullet.list++;
+		}
+		
+		override public function removed():void 
+		{
+			Bullet.list--;
+		}
+		
+		public static function resetList():void 
+		{
+			list = 0;
 		}
 		
 	}

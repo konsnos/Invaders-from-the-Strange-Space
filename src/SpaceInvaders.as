@@ -33,7 +33,7 @@ package
 			
 			FP.world = new MainMenu;
 			
-			// FP.console.enable();
+			FP.console.enable();
 		}
 		
 	}

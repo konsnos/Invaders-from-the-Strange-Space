@@ -31,7 +31,6 @@ package worlds
 			title = new Text(String("Score: " + score + " Rank: Rookie"));
 			title.size = 16;
 			title.y = 1;
-			trace(title.height);
 			title.x = 10;
 			title.color = 0xffff00; // Yellow
 			title.font = 'FONT_STATS';

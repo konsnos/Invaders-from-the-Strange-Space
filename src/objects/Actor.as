@@ -2,6 +2,7 @@ package objects
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Image;
 	
 	/**
