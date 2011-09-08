@@ -13,10 +13,7 @@ package worlds
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
-	import worlds.objs.Lost_Obj;
-	import worlds.objs.Pause_Obj;
-	import worlds.objs.Stats_Obj;
-	import worlds.objs.Win_Obj;
+	import worlds.objs.Starfield;
 	
 	import objects.Actor;
 	import objects.enemies.Alien;
@@ -27,6 +24,10 @@ package worlds
 	import objects.bullets.BulletPlayer;
 	import worlds.objs.WeaponsFree_Obj;
 	import worlds.objs.Menu_Obj;
+	import worlds.objs.Lost_Obj;
+	import worlds.objs.Pause_Obj;
+	import worlds.objs.Stats_Obj;
+	import worlds.objs.Win_Obj;
 	import GlobalVariables;
 	
 	/**
@@ -39,14 +40,10 @@ package worlds
 		private var background1:Graphic;
 		private var background2:Graphic;
 		
-		// BACKGROUND MOVEMENT
-		private var layer1Y:Number;
-		private var layer1X:Number;
-		private var layer2Y:Number;
-		private var layer2X:Number;
+		// create the starfield
+		private var field:Starfield = new Starfield();
 		
 		// GAME
-		private static var gameState:Number;
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
 		private var obj:Menu_Obj;
@@ -72,31 +69,15 @@ package worlds
 		private var small_e:Small;
 		private var smallShooting:uint;
 		
-		// Gets-Sets
-		public static function set gameStateS(setValue:Number):void
-		{
-			gameState = setValue;
-		}
-		public static function get gameStateG():Number 
-		{
-			return gameState;
-		}
-		
 		public function Level() 
 		{
-			layer1Y = 1.2;
-			layer2Y = 2.5;
-			GlobalVariables.RESETBACKDROPS();
-			background1 = GlobalVariables.backdrop1;
-			background2 = GlobalVariables.backdrop2;
-			
 			timeElapsed = 0;
 			changeLine = false;
 			
 			smalls_e = new Array();
 			entitiesToRemove = new Array();
 			
-			gameState = GlobalVariables.PREPARING;
+			GlobalVariables.gameState = GlobalVariables.PREPARING;
 		}
 		
 		override public function begin():void 
@@ -109,17 +90,12 @@ package worlds
 			
 			resetAllLists();
 			
-			addGraphic(background1, 1);
-			addGraphic(background2, 0);
+			//addGraphic(background1, 1);
+			//addGraphic(background2, 0);
+			addGraphic(field);
 			add(new Stats_Obj);
 			obj = new WeaponsFree_Obj;
 			add(obj);
-			
-			// Setting background movement
-			background1.y = 245;
-			background1.x = 345;
-			background2.y = 376;
-			background2.x = 123;
 			
 			loadLevel(MAP);
 			enemiesMoveTime = 1;
@@ -131,12 +107,12 @@ package worlds
 		
 		override public function update():void 
 		{
-			if (gameState == GlobalVariables.PREPARING)
+			if (GlobalVariables.gameState == GlobalVariables.PREPARING)
 			{
 				preparing();
 			}
 			
-			if (gameState == GlobalVariables.LOST)
+			if (GlobalVariables.gameState == GlobalVariables.LOST)
 			{
 				if (Input.pressed("enter"))
 				{
@@ -146,9 +122,9 @@ package worlds
 			
 			if (Input.pressed("pause"))
 			{
-				if (gameState == GlobalVariables.PAUSE)
+				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
 				{
-					gameState = GlobalVariables.PLAYING;
+					GlobalVariables.gameState = GlobalVariables.PLAYING;
 					getClass(Pause_Obj, entitiesToRemove);
 					if (entitiesToRemove)
 					{
@@ -158,23 +134,21 @@ package worlds
 				}
 				else
 				{
-					gameState = GlobalVariables.PAUSE;
+					GlobalVariables.gameState = GlobalVariables.PAUSE;
 					add(new Pause_Obj);
 				}
 			}
 			
-			if (gameState == GlobalVariables.WIN && Input.pressed("enter"))
+			if (GlobalVariables.gameState == GlobalVariables.WIN && Input.pressed("enter"))
 			{
 				returnToMainMenu();
 			}
 			
-			if (gameState == GlobalVariables.PLAYING)
+			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				updateGameplay();
 			}
 			
-			background1.y += layer1Y;
-			background2.y += layer2Y;
 			super.update();
 		}
 		
@@ -190,13 +164,13 @@ package worlds
 			
 			if (player.hpG <= 0)
 			{
-				gameStateS = GlobalVariables.LOST;
+				GlobalVariables.gameState = GlobalVariables.LOST;
 				add(new Lost_Obj);
 			}
 			
-			if(Alien.list == 0 && gameState == GlobalVariables.PLAYING)
+			if(Alien.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
-				gameState = GlobalVariables.WIN; // WIN!!!
+				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
 				add(new Win_Obj);
 			}
 			
@@ -234,7 +208,7 @@ package worlds
 					
 					if (small_e.bottom > player.y)
 					{
-						gameState = GlobalVariables.LOST;
+						GlobalVariables.gameState = GlobalVariables.LOST;
 						returnToMainMenu();
 					}
 				}
@@ -274,7 +248,7 @@ package worlds
 			timeElapsed += FP.elapsed;
 			if (timeElapsed > 1)
 			{
-				gameState = GlobalVariables.PLAYING;
+				GlobalVariables.gameState = GlobalVariables.PLAYING;
 			}
 		}
 		
@@ -287,7 +261,6 @@ package worlds
 			{
 				player = new Player(p.@x, p.@y);
 				add(player);
-				trace(p.@x + " : " + p.@y);
 			}
 			
 			dataList = xml.enemies.tile;

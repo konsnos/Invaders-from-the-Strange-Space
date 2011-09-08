@@ -71,7 +71,7 @@ package objects.enemies
 		
 		override public function update():void 
 		{
-			if (Level.gameStateG == GlobalVariables.PLAYING)
+			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				CheckIfShot();
 			}

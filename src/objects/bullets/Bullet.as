@@ -37,9 +37,9 @@ package objects.bullets
 		
 		override public function update():void
 		{
-			if (Level.gameStateG == GlobalVariables.PLAYING || 
-			Level.gameStateG == GlobalVariables.WIN ||
-			Level.gameStateG == GlobalVariables.LOST)
+			if (GlobalVariables.gameState == GlobalVariables.PLAYING || 
+			GlobalVariables.gameState == GlobalVariables.WIN ||
+			GlobalVariables.gameState == GlobalVariables.LOST)
 			{
 				this.y += speed * FP.elapsed;
 				
