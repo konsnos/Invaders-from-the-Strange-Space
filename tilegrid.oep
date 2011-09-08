@@ -1,0 +1,25 @@
+<project>
+	<name>Space Invaders example project</name>
+	
+	<settings>
+		<defaultWidth>800</defaultWidth>
+		<defaultHeight>600</defaultHeight>
+	</settings>
+	
+	<tilesets>
+		<tileset name="small" image="assets/images/small_enemy.png" tileWidth="44" tileHeight="32"/>
+		<tileset name="medium" image="assets/images/medium_enemy.png" tileWidth="44" tileHeight="32"/>
+		<tileset name="big" image="assets/images/big_enemy.png" tileWidth="44" tileHeight="32"/>
+		<tileset name="bonus" image="assets/images/bonus_enemy.png" tileWidth="64" tileHeight="28"/>
+	</tilesets>
+	
+	<objects>
+		<object name="player" image="assets/images/player.png" width="84" height="84" limit="1"/>
+	</objects>
+	
+	<layers>
+		<grid name="space" gridSize="1" exportAsObjects="true"/>
+		<objects name="startPlace" gridSize="4"/>
+		<tiles name="enemies" gridSize="32" exportTileIDs="true" multipleTilesets="true" />
+	</layers>
+</project>

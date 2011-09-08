@@ -16,7 +16,7 @@ package
 		[Embed(source = '../assets/images/player.png')] public static const IMG_PLAYER:Class;
 		[Embed(source = '../assets/images/small_enemy.png')] public static const IMG_ENEMY_S:Class;
 		[Embed(source = '../assets/images/medium_enemy.png')] public static const IMG_ENEMY_M:Class;
-		[Embed(source = '../assets/images/large_enemy.png')] public static const IMG_ENEMY_L:Class;
+		[Embed(source = '../assets/images/big_enemy.png')] public static const IMG_ENEMY_L:Class;
 		[Embed(source = '../assets/images/bonus_enemy.png')] public static const IMG_ENEMY_B:Class;
 		[Embed(source = '../assets/images/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
 		public static const IMG_BULLET_REDRECT:Image = new Image(new BitmapData(2, 10, false, 0xee0000));

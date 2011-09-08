@@ -1,9 +1,11 @@
 package worlds 
 {
 	import flash.display.BitmapData;
+	import flash.sampler.NewObjectSample;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
+	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.World;
 	import net.flashpunk.tweens.misc.Alarm;
 	import net.flashpunk.graphics.Canvas;
@@ -18,7 +20,7 @@ package worlds
 	
 	import objects.Actor;
 	import objects.enemies.Alien;
-	import objects.enemies.Little;
+	import objects.enemies.Small;
 	import objects.player.Player;
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
@@ -48,6 +50,7 @@ package worlds
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
 		private var obj:Menu_Obj;
+		[Embed(source = '../../assets/levels/level01.oel', mimeType = 'application/octet-stream')]private const MAP:Class;
 		
 		// PLAYER
 		private var player:Player;
@@ -61,13 +64,13 @@ package worlds
 		private var enemiesMoveTime:Number;
 		private var changeLine:Boolean;
 		
-		private var littles_e:Array;
+		private var smalls_e:Array;
 		private var entitiesToRemove:Array;
 		
 		// TEMPORARY VARS
 		private var i:Number;
-		private var little_e:Little;
-		private var littleShooting:uint;
+		private var small_e:Small;
+		private var smallShooting:uint;
 		
 		// Gets-Sets
 		public static function set gameStateS(setValue:Number):void
@@ -90,7 +93,7 @@ package worlds
 			timeElapsed = 0;
 			changeLine = false;
 			
-			littles_e = new Array();
+			smalls_e = new Array();
 			entitiesToRemove = new Array();
 			
 			gameState = GlobalVariables.PREPARING;
@@ -112,33 +115,18 @@ package worlds
 			obj = new WeaponsFree_Obj;
 			add(obj);
 			
+			// Setting background movement
 			background1.y = 245;
 			background1.x = 345;
 			background2.y = 376;
 			background2.x = 123;
 			
-			player = new Player(FP.halfWidth, FP.height / 10 * 8);
-			add(player);
-			
-			columns = 8;
-			rows = 5;
-			
-			columnsSpace = (FP.width / columns) - 20;
-			rowsSpace = FP.height / (rows + 6);
-			
-			for (var r:int = 1; r <= rows; r++)
-			{
-				for (var c:int = 1; c <= columns; c++)
-				{
-					add(new Little(c * columnsSpace, r * rowsSpace));
-				}
-			}
-			
+			loadLevel(MAP);
 			enemiesMoveTime = 1;
-			Little.listUpdateS = true;
-			Little.calculateMaxShots();
-			little_e = null;
-			littleShooting = 0;
+			Small.listUpdateS = true;
+			Small.calculateMaxShots();
+			small_e = null;
+			smallShooting = 0;
 		}
 		
 		override public function update():void 
@@ -192,8 +180,8 @@ package worlds
 		
 		public function getEnemies():void 
 		{
-			littles_e = new Array();
-			getType("little", littles_e);
+			smalls_e = new Array();
+			getType("Small", smalls_e);
 		}
 		
 		private function updateGameplay():void 
@@ -217,34 +205,34 @@ package worlds
 		
 		private function updateEnemies():void 
 		{
-			Little.timeElapsed += FP.elapsed;
+			Small.timeElapsed += FP.elapsed;
 			
-			if (Little.listUpdateG)
+			if (Small.listUpdateG)
 			{
 				getEnemies();
-				Little.listUpdateS = false;
+				Small.listUpdateS = false;
 			}
 			
-			if (Little.timeElapsed > Little.shootInterval && BulletEnemy.list < Little.maxShotsG)
+			if (Small.timeElapsed > Small.shootInterval && BulletEnemy.list < Small.maxShotsG)
 			{
-				littleShooting = Little.calculateWhichShoot();
-				little_e = littles_e[littleShooting];
-				little_e.Shoot();
-				Little.timeElapsed = 0;
+				smallShooting = Small.calculateWhichShoot();
+				small_e = smalls_e[smallShooting];
+				small_e.Shoot();
+				Small.timeElapsed = 0;
 			}
 			
 			if (timeElapsed > enemiesMoveTime)
 			{
-				for (i = 0, little_e = littles_e[i] as Little; i < littles_e.length; i++, little_e = littles_e[i] as Little)
+				for (i = 0, small_e = smalls_e[i] as Small; i < smalls_e.length; i++, small_e = smalls_e[i] as Small)
 				{
-					little_e.walkOn();
+					small_e.walkOn();
 					
-					if ((little_e.x + little_e.width * 2 > FP.width || little_e.x < little_e.width ) && (!changeLine))
+					if ((small_e.x + small_e.width * 2 > FP.width || small_e.x < small_e.width ) && (!changeLine))
 					{
 						changeLine = true;
 					}
 					
-					if (little_e.bottom > player.y)
+					if (small_e.bottom > player.y)
 					{
 						gameState = GlobalVariables.LOST;
 						returnToMainMenu();
@@ -253,10 +241,10 @@ package worlds
 				
 				if (changeLine)
 				{
-					Little.reverseDirection();
-					for (i = 0, little_e = littles_e[i] as Little; i < littles_e.length; i++, little_e = littles_e[i] as Little)
+					Small.reverseDirection();
+					for (i = 0, small_e = smalls_e[i] as Small; i < smalls_e.length; i++, small_e = smalls_e[i] as Small)
 					{
-						little_e.ComeCloser();
+						small_e.ComeCloser();
 					}
 					changeLine = false;
 				}
@@ -278,7 +266,7 @@ package worlds
 			BulletEnemy.resetList();
 			BulletPlayer.resetList();
 			Alien.resetList();
-			Little.resetList();
+			Small.resetList();
 		}
 		
 		public function preparing():void 
@@ -287,6 +275,25 @@ package worlds
 			if (timeElapsed > 1)
 			{
 				gameState = GlobalVariables.PLAYING;
+			}
+		}
+		
+		public function loadLevel(map:Class):void 
+		{
+			var xml:XML = FP.getXML(map);
+			var dataList:XMLList;
+			dataList = xml.startPlace.player;
+			for each(var p:XML in dataList)
+			{
+				player = new Player(p.@x, p.@y);
+				add(player);
+				trace(p.@x + " : " + p.@y);
+			}
+			
+			dataList = xml.enemies.tile;
+			for each(var l:XML in dataList)
+			{
+				add(new Small(l.@x, l.@y));
 			}
 		}
 	}

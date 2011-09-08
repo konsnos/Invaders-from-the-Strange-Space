@@ -1,3 +1,7 @@
+Build 18
+
+- Implemented xml import for levels. Levels can be created with Ogmo Editor.
+
 Build 17
 
 - Added some sound effects.

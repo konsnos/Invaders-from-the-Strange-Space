@@ -8,6 +8,7 @@ package objects.player
 	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import objects.enemies.Small;
 	
 	import worlds.objs.Lost_Obj;
 	import worlds.Level;
@@ -15,7 +16,7 @@ package objects.player
 	import objects.Explosion;
 	import objects.bullets.BulletPlayer;
 	import objects.bullets.Bullet;
-	import objects.enemies.Little;
+	import objects.enemies.Small;
 	import GlobalVariables;
 	
 	/**
@@ -29,7 +30,7 @@ package objects.player
 		private var BulletsMax:Number;
 		private var BulletsShot:Number;
 		
-		private var little:Little;
+		private var small:Small;
 		
 		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
 		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
@@ -75,14 +76,14 @@ package objects.player
 				checkIfShot();
 				
 				/**************** ALIENS COLLIDED WITH PLAYER ****************/
-				little = collide("little", x, y) as Little;
+				small = collide("small", x, y) as Small;
 				
-				if (little)
+				if (small)
 				{
-					hpS = -little.hpG;
+					hpS = -small.hpG;
 				}
 				
-				little = null;
+				small = null;
 			}
 		}
 		
