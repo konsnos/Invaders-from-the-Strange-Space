@@ -16,30 +16,15 @@ package objects.enemies
 	 */
 	public class Small extends Alien 
 	{
-		private static var image:Image;
-		public static var points:Number;
 		public static var list:Number;
 		public static var timeElapsed:Number;
-		
-		private static var speed:Number;
 		private static var maxShots:uint; // The amount of shots Small aliens can shoot in game.
-		private static var SmallShooting:uint; // The Small that shoots.
+		private static var WhoShoots:uint; // The Small that shoots.
 		public static var shootInterval:Number; // The interval the Smalls shoots.
 		
-		private static var listUpdate:Boolean; // Checks if the list with the Small aliens needs to be updated.
-		
-		// Gets-Sets
-		public static function get listUpdateG():Boolean
-		{ 
-			return listUpdate;
-		}
-		public static function set listUpdateS(setValue:Boolean):void 
+		public static function get WhoShootsG():uint
 		{
-			listUpdate = setValue;
-		}
-		public static function get SmallShootingG():uint
-		{
-			return SmallShooting;
+			return WhoShoots;
 		}
 		public static function get maxShotsG():uint 
 		{
@@ -59,7 +44,8 @@ package objects.enemies
 			
 			hpS = 1;
 			speed = 15;
-			fireChance = 0.0003;
+			direction = 1;
+			points = 10;
 			
 			width = image.width * image.scale;
 			height = image.height * image.scale;
@@ -77,30 +63,9 @@ package objects.enemies
 			}
 		}
 		
-		public function Shoot():void 
-		{
-			spawnBullet(this.x + halfWidth, this.y + height);
-		}
-		
-		private function spawnBullet(x:Number, y:Number):void 
-		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y);
-		}
-		
-		public function walkOn():void 
-		{
-			this.x += speed;
-		}
-		
-		public static function reverseDirection():void 
-		{
-			speed *= -1;
-		}
-		
 		public static function resetList():void // Total number of entities existing.
 		{
 			list = 0;
-			points = 10;
 			shootInterval = 0.5;
 			timeElapsed = 0;
 		}
@@ -113,12 +78,7 @@ package objects.enemies
 		
 		public static function calculateWhichShoot():uint
 		{
-			return SmallShooting = FP.random * list;
-		}
-		
-		public function ComeCloser():void 
-		{
-			this.y += Math.abs(speed) * 2;
+			return WhoShoots = FP.random * list;
 		}
 		
 		public function CheckIfShot():void 
@@ -143,6 +103,11 @@ package objects.enemies
 				Small.calculateMaxShots();
 			}
 			super.destroy();
+		}
+		
+		override public function spawnBullet(x:Number, y:Number):void 
+		{
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350, 1, GlobalVariables.IMG_BULLET_REDRECT, "Bullet_Enem_Small");
 		}
 	}
 	

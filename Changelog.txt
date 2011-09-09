@@ -1,3 +1,12 @@
+Build 20
+
+- Added more enemies to the level.
+
+Build 19
+
+- Fixed a memory leak which made the game need ~95 RAM at most. Now it tops at ~25.
+- Changed the background image.
+
 Build 18
 
 - Implemented xml import for levels. Levels can be created with Ogmo Editor.

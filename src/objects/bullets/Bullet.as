@@ -59,10 +59,11 @@ package objects.bullets
 			FP.world.recycle(this);
 		}
 		
-		public function reset(x:Number,y:Number):void 
+		public function reset(x:Number, y:Number, speed:uint = 0, damage:uint = 1, img:Image = null, type:String = null):void 
 		{
 			this.x = x;
 			this.y = y;
+			
 			Bullet.list++;
 		}
 		

@@ -1,5 +1,6 @@
 package objects.bullets 
 {
+	import net.flashpunk.graphics.Image;
 	/**
 	 * ...
 	 * @author konsnos
@@ -19,7 +20,7 @@ package objects.bullets
 			
 			layer = 1;
 			
-			type = "bullet_L"
+			type = "bullet_e";
 		}
 		
 		override public function update():void
@@ -27,9 +28,18 @@ package objects.bullets
 			super.update();
 		}
 		
-		override public function reset(x:Number, y:Number):void
+		override public function reset(x:Number, y:Number, speed:uint = 350, damage:uint = 1, 
+		image:Image = null, type:String = "Bullet_Enem"):void
 		{
 			super.reset(x, y);
+			
+			graphic = this.image = image;
+			
+			this.speed = speed;
+			this.damage = damage;
+			
+			this.type = type;
+			
 			BulletEnemy.list++;
 		}
 		

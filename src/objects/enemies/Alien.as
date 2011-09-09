@@ -1,8 +1,11 @@
 package objects.enemies 
 {
+	import flash.sampler.NewObjectSample;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Sfx;
 	import objects.Actor;
+	import objects.bullets.BulletEnemy;
 	
 	/**
 	 * ...
@@ -10,10 +13,25 @@ package objects.enemies
 	 */
 	public class Alien extends Actor 
 	{
-		protected static var fireChance:Number; // Shows the possibility of firing. 0 < value < 1. 1 means fire in every frame.
 		public static var list:Number; // Total number of aliens in the game.
 		
+		public var points:Number;
+		protected var speed:Number;
+		public var direction:Number;
+		
 		protected var soundExplosion:Sfx;
+		
+		private static var listUpdate:Boolean; // Checks if the list with the Small aliens needs to be updated.
+		
+		// Gets-Sets
+		public static function get listUpdateG():Boolean
+		{ 
+			return listUpdate;
+		}
+		public static function set listUpdateS(setValue:Boolean):void 
+		{
+			listUpdate = setValue;
+		}
 		
 		public function Alien(x:Number, y:Number) 
 		{
@@ -32,6 +50,31 @@ package objects.enemies
 		public static function resetList():void 
 		{
 			list = 0;
+		}
+		
+		public function Shoot():void 
+		{
+			spawnBullet(this.x + halfWidth, this.y + height);
+		}
+		
+		public function spawnBullet(x:Number, y:Number):void 
+		{
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Small");
+		}
+		
+		public function walkOn():void 
+		{
+			this.x += speed * direction;
+		}
+		
+		public function reverseDirection():void 
+		{
+			direction *= -1;
+		}
+		
+		public function ComeCloser():void 
+		{
+			this.y += Math.abs(speed) * 2;
 		}
 		
 		override public function destroy():void 

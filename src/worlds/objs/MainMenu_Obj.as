@@ -27,7 +27,7 @@ package worlds.objs
 			title.color = 0xadff2f; // Green
 			
 			selection.push(new Text(String("New Game")));
-			selection.push(new Text(String("Load Game")));
+			selection.push(new Text(String("Select Level")));
 			selection.push(new Text(String("About")));
 			
 			for (var i:Number = 0; i < selection.length; i++)
@@ -83,7 +83,7 @@ package worlds.objs
 						FP.world = new Level;
 						break;
 					case 1:
-						trace("Load Game");
+						trace("Select Level");
 						break;
 					case 2:
 						trace("About");

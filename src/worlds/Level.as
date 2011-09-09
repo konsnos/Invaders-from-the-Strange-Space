@@ -1,6 +1,7 @@
 package worlds 
 {
 	import flash.display.BitmapData;
+	import flash.display.ShaderParameter;
 	import flash.sampler.NewObjectSample;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -13,6 +14,8 @@ package worlds
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import objects.enemies.Big;
+	import objects.enemies.Medium;
 	import worlds.objs.Starfield;
 	
 	import objects.Actor;
@@ -36,10 +39,6 @@ package worlds
 	 */
 	public class Level extends World 
 	{
-		// BACKGROUND
-		private var background1:Graphic;
-		private var background2:Graphic;
-		
 		// create the starfield
 		private var field:Starfield = new Starfield();
 		
@@ -47,34 +46,37 @@ package worlds
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
 		private var obj:Menu_Obj;
-		[Embed(source = '../../assets/levels/level01.oel', mimeType = 'application/octet-stream')]private const MAP:Class;
+		[Embed(source = '../../assets/levels/level02.oel', mimeType = 'application/octet-stream')]private const MAP:Class;
 		
 		// PLAYER
 		private var player:Player;
 		
 		// ENEMIES
-		private var rows:Number;
-		private var rowsSpace:Number;
-		private var columns:Number;
-		private var columnsSpace:Number;
 		private var timeElapsed:Number;
 		private var enemiesMoveTime:Number;
 		private var changeLine:Boolean;
 		
+		private var aliens_e:Array;
 		private var smalls_e:Array;
+		private var mediums_e:Array;
+		private var bigs_e:Array;
 		private var entitiesToRemove:Array;
+		
+		private var bullets_s:Array;
+		private var bullets_m:Array;
+		private var bullets_b:Array;
 		
 		// TEMPORARY VARS
 		private var i:Number;
-		private var small_e:Small;
-		private var smallShooting:uint;
+		private var alien_e:Alien;
+		private var enemyShooting:uint;
 		
 		public function Level() 
 		{
 			timeElapsed = 0;
 			changeLine = false;
 			
-			smalls_e = new Array();
+			getEnemies();
 			entitiesToRemove = new Array();
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
@@ -89,9 +91,8 @@ package worlds
 			wasPaused = false;
 			
 			resetAllLists();
+			resetAllBullets();
 			
-			//addGraphic(background1, 1);
-			//addGraphic(background2, 0);
 			addGraphic(field);
 			add(new Stats_Obj);
 			obj = new WeaponsFree_Obj;
@@ -99,10 +100,12 @@ package worlds
 			
 			loadLevel(MAP);
 			enemiesMoveTime = 1;
-			Small.listUpdateS = true;
+			Alien.listUpdateS = true;
 			Small.calculateMaxShots();
-			small_e = null;
-			smallShooting = 0;
+			Medium.calculateMaxShots();
+			Big.calculateMaxShots();
+			alien_e = null;
+			enemyShooting = 0;
 		}
 		
 		override public function update():void 
@@ -155,7 +158,14 @@ package worlds
 		public function getEnemies():void 
 		{
 			smalls_e = new Array();
+			mediums_e = new Array();
+			bigs_e = new Array();
 			getType("Small", smalls_e);
+			getType("Medium", mediums_e);
+			getType("Big", bigs_e);
+			
+			aliens_e = new Array();
+			aliens_e = smalls_e.concat(mediums_e, bigs_e);
 		}
 		
 		private function updateGameplay():void 
@@ -180,45 +190,43 @@ package worlds
 		private function updateEnemies():void 
 		{
 			Small.timeElapsed += FP.elapsed;
+			Medium.timeElapsed += FP.elapsed;
+			Big.timeElapsed += FP.elapsed;
 			
-			if (Small.listUpdateG)
+			if (Alien.listUpdateG)
 			{
 				getEnemies();
-				Small.listUpdateS = false;
+				Alien.listUpdateS = false;
 			}
 			
-			if (Small.timeElapsed > Small.shootInterval && BulletEnemy.list < Small.maxShotsG)
-			{
-				smallShooting = Small.calculateWhichShoot();
-				small_e = smalls_e[smallShooting];
-				small_e.Shoot();
-				Small.timeElapsed = 0;
-			}
+			resetAllBullets();
+			calculateEnemiesShots();
 			
+			// Movement
 			if (timeElapsed > enemiesMoveTime)
 			{
-				for (i = 0, small_e = smalls_e[i] as Small; i < smalls_e.length; i++, small_e = smalls_e[i] as Small)
+				for (i = 0, alien_e = aliens_e[i] as Alien; i < aliens_e.length; i++, alien_e = aliens_e[i] as Alien)
 				{
-					small_e.walkOn();
+					alien_e.walkOn();
 					
-					if ((small_e.x + small_e.width * 2 > FP.width || small_e.x < small_e.width ) && (!changeLine))
+					if ((alien_e.x + alien_e.width * 2 > FP.width || alien_e.x < alien_e.width ) && (!changeLine))
 					{
 						changeLine = true;
 					}
 					
-					if (small_e.bottom > player.y)
+					if (alien_e.bottom > player.y)
 					{
 						GlobalVariables.gameState = GlobalVariables.LOST;
-						returnToMainMenu();
+						add(new Lost_Obj);
 					}
 				}
 				
 				if (changeLine)
 				{
-					Small.reverseDirection();
-					for (i = 0, small_e = smalls_e[i] as Small; i < smalls_e.length; i++, small_e = smalls_e[i] as Small)
+					for (i = 0, alien_e = aliens_e[i] as Alien; i < aliens_e.length; i++, alien_e = aliens_e[i] as Alien)
 					{
-						small_e.ComeCloser();
+						alien_e.reverseDirection();
+						alien_e.ComeCloser();
 					}
 					changeLine = false;
 				}
@@ -241,6 +249,45 @@ package worlds
 			BulletPlayer.resetList();
 			Alien.resetList();
 			Small.resetList();
+			Medium.resetList();
+			Big.resetList();
+		}
+		
+		public function resetAllBullets():void
+		{
+			bullets_s = new Array();
+			bullets_m = new Array();
+			bullets_b = new Array();
+		}
+		
+		public function calculateEnemiesShots():void 
+		{
+			getType("Bullet_Enem_Small", bullets_s);
+			if (Small.timeElapsed > Small.shootInterval && bullets_s.length < Small.maxShotsG)
+			{
+				enemyShooting = Small.calculateWhichShoot();
+				alien_e = smalls_e[enemyShooting];
+				alien_e.Shoot();
+				Small.timeElapsed = 0;
+			}
+			
+			getType("Bullet_Enem_Medium", bullets_m);
+ 			if (Medium.timeElapsed > Medium.shootInterval && bullets_m.length < Medium.maxShotsG)
+			{
+				enemyShooting = Medium.calculateWhichShoot();
+				alien_e = mediums_e[enemyShooting];
+				alien_e.Shoot();
+				Medium.timeElapsed = 0;
+			}
+			
+			getType("Bullet_Enem_Big", bullets_b);
+			if (Big.timeElapsed > Big.shootInterval && bullets_b.length < Big.maxShotsG)
+			{
+				enemyShooting = Big.calculateWhichShoot();
+				alien_e = bigs_e[enemyShooting];
+				alien_e.Shoot();
+				Big.timeElapsed = 0;
+			}
 		}
 		
 		public function preparing():void 
@@ -256,6 +303,7 @@ package worlds
 		{
 			var xml:XML = FP.getXML(map);
 			var dataList:XMLList;
+			
 			dataList = xml.startPlace.player;
 			for each(var p:XML in dataList)
 			{
@@ -263,10 +311,22 @@ package worlds
 				add(player);
 			}
 			
-			dataList = xml.enemies.tile;
-			for each(var l:XML in dataList)
+			dataList = xml.smalls.tile;
+			for each(var s:XML in dataList)
 			{
-				add(new Small(l.@x, l.@y));
+				add(new Small(s.@x, s.@y));
+			}
+			
+			dataList = xml.mediums.tile;
+			for each(var m:XML in dataList)
+			{
+				add(new Medium(m.@x, m.@y));
+			}
+			
+			dataList = xml.bigs.tile;
+			for each(var b:XML in dataList)
+			{
+				add(new Big(b.@x, b.@y));
 			}
 		}
 	}

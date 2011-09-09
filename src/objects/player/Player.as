@@ -123,7 +123,7 @@ package objects.player
 		
 		public function checkIfShot():void
 		{
-			var b:Bullet = collide("bullet_L", x, y) as Bullet;
+			var b:Bullet = collideTypes(["Bullet_Enem_Small", "Bullet_Enem_Medium", "Bullet_Enem_Big"], x, y) as Bullet;
 			
 			if (b)
 			{

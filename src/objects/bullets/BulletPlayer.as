@@ -1,5 +1,6 @@
 package objects.bullets 
 {
+	import net.flashpunk.graphics.Image;
 	/**
 	 * ...
 	 * @author konsnos
@@ -7,7 +8,6 @@ package objects.bullets
 	public class BulletPlayer extends Bullet 
 	{
 		public static var list:uint;
-		private static var BulletsExisting:Number;
 		
 		public function BulletPlayer() 
 		{
@@ -24,7 +24,8 @@ package objects.bullets
 			super.update();
 		}
 		
-		override public function reset(x:Number, y:Number):void
+		override public function reset(x:Number, y:Number, speed:uint = -500, damage:uint = 1, 
+		img:Image = null, type:String = "bullet_P"):void
 		{
 			super.reset(x, y);
 			BulletPlayer.list++;
