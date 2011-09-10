@@ -28,6 +28,18 @@ package
 		/****************** FONTS ******************/
 		[Embed(source = '../assets/fonts/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
 		
+		/****************** LEVELS ******************/
+		[Embed(source = '../assets/levels/level01.oel', mimeType = 'application/octet-stream')]private static const MAP01:Class;
+		[Embed(source = '../assets/levels/level02.oel', mimeType = 'application/octet-stream')]private static const MAP02:Class;
+		[Embed(source = '../assets/levels/level03.oel', mimeType = 'application/octet-stream')]private static const MAP03:Class;
+		[Embed(source = '../assets/levels/level04.oel', mimeType = 'application/octet-stream')]private static const MAP04:Class;
+		[Embed(source = '../assets/levels/level05.oel', mimeType = 'application/octet-stream')]private static const MAP05:Class;
+		[Embed(source = '../assets/levels/level06.oel', mimeType = 'application/octet-stream')]private static const MAP06:Class;
+		[Embed(source = '../assets/levels/level07.oel', mimeType = 'application/octet-stream')]private static const MAP07:Class;
+		[Embed(source = '../assets/levels/level08.oel', mimeType = 'application/octet-stream')]private static const MAP08:Class;
+		[Embed(source = '../assets/levels/level09.oel', mimeType = 'application/octet-stream')]private static const MAP09:Class;
+		[Embed(source = '../assets/levels/level10.oel', mimeType = 'application/octet-stream')]private static const MAP10:Class;
+		
 		private static var score:Number; // Να βάλω get/set
 		
 		public static var gameState:Number;
@@ -36,6 +48,7 @@ package
 		public static const WIN:uint = 3;
 		public static const LOST:uint = 4;
 		public static const PREPARING:uint = 5;
+		public static var MAP:Array;
 		
 		public function GlobalVariables()
 		{
@@ -55,6 +68,11 @@ package
 		public static function GETSCORE():Number 
 		{
 			return score;
+		}
+		
+		public static function FILLMAPARRAY():void 
+		{
+			MAP = new Array(MAP01, MAP02, MAP03, MAP04, MAP05, MAP06, MAP07, MAP08, MAP09, MAP10);
 		}
 		
 	}

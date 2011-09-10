@@ -6,6 +6,7 @@ package worlds
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.World;
 	import net.flashpunk.tweens.misc.Alarm;
@@ -48,8 +49,6 @@ package worlds
 		private var obj:Menu_Obj;
 		private var stage:uint;
 		private var maps:Array;
-		/****************** LEVELS ******************/
-		[Embed(source='../../assets/levels/level01.oel', mimeType='application/octet-stream')]public static const MAP:Class;
 		
 		// PLAYER
 		private var player:Player;
@@ -82,9 +81,10 @@ package worlds
 			getEnemies();
 			entitiesToRemove = new Array();
 			
-			stage = selectedlevel; // Να χρησιμοποιηθεί για την επιλογή levels
+			stage = selectedlevel - 1;
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
+			GlobalVariables.FILLMAPARRAY();
 		}
 		
 		override public function begin():void 
@@ -103,7 +103,7 @@ package worlds
 			obj = new WeaponsFree_Obj;
 			add(obj);
 			
-			loadLevel(MAP);
+			loadLevel(GlobalVariables.MAP[stage]);
 			enemiesMoveTime = 1;
 			Alien.listUpdateS = true;
 			Small.calculateMaxShots();
