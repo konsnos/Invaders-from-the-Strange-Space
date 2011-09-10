@@ -34,6 +34,7 @@ package
 			Input.define("shoot", Key.SPACE);
 			Input.define("enter", Key.ENTER);
 			Input.define("pause", Key.P);
+			Input.define("back", Key.BACKSPACE);
 			
 			FP.world = new MainMenu;
 			

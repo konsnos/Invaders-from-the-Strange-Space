@@ -46,7 +46,7 @@ package worlds
 		private var pause:Boolean;
 		private var wasPaused:Boolean;
 		private var obj:Menu_Obj;
-		[Embed(source = '../../assets/levels/level02.oel', mimeType = 'application/octet-stream')]private const MAP:Class;
+		private var stage:uint;
 		
 		// PLAYER
 		private var player:Player;
@@ -71,13 +71,15 @@ package worlds
 		private var alien_e:Alien;
 		private var enemyShooting:uint;
 		
-		public function Level() 
+		public function Level(selectedlevel:uint) 
 		{
 			timeElapsed = 0;
 			changeLine = false;
 			
 			getEnemies();
 			entitiesToRemove = new Array();
+			
+			stage = selectedlevel; // Να χρησιμοποιηθεί για την επιλογή levels
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
 		}
@@ -98,7 +100,7 @@ package worlds
 			obj = new WeaponsFree_Obj;
 			add(obj);
 			
-			loadLevel(MAP);
+			loadLevel(GlobalVariables.MAP);
 			enemiesMoveTime = 1;
 			Alien.listUpdateS = true;
 			Small.calculateMaxShots();

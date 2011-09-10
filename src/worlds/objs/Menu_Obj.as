@@ -11,6 +11,7 @@ package worlds.objs
 	{
 		protected var title:Text;
 		protected var selection:Array;
+		protected var selected:Menu_Obj;
 		protected var menu:Graphiclist;
 		private var choice:Number = 1;
 		
@@ -36,10 +37,18 @@ package worlds.objs
 				}
 			}
 		}
+		public function get selectedG():Menu_Obj 
+		{
+			return selected;
+		}
+		public function set selectedS(setValue:Menu_Obj):void 
+		{
+			selected = setValue;
+		}
 		
 		public function Menu_Obj() 
 		{
-			
+			selected = null;
 		}
 		
 	}

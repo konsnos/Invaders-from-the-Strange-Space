@@ -45,6 +45,14 @@ package worlds.objs
 		
 		override public function update():void 
 		{
+			if (selected == null)
+			{
+				CheckInput();
+			}
+		}
+		
+		public function CheckInput():void 
+		{
 			if (Input.pressed("down"))
 			{
 				choiceS = 1;
@@ -80,13 +88,13 @@ package worlds.objs
 					case 0:
 						GlobalVariables.RESETSCORE();
 						FP.world.removeAll();
-						FP.world = new Level;
+						FP.world = new Level(1);; // Fade screen to be added.
 						break;
 					case 1:
-						trace("Select Level");
+						selected = new MainMenu_Obj;
 						break;
 					case 2:
-						trace("About");
+						selected = new About_Obj;
 						break;
 				}
 			}

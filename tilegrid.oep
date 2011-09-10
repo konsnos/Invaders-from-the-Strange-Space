@@ -19,7 +19,7 @@
 	
 	<layers>
 		<grid name="space" gridSize="1" exportAsObjects="true"/>
-		<objects name="startPlace" gridSize="4"/>
+		<objects name="startPlace" gridSize="16"/>
 		<tiles name="smalls" gridSize="32" exportTileIDs="true" />
 		<tiles name="mediums" gridSize="32" exportTileIDs="true" />
 		<tiles name="bigs" gridSize="32" exportTileIDs="true" />
