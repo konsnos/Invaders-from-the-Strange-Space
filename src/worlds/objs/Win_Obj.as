@@ -19,7 +19,7 @@ package worlds.objs
 			title.y = 20;
 			title.color = 0x0000ff; // blue
 			
-			selection.push(new Text(String("Press Enter to return to the Main Menu")));
+			selection.push(new Text(String("Press Enter to advance to the next level")));
 			Text(selection[0]).size = 30;
 			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 2;

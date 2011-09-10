@@ -52,7 +52,7 @@ package worlds
 		
 		override public function update():void 
 		{
-			if (instance.selectedG != null)
+			if (instance.selectedG != null && !updating)
 			{
 				nextInstance = instance.selectedG;
 				if (forthOrBack)
@@ -63,13 +63,17 @@ package worlds
 					instance.selectedS = null;
 					updating = true;
 				}
-				else {
-					add(nextInstance);
-					nextInstance.x = FP.width;
-					prevTween.tween(instance.x, instance.x + FP.width, 1, Ease.quartInOut);
-					instance.selectedS = null;
-					updating = true;
-				}
+			}else if (Input.pressed("back") && objsArray.length > 0 && !updating)
+			{
+				nextInstance = instance.selectedS = objsArray[objsArray.length -1];
+				updating = true;
+				forthOrBack = false;
+				
+				add(nextInstance);
+				nextInstance.x = FP.width;
+				prevTween.tween(instance.x, instance.x + FP.width, 1, Ease.quartInOut);
+				instance.selectedS = null;
+				updating = true;
 			}
 			
 			if (updating)
@@ -81,16 +85,6 @@ package worlds
 				}
 				else {
 					nextInstance.x = instance.x - FP.width;
-				}
-			}
-			
-			if (Input.pressed("back"))
-			{
-				if (objsArray.length > 0)
-				{
-					instance.selectedS = objsArray[objsArray.length -1];
-					updating = true;
-					forthOrBack = false;
 				}
 			}
 			

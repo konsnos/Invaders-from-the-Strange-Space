@@ -28,9 +28,6 @@ package
 		/****************** FONTS ******************/
 		[Embed(source = '../assets/fonts/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
 		
-		/****************** LEVELS ******************/
-		[Embed(source = '../assets/levels/level01.oel', mimeType = 'application/octet-stream')]public static const MAP:Class;
-		
 		private static var score:Number; // Να βάλω get/set
 		
 		public static var gameState:Number;

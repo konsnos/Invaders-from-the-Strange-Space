@@ -47,6 +47,9 @@ package worlds
 		private var wasPaused:Boolean;
 		private var obj:Menu_Obj;
 		private var stage:uint;
+		private var maps:Array;
+		/****************** LEVELS ******************/
+		[Embed(source='../../assets/levels/level01.oel', mimeType='application/octet-stream')]public static const MAP:Class;
 		
 		// PLAYER
 		private var player:Player;
@@ -100,7 +103,7 @@ package worlds
 			obj = new WeaponsFree_Obj;
 			add(obj);
 			
-			loadLevel(GlobalVariables.MAP);
+			loadLevel(MAP);
 			enemiesMoveTime = 1;
 			Alien.listUpdateS = true;
 			Small.calculateMaxShots();
