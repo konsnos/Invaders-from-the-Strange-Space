@@ -84,7 +84,6 @@ package worlds
 			stage = selectedlevel - 1;
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
-			GlobalVariables.FILLMAPARRAY();
 		}
 		
 		override public function begin():void 

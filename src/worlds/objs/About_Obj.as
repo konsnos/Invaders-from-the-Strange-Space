@@ -13,10 +13,10 @@ package worlds.objs
 		public function About_Obj() 
 		{
 			title = new Text(String("About"));
-			title.size = 30;
+			title.size = 50;
 			title.y = 10;
 			title.x = FP.halfWidth - title.width/2;
-			title.color = 0xc1cdc1; // Yellow
+			title.color = 0x006400; // Dark Green
 			
 			layer = 2;
 			

@@ -36,8 +36,10 @@ package worlds.objs
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.height / 4 * (i + 1);
 				Text(selection[i]).color = 0xFFFFFF; // White
+				Text(selection[i]).alpha = 0.5;
 			}
 			
+			Text(selection[0]).alpha = 1;
 			menu = new Graphiclist(title, selection[0], selection[1], selection[2]);
 			choiceS = 0;
 			graphic = menu;
@@ -55,30 +57,15 @@ package worlds.objs
 		{
 			if (Input.pressed("down"))
 			{
+				Text(selection[choiceG]).alpha = 0.5;
 				choiceS = 1;
+				Text(selection[choiceG]).alpha = 1;
 			}
 			else if (Input.pressed("up"))
 			{
+				Text(selection[choiceG]).alpha = 0.5;
 				choiceS = -1;
-			}
-			
-			if (choiceG == 0)
-			{
-				Text(selection[0]).alpha = 1;
-				Text(selection[1]).alpha = 0.5;
-				Text(selection[2]).alpha = 0.5;
-			}
-			else if (choiceG == 1)
-			{
-				Text(selection[0]).alpha = 0.5;
-				Text(selection[1]).alpha = 1;
-				Text(selection[2]).alpha = 0.5;
-			}
-			else if (choiceG == 2)
-			{
-				Text(selection[0]).alpha = 0.5;
-				Text(selection[1]).alpha = 0.5;
-				Text(selection[2]).alpha = 1;
+				Text(selection[choiceG]).alpha = 1;
 			}
 			
 			if (Input.pressed("enter"))
@@ -88,10 +75,10 @@ package worlds.objs
 					case 0:
 						GlobalVariables.RESETSCORE();
 						FP.world.removeAll();
-						FP.world = new Level(1);; // Fade screen to be added.
+						FP.world = new Level(1); // Fade screen to be added.
 						break;
 					case 1:
-						selected = new MainMenu_Obj;
+						selected = new SelectLevel_Obj;
 						break;
 					case 2:
 						selected = new About_Obj;

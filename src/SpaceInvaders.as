@@ -36,6 +36,8 @@ package
 			Input.define("pause", Key.P);
 			Input.define("back", Key.BACKSPACE);
 			
+			GlobalVariables.FILLMAPARRAY();
+			
 			FP.world = new MainMenu;
 			
 			FP.console.enable();

@@ -30,10 +30,10 @@ package worlds.objs
 				choice += setValue;
 				if (choice < 0)
 				{
-					choice = 2;
-				}else if (choice > 2)
-				{
 					choice = 0;
+				}else if (choice > selection.length -1)
+				{
+					choice = selection.length -1;
 				}
 			}
 		}
