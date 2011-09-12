@@ -25,7 +25,7 @@ package
 		{
 			super.init();
 			
-			// Mouse.hide();
+			Mouse.hide();
 			
 			Input.define("right", Key.RIGHT, Key.D);
 			Input.define("left", Key.LEFT, Key.A);
@@ -38,10 +38,11 @@ package
 			
 			GlobalVariables.FILLMAPARRAY();
 			GlobalVariables.FILLEXPLOSIONARRAY();
+			GlobalVariables.RESETSCORE();
 			
 			FP.world = new MainMenu;
 			
-			FP.console.enable();
+			//FP.console.enable();
 		}
 		
 	}

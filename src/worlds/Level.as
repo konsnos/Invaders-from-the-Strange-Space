@@ -73,6 +73,12 @@ package worlds
 		private var alien_e:Alien;
 		private var enemyShooting:uint;
 		
+		// Gets-Sets
+		public function get stageG():uint 
+		{
+			return stage;
+		}
+		
 		public function Level(selectedlevel:uint) 
 		{
 			timeElapsed = 0;
@@ -119,7 +125,7 @@ package worlds
 				preparing();
 			}
 			
-			if (GlobalVariables.gameState == GlobalVariables.LOST)
+			if (GlobalVariables.gameState == GlobalVariables.LOST) // Player has lost
 			{
 				if (Input.pressed("enter"))
 				{
@@ -127,7 +133,7 @@ package worlds
 				}
 			}
 			
-			if (Input.pressed("pause"))
+			if (Input.pressed("pause")) // Player has paused
 			{
 				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
 				{
@@ -146,12 +152,12 @@ package worlds
 				}
 			}
 			
-			if (GlobalVariables.gameState == GlobalVariables.WIN && Input.pressed("enter"))
+			if (GlobalVariables.gameState == GlobalVariables.WIN && Input.pressed("enter")) // Player has won
 			{
-				returnToMainMenu();
+				advanceToNextLevel();
 			}
 			
-			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
+			if (GlobalVariables.gameState == GlobalVariables.PLAYING) // Player is playing
 			{
 				updateGameplay();
 			}
@@ -185,7 +191,7 @@ package worlds
 			if(Alien.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
-				add(new Win_Obj);
+				add(new Win_Obj(stage));
 			}
 			
 			updateEnemies();
@@ -243,6 +249,12 @@ package worlds
 		{
 			FP.world.removeAll();
 			FP.world = new MainMenu;
+		}
+		
+		public function advanceToNextLevel():void 
+		{
+			FP.world.removeAll();
+			FP.world = new Level(stage + 2);
 		}
 		
 		public function resetAllLists():void 

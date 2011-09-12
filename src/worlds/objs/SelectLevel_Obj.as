@@ -90,7 +90,6 @@ package worlds.objs
 			
 			if (Input.pressed("enter") && !updating)
 			{
-				GlobalVariables.RESETSCORE();
 				FP.world.removeAll();
 				FP.world = new Level(choiceG + 1);
 			}

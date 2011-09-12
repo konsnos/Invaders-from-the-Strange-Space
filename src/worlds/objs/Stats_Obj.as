@@ -1,5 +1,6 @@
 package worlds.objs 
 {
+	import adobe.utils.ProductManager;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
@@ -23,6 +24,10 @@ package worlds.objs
 			score += setValue;
 			title.text = new String("Level 1 Score: " + score + " Rank: Rookie");
 		}
+		public static function get scoreG():uint
+		{
+			return score;
+		}
 		
 		public function Stats_Obj() 
 		{
@@ -42,7 +47,7 @@ package worlds.objs
 		
 		public static function resetScore():void 
 		{
-			
+			score = 0;
 		}
 		
 	}

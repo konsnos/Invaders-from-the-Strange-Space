@@ -44,7 +44,7 @@ package
 		[Embed(source = '../assets/levels/level09.oel', mimeType = 'application/octet-stream')]private static const MAP09:Class;
 		[Embed(source = '../assets/levels/level10.oel', mimeType = 'application/octet-stream')]private static const MAP10:Class;
 		
-		private static var score:Number; // Να βάλω get/set
+		private static var finalScore:Number;
 		
 		public static var gameState:Number;
 		public static const PLAYING:uint = 1;
@@ -54,6 +54,8 @@ package
 		public static const PREPARING:uint = 5;
 		public static var MAP:Array;
 		public static var EXPLOSION:Array;
+		public static var SCORE:Array;
+		public static var GAMESCORE:uint;
 		
 		public function GlobalVariables()
 		{
@@ -62,22 +64,35 @@ package
 		
 		public static function RESETSCORE():void 
 		{
-			score = 0;
+			GAMESCORE = 0;
 		}
 		
-		public static function ADDSCORE(toadd:Number):void 
+		public static function CALCULATESCORE(toadd:Number):void 
 		{
-			score += toadd;
+			RESETSCORE();
+			for (var i:uint = 0; i < MAP.length; i++)
+			{
+				GAMESCORE += MAP[i];
+			}
 		}
 		
-		public static function GETSCORE():Number 
+		public static function GETSCORE(stage:uint ):Number 
 		{
-			return score;
+			return MAP[stage];
+		}
+		
+		public static function SETLEVELSCORE(score:uint, stage:uint):void
+		{
+			if (SCORE[stage] > score)
+			{
+				SCORE[stage] = score;
+			}
 		}
 		
 		public static function FILLMAPARRAY():void 
 		{
 			MAP = new Array(MAP01, MAP02, MAP03, MAP04, MAP05, MAP06, MAP07, MAP08, MAP09, MAP10);
+			SCORE = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		}
 		
 		public static function FILLEXPLOSIONARRAY():void
