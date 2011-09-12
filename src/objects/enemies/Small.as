@@ -36,7 +36,6 @@ package objects.enemies
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);
 			
 			image.scale *= 0.7;
-			soundExplosion = new Sfx(GlobalVariables.EXPLOSION);
 			
 			listUpdateS = false;
 			

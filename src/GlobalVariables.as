@@ -20,7 +20,11 @@ package
 		public static const IMG_BULLET_REDRECT:Image = new Image(new BitmapData(2, 10, false, 0xee0000));
 		
 		/****************** SOUNDS ******************/
-		[Embed(source = '../assets/sounds/effects/explosion01.mp3')] public static const EXPLOSION:Class;
+		// MUSIC
+		[Embed(source = '../assets/sounds/music/36223__genghis-attenborough__lone-sleeper.mp3')] public static const MSC01:Class;
+		// EFFECTS
+		[Embed(source = '../assets/sounds/effects/explosion01.mp3')] public static const EXPLOSION01:Class;
+		[Embed(source='../assets/sounds/effects/explosion02.mp3')] public static const EXPLOSION02:Class;
 		[Embed(source = '../assets/sounds/effects/explosionP.mp3')] public static const EXPLOSIONP:Class;
 		[Embed(source = '../assets/sounds/effects/explosionPm.mp3')] public static const EXPLOSIONPM:Class;
 		[Embed(source='../assets/sounds/effects/shoot.mp3')] public static const SHOOT:Class;
@@ -49,6 +53,7 @@ package
 		public static const LOST:uint = 4;
 		public static const PREPARING:uint = 5;
 		public static var MAP:Array;
+		public static var EXPLOSION:Array;
 		
 		public function GlobalVariables()
 		{
@@ -73,6 +78,11 @@ package
 		public static function FILLMAPARRAY():void 
 		{
 			MAP = new Array(MAP01, MAP02, MAP03, MAP04, MAP05, MAP06, MAP07, MAP08, MAP09, MAP10);
+		}
+		
+		public static function FILLEXPLOSIONARRAY():void
+		{
+			EXPLOSION = new Array(EXPLOSION01, EXPLOSION02);
 		}
 		
 	}

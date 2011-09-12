@@ -2,6 +2,7 @@ package worlds
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.misc.NumTween;
 	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
@@ -26,6 +27,7 @@ package worlds
 		private var updating:Boolean;
 		private var objsArray:Array;
 		private var forthOrBack:Boolean; // When this is true the scene changes from right to left.
+		private var backgroundMusic:Sfx = new Sfx(GlobalVariables.MSC01);
 		
 		public function MainMenu() 
 		{
@@ -46,6 +48,8 @@ package worlds
 			prevTween = new NumTween(changeInstances);
 			addTween(prevTween);
 			forthOrBack = true;
+			
+			backgroundMusic.loop();
 			
 			updating = false;
 		}
@@ -109,6 +113,10 @@ package worlds
 			updating = false;
 			forthOrBack = true;
 		}
+		
+		override public function end():void 
+		{
+			backgroundMusic.stop();
+		}
 	}
-
 }

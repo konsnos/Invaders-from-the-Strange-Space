@@ -41,7 +41,6 @@ package objects.enemies
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_L);
 			
 			image.scale *= 0.7;
-			soundExplosion = new Sfx(GlobalVariables.EXPLOSION);
 			
 			listUpdateS = false;
 			
@@ -98,6 +97,7 @@ package objects.enemies
 			if (b)
 			{
  				takeDamage(b.damageG);
+				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00, 5);
 				b.destroy();
 			}
 		}

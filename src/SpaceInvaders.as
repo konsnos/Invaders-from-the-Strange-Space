@@ -37,6 +37,7 @@ package
 			Input.define("back", Key.BACKSPACE);
 			
 			GlobalVariables.FILLMAPARRAY();
+			GlobalVariables.FILLEXPLOSIONARRAY();
 			
 			FP.world = new MainMenu;
 			

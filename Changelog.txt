@@ -1,3 +1,8 @@
+Build 23
+
+- Populated the about screen.
+- Added sound effect and particles when an alien is hit.
+
 Build 22
 
 - Added a level selection menu.

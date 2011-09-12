@@ -20,6 +20,7 @@ package objects.enemies
 		public var direction:Number;
 		
 		protected var soundExplosion:Sfx;
+		protected var soundHit:Sfx;
 		
 		private static var listUpdate:Boolean; // Checks if the list with the Small aliens needs to be updated.
 		
@@ -38,6 +39,9 @@ package objects.enemies
 			super();
 			this.x = x;
 			this.y = y;
+			
+			soundExplosion = new  Sfx(GlobalVariables.EXPLOSION[0]);
+			soundHit = new Sfx(GlobalVariables.EXPLOSION[1]);
 			
 			list++;
 		}
@@ -75,6 +79,12 @@ package objects.enemies
 		public function ComeCloser():void 
 		{
 			this.y += Math.abs(speed) * 2;
+		}
+		
+		override public function takeDamage(damageTaken:Number):void 
+		{
+			soundHit.play();
+			super.takeDamage(damageTaken);
 		}
 		
 		override public function destroy():void 

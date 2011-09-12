@@ -11,7 +11,7 @@ package objects
 	public class Explosion extends Entity 
 	{
 		private var explosion:Emitter;
-		protected const EXPLOSION_SIZE:uint = 15;
+		protected var explosionSize:uint;
 		
 		public function Explosion() // Need also color
 		{
@@ -31,14 +31,15 @@ package objects
 		
 		public function explode():void 
 		{
-			for (var i:uint = 0; i < EXPLOSION_SIZE; i++)
+			for (var i:uint = 0; i < explosionSize; i++)
 			{
 				explosion.emit("explode", x, y);
 			}
 		}
 		
-		public function reset(x:Number,y:Number,sign:Number, color:uint):void 
+		public function reset(x:Number, y:Number, sign:Number, color:uint, size:uint = 15):void
 		{
+			explosionSize = size;
 			explosion.x = x;
 			explosion.y = y;
 			explosion.setMotion("explode", 80*sign, 600, 4, 20*sign, -10, -0.5);
