@@ -3,6 +3,8 @@ package worlds.objs
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Text;
+	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.utils.Ease;
 	
 	import worlds.Level;
 	import worlds.objs.Menu_Obj;
@@ -13,7 +15,6 @@ package worlds.objs
 	 */
 	public class WeaponsFree_Obj extends Menu_Obj 
 	{
-		
 		public function WeaponsFree_Obj() 
 		{
 			title = new Text(String("Weapons Free"));
@@ -22,6 +23,8 @@ package worlds.objs
 			title.y = FP.height / 10 * 7;
 			title.color = 0xbff0000; // dark red
 			title.alpha = 1;
+			
+			layer = -1;
 			
 			graphic = menu = new Graphiclist(title);
 		}

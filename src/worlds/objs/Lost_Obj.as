@@ -1,9 +1,12 @@
 package worlds.objs 
 {
 	import net.flashpunk.FP;
+	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Graphiclist;
+	import worlds.MainMenu;
 	
 	/**
 	 * ...
@@ -11,9 +14,10 @@ package worlds.objs
 	 */
 	public class Lost_Obj extends Menu_Obj 
 	{
-		
 		public function Lost_Obj() 
 		{
+			layer = -1;
+			
 			selection = new Array();
 			title = new Text(String("You lost"));
 			title.size = 50;
@@ -32,5 +36,5 @@ package worlds.objs
 		}
 		
 	}
-
+	
 }

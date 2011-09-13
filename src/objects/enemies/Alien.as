@@ -87,6 +87,9 @@ package objects.enemies
 			super.takeDamage(damageTaken);
 		}
 		
+		/**
+		 * Recycles the Alien. Plays the explosion sound and removes 1 from the list.
+		 */
 		override public function destroy():void 
 		{
 			soundExplosion.play();

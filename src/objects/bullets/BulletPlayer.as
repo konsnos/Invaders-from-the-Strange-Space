@@ -13,7 +13,7 @@ package objects.bullets
 		{
 			super();
 			
-			speed = -500;
+			speed = -700;
 			damage = 1;
 			
 			type = "bullet_P";

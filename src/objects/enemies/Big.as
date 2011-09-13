@@ -20,7 +20,7 @@ package objects.enemies
 		private static var WhoShoots:uint; // The Medium that shoots.
 		public static var shootInterval:Number; // The interval the Medium shoots.
 		
-		private static var listUpdate:Boolean; // Checks if the list with the Medium aliens needs to be updated.
+		private static var listUpdate:Boolean; // Checks if the list with the Big aliens needs to be updated.
 		
 		// Gets-Sets
 		public static function get listUpdateG():Boolean
@@ -46,7 +46,7 @@ package objects.enemies
 			
 			super(x, y);
 			
-			hpS = 3;
+			hpS = 2;
 			speed = 15;
 			direction = 1;
 			points = 20;
@@ -69,20 +69,19 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Big");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 500,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Big");
 		}
 		
 		public static function resetList():void // Total number of entities existing.
 		{
 			list = 0;
-			shootInterval = 1;
+			shootInterval = 0.2;
 			timeElapsed = 0;
 		}
 		
 		public static function calculateMaxShots():void 
 		{
-			maxShots = (list / 2) as uint;
-
+			maxShots = uint(list / 2);
 		}
 		
 		public static function calculateWhichShoot():uint

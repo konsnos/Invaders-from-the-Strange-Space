@@ -12,8 +12,11 @@ package worlds.objs
 		protected var title:Text;
 		protected var selection:Array;
 		protected var selected:Menu_Obj;
+		protected var updates:Boolean; // When false the player can't press enter to choose the same option.
 		protected var menu:Graphiclist;
 		private var choice:Number = 1;
+		public var fadeIn:Boolean;
+		public var fadeOut:Boolean;
 		
 		// Gets-Sets
 		protected function get choiceG():Number
@@ -49,6 +52,7 @@ package worlds.objs
 		public function Menu_Obj() 
 		{
 			selected = null;
+			updates = true;
 		}
 		
 	}

@@ -71,8 +71,7 @@ package objects.enemies
 		
 		public static function calculateMaxShots():void 
 		{
-			maxShots = (list / 10) as uint;
-
+			maxShots = uint(list / 10);// as uint;
 		}
 		
 		public static function calculateWhichShoot():uint

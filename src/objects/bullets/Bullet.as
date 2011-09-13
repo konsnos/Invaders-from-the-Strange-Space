@@ -24,11 +24,12 @@ package objects.bullets
 			return damage;
 		}
 		
-		public function Bullet() 
+		public function Bullet()
 		{
 			graphic = image = new Image(GlobalVariables.IMG_BULLET_PLAYER);
 			
 			type = "bullet";
+			layer = 1;
 			
 			speed = 0;
 			width = image.width;

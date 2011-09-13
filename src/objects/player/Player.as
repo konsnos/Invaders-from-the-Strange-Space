@@ -55,8 +55,6 @@ package objects.player
 			type = "player";
 			
 			BulletsMax = 2;
-			
-			layer = 1;
 		}
 		
 		override public function update():void 
@@ -123,7 +121,7 @@ package objects.player
 		
 		public function checkIfShot():void
 		{
-			var b:Bullet = collideTypes(["Bullet_Enem_Small", "Bullet_Enem_Medium", "Bullet_Enem_Big"], x, y) as Bullet;
+			var b:Bullet = collideTypes(["Bullet_Enem_Small", "Bullet_Enem_Medium", "Bullet_Enem_Big", "Bullet_Enem_Bonus"], x, y) as Bullet;
 			
 			if (b)
 			{

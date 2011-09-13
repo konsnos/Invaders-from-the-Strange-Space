@@ -6,6 +6,10 @@
 		<defaultHeight>600</defaultHeight>
 	</settings>
 	
+	<values>
+		<integer name="bonusfrequency" default="30" min="5" max="60" />
+	</values>
+	
 	<tilesets>
 		<tileset name="small" image="assets/images/small_enemy.png" tileWidth="44" tileHeight="32"/>
 		<tileset name="medium" image="assets/images/medium_enemy.png" tileWidth="44" tileHeight="32"/>

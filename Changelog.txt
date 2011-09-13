@@ -1,3 +1,13 @@
+Build 28
+
+- Commented some code.
+- Fixed cases in which enemies would not shoot.
+- Fixed case where the player could selecte an option from the main menu more than one times.
+
+Build 27
+
+- Added transitions
+
 Build 26
 
 - Added the Bonus enemy.

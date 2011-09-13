@@ -2,21 +2,21 @@ package worlds
 {
 	import flash.display.BitmapData;
 	import flash.display.ShaderParameter;
-	import flash.sampler.NewObjectSample;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.World;
-	import net.flashpunk.tweens.misc.Alarm;
-	import net.flashpunk.graphics.Canvas;
+	import net.flashpunk.tweens.misc.Alarm; // υπάρχει η περίπτωση να εμφανιστεί κατά το win;
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import objects.enemies.Big;
+	import objects.enemies.Bonus;
 	import objects.enemies.Medium;
+	import worlds.objs.BlackScreen;
 	import worlds.objs.Starfield;
 	
 	import objects.Actor;
@@ -49,6 +49,8 @@ package worlds
 		private var obj:Menu_Obj;
 		private var stage:uint;
 		private var maps:Array;
+		private var newObj:Menu_Obj;
+		private var fade:BlackScreen;
 		
 		// PLAYER
 		private var player:Player;
@@ -57,6 +59,8 @@ package worlds
 		private var timeElapsed:Number;
 		private var enemiesMoveTime:Number;
 		private var changeLine:Boolean;
+		private var bonusMaxFrequency:uint;
+		private var timeBonusWillAppear:Number;
 		
 		private var aliens_e:Array;
 		private var smalls_e:Array;
@@ -108,6 +112,7 @@ package worlds
 			obj = new WeaponsFree_Obj;
 			add(obj);
 			
+			trace(GlobalVariables.MAP[stage]);
 			loadLevel(GlobalVariables.MAP[stage]);
 			enemiesMoveTime = 1;
 			Alien.listUpdateS = true;
@@ -116,6 +121,12 @@ package worlds
 			Big.calculateMaxShots();
 			alien_e = null;
 			enemyShooting = 0;
+			
+			FP.randomizeSeed();
+			
+			fade = new BlackScreen();
+			add(fade);
+			fade.fadeIn(0.5);
 		}
 		
 		override public function update():void 
@@ -129,7 +140,8 @@ package worlds
 			{
 				if (Input.pressed("enter"))
 				{
-					returnToMainMenu(); // Break
+					fade.fadeOut();
+					FP.alarm(1, returnToMainMenu);
 				}
 			}
 			
@@ -154,7 +166,8 @@ package worlds
 			
 			if (GlobalVariables.gameState == GlobalVariables.WIN && Input.pressed("enter")) // Player has won
 			{
-				advanceToNextLevel();
+				fade.fadeOut();
+				FP.alarm(1, advanceToNextLevel);
 			}
 			
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING) // Player is playing
@@ -165,6 +178,9 @@ package worlds
 			super.update();
 		}
 		
+		/*
+		 * Fills the smalls_e, mediums_e, bigs_e and aliens_e arrays.
+		 */
 		public function getEnemies():void 
 		{
 			smalls_e = new Array();
@@ -185,18 +201,23 @@ package worlds
 			if (player.hpG <= 0)
 			{
 				GlobalVariables.gameState = GlobalVariables.LOST;
-				add(new Lost_Obj);
+				newObj = new Lost_Obj;
+				add(newObj);
 			}
 			
 			if(Alien.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
-				add(new Win_Obj(stage));
+				newObj = new Win_Obj(stage)
+				add(newObj);
 			}
 			
 			updateEnemies();
 		}
 		
+		/**
+		 * Updates enemy logic.
+		 */
 		private function updateEnemies():void 
 		{
 			Small.timeElapsed += FP.elapsed;
@@ -212,8 +233,15 @@ package worlds
 			resetAllBullets();
 			calculateEnemiesShots();
 			
-			// Movement
-			if (timeElapsed > enemiesMoveTime)
+			movement();
+		}
+		
+		/**
+		 * Moves the aliens vertical and horizontal.
+		 */
+		public function movement():void 
+		{
+			if (timeElapsed > enemiesMoveTime) // Movement
 			{
 				for (i = 0, alien_e = aliens_e[i] as Alien; i < aliens_e.length; i++, alien_e = aliens_e[i] as Alien)
 				{
@@ -224,10 +252,11 @@ package worlds
 						changeLine = true;
 					}
 					
-					if (alien_e.bottom > player.y)
+					if (alien_e.bottom > player.y) // Player has lost.
 					{
 						GlobalVariables.gameState = GlobalVariables.LOST;
-						add(new Lost_Obj);
+						newObj = new Lost_Obj;
+						add(newObj);
 					}
 				}
 				
@@ -243,18 +272,6 @@ package worlds
 				
 				timeElapsed -= enemiesMoveTime;
 			}
-		}
-		
-		public function returnToMainMenu():void 
-		{
-			FP.world.removeAll();
-			FP.world = new MainMenu;
-		}
-		
-		public function advanceToNextLevel():void 
-		{
-			FP.world.removeAll();
-			FP.world = new Level(stage + 2);
 		}
 		
 		public function resetAllLists():void 
@@ -274,11 +291,16 @@ package worlds
 			bullets_s = new Array();
 			bullets_m = new Array();
 			bullets_b = new Array();
+			getType("Bullet_Enem_Small", bullets_s);
+			getType("Bullet_Enem_Medium", bullets_m);
+			getType("Bullet_Enem_Big", bullets_b);
 		}
 		
-		public function calculateEnemiesShots():void 
+		/*
+		 * Checks to see which enemy shoots
+		 */
+		public function calculateEnemiesShots():void
 		{
-			getType("Bullet_Enem_Small", bullets_s);
 			if (Small.timeElapsed > Small.shootInterval && bullets_s.length < Small.maxShotsG)
 			{
 				enemyShooting = Small.calculateWhichShoot();
@@ -287,7 +309,6 @@ package worlds
 				Small.timeElapsed = 0;
 			}
 			
-			getType("Bullet_Enem_Medium", bullets_m);
  			if (Medium.timeElapsed > Medium.shootInterval && bullets_m.length < Medium.maxShotsG)
 			{
 				enemyShooting = Medium.calculateWhichShoot();
@@ -296,7 +317,6 @@ package worlds
 				Medium.timeElapsed = 0;
 			}
 			
-			getType("Bullet_Enem_Big", bullets_b);
 			if (Big.timeElapsed > Big.shootInterval && bullets_b.length < Big.maxShotsG)
 			{
 				enemyShooting = Big.calculateWhichShoot();
@@ -306,12 +326,46 @@ package worlds
 			}
 		}
 		
+		/*
+		 * Sets the time of the bonus alien appearance
+		 */
+		public function estimateBonusAppearance():void
+		{
+			timeBonusWillAppear = FP.rand(bonusMaxFrequency);
+			FP.alarm(timeBonusWillAppear, addBonusAlien);
+		}
+		
+		/*
+		 * Adds the Bonus Alien in the game.
+		 */
+		public function addBonusAlien():void 
+		{
+			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
+			{
+				Bonus(FP.world.create(Bonus)).reset();
+				estimateBonusAppearance();
+			}
+		}
+		
+		public function returnToMainMenu():void 
+		{
+			FP.world.removeAll();
+			FP.world = new MainMenu;
+		}
+		
+		public function advanceToNextLevel():void 
+		{
+			FP.world.removeAll();
+			FP.world = new Level(stage + 2);
+		}
+		
 		public function preparing():void 
 		{
 			timeElapsed += FP.elapsed;
 			if (timeElapsed > 1)
 			{
 				GlobalVariables.gameState = GlobalVariables.PLAYING;
+				estimateBonusAppearance();
 			}
 		}
 		
@@ -319,6 +373,8 @@ package worlds
 		{
 			var xml:XML = FP.getXML(map);
 			var dataList:XMLList;
+			
+			bonusMaxFrequency = xml.@bonusfrequency;
 			
 			dataList = xml.startPlace.player;
 			for each(var p:XML in dataList)

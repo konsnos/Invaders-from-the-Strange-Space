@@ -90,14 +90,20 @@ package worlds.objs
 			
 			if (Input.pressed("enter") && !updating)
 			{
-				FP.world.removeAll();
-				FP.world = new Level(choiceG + 1);
+				fadeOut = true;
+				FP.alarm(1, startLevel);
 			}
 		}
 		
 		public function updated():void 
 		{
 			updating = false;
+		}
+		
+		public function startLevel():void 
+		{
+			FP.world.removeAll();
+			FP.world = new Level(choiceG + 1);
 		}
 	}
 }

@@ -46,7 +46,7 @@ package objects.enemies
 			
 			super(x, y);
 			
-			hpS = 2;
+			hpS = 1;
 			speed = 15;
 			direction = 1;
 			points = 15;
@@ -69,20 +69,19 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Medium");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 400,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Medium");
 		}
 		
 		public static function resetList():void // Total number of entities existing.
 		{
 			list = 0;
-			shootInterval = 0.5;
+			shootInterval = 0.3;
 			timeElapsed = 0;
 		}
 		
 		public static function calculateMaxShots():void 
 		{
-			maxShots = (list / 5) as uint;
-
+			maxShots = uint(list / 5);
 		}
 		
 		public static function calculateWhichShoot():uint

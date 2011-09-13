@@ -15,10 +15,8 @@ package objects.bullets
 			
 			graphic = GlobalVariables.IMG_BULLET_REDRECT;
 			
-			speed = 350;
+			speed = 650;
 			damage = 1;
-			
-			layer = 1;
 			
 			type = "bullet_e";
 		}
@@ -53,7 +51,6 @@ package objects.bullets
 		{
 			list = 0;
 		}
-		
 	}
 
 }

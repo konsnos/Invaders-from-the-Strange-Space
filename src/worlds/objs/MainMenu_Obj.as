@@ -5,7 +5,10 @@ package worlds.objs
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
+	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import worlds.Level;
@@ -40,19 +43,25 @@ package worlds.objs
 			}
 			
 			Text(selection[0]).alpha = 1;
-			menu = new Graphiclist(title, selection[0], selection[1], selection[2]);
+			
+			fadeIn = fadeOut = false;
+			
+			menu = new  Graphiclist(title, selection[0], selection[1], selection[2]);
 			choiceS = 0;
 			graphic = menu;
 		}
 		
 		override public function update():void 
 		{
-			if (selected == null)
+			if (selected == null && updates)
 			{
 				CheckInput();
 			}
 		}
 		
+		/**
+		 * Checks the input.
+		 */
 		public function CheckInput():void 
 		{
 			if (Input.pressed("down"))
@@ -70,12 +79,12 @@ package worlds.objs
 			
 			if (Input.pressed("enter"))
 			{
-				switch (choiceG) 
+				switch (choiceG)
 				{
 					case 0:
-						GlobalVariables.RESETSCORE();
-						FP.world.removeAll();
-						FP.world = new Level(1); // Fade screen to be added.
+						fadeOut = true;
+						FP.alarm(1, newGame);
+						updates = false;
 						break;
 					case 1:
 						selected = new SelectLevel_Obj;
@@ -85,6 +94,22 @@ package worlds.objs
 						break;
 				}
 			}
+		}
+		
+		/**
+		 * Starts a level.
+		 */
+		public function newGame():void 
+		{
+			GlobalVariables.RESETSCORE();
+			FP.world.removeAll();
+			FP.world = new Level(1);
+		}
+		
+		override public function removed():void 
+		{
+			updates = true;
+			super.removed();
 		}
 		
 	}

@@ -7,6 +7,7 @@ package worlds
 	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
+	import worlds.objs.BlackScreen;
 	import worlds.objs.MainMenu_Obj;
 	import worlds.objs.Menu_Obj;
 	import worlds.objs.Starfield;
@@ -28,6 +29,8 @@ package worlds
 		private var objsArray:Array;
 		private var forthOrBack:Boolean; // When this is true the scene changes from right to left.
 		private var backgroundMusic:Sfx = new Sfx(GlobalVariables.MSC01);
+		private var fade:BlackScreen;
+		private var doneTransition:Boolean;
 		
 		public function MainMenu() 
 		{
@@ -41,6 +44,8 @@ package worlds
 			objsArray = new Array;
 			
 			addGraphic(field);
+			fade = new BlackScreen();
+			add(fade);
 			
 			instance = new MainMenu_Obj;
 			add(instance);
@@ -52,9 +57,57 @@ package worlds
 			backgroundMusic.loop();
 			
 			updating = false;
+			
+			fade.fadeIn();
 		}
 		
 		override public function update():void 
+		{
+			selected();
+			
+			changingScreen();
+			
+			checkTransitioning();
+			
+			super.update();
+		}
+		
+		private function checkTransitioning():void 
+		{
+			if (instance.fadeIn)
+			{
+				fade.fadeIn();
+				instance.fadeIn = false;
+			}else if (instance.fadeOut)
+			{
+				fade.fadeOut();
+				instance.fadeOut = false;
+			}
+		}
+		
+		private function changeInstances():void
+		{
+			if (forthOrBack)
+			{
+				objsArray.push(remove(instance));
+			}
+			else
+			{
+				objsArray.pop();
+				remove(instance);
+			}
+			
+			instance = nextInstance;
+			add(instance);
+			remove(nextInstance);
+			updating = false;
+			forthOrBack = true;
+		}
+		
+		/**
+		 * Initiating transition between objects.
+		 */
+		public function selected():void 
 		{
 			if (instance.selectedG != null && !updating)
 			{
@@ -79,7 +132,13 @@ package worlds
 				instance.selectedS = null;
 				updating = true;
 			}
-			
+		}
+		
+		/**
+		 * Updates the position of the objects changing places.
+		 */
+		public function changingScreen():void 
+		{
 			if (updating)
 			{
 				instance.x = prevTween.value;
@@ -91,27 +150,6 @@ package worlds
 					nextInstance.x = instance.x - FP.width;
 				}
 			}
-			
-			super.update();
-		}
-		
-		private function changeInstances():void
-		{
-			if (forthOrBack)
-			{
-				objsArray.push(remove(instance));
-			}
-			else
-			{
-				objsArray.pop();
-				remove(instance);
-			}
-			
-			instance = nextInstance;
-			add(instance);
-			remove(nextInstance);
-			updating = false;
-			forthOrBack = true;
 		}
 		
 		override public function end():void 
