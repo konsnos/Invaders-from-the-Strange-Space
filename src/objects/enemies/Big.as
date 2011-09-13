@@ -81,7 +81,7 @@ package objects.enemies
 		
 		public static function calculateMaxShots():void 
 		{
-			maxShots = uint(list / 2);
+			maxShots = uint(list / 4);
 		}
 		
 		public static function calculateWhichShoot():uint
@@ -107,7 +107,7 @@ package objects.enemies
 			list--;
 			listUpdateS = true;
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00);
-			if (list % 2 == 0)
+			if (list % 4 == 0)
 			{
 				Small.calculateMaxShots();
 			}

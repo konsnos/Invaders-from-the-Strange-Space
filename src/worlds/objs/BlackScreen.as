@@ -17,10 +17,13 @@ package worlds.objs
 		private var fader:NumTween = new NumTween(faderEnd);
 		public var completed:Boolean;
 		
+		/**
+		 * 
+		 */
 		public function BlackScreen() 
 		{
 			layer = -10;
-			completed = false;
+			completed = true;
 			graphic = new Graphiclist(fade);
 			
 			// Set the fade cover properties.
@@ -43,6 +46,7 @@ package worlds.objs
 		public function fadeIn(time:Number=1):void
 		{
 			fader.tween(1, 0, 1, Ease.cubeOut);
+			completed = false;
 		}
 		
 		/**
@@ -52,8 +56,12 @@ package worlds.objs
 		public function fadeOut(time:Number=1):void
 		{
 			fader.tween(0, 1, 1, Ease.cubeIn);
+			completed = false;
 		}
 		
+		/**
+		 * Executes when the fade in/out has finished.
+		 */
 		private function faderEnd():void 
 		{
 			completed = true;
