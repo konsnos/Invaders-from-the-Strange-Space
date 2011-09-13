@@ -1,3 +1,15 @@
+Build 26
+
+- Added the Bonus enemy.
+
+Build 25
+
+- Changed the speed values of the bullets and the life of the enemies.
+
+Build 24
+
+- Now the game store the scores of each level.
+
 Build 23
 
 - Populated the about screen.
