@@ -1,3 +1,7 @@
+Build 30
+
+- Made the aliens come closer without moving diagonically.
+
 Build 29
 
 - Added a floating text which sais the accumulated points the player earned.

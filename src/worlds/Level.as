@@ -73,7 +73,7 @@ package worlds
 		private var bullets_b:Array;
 		
 		// TEMPORARY VARS
-		private var i:Number;
+		private var i:Number, j:Number;
 		private var alien_e:Alien;
 		private var enemyShooting:uint;
 		
@@ -259,17 +259,17 @@ package worlds
 					}
 				}
 				
-				if (changeLine)
-				{
-					for (i = 0, alien_e = aliens_e[i] as Alien; i < aliens_e.length; i++, alien_e = aliens_e[i] as Alien)
-					{
-						alien_e.reverseDirection();
-						alien_e.ComeCloser();
-					}
-					changeLine = false;
-				}
-				
 				timeElapsed -= enemiesMoveTime;
+			}
+			
+			if (changeLine && timeElapsed > (enemiesMoveTime / 2))
+			{
+				for (j = 0, alien_e = aliens_e[j] as Alien; j < aliens_e.length; j++, alien_e = aliens_e[j] as Alien)
+				{
+					alien_e.reverseDirection();
+					alien_e.ComeCloser();
+				}
+				changeLine = false
 			}
 		}
 		
