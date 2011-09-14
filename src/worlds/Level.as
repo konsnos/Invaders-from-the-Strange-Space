@@ -91,6 +91,7 @@ package worlds
 			getEnemies();
 			entitiesToRemove = new Array();
 			
+			Stats_Obj.levelS = selectedlevel;
 			stage = selectedlevel - 1;
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
@@ -304,7 +305,10 @@ package worlds
 			{
 				enemyShooting = Small.calculateWhichShoot();
 				alien_e = smalls_e[enemyShooting];
-				alien_e.Shoot();
+				if (alien_e != null)
+				{
+					alien_e.Shoot();
+				}
 				Small.timeElapsed = 0;
 			}
 			
@@ -312,7 +316,10 @@ package worlds
 			{
 				enemyShooting = Medium.calculateWhichShoot();
 				alien_e = mediums_e[enemyShooting];
-				alien_e.Shoot();
+				if (alien_e != null)
+				{
+					alien_e.Shoot();
+				}
 				Medium.timeElapsed = 0;
 			}
 			
@@ -320,7 +327,10 @@ package worlds
 			{
 				enemyShooting = Big.calculateWhichShoot();
 				alien_e = bigs_e[enemyShooting];
-				alien_e.Shoot();
+				if (alien_e != null)
+				{
+					alien_e.Shoot();
+				}
 				Big.timeElapsed = 0;
 			}
 		}

@@ -16,7 +16,7 @@ package objects
 		
 		public function Explosion() // Need also color
 		{
-			explosion = new Emitter(new BitmapData(2, 2, false));
+			explosion = new Emitter(GlobalVariables.IMG_PARTICLE);
 			explosion.newType("explode", [0]);
 			explosion.relative = false;
 			collidable = false;

@@ -18,6 +18,7 @@ package
 		[Embed(source = '../assets/images/bonus_enemy.png')] public static const IMG_ENEMY_B:Class;
 		[Embed(source = '../assets/images/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
 		public static const IMG_BULLET_REDRECT:Image = new Image(new BitmapData(2, 10, false, 0xee0000));
+		public static const IMG_PARTICLE:BitmapData = new BitmapData(2, 2, false);
 		
 		/****************** SOUNDS ******************/
 		// MUSIC

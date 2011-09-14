@@ -30,7 +30,7 @@ package worlds.objs
 			if (Stats_Obj.scoreG > uint(GlobalVariables.SCORE[stage]))
 			{
 				selection.push(new Text(String("You've surpassed you've previous score by " + (Stats_Obj.scoreG - uint(GlobalVariables.SCORE[stage])) + " points. Well done")));
-				GlobalVariables.MAP[stage] = Stats_Obj.scoreG;
+				GlobalVariables.SCORE[stage] = Stats_Obj.scoreG;
 			}else
 			{
 				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.scoreG) + " points to tie the high score")));

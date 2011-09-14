@@ -25,7 +25,8 @@ package
 		{
 			super.init();
 			
-			//Mouse.hide();
+			Mouse.hide();
+			//FP.console.enable();
 			
 			Input.define("right", Key.RIGHT, Key.D);
 			Input.define("left", Key.LEFT, Key.A);
@@ -41,8 +42,6 @@ package
 			GlobalVariables.RESETSCORE();
 			
 			FP.world = new MainMenu;
-			
-			FP.console.enable();
 			FP.screen.color = 0x111111;
 		}
 		

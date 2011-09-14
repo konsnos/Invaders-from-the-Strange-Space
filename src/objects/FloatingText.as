@@ -40,7 +40,7 @@ package objects
 		
 		public function reset(x:Number,y:Number, text:String, duration:Number=0.6):void 
 		{
-			title = new Text(text);
+			title = new Text("+" + text);
 			this.duration = duration;
 			timeElapsed = 0;
 			title.size = 18;
