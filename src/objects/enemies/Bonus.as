@@ -33,7 +33,7 @@ package objects.enemies
 			listUpdateS = false;
 			
 			hpS = 1;
-			speed = 300;
+			speed = 200;
 			points = 40;
 			
 			super(10,10);
@@ -137,6 +137,7 @@ package objects.enemies
 			Bonus.list++;
 			Alien.list++;
 			speed = 300;
+			points = 40;
 			timeElapsed = 0;
 			direction = FP.random;
 			if (direction > 0.5)

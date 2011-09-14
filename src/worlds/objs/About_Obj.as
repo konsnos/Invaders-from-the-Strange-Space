@@ -25,7 +25,7 @@ package worlds.objs
 			selection.push(new Text(String("Artwork: Tonia Hoimpa")));
 			selection.push(new Text(String("Tester: Theodor Barlas")));
 			selection.push(new Text(String("Music: Genghis Attenborough from freesound project")));
-			selection.push(new Text(String("Sound effects: from sfxr")));
+			selection.push(new Text(String("Sound effects: from sfxr by Tomas Pettersson")));
 			
 			for (var i:Number = 0; i < selection.length; i++)
 			{

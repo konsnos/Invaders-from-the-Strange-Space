@@ -23,8 +23,8 @@ package worlds.objs
 		public function MainMenu_Obj()
 		{
 			selection = new Array();
-			title = new Text(String("Space Invaders"));
-			title.size = 50;
+			title = new Text(String("Invaders from the Strange Space"));
+			title.size = 40;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0xadff2f; // Green

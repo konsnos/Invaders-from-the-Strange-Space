@@ -3,9 +3,11 @@ package objects.enemies
 	import flash.sampler.NewObjectSample;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.Sfx;
 	import objects.Actor;
 	import objects.bullets.BulletEnemy;
+	import objects.FloatingText;
 	
 	/**
 	 * ...
@@ -93,6 +95,7 @@ package objects.enemies
 		override public function destroy():void 
 		{
 			soundExplosion.play();
+			FloatingText(world.create(FloatingText)).reset(this.x + this.halfWidth, this.y+halfHeight, points.toString());
 			list--;
 			super.destroy();
 		}

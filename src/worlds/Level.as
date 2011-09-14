@@ -112,7 +112,6 @@ package worlds
 			obj = new WeaponsFree_Obj;
 			add(obj);
 			
-			trace(GlobalVariables.MAP[stage]);
 			loadLevel(GlobalVariables.MAP[stage]);
 			enemiesMoveTime = 1;
 			Alien.listUpdateS = true;

@@ -43,6 +43,7 @@ package
 			FP.world = new MainMenu;
 			
 			FP.console.enable();
+			FP.screen.color = 0x111111;
 		}
 		
 	}

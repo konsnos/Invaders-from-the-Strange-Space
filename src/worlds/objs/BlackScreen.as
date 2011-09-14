@@ -45,7 +45,7 @@ package worlds.objs
 		 */
 		public function fadeIn(time:Number=1):void
 		{
-			fader.tween(1, 0, 1, Ease.cubeOut);
+			fader.tween(1, 0, time, Ease.cubeOut);
 			completed = false;
 		}
 		
@@ -55,7 +55,7 @@ package worlds.objs
 		 */
 		public function fadeOut(time:Number=1):void
 		{
-			fader.tween(0, 1, 1, Ease.cubeIn);
+			fader.tween(0, 1, time, Ease.cubeIn);
 			completed = false;
 		}
 		

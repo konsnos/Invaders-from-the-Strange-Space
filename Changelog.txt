@@ -1,3 +1,7 @@
+Build 29
+
+- Added a floating text which sais the accumulated points the player earned.
+
 Build 28
 
 - Commented some code.
