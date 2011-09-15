@@ -32,7 +32,7 @@ package
 			Input.define("left", Key.LEFT, Key.A);
 			Input.define("up", Key.UP, Key.W);
 			Input.define("down", Key.DOWN, Key.S);
-			Input.define("shoot", Key.SPACE);
+			Input.define("shoot", Key.SPACE, Key.Z, Key.X, Key.C);
 			Input.define("enter", Key.ENTER);
 			Input.define("pause", Key.P);
 			Input.define("back", Key.BACKSPACE);

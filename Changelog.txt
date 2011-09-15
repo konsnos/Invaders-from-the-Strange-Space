@@ -1,3 +1,8 @@
+Build 32
+
+- Fixed a name in the about screen.
+- Added the Z, X, C keystrokes for shoot.
+
 Build 31
 
 - Fixed a bug where a level wouldn't load.
