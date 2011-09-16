@@ -109,7 +109,8 @@ package objects.player
 		{
 			if (BulletPlayer.list < BulletsMax )
 			{
-				soundShoot.play();
+				soundShoot.play(1, GlobalVariables.panSound(this.centerX));
+				trace(GlobalVariables.panSound(this.centerX));
 				spawnBullet(this.x + halfWidth, this.y);
 			}
 		}
@@ -126,7 +127,7 @@ package objects.player
 			if (b)
 			{
 				takeDamage(b.damageG);
-				soundExplosionm.play();
+				soundExplosionm.play(1,GlobalVariables.panSound(this.centerX));
 				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 				b.destroy();
 			}
@@ -135,7 +136,7 @@ package objects.player
 		override public function destroy():void
 		{
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
-			soundExplosion.play();
+			soundExplosion.play(1, GlobalVariables.panSound(this.centerX));
 			super.destroy();
 		}
 		

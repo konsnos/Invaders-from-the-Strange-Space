@@ -85,7 +85,7 @@ package objects.enemies
 		
 		override public function takeDamage(damageTaken:Number):void 
 		{
-			soundHit.play();
+			soundHit.play(1,GlobalVariables.panSound(this.centerX));
 			super.takeDamage(damageTaken);
 		}
 		
@@ -94,7 +94,7 @@ package objects.enemies
 		 */
 		override public function destroy():void 
 		{
-			soundExplosion.play();
+			soundExplosion.play(1,GlobalVariables.panSound(this.centerX));
 			FloatingText(world.create(FloatingText)).reset(this.x + this.halfWidth, this.y+halfHeight, points.toString());
 			list--;
 			super.destroy();

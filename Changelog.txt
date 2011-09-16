@@ -1,3 +1,7 @@
+Build 33
+
+- Implemented a system in which the sound is panned in the speakers according to the x position of the source of the sound.
+
 Build 32
 
 - Fixed a name in the about screen.
