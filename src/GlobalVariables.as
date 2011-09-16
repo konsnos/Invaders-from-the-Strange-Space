@@ -114,7 +114,7 @@ package
 				return xPos / FP.halfWidth;
 			}else if(xPos < FP.halfWidth)
 			{
-				return (400-xPos)*(-1);
+				return (FP.halfWidth-xPos)*(-1);
 			}else
 			{
 				return 0;
