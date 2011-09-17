@@ -23,13 +23,13 @@ package worlds.objs
 			selection = new Array();
 			title = new Text(String("You Won!!!"));
 			title.size = 50;
-			title.x = FP.width / 2 - title.width / 2;
+			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0x0000ff; // blue
 			
 			if (Stats_Obj.scoreG > uint(GlobalVariables.SCORE[stage]))
 			{
-				selection.push(new Text(String("You've surpassed the previous score by " + (Stats_Obj.scoreG - uint(GlobalVariables.SCORE[stage])) + " points. Well done")));
+				selection.push(new Text(String("You've surpassed the previous score by " + (Stats_Obj.scoreG - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
 				GlobalVariables.SCORE[stage] = Stats_Obj.scoreG;
 			}else
 			{
@@ -39,6 +39,10 @@ package worlds.objs
 			Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 4 * 2;
 			Text(selection[0]).color = 0x00bfff; // white-blue
+			
+			GlobalVariables.CALCULATESCORE();
+			
+			selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
 			
 			selection.push(new Text(String("Press Enter to advance to the next level")));
 			Text(selection[1]).size = 20;

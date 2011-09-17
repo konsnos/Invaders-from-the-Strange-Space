@@ -31,13 +31,14 @@ package worlds.objs
 			
 			selection.push(new Text(String("New Game")));
 			selection.push(new Text(String("Select Level")));
+			selection.push(new Text(String("How to play")));
 			selection.push(new Text(String("About")));
 			
 			for (var i:Number = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).size = 30;
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
-				Text(selection[i]).y = FP.height / 4 * (i + 1);
+				Text(selection[i]).y = FP.height / 5 * (i + 1);
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 0.5;
 			}
@@ -46,7 +47,7 @@ package worlds.objs
 			
 			fadeIn = fadeOut = false;
 			
-			menu = new  Graphiclist(title, selection[0], selection[1], selection[2]);
+			menu = new  Graphiclist(title, selection[0], selection[1], selection[2], selection[3]);
 			choiceS = 0;
 			graphic = menu;
 		}
@@ -90,8 +91,12 @@ package worlds.objs
 						selected = new SelectLevel_Obj;
 						break;
 					case 2:
+						selected = new HowToPlay_obj;
+						break;
+					case 3:
 						selected = new About_Obj;
 						break;
+					break;
 				}
 			}
 		}

@@ -45,8 +45,6 @@ package
 		[Embed(source = '../assets/levels/level09.oel', mimeType = 'application/octet-stream')]private static const MAP09:Class;
 		[Embed(source = '../assets/levels/level10.oel', mimeType = 'application/octet-stream')]private static const MAP10:Class;
 		
-		private static var finalScore:Number;
-		
 		public static var gameState:Number;
 		public static const PLAYING:uint = 1;
 		public static const PAUSE:uint = 2;
@@ -68,26 +66,18 @@ package
 			GAMESCORE = 0;
 		}
 		
-		public static function CALCULATESCORE(toadd:Number):void 
+		public static function CALCULATESCORE():void 
 		{
 			RESETSCORE();
-			for (var i:uint = 0; i < MAP.length; i++)
+			for (var i:uint = 0; i < SCORE.length; i++)
 			{
-				GAMESCORE += MAP[i];
+				GAMESCORE += SCORE[i];
 			}
 		}
 		
 		public static function GETSCORE(stage:uint ):Number 
 		{
 			return MAP[stage];
-		}
-		
-		public static function SETLEVELSCORE(score:uint, stage:uint):void
-		{
-			if (SCORE[stage] > score)
-			{
-				SCORE[stage] = score;
-			}
 		}
 		
 		public static function FILLMAPARRAY():void 

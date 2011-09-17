@@ -1,3 +1,14 @@
+Build 35
+
+- Added a how to play screen.
+- Added the life of the player in the bottom of the level.
+
+Build 34
+
+- Performance fixes.
+- Made the background music from the main menu fade out when its changing.
+- Added a text in the level selection and about menus taht inform the user of pressing the backspace key, returns him to the previous menu screen.
+
 Build 33
 
 - Implemented a system in which the sound is panned in the speakers according to the x position of the source of the sound.

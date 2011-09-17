@@ -5,6 +5,7 @@ package worlds.objs
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Text;
+	import objects.player.Player;
 	
 	import GlobalVariables;
 	
@@ -14,17 +15,16 @@ package worlds.objs
 	 */
 	public class Stats_Obj extends Entity 
 	{
-		private static var title:Text;
+		private static var stats:Text;
+		private static var playerlife:Text;
 		private static var score:uint;
 		private static var level:uint;
-		private static var updated:Boolean;
 		
 		// Gets-Sets
 		public static function set scoreS(setValue:uint):void 
 		{
 			score += setValue;
-			updated = true;
-			title.text = new String("Level 1 Score: " + score + " Rank: Rookie");
+			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
 		}
 		public static function get scoreG():uint
 		{
@@ -33,37 +33,43 @@ package worlds.objs
 		public static function set levelS(setValue:uint):void 
 		{
 			level = setValue;
-			updated = true;
 		}
 		
 		public function Stats_Obj()
 		{
 			score = 0;
 			
-			title = new Text(String("Level " + level + " Score: " + score + " Rank: Rookie"));
-			title.size = 16;
-			title.y = 1;
-			title.x = 10;
-			title.color = 0xffff00; // Yellow
-			title.font = 'FONT_STATS';
+			stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
+			stats.size = 16;
+			stats.y = 1;
+			stats.x = 10;
+			stats.color = 0xffdead; // blue
+			stats.font = 'FONT_STATS';
 			
-			updated = false;
+			playerlife = new Text(String("Life: " + Player.getlife() + "/3" + "- Rank: Rookie"));
+			playerlife.size = 16;
+			playerlife.y = FP.height - 20;
+			playerlife.x = 5;
+			playerlife.color = 0x3cb371; // green
+			playerlife.font = 'FONT_STATS';
+			
 			layer = 2;
 			
-			graphic = new Graphiclist(title);
-		}
-		
-		override public function update():void 
-		{
-			if (updated)
-			{
-				title.text = new String("Level 1 Score: " + score + " Rank: Rookie");
-			}
+			graphic = new Graphiclist(stats, playerlife);
 		}
 		
 		public static function resetScore():void 
 		{
 			score = 0;
+		}
+		
+		/**
+		 * Updates the score and player life texts.
+		 */
+		public static function updateStats():void 
+		{
+			stats.text = new String("Level " + level + "- Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+			playerlife.text = new String("Life: " + Player.getlife() + "/3" + " - Rank: Rookie")
 		}
 		
 	}

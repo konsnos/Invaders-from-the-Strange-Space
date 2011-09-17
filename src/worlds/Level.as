@@ -166,7 +166,13 @@ package worlds
 			if (GlobalVariables.gameState == GlobalVariables.WIN && Input.pressed("enter")) // Player has won
 			{
 				fade.fadeOut();
-				FP.alarm(1, advanceToNextLevel);
+				if (stageG +1 != 10)
+				{
+					FP.alarm(1, advanceToNextLevel);
+				}else
+				{
+					FP.alarm(1, returnToMainMenu);
+				}
 			}
 			
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING) // Player is playing

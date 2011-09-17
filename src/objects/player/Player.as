@@ -9,6 +9,7 @@ package objects.player
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import objects.enemies.Small;
+	import worlds.objs.Stats_Obj;
 	
 	import worlds.objs.Lost_Obj;
 	import worlds.Level;
@@ -26,6 +27,7 @@ package objects.player
 	public class Player extends Actor
 	{
 		private var speed:Number;
+		public static var life:uint;
 		
 		private var BulletsMax:Number;
 		private var BulletsShot:Number;
@@ -36,6 +38,11 @@ package objects.player
 		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
 		private var soundExplosionm:Sfx = new Sfx(GlobalVariables.EXPLOSIONPM);
 		
+		public static function getlife():uint 
+		{
+			return life;
+		}
+		
 		public function Player(x:Number, y:Number) 
 		{
 			super();
@@ -44,6 +51,8 @@ package objects.player
 			image.scale = 0.8;
 			
 			hpS = 3;
+			life = hpG;
+			Stats_Obj.updateStats();
 			speed = 270;
 			
 			this.x = x - image.width / 2;
@@ -129,6 +138,8 @@ package objects.player
 				soundExplosionm.play(1,GlobalVariables.panSound(this.centerX));
 				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 				b.destroy();
+				life = hpG;
+				Stats_Obj.updateStats();
 			}
 		}
 		
