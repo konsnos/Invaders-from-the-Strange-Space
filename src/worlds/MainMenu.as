@@ -4,6 +4,7 @@ package worlds
 	import net.flashpunk.FP;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.tweens.sound.Fader;
 	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
@@ -29,6 +30,7 @@ package worlds
 		private var objsArray:Array;
 		private var forthOrBack:Boolean; // When this is true the scene changes from right to left.
 		private var backgroundMusic:Sfx = new Sfx(GlobalVariables.MSC01);
+		private var fader:Fader; // Fades out the sound.
 		private var fade:BlackScreen;
 		private var doneTransition:Boolean;
 		
@@ -55,6 +57,8 @@ package worlds
 			forthOrBack = true;
 			
 			backgroundMusic.loop();
+			fader = new Fader();
+			addTween(fader);
 			
 			updating = false;
 			
@@ -81,6 +85,7 @@ package worlds
 			}else if (instance.fadeOut)
 			{
 				fade.fadeOut();
+				fader.fadeTo(0, 0.9);
 				instance.fadeOut = false;
 			}
 		}

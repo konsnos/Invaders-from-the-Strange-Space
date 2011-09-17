@@ -110,7 +110,6 @@ package objects.player
 			if (BulletPlayer.list < BulletsMax )
 			{
 				soundShoot.play(1, GlobalVariables.panSound(this.centerX));
-				trace(GlobalVariables.panSound(this.centerX));
 				spawnBullet(this.x + halfWidth, this.y);
 			}
 		}

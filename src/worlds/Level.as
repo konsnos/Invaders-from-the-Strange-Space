@@ -1,14 +1,12 @@
 package worlds 
 {
 	import flash.display.BitmapData;
-	import flash.display.ShaderParameter;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.World;
-	import net.flashpunk.tweens.misc.Alarm; // υπάρχει η περίπτωση να εμφανιστεί κατά το win;
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
@@ -85,6 +83,7 @@ package worlds
 		
 		public function Level(selectedlevel:uint) 
 		{
+			FP.volume = 1;
 			timeElapsed = 0;
 			changeLine = false;
 			
@@ -247,7 +246,7 @@ package worlds
 				{
 					alien_e.walkOn();
 					
-					if ((alien_e.x + alien_e.width * 2 > FP.width || alien_e.x < alien_e.width ) && (!changeLine))
+					if ((alien_e.right + alien_e.width > FP.width || alien_e.x < alien_e.width ) && (!changeLine))
 					{
 						changeLine = true;
 					}

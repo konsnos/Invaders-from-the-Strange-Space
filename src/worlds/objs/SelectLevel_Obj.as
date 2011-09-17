@@ -43,6 +43,15 @@ package worlds.objs
 				graphiclist.add(selection[i]);
 			}
 			
+			selection.push(new Text(String("Press Backspace to return")));
+			// The press backspace text.
+			Text(selection[selection.length - 1]).size = 15;
+			Text(selection[selection.length - 1]).x = 10;
+			Text(selection[selection.length - 1]).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(selection[selection.length - 1]).color = 0x006400;
+			Text(selection[selection.length - 1]).alpha = 1;
+			graphiclist.add(selection[selection.length - 1]);
+			
 			prevTween = new NumTween(updated);
 			addTween(prevTween);
 			Text(selection[0]).alpha = 1;

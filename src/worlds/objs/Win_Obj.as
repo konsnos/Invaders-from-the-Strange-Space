@@ -36,13 +36,13 @@ package worlds.objs
 				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.scoreG) + " points to tie the high score")));
 			}
 			Text(selection[0]).size = 20;
-			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
+			Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 4 * 2;
 			Text(selection[0]).color = 0x00bfff; // white-blue
 			
 			selection.push(new Text(String("Press Enter to advance to the next level")));
 			Text(selection[1]).size = 20;
-			Text(selection[1]).x = FP.width / 2 - Text(selection[0]).width / 2;
+			Text(selection[1]).x = FP.halfWidth - Text(selection[0]).width / 2;
 			Text(selection[1]).y = FP.height / 3 * 2;
 			Text(selection[1]).color = 0x00bfff; // white-blue
 			
