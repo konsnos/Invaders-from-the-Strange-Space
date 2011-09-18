@@ -1,7 +1,7 @@
 Build 36
 
 - Added a red fadeout/in when the player is hit.
-- Populated the about screen.
+- Populated the How to play screen.
 
 Build 35
 
