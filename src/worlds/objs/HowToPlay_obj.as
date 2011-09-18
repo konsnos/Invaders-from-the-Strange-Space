@@ -22,8 +22,23 @@ package worlds.objs
 			title.color = 0x006400; // Dark Green
 			graphiclist = new Graphiclist(title);
 			
+			selection.push(new Text(String("Turn right : right arrow, D")));
+			selection.push(new Text(String("Turn left : left arrow, A")));
+			selection.push(new Text(String("Shoot : Space, Z, X, C")));
+			selection.push(new Text(String("Pause : P")));
+			
+			for (var i:uint = 0; i < selection.length; i++)
+			{
+				Text(selection[i]).size = 20;
+				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
+				Text(selection[i]).y = FP.height / 6 * i + 150;
+				Text(selection[i]).color = 0xffffff;
+				Text(selection[i]).alpha = 1;
+				graphiclist.add(selection[i]);
+			}
+			
 			selection.push(new Text(String("Press Backspace to return")));
-			graphiclist.add(selection[0]);
+			graphiclist.add(selection[selection.length -1 ]);
 			// The press backspace text.
 			Text(selection[selection.length - 1]).size = 15;
 			Text(selection[selection.length - 1]).x = 10;

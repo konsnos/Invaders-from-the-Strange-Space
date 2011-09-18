@@ -32,7 +32,7 @@ package worlds.objs
 			{
 				Text(selection[i]).size = 20;
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
-				Text(selection[i]).y = FP.height / 8 * (i + 1);
+				Text(selection[i]).y = FP.height / 8 * (i + 1) +50;
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 1;
 				graphiclist.add(selection[i]);
