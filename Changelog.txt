@@ -1,3 +1,7 @@
+Build 36
+
+- Added a red fadeout/in when the player is hit.
+
 Build 35
 
 - Added a how to play screen.

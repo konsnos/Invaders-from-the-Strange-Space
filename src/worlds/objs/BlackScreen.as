@@ -1,5 +1,6 @@
 package worlds.objs 
 {
+	import adobe.utils.ProductManager;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
@@ -13,17 +14,19 @@ package worlds.objs
 	 */
 	public class BlackScreen extends Entity 
 	{
-		private var fade:Image = Image.createRect(FP.width, FP.height, 0);
+		private var fade:Image;
 		private var fader:NumTween = new NumTween(faderEnd);
 		public var completed:Boolean;
+		public var completedF:Function;
 		
 		/**
 		 * 
 		 */
-		public function BlackScreen() 
+		public function BlackScreen(color:uint = 0) 
 		{
 			layer = -10;
 			completed = true;
+			fade = Image.createRect(FP.width, FP.height, color);
 			graphic = new Graphiclist(fade);
 			
 			// Set the fade cover properties.
@@ -43,20 +46,29 @@ package worlds.objs
 		 * Fades the splash screen in.
 		 * @param time	The time the transition will need.
 		 */
-		public function fadeIn(time:Number=1):void
+		public function fadeIn(fromValue:Number = 1, time:Number = 1, reverse:Boolean = false):void
 		{
-			fader.tween(1, 0, time, Ease.cubeOut);
+			fader.tween(fromValue, 0, time, Ease.cubeOut);
 			completed = false;
+			if (reverse)
+			{
+				completedF = fadeOut(fromValue, time) as Function;
+			}
 		}
 		
 		/**
 		 * Fades the splash screen out.
+		 * @param toValue End value.
 		 * @param time	The time the transition will need.
 		 */
-		public function fadeOut(time:Number=1):void
+		public function fadeOut(toValue:Number = 1, time:Number = 1, reverse:Boolean = false ):void
 		{
-			fader.tween(0, 1, time, Ease.cubeIn);
+			fader.tween(0, toValue, time, Ease.cubeIn);
 			completed = false;
+			if (reverse)
+			{
+				completedF = fadeIn(toValue, time) as Function;
+			}
 		}
 		
 		/**
@@ -65,6 +77,10 @@ package worlds.objs
 		private function faderEnd():void 
 		{
 			completed = true;
+			if (completedF != null)
+			{
+				completedF();
+			}
 		}
 		
 	}

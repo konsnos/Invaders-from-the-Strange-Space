@@ -9,6 +9,7 @@ package objects.player
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import objects.enemies.Small;
+	import worlds.objs.BlackScreen;
 	import worlds.objs.Stats_Obj;
 	
 	import worlds.objs.Lost_Obj;
@@ -28,11 +29,10 @@ package objects.player
 	{
 		private var speed:Number;
 		public static var life:uint;
+		private var fade:BlackScreen;
 		
 		private var BulletsMax:Number;
 		private var BulletsShot:Number;
-		
-		private var small:Small;
 		
 		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
 		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
@@ -46,6 +46,8 @@ package objects.player
 		public function Player(x:Number, y:Number) 
 		{
 			super();
+			fade = new BlackScreen(0xff0000);
+			FP.world.add(fade);
 			
 			graphic = image = new Image(GlobalVariables.IMG_PLAYER);
 			image.scale = 0.8;
@@ -81,16 +83,6 @@ package objects.player
 				
 				/**************** Check if shot by enemies ****************/
 				checkIfShot();
-				
-				/**************** ALIENS COLLIDED WITH PLAYER ****************/
-				small = collide("small", x, y) as Small;
-				
-				if (small)
-				{
-					hpS = -small.hpG;
-				}
-				
-				small = null;
 			}
 		}
 		
@@ -135,6 +127,7 @@ package objects.player
 			if (b)
 			{
 				takeDamage(b.damageG);
+				fade.fadeOut(0.2, 0.8, true );
 				soundExplosionm.play(1,GlobalVariables.panSound(this.centerX));
 				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 				b.destroy();
