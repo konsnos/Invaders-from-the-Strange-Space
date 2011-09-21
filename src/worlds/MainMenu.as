@@ -9,6 +9,7 @@ package worlds
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
 	import worlds.objs.BlackScreen;
+	import worlds.objs.GetName_Obj;
 	import worlds.objs.MainMenu_Obj;
 	import worlds.objs.Menu_Obj;
 	import worlds.objs.Starfield;
@@ -49,7 +50,13 @@ package worlds
 			fade = new BlackScreen();
 			add(fade);
 			
-			instance = new MainMenu_Obj;
+			if (GlobalVariables.USERNAME == null)
+			{
+				instance = new GetName_Obj;
+			}else
+			{
+				instance = new MainMenu_Obj;
+			}
 			add(instance);
 			
 			prevTween = new NumTween(changeInstances);

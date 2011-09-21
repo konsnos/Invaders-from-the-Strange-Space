@@ -65,7 +65,7 @@ package objects.enemies
 		
 		public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Small");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Small");
 		}
 		
 		public function walkOn():void 

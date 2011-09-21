@@ -1,6 +1,8 @@
 package worlds 
 {
 	import flash.display.BitmapData;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
@@ -14,6 +16,7 @@ package worlds
 	import objects.enemies.Big;
 	import objects.enemies.Bonus;
 	import objects.enemies.Medium;
+	import Playtomic.Log;
 	import worlds.objs.BlackScreen;
 	import worlds.objs.Starfield;
 	
@@ -49,6 +52,7 @@ package worlds
 		private var maps:Array;
 		private var newObj:Menu_Obj;
 		private var fade:BlackScreen;
+		private var timeFromStart:Timer;
 		
 		// PLAYER
 		private var player:Player;
@@ -149,6 +153,7 @@ package worlds
 				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
 				{
 					GlobalVariables.gameState = GlobalVariables.PLAYING;
+					timeFromStart.start();
 					getClass(Pause_Obj, entitiesToRemove);
 					if (entitiesToRemove)
 					{
@@ -159,6 +164,7 @@ package worlds
 				else
 				{
 					GlobalVariables.gameState = GlobalVariables.PAUSE;
+					timeFromStart.stop();
 					add(new Pause_Obj);
 				}
 			}
@@ -206,6 +212,8 @@ package worlds
 			if (player.hpG <= 0)
 			{
 				GlobalVariables.gameState = GlobalVariables.LOST;
+				timeFromStart.stop();
+ 				Log.LevelAverageMetric("Lost", stage + 1, timeFromStart.currentCount);
 				newObj = new Lost_Obj;
 				add(newObj);
 			}
@@ -213,6 +221,8 @@ package worlds
 			if(Alien.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
+				timeFromStart.stop();
+				Log.LevelAverageMetric("Won", stage + 1, timeFromStart.currentCount);
 				newObj = new Win_Obj(stage)
 				add(newObj);
 			}
@@ -379,6 +389,9 @@ package worlds
 			if (timeElapsed > 1)
 			{
 				GlobalVariables.gameState = GlobalVariables.PLAYING;
+				timeFromStart = new Timer(1000, 0);
+				timeFromStart.reset();
+				timeFromStart.start();
 				estimateBonusAppearance();
 			}
 		}

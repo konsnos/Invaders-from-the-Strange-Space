@@ -49,7 +49,7 @@ package objects
 		 * @param	color The color of the particles.
 		 * @param	size The amount of particles.
 		 */
-		public function reset(x:Number, y:Number, sign:Number, color:uint, size:uint = 15):void
+		public function reset(x:Number, y:Number, sign:Number, color:uint, size:uint = 10):void
 		{
 			explosionSize = 50;
 			explosion.x = x;

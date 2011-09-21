@@ -13,7 +13,7 @@ package objects.bullets
 		{
 			super();
 			
-			graphic = GlobalVariables.IMG_BULLET_REDRECT;
+			graphic = image = new Image(GlobalVariables.IMG_BULLET);
 			
 			speed = 650;
 			damage = 1;
@@ -26,12 +26,21 @@ package objects.bullets
 			super.update();
 		}
 		
+		/**
+		 * Resets the position, damage, image and type of the bullet
+		 * @param	x Position in the x axis.
+		 * @param	y Position in the y axis.
+		 * @param	speed Speed of the bullet.
+		 * @param	damage Damage dealt by the bullet.
+		 * @param	image Image of the bullet.
+		 * @param	type Type of the bullet.
+		 */
 		override public function reset(x:Number, y:Number, speed:uint = 350, damage:uint = 1, 
-		image:Image = null, type:String = "Bullet_Enem"):void
+		image:Class = null, type:String = "Bullet_Enem"):void
 		{
 			super.reset(x, y);
 			
-			graphic = this.image = image;
+			graphic = this.image = new Image(image);
 			
 			this.speed = speed;
 			this.damage = damage;

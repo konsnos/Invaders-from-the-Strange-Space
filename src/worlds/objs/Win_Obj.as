@@ -6,6 +6,8 @@ package worlds.objs
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.tweens.misc.NumTween;
 	import net.flashpunk.utils.Ease;
+	import Playtomic.Leaderboards;
+	import Playtomic.PlayerScore;
 	import worlds.Level;
 	/**
 	 * ...
@@ -14,6 +16,8 @@ package worlds.objs
 	public class Win_Obj extends Menu_Obj 
 	{
 		private var stage:uint;
+		private var level_score:PlayerScore;
+		private var overall_score:PlayerScore;
 		
 		public function Win_Obj(tempStage:uint ) 
 		{
@@ -52,6 +56,12 @@ package worlds.objs
 			
 			menu = new Graphiclist(title, selection[0], selection[1]);
 			graphic = menu;
+			
+			// Store in playtomic
+			level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
+			Leaderboards.Save(level_score, String(stage + 1));
+			overall_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.GAMESCORE);
+			Leaderboards.Save(overall_score, "highscores");
 		}
 		
 	}

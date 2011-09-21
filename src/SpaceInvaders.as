@@ -6,6 +6,7 @@ package
 	import net.flashpunk.World;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import Playtomic.*;
 	
 	import worlds.MainMenu;
 	
@@ -19,6 +20,8 @@ package
 		public function SpaceInvaders():void 
 		{
 			super(800, 600);
+			
+			//Log.View();
 		}
 		
 		override public function init():void 

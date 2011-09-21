@@ -1,3 +1,13 @@
+Build 38
+
+- Changed the images of bonus, medium, small enemies, and the bullets.
+- Changed the documentation of fade in/out comments.
+- Implemented a stats system.
+
+Build 37
+
+- When the player died from a bonus enemy bullet, his life woulf be out of limits.
+
 Build 36
 
 - Added a red fadeout/in when the player is hit.

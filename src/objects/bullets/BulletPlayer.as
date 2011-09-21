@@ -13,6 +13,8 @@ package objects.bullets
 		{
 			super();
 			
+			graphic = image = new Image(GlobalVariables.IMG_BULLET_PLAYER);
+			
 			speed = -700;
 			damage = 1;
 			
@@ -25,7 +27,7 @@ package objects.bullets
 		}
 		
 		override public function reset(x:Number, y:Number, speed:uint = -500, damage:uint = 1, 
-		img:Image = null, type:String = "bullet_P"):void
+		img:Class = null, type:String = "bullet_P"):void
 		{
 			super.reset(x, y);
 			BulletPlayer.list++;

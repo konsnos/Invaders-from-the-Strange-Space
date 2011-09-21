@@ -26,7 +26,7 @@ package objects.bullets
 		
 		public function Bullet()
 		{
-			graphic = image = new Image(GlobalVariables.IMG_BULLET_PLAYER);
+			graphic = image = new Image(GlobalVariables.IMG_BULLET);
 			
 			type = "bullet";
 			layer = 1;
@@ -60,7 +60,16 @@ package objects.bullets
 			FP.world.recycle(this);
 		}
 		
-		public function reset(x:Number, y:Number, speed:uint = 0, damage:uint = 1, img:Image = null, type:String = null):void 
+		/**
+		 * Resets the position, damage, image and type of the bullet.
+		 * @param	x Position in the x axis.
+		 * @param	y Position in the y axis.
+		 * @param	speed Speed of the bullet.
+		 * @param	damage Damage dealt by the bullet.
+		 * @param	img Image of the bullet.
+		 * @param	type Type of the bullet.
+		 */
+		public function reset(x:Number, y:Number, speed:uint = 0, damage:uint = 1, img:Class = null, type:String = null):void 
 		{
 			this.x = x;
 			this.y = y;

@@ -41,8 +41,8 @@ package worlds.objs
 			
 			stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
 			stats.size = 16;
-			stats.y = 1;
-			stats.x = 10;
+			stats.y = FP.height - 20;
+			stats.x = FP.width - stats.width + 20;
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';
 			
@@ -68,7 +68,7 @@ package worlds.objs
 		 */
 		public static function updateStats():void 
 		{
-			stats.text = new String("Level " + level + "- Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
 			playerlife.text = new String("Life: " + Player.getlife() + "/3" + " - Rank: Rookie")
 		}
 		

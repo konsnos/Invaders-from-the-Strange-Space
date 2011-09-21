@@ -44,7 +44,9 @@ package worlds.objs
 		
 		/**
 		 * Fades the splash screen in.
+		 * @param fromValue Starting value.
 		 * @param time	The time the transition will need.
+		 * @param reverse If true, when completed it will fade out.
 		 */
 		public function fadeIn(fromValue:Number = 1, time:Number = 1, reverse:Boolean = false):void
 		{
@@ -60,6 +62,7 @@ package worlds.objs
 		 * Fades the splash screen out.
 		 * @param toValue End value.
 		 * @param time	The time the transition will need.
+		 * @param reverse If true, when completed it will fade in.
 		 */
 		public function fadeOut(toValue:Number = 1, time:Number = 1, reverse:Boolean = false ):void
 		{

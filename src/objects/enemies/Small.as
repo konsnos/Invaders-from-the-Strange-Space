@@ -95,7 +95,7 @@ package objects.enemies
 			Stats_Obj.scoreS = points;
 			list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x7138c6, 10);
 			if (list % 10 == 0)
 			{
 				Small.calculateMaxShots();
@@ -105,7 +105,7 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350, 1, GlobalVariables.IMG_BULLET_REDRECT, "Bullet_Enem_Small");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350, 1, GlobalVariables.IMG_BULLET, "Bullet_Enem_Small");
 		}
 	}
 	

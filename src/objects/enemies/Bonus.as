@@ -28,7 +28,7 @@ package objects.enemies
 		{
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_B);
 			
-			image.scale *= 0.7;
+			//image.scale *= 0.7;
 			
 			listUpdateS = false;
 			
@@ -96,7 +96,7 @@ package objects.enemies
 			if (b)
 			{
  				takeDamage(b.damageG);
-				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x0000FF, 5);
+				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8c8c71, 5);
 				b.destroy();
 			}
 		}
@@ -122,7 +122,7 @@ package objects.enemies
 		override public function spawnBullet(x:Number, y:Number):void
 		{
 			// Fix it
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 600, 3, GlobalVariables.IMG_BULLET_REDRECT, "Bullet_Enem_Bonus");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 600, 3, GlobalVariables.IMG_BULLET, "Bullet_Enem_Bonus");
 		}
 		
 		/**
@@ -164,7 +164,7 @@ package objects.enemies
 			Stats_Obj.scoreS = points;
 			Bonus.list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x0000FF);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8c8c71);
 			super.destroy();
 		}
 		

@@ -4,6 +4,7 @@ package
 	import net.flashpunk.graphics.Backdrop;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import Playtomic.Log;
 	/**
 	 * ...
 	 * @author konsnos
@@ -16,8 +17,8 @@ package
 		[Embed(source = '../assets/images/medium_enemy.png')] public static const IMG_ENEMY_M:Class;
 		[Embed(source = '../assets/images/big_enemy.png')] public static const IMG_ENEMY_L:Class;
 		[Embed(source = '../assets/images/bonus_enemy.png')] public static const IMG_ENEMY_B:Class;
-		[Embed(source = '../assets/images/bullet.png')] public static const IMG_BULLET_PLAYER:Class;
-		public static const IMG_BULLET_REDRECT:Image = new Image(new BitmapData(2, 10, false, 0xee0000));
+		[Embed(source = '../assets/images/bullet.png')] public static const IMG_BULLET:Class;
+		[Embed(source="../assets/images/bullet_P.png")] public static const IMG_BULLET_PLAYER:Class;
 		public static const IMG_PARTICLE:BitmapData = new BitmapData(2, 2, false);
 		
 		/****************** SOUNDS ******************/
@@ -45,6 +46,8 @@ package
 		[Embed(source = '../assets/levels/level09.oel', mimeType = 'application/octet-stream')]private static const MAP09:Class;
 		[Embed(source = '../assets/levels/level10.oel', mimeType = 'application/octet-stream')]private static const MAP10:Class;
 		
+		/****************** GAME VARS ******************/
+		public static var USERNAME:String;
 		public static var gameState:Number;
 		public static const PLAYING:uint = 1;
 		public static const PAUSE:uint = 2;

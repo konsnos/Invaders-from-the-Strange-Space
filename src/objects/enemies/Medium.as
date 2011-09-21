@@ -69,7 +69,7 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 400,1,GlobalVariables.IMG_BULLET_REDRECT,"Bullet_Enem_Medium");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 400,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Medium");
 		}
 		
 		public static function resetList():void // Total number of entities existing.
@@ -96,7 +96,7 @@ package objects.enemies
 			if (b)
 			{
  				takeDamage(b.damageG);
-				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0xff69b4, 5);
+				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x0044b5, 4);
 				b.destroy();
 			}
 		}
@@ -106,7 +106,7 @@ package objects.enemies
 			Stats_Obj.scoreS = points;
 			list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0xff69b4);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x0044b5, 10);
 			if (list % 6 == 0)
 			{
 				Small.calculateMaxShots();

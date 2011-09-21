@@ -11,6 +11,8 @@ package worlds.objs
 	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import Playtomic.GeoIP;
+	import Playtomic.Log;
 	import worlds.Level;
 	
 	import GlobalVariables;
@@ -50,6 +52,8 @@ package worlds.objs
 			menu = new  Graphiclist(title, selection[0], selection[1], selection[2], selection[3]);
 			choiceS = 0;
 			graphic = menu;
+			
+			GeoIP.Lookup(SetPlayerCountry);
 		}
 		
 		override public function update():void 
@@ -85,6 +89,7 @@ package worlds.objs
 					case 0:
 						fadeOut = true;
 						FP.alarm(1, newGame);
+						Log.CustomMetric("NewGame");
 						updates = false;
 						break;
 					case 1:
@@ -92,9 +97,11 @@ package worlds.objs
 						break;
 					case 2:
 						selected = new HowToPlay_obj;
+						Log.CustomMetric("HowToPlay", "screens");
 						break;
 					case 3:
 						selected = new About_Obj;
+						Log.CustomMetric("ViewedCredits","screens");
 						break;
 					break;
 				}
@@ -115,6 +122,23 @@ package worlds.objs
 		{
 			updates = true;
 			super.removed();
+		}
+		
+		public function SetPlayerCountry(country:Object, response:Object):void
+		{
+			if(response.Success)
+			{
+				// we have the country data
+				if (country.code != null)
+				{
+					Log.CustomMetric(country.code,"country");
+				}
+			}
+			else
+			{
+				Log.CustomMetric("UnableToRetrieveCountry","country");
+				// request failed because of response.ErrorCode
+			}
 		}
 		
 	}

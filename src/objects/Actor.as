@@ -18,6 +18,10 @@ package objects
 		// Gets-Sets
 		public function get hpG():Number
 		{
+			if (hp < 0)
+			{
+				return 0;
+			}
 			return hp;
 		}
 		public function set hpS(setValue:Number):void 
