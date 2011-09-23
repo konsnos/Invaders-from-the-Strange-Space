@@ -1,3 +1,8 @@
+Build 39
+
+- Stats now provide the players' country.
+- From pause the player is able to return to the main menu.
+
 Build 38
 
 - Changed the images of bonus, medium, small enemies, and the bullets.

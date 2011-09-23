@@ -148,9 +148,9 @@ package worlds
 				}
 			}
 			
-			if (Input.pressed("pause")) // Player has paused
+			if (GlobalVariables.gameState == GlobalVariables.PAUSE)
 			{
-				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
+				if (Input.pressed("pause"))
 				{
 					GlobalVariables.gameState = GlobalVariables.PLAYING;
 					timeFromStart.start();
@@ -160,12 +160,12 @@ package worlds
 						remove(entitiesToRemove.pop());
 					}
 					getClass(Pause_Obj, entitiesToRemove);
+					Input.clear();
 				}
-				else
+				if (Input.pressed("back"))
 				{
-					GlobalVariables.gameState = GlobalVariables.PAUSE;
-					timeFromStart.stop();
-					add(new Pause_Obj);
+					fade.fadeOut();
+					FP.alarm(1, returnToMainMenu);
 				}
 			}
 			
@@ -183,7 +183,15 @@ package worlds
 			
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING) // Player is playing
 			{
-				updateGameplay();
+				if (Input.pressed("pause"))
+				{
+					GlobalVariables.gameState = GlobalVariables.PAUSE;
+					timeFromStart.stop();
+					add(new Pause_Obj);
+				}else
+				{
+					updateGameplay();
+				}
 			}
 			
 			super.update();

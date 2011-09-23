@@ -5,6 +5,7 @@ package worlds.objs
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import Playtomic.GeoIP;
 	import Playtomic.Log;
 	/**
 	 * ...
@@ -55,6 +56,8 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
+				Log.CustomMetric("39", "version", true);
+				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)
 				{
@@ -64,6 +67,20 @@ package worlds.objs
 				{
 					Text(title).text = "Please provide a name";
 				}
+			}
+		}
+		
+		public function SetPlayerCountry(country:Object, response:Object):void
+		{
+			if(response.Success)
+			{
+				// we have the country data
+				Log.CustomMetric(country.Code, "country", true);
+			}
+			else
+			{
+				Log.CustomMetric("UnableToRetrieveCountry", "country", true);
+				// request failed because of response.ErrorCode
 			}
 		}
 	}

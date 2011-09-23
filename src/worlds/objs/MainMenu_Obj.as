@@ -52,8 +52,6 @@ package worlds.objs
 			menu = new  Graphiclist(title, selection[0], selection[1], selection[2], selection[3]);
 			choiceS = 0;
 			graphic = menu;
-			
-			GeoIP.Lookup(SetPlayerCountry);
 		}
 		
 		override public function update():void 
@@ -122,23 +120,6 @@ package worlds.objs
 		{
 			updates = true;
 			super.removed();
-		}
-		
-		public function SetPlayerCountry(country:Object, response:Object):void
-		{
-			if(response.Success)
-			{
-				// we have the country data
-				if (country.code != null)
-				{
-					Log.CustomMetric(country.code,"country");
-				}
-			}
-			else
-			{
-				Log.CustomMetric("UnableToRetrieveCountry","country");
-				// request failed because of response.ErrorCode
-			}
 		}
 		
 	}

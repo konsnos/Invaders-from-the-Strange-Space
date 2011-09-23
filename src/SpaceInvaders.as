@@ -6,7 +6,7 @@ package
 	import net.flashpunk.World;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
-	import Playtomic.*;
+	import Playtomic.Log;
 	
 	import worlds.MainMenu;
 	
@@ -21,7 +21,7 @@ package
 		{
 			super(800, 600);
 			
-			//Log.View();
+			Log.View();
 		}
 		
 		override public function init():void 

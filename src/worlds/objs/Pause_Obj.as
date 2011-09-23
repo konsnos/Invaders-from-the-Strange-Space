@@ -18,15 +18,20 @@ package worlds.objs
 			title.size = 50;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
-			title.color = 0xbebebe; // gray 
+			title.color = 0xffd700; // yellow 
 			
 			selection.push(new Text(String("Press 'P' to continue")));
-			Text(selection[0]).size = 30;
-			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
-			Text(selection[0]).y = FP.height / 2;
-			Text(selection[0]).color = 0xd3d3d3; // gray
+			selection.push(new Text(String("Press 'BACKSPACE' to exit")));
 			
-			menu = new Graphiclist(title, selection[0]);
+			for (var i:uint = 0; i < selection.length; i++)
+			{
+				Text(selection[i]).size = 30;
+				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
+				Text(selection[i]).y = FP.height / 4 * 2 + (i * 30);
+				Text(selection[i]).color = 0xffd700; // yellow
+			}
+			
+			menu = new Graphiclist(title, selection[0], selection[1]);
 			graphic = menu;
 		}
 		
