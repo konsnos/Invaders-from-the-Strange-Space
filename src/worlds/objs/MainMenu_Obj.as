@@ -112,7 +112,6 @@ package worlds.objs
 		public function newGame():void 
 		{
 			GlobalVariables.RESETSCORE();
-			FP.world.removeAll();
 			FP.world = new Level(1);
 		}
 		

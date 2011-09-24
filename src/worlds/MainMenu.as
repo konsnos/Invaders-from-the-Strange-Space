@@ -167,6 +167,9 @@ package worlds
 		override public function end():void 
 		{
 			backgroundMusic.stop();
+			removeAll();
+			clearRecycledAll();
+			super.end();
 		}
 	}
 }

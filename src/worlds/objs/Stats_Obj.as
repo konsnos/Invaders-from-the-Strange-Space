@@ -4,6 +4,7 @@ package worlds.objs
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	import objects.player.Player;
 	
@@ -19,6 +20,10 @@ package worlds.objs
 		private static var playerlife:Text;
 		private static var score:uint;
 		private static var level:uint;
+		//private static const hpRect:Image = new Image(GlobalVariables.IMG_HEALTHRECT);
+		//private static const hpFill:Image = new Image(GlobalVariables.IMG_HEALTHFILL);
+		private static var hparray:Array;
+		private static var graphiclist:Graphiclist;
 		
 		// Gets-Sets
 		public static function set scoreS(setValue:uint):void 
@@ -46,16 +51,36 @@ package worlds.objs
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';
 			
-			playerlife = new Text(String("Life: " + Player.getlife() + "/3" + "- Rank: Rookie"));
+			graphiclist = new Graphiclist(stats);
+			
+			playerlife = new Text(String("Life:       - Rank: Rookie"));
 			playerlife.size = 16;
 			playerlife.y = FP.height - 20;
 			playerlife.x = 5;
 			playerlife.color = 0x3cb371; // green
 			playerlife.font = 'FONT_STATS';
+			graphiclist.add(playerlife);
 			
+			hparray = new Array([new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)], [new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)], [new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)]);
+			for (var i:uint = 0; i < 3; i++)
+			{
+				for (var j:uint = 0; j < 2; j++)
+				{
+					if (j % 2 == 1)
+					{
+						Image(hparray[i][j]).x = 41 + i * 8;
+						Image(hparray[i][j]).y = FP.height - 14;
+					}else
+					{
+						Image(hparray[i][j]).x = 40 + i * 8;
+						Image(hparray[i][j]).y = FP.height - 15;
+					}
+					graphiclist.add(hparray[i][j]);
+				}
+			}
 			layer = 2;
 			
-			graphic = new Graphiclist(stats, playerlife);
+			graphic = graphiclist;
 		}
 		
 		public static function resetScore():void 
@@ -69,7 +94,24 @@ package worlds.objs
 		public static function updateStats():void 
 		{
 			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
-			playerlife.text = new String("Life: " + Player.getlife() + "/3" + " - Rank: Rookie")
+			//playerlife.text = new String("Life:       - Rank: Rookie")
+			switch (Player.getlife()) 
+			{
+				case 2:
+					Image(hparray[2][1]).visible = false;
+					break;
+				case 1:
+					Image(hparray[2][1]).visible = false;
+					Image(hparray[1][1]).visible = false;
+					break;
+				case 0:
+					Image(hparray[2][1]).visible = false;
+					Image(hparray[1][1]).visible = false;
+					Image(hparray[0][1]).visible = false;
+					break;
+				default:
+					break;
+			}
 		}
 		
 	}

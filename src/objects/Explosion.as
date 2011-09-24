@@ -51,7 +51,7 @@ package objects
 		 */
 		public function reset(x:Number, y:Number, sign:Number, color:uint, size:uint = 10):void
 		{
-			explosionSize = 50;
+			explosionSize = size;
 			explosion.x = x;
 			explosion.y = y;
 			//explosion.setMotion("circle", 0, 20, 0.2, 360, -5, 0.5);

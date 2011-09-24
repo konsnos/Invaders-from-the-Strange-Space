@@ -112,7 +112,6 @@ package worlds.objs
 		
 		public function startLevel():void 
 		{
-			FP.world.removeAll();
 			Log.LevelCounterMetric("LevelSelected", int(choiceG + 1));
 			FP.world = new Level(choiceG + 1);
 		}

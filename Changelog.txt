@@ -1,3 +1,7 @@
+Build 40
+
+- Players health is now visual.
+
 Build 39
 
 - Stats now provide the players' country.

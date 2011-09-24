@@ -35,7 +35,7 @@ package worlds.objs
 					if (star[2] > FP.height)
 					{
 						// new random x position and warp back to top
-						star[1] = Math.random() * FP.width;
+						star[1] = FP.random * FP.width;
 						star[2] = 0;
 					}
 				}
@@ -87,11 +87,11 @@ package worlds.objs
 				var star:Array = [null, null, null, null, null];
 				
 				// random position
-				star[1] = Math.random() * FP.width;
-				star[2] = Math.random() * FP.height;
+				star[1] = FP.random * FP.width;
+				star[2] = FP.random * FP.height;
 				
 				// random speed based on number of available colors
-				star[4] = Math.floor(Math.random() * fieldColors.length);
+				star[4] = Math.floor(FP.random * fieldColors.length);
 				
 				// color based on speed
 				star[3] = fieldColors[star[4]];

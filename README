@@ -1,9 +1,8 @@
-Invaders from the Strange Space is a project I've been working on just to test flashpunk.
+Invaders from the Strange Space (ISS) is a clone of Space Invaders but slightly different and with more features.
 
-Most of the assets are not mine, but free.
-
-Build 39 - Public Beta
+Build 40 - Public Beta
 
 NEW FEATURES
 
 - From pause the player is able to return to the main menu.
+- Players' health is now a visual graphic.

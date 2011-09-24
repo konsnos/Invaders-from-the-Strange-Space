@@ -381,13 +381,13 @@ package worlds
 		
 		public function returnToMainMenu():void 
 		{
-			FP.world.removeAll();
+			//FP.world.removeAll();
 			FP.world = new MainMenu;
 		}
 		
 		public function advanceToNextLevel():void 
 		{
-			FP.world.removeAll();
+			//FP.world.removeAll();
 			FP.world = new Level(stage + 2);
 		}
 		
@@ -435,6 +435,13 @@ package worlds
 			{
 				add(new Big(b.@x, b.@y));
 			}
+		}
+		
+		override public function end():void 
+		{
+			removeAll();
+			clearRecycledAll();
+			super.end();
 		}
 	}
 
