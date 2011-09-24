@@ -11,6 +11,7 @@ package objects.player
 	import objects.enemies.Small;
 	import worlds.objs.BlackScreen;
 	import worlds.objs.Stats_Obj;
+	import worlds.SoundSystem;
 	
 	import worlds.objs.Lost_Obj;
 	import worlds.Level;
@@ -32,7 +33,6 @@ package objects.player
 		private var fade:BlackScreen;
 		
 		private var BulletsMax:Number;
-		private var BulletsShot:Number;
 		
 		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
 		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
@@ -110,14 +110,14 @@ package objects.player
 		{
 			if (BulletPlayer.list < BulletsMax )
 			{
-				soundShoot.play(1, GlobalVariables.panSound(this.centerX));
+ 				SoundSystem.play(soundShoot, this.centerX);
 				spawnBullet(this.x + halfWidth, this.y);
 			}
 		}
 		
 		public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletPlayer(world.create(BulletPlayer)).reset(x, y);
+			BulletPlayer(world.create(BulletPlayer)).reset(x, y, -700, 1, GlobalVariables.IMG_BULLET_PLAYER, "bullet_P");
 		}
 		
 		public function checkIfShot():void
@@ -127,8 +127,8 @@ package objects.player
 			if (b)
 			{
 				takeDamage(b.damageG);
-				fade.fadeOut(0.2, 0.8, true );
-				soundExplosionm.play(1,GlobalVariables.panSound(this.centerX));
+				fade.fadeOut(0.2, 0.8, true);
+				SoundSystem.play(soundExplosionm, this.centerX);
 				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 				b.destroy();
 				life = hpG;
@@ -139,7 +139,7 @@ package objects.player
 		override public function destroy():void
 		{
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
-			soundExplosion.play(1, GlobalVariables.panSound(this.centerX));
+			SoundSystem.play(soundExplosion, this.centerX);
 			super.destroy();
 		}
 		

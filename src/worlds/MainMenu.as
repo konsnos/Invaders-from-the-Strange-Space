@@ -43,6 +43,7 @@ package worlds
 		override public function begin():void 
 		{
 			super.begin();
+			SoundSystem.reset();
 			
 			objsArray = new Array;
 			
@@ -63,7 +64,7 @@ package worlds
 			addTween(prevTween);
 			forthOrBack = true;
 			
-			backgroundMusic.loop();
+			SoundSystem.loop(backgroundMusic);
 			fader = new Fader();
 			addTween(fader);
 			
@@ -166,9 +167,8 @@ package worlds
 		
 		override public function end():void 
 		{
-			backgroundMusic.stop();
+			SoundSystem.pause(backgroundMusic);
 			removeAll();
-			clearRecycledAll();
 			super.end();
 		}
 	}

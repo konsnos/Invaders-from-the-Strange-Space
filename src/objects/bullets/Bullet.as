@@ -15,7 +15,7 @@ package objects.bullets
 	{
 		public static var list:uint;
 		protected var image:Image;
-		protected var speed:Number;
+		protected var speed:int;
 		protected var damage:Number;
 		
 		// Gets-Sets
@@ -69,10 +69,14 @@ package objects.bullets
 		 * @param	img Image of the bullet.
 		 * @param	type Type of the bullet.
 		 */
-		public function reset(x:Number, y:Number, speed:uint = 0, damage:uint = 1, img:Class = null, type:String = null):void 
+		public function reset(x:Number, y:Number, speed:int = 0, damage:uint = 1, img:Class = null, type:String = null):void 
 		{
 			this.x = x;
 			this.y = y;
+			
+			this.speed = speed;
+			this.damage = damage;
+			this.type = type;
 			
 			Bullet.list++;
 		}

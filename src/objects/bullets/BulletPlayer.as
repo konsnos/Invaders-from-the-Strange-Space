@@ -9,7 +9,7 @@ package objects.bullets
 	{
 		public static var list:uint;
 		
-		public function BulletPlayer() 
+		public function BulletPlayer()
 		{
 			super();
 			
@@ -21,15 +21,19 @@ package objects.bullets
 			type = "bullet_P";
 		}
 		
-		override public function update():void 
-		{
-			super.update();
-		}
-		
-		override public function reset(x:Number, y:Number, speed:uint = -500, damage:uint = 1, 
+		/**
+		 * Resets the bullet of the player.
+		 * @param	x The position on the x axis.
+		 * @param	y The position on the y axis.
+		 * @param	speed The speed and direction the bullet has.
+		 * @param	damage The damage the bullet does.
+		 * @param	img The image is not used, the default is fine. It's here only for override reasons.
+		 * @param	type The type of the bullet.
+		 */
+		override public function reset(x:Number, y:Number, speed:int = -700, damage:uint = 1, 
 		img:Class = null, type:String = "bullet_P"):void
 		{
-			super.reset(x, y);
+			super.reset(x, y, speed, damage, img, type);
 			BulletPlayer.list++;
 		}
 		

@@ -2,19 +2,18 @@ package worlds.objs
 {
 	import flash.display.BitmapData;
 	import flash.geom.Point;
-	import flash.sampler.NewObjectSample;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	
 	/**
-	 * implements a simple starfield
+	 * Implements a simple starfield
 	 * @author Richard Marks
 	 */
 	public class Starfield extends Graphic
 	{
 		// stars is [star1, star2, star3, etc]
-		// star# is [graphic, x, y, color, speed]
+		// star# is [graphic, Point(x, y), color, speed]
 		private var stars:Array;
 		
 		// number of stars
@@ -30,13 +29,13 @@ package worlds.objs
 				for each(var star:Array in stars)
 				{
 					// add speed to the star
-					star[2] += star[4];
+					Point(star[1]).y += star[3];
 					
-					if (star[2] > FP.height)
+					if (Point(star[1]).y > FP.height)
 					{
 						// new random x position and warp back to top
-						star[1] = FP.random * FP.width;
-						star[2] = 0;
+						Point(star[1]).x = FP.random * FP.width;
+						Point(star[1]).y = 0;
 					}
 				}
 			}
@@ -46,7 +45,7 @@ package worlds.objs
 		{
 			for each(var star:Array in stars)
 			{
-				(star[0] as Image).render(target, new Point(star[1], star[2]), camera);
+				Image(star[0]).render(target, Point(star[1]), camera);
 			}
 		}
 		
@@ -83,21 +82,21 @@ package worlds.objs
 			
 			for (var i:int = 0; i < fieldDensity; i++)
 			{
-				// star is [graphic, x, y, color, speed]
-				var star:Array = [null, null, null, null, null];
+				// star is [graphic, Point(x,y), color, speed]
+				var star:Array = [null, new Point(0,0), null, null];
 				
 				// random position
-				star[1] = FP.random * FP.width;
-				star[2] = FP.random * FP.height;
+				Point(star[1]).x = FP.random * FP.width;
+				Point(star[1]).y = FP.random * FP.height;
 				
 				// random speed based on number of available colors
-				star[4] = Math.floor(FP.random * fieldColors.length);
+				star[3] = Math.floor(FP.random * fieldColors.length);
 				
 				// color based on speed
-				star[3] = fieldColors[star[4]];
+				star[2] = fieldColors[star[3]];
 				
 				// star graphic itself
-				star[0] = Image.createRect(1, 1, star[3]);
+				star[0] = Image.createRect(1, 1, star[2]);
 				
 				// add star to the stars array
 				stars.push(star);

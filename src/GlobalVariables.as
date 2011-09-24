@@ -96,26 +96,6 @@ package
 			EXPLOSION = new Array(EXPLOSION01, EXPLOSION02);
 		}
 		
-		/**
-		 * Returns the pan value according to the entity x position in the stage.
-		 * @param	xPos The x position where the sound is comming.
-		 * @return The pan value.
-		 */
-		public static function panSound(xPos:Number):Number 
-		{
-			if (xPos > FP.halfWidth)
-			{
-				xPos -= FP.halfWidth;
-				return xPos / FP.halfWidth;
-			}else if(xPos < FP.halfWidth)
-			{
-				return (FP.halfWidth-xPos)*(-1);
-			}else
-			{
-				return 0;
-			} 
-		}
-		
 	}
 
 }

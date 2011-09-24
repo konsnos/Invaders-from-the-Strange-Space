@@ -1,5 +1,6 @@
 package objects.enemies 
 {
+	import flash.media.Sound;
 	import flash.sampler.NewObjectSample;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -8,6 +9,7 @@ package objects.enemies
 	import objects.Actor;
 	import objects.bullets.BulletEnemy;
 	import objects.FloatingText;
+	import worlds.SoundSystem;
 	
 	/**
 	 * ...
@@ -36,15 +38,19 @@ package objects.enemies
 			listUpdate = setValue;
 		}
 		
-		public function Alien(x:Number, y:Number) 
+		public function Alien() 
 		{
 			super();
-			this.x = x;
-			this.y = y;
 			
-			soundExplosion = new  Sfx(GlobalVariables.EXPLOSION[0]);
+			soundExplosion = new Sfx(GlobalVariables.EXPLOSION[0]);
 			soundHit = new Sfx(GlobalVariables.EXPLOSION[1]);
 			
+		}
+		
+		public function reset(x:Number, y:Number):void 
+		{
+			this.x = x;
+			this.y = y;
 			list++;
 		}
 		
@@ -85,7 +91,7 @@ package objects.enemies
 		
 		override public function takeDamage(damageTaken:Number):void 
 		{
-			soundHit.play(1,GlobalVariables.panSound(this.centerX));
+			SoundSystem.play(soundHit, this.centerX);
 			super.takeDamage(damageTaken);
 		}
 		
@@ -94,7 +100,7 @@ package objects.enemies
 		 */
 		override public function destroy():void 
 		{
-			soundExplosion.play(1,GlobalVariables.panSound(this.centerX));
+			SoundSystem.play(soundExplosion, this.centerX);
 			FloatingText(world.create(FloatingText)).reset(this.x + this.halfWidth, this.y+halfHeight, points.toString());
 			list--;
 			super.destroy();

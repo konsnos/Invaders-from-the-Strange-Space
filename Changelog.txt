@@ -1,6 +1,10 @@
 Build 40
 
 - Players health is now visual.
+- Added a settings menu.
+- Added the choice to mute the game.
+- Added a sound system which controls the sound.
+- Changed the starfield render function. Now the game runs smoother.
 
 Build 39
 

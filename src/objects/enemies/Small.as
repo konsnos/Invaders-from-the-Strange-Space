@@ -31,7 +31,7 @@ package objects.enemies
 			return maxShots;
 		}
 		
-		public function Small(x:Number, y:Number)
+		public function Small()
 		{
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);
 			
@@ -39,7 +39,7 @@ package objects.enemies
 			
 			listUpdateS = false;
 			
-			super(x, y);
+			super();
 			
 			hpS = 1;
 			speed = 15;
@@ -50,8 +50,18 @@ package objects.enemies
 			height = image.height * image.scale;
 			
 			type = "Small";
-			
+		}
+		
+		override public function reset(x:Number, y:Number):void 
+		{
+			super.reset(x, y);
+			if (hpG == 0)
+			{
+				hpS = 1;
+			}
+			direction = 1;
 			list++;
+			listUpdateS = false;
 		}
 		
 		override public function update():void 

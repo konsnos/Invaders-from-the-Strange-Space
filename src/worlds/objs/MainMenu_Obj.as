@@ -22,6 +22,7 @@ package worlds.objs
 	 */
 	public class MainMenu_Obj extends Menu_Obj
 	{
+		
 		public function MainMenu_Obj()
 		{
 			selection = new Array();
@@ -30,9 +31,11 @@ package worlds.objs
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0xadff2f; // Green
+			menu = new Graphiclist(title);
 			
 			selection.push(new Text(String("New Game")));
 			selection.push(new Text(String("Select Level")));
+			selection.push(new Text(String("Settings")));
 			selection.push(new Text(String("How to play")));
 			selection.push(new Text(String("About")));
 			
@@ -40,16 +43,16 @@ package worlds.objs
 			{
 				Text(selection[i]).size = 30;
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
-				Text(selection[i]).y = FP.height / 5 * (i + 1);
+				Text(selection[i]).y = FP.height / (selection.length + 1) * (i + 1);
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 0.5;
+				menu.add(selection[i]);
 			}
 			
 			Text(selection[0]).alpha = 1;
 			
 			fadeIn = fadeOut = false;
 			
-			menu = new  Graphiclist(title, selection[0], selection[1], selection[2], selection[3]);
 			choiceS = 0;
 			graphic = menu;
 		}
@@ -94,10 +97,14 @@ package worlds.objs
 						selected = new SelectLevel_Obj;
 						break;
 					case 2:
+						selected = new Settings_Obj;
+						Log.CustomMetric("Settings", "screens");
+						break;
+					case 3:
 						selected = new HowToPlay_obj;
 						Log.CustomMetric("HowToPlay", "screens");
 						break;
-					case 3:
+					case 4:
 						selected = new About_Obj;
 						Log.CustomMetric("ViewedCredits","screens");
 						break;

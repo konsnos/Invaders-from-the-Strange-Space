@@ -374,7 +374,7 @@ package worlds
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
-				Bonus(FP.world.create(Bonus)).reset();
+				Bonus(FP.world.create(Bonus)).reset(0,0);
 				estimateBonusAppearance();
 			}
 		}
@@ -421,26 +421,25 @@ package worlds
 			dataList = xml.smalls.tile;
 			for each(var s:XML in dataList)
 			{
-				add(new Small(s.@x, s.@y));
+				Small(create(Small)).reset(s.@x, s.@y);
 			}
 			
 			dataList = xml.mediums.tile;
 			for each(var m:XML in dataList)
 			{
-				add(new Medium(m.@x, m.@y));
+				Medium(create(Medium)).reset(m.@x, m.@y);
 			}
 			
 			dataList = xml.bigs.tile;
 			for each(var b:XML in dataList)
 			{
-				add(new Big(b.@x, b.@y));
+				Big(create(Big)).reset(b.@x, b.@y);
 			}
 		}
 		
 		override public function end():void 
 		{
 			removeAll();
-			clearRecycledAll();
 			super.end();
 		}
 	}

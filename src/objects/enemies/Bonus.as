@@ -36,8 +36,7 @@ package objects.enemies
 			speed = 200;
 			points = 40;
 			
-			super(10,10);
-			Alien.list--;
+			super();
 			
 			width = image.width * image.scale;
 			height = image.height * image.scale;
@@ -128,7 +127,7 @@ package objects.enemies
 		/**
 		 * Resets the position of the Bonus.
 		 */
-		public function reset():void 
+		override public function reset(x:Number, y:Number):void 
 		{
 			if (hpG == 0)
 			{
