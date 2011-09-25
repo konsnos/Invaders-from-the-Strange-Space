@@ -11,10 +11,10 @@
 	</values>
 	
 	<tilesets>
-		<tileset name="small" image="assets/images/small_enemy.png" tileWidth="44" tileHeight="32"/>
-		<tileset name="medium" image="assets/images/medium_enemy.png" tileWidth="44" tileHeight="32"/>
+		<tileset name="small" image="assets/images/small_enemy.png" tileWidth="35" tileHeight="28"/>
+		<tileset name="medium" image="assets/images/medium_enemy.png" tileWidth="40" tileHeight="22"/>
 		<tileset name="big" image="assets/images/big_enemy.png" tileWidth="44" tileHeight="32"/>
-		<tileset name="bonus" image="assets/images/bonus_enemy.png" tileWidth="64" tileHeight="28"/>
+		<tileset name="bonus" image="assets/images/bonus_enemy.png" tileWidth="70" tileHeight="36"/>
 	</tilesets>
 	
 	<objects>

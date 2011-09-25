@@ -31,7 +31,6 @@ package worlds
 		private var objsArray:Array;
 		private var forthOrBack:Boolean; // When this is true the scene changes from right to left.
 		private var backgroundMusic:Sfx = new Sfx(GlobalVariables.MSC01);
-		private var fader:Fader; // Fades out the sound.
 		private var fade:BlackScreen;
 		private var doneTransition:Boolean;
 		
@@ -43,7 +42,6 @@ package worlds
 		override public function begin():void 
 		{
 			super.begin();
-			SoundSystem.reset();
 			
 			objsArray = new Array;
 			
@@ -65,8 +63,7 @@ package worlds
 			forthOrBack = true;
 			
 			SoundSystem.loop(backgroundMusic);
-			fader = new Fader();
-			addTween(fader);
+			SoundSystem.addFader();
 			
 			updating = false;
 			
@@ -93,7 +90,7 @@ package worlds
 			}else if (instance.fadeOut)
 			{
 				fade.fadeOut();
-				fader.fadeTo(0, 0.9);
+				SoundSystem.fadeOut(0,1);
 				instance.fadeOut = false;
 			}
 		}
@@ -130,7 +127,6 @@ package worlds
 					add(nextInstance);
 					nextInstance.x = FP.width;
 					prevTween.tween(instance.x, instance.x - FP.width, 1, Ease.quartInOut);
-					instance.selectedS = null;
 					updating = true;
 				}
 			}else if (Input.pressed("back") && objsArray.length > 0 && !updating)
@@ -143,6 +139,7 @@ package worlds
 				nextInstance.x = FP.width;
 				prevTween.tween(instance.x, instance.x + FP.width, 1, Ease.quartInOut);
 				instance.selectedS = null;
+				nextInstance.selectedS = null;
 				updating = true;
 			}
 		}
@@ -169,6 +166,7 @@ package worlds
 		{
 			SoundSystem.pause(backgroundMusic);
 			removeAll();
+			FP.world.clearTweens();
 			super.end();
 		}
 	}

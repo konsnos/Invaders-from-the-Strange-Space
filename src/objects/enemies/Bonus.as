@@ -135,7 +135,7 @@ package objects.enemies
 			}
 			Bonus.list++;
 			Alien.list++;
-			speed = 300;
+			speed = 280;
 			points = 40;
 			timeElapsed = 0;
 			direction = FP.random;

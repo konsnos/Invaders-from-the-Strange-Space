@@ -35,8 +35,6 @@ package objects.enemies
 		{
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);
 			
-			image.scale *= 0.7;
-			
 			listUpdateS = false;
 			
 			super();
@@ -46,8 +44,8 @@ package objects.enemies
 			direction = 1;
 			points = 10;
 			
-			width = image.width * image.scale;
-			height = image.height * image.scale;
+			width = image.width;
+			height = image.height;
 			
 			type = "Small";
 		}

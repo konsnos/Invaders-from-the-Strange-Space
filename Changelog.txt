@@ -1,3 +1,8 @@
+Build 41
+
+- Redesigned assets and levels.
+- Fixed a bug where the user could hit enter more times and when the screen was viewed again the next enter would take place.
+
 Build 40
 
 - Players health is now visual.

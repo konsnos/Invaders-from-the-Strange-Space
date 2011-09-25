@@ -55,7 +55,7 @@ package objects.player
 			hpS = 3;
 			life = hpG;
 			Stats_Obj.updateStats();
-			speed = 270;
+			speed = 300;
 			
 			this.x = x - image.width / 2;
 			this.y = y;

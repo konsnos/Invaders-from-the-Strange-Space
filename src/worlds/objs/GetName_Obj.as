@@ -7,6 +7,7 @@ package worlds.objs
 	import net.flashpunk.utils.Key;
 	import Playtomic.GeoIP;
 	import Playtomic.Log;
+	import worlds.SoundSystem;
 	/**
 	 * ...
 	 * @author konsnos
@@ -36,6 +37,8 @@ package worlds.objs
 			menu = new Graphiclist(title, selection[0]);
 			choiceS = 0;
 			graphic = menu;
+			
+			SoundSystem.reset();
 		}
 		
 		override public function update():void 
@@ -56,7 +59,7 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("40", "version", true);
+				Log.CustomMetric("41", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)

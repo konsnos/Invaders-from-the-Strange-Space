@@ -87,7 +87,6 @@ package worlds
 		
 		public function Level(selectedlevel:uint) 
 		{
-			FP.volume = 1;
 			timeElapsed = 0;
 			changeLine = false;
 			
@@ -130,6 +129,7 @@ package worlds
 			fade = new BlackScreen();
 			add(fade);
 			fade.fadeIn(0.5);
+			SoundSystem.resetVolume();
 		}
 		
 		override public function update():void 
@@ -427,7 +427,7 @@ package worlds
 			dataList = xml.mediums.tile;
 			for each(var m:XML in dataList)
 			{
-				Medium(create(Medium)).reset(m.@x, m.@y);
+				Medium(create(Medium)).reset(m.@x - 2, m.@y);
 			}
 			
 			dataList = xml.bigs.tile;
