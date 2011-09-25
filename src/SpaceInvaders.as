@@ -17,7 +17,7 @@ package
 	public class SpaceInvaders extends Engine 
 	{
 		
-		public function SpaceInvaders():void 
+		public function SpaceInvaders() 
 		{
 			super(800, 600);
 			
@@ -29,7 +29,7 @@ package
 		{
 			super.init();
 			
-			//Mouse.hide();
+			Mouse.hide();
 			//FP.console.enable();
 			
 			Input.define("right", Key.RIGHT, Key.D);

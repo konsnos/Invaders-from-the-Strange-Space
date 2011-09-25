@@ -1,6 +1,5 @@
 package worlds.objs
 {
-	import flash.display.ShaderParameter;
 	import flash.events.TextEvent;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;

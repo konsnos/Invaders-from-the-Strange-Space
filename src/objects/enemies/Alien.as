@@ -9,6 +9,7 @@ package objects.enemies
 	import objects.Actor;
 	import objects.bullets.BulletEnemy;
 	import objects.FloatingText;
+	import worlds.objs.Stats_Obj;
 	import worlds.SoundSystem;
 	
 	/**
@@ -19,9 +20,8 @@ package objects.enemies
 	{
 		public static var list:Number; // Total number of aliens in the game.
 		
-		public var points:Number;
 		protected var speed:Number;
-		public var direction:Number;
+		protected var direction:Number;
 		
 		protected var soundExplosion:Sfx;
 		protected var soundHit:Sfx;
@@ -98,8 +98,9 @@ package objects.enemies
 		/**
 		 * Recycles the Alien. Plays the explosion sound and removes 1 from the list.
 		 */
-		override public function destroy():void 
+		override public function destroy(points:uint = 0):void 
 		{
+			Stats_Obj.scoreS = points;
 			SoundSystem.play(soundExplosion, this.centerX);
 			FloatingText(world.create(FloatingText)).reset(this.x + this.halfWidth, this.y+halfHeight, points.toString());
 			list--;

@@ -3,12 +3,9 @@ package objects.enemies
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Sfx;
-	
 	import objects.Explosion;
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
-	import worlds.Level;
-	import worlds.objs.Stats_Obj;
 	import GlobalVariables;
 	/**
 	 * ...
@@ -16,6 +13,7 @@ package objects.enemies
 	 */
 	public class Small extends Alien 
 	{
+		public static const Points:uint = 10;
 		public static var list:Number;
 		public static var timeElapsed:Number;
 		private static var maxShots:uint; // The amount of shots Small aliens can shoot in game.
@@ -42,7 +40,6 @@ package objects.enemies
 			hpS = 1;
 			speed = 15;
 			direction = 1;
-			points = 10;
 			
 			width = image.width;
 			height = image.height;
@@ -102,9 +99,8 @@ package objects.enemies
 			}
 		}
 		
-		override public function destroy():void 
+		override public function destroy(points:uint = Small.Points):void 
 		{
-			Stats_Obj.scoreS = points;
 			list--;
 			listUpdateS = true;
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x7138c6, 10);
@@ -112,7 +108,7 @@ package objects.enemies
 			{
 				Small.calculateMaxShots();
 			}
-			super.destroy();
+			super.destroy(points);
 		}
 		
 		override public function spawnBullet(x:Number, y:Number):void 

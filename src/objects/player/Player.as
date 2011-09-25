@@ -136,7 +136,7 @@ package objects.player
 			}
 		}
 		
-		override public function destroy():void
+		override public function destroy(points:uint = 0):void
 		{
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
 			SoundSystem.play(soundExplosion, this.centerX);

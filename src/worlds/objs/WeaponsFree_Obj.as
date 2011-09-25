@@ -5,9 +5,7 @@ package worlds.objs
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.tweens.misc.NumTween;
 	import net.flashpunk.utils.Ease;
-	
 	import worlds.Level;
-	import worlds.objs.Menu_Obj;
 	
 	/**
 	 * ...

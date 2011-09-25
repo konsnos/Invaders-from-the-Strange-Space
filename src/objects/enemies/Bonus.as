@@ -5,36 +5,25 @@ package objects.enemies
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
 	import objects.Explosion;
-	import worlds.objs.Stats_Obj;
 	/**
 	 * ...
 	 * @author konsnos
 	 */
 	public class Bonus extends Alien 
 	{
+		public static const Points:uint = 40;
 		public static var list:Number;
 		public var timeThisWillShoot:Number;
 		private var timeElapsed:Number;
-		
-		private static var listUpdate:Boolean; // Checks if the list with the Big aliens needs to be updated.
-		
-		// Gets-Sets
-		public static function get listUpdateG():Boolean
-		{ 
-			return listUpdate;
-		}
 		
 		public function Bonus() 
 		{
 			graphic = image = new Image(GlobalVariables.IMG_ENEMY_B);
 			
-			//image.scale *= 0.7;
-			
 			listUpdateS = false;
 			
 			hpS = 1;
 			speed = 200;
-			points = 40;
 			
 			super();
 			
@@ -136,7 +125,6 @@ package objects.enemies
 			Bonus.list++;
 			Alien.list++;
 			speed = 280;
-			points = 40;
 			timeElapsed = 0;
 			direction = FP.random;
 			if (direction > 0.5)
@@ -158,13 +146,12 @@ package objects.enemies
 		/**
 		 * Recycles the Bonus alien. Erases it from the list. Spawns Explosion. Sets to score the points.
 		 */
-		override public function destroy():void 
+		override public function destroy(points:uint = Bonus.Points):void 
 		{
-			Stats_Obj.scoreS = points;
 			Bonus.list--;
 			listUpdateS = true;
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8c8c71);
-			super.destroy();
+			super.destroy(points);
 		}
 		
 		/**

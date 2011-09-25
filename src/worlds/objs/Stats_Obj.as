@@ -61,7 +61,9 @@ package worlds.objs
 			playerlife.font = 'FONT_STATS';
 			graphiclist.add(playerlife);
 			
-			hparray = new Array([new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)], [new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)], [new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)]);
+			hparray = new Array([new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)],
+			[new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)],
+			[new Image(GlobalVariables.IMG_HEALTHRECT), new Image(GlobalVariables.IMG_HEALTHFILL)]);
 			for (var i:uint = 0; i < 3; i++)
 			{
 				for (var j:uint = 0; j < 2; j++)

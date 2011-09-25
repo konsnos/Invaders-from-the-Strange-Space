@@ -43,7 +43,7 @@ package objects
 			hpS = -damageTaken;
 		}
 		
-		public function destroy():void 
+		public function destroy(points:uint = 0):void 
 		{
 			FP.world.recycle(this);
 		}

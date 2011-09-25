@@ -32,7 +32,6 @@ package worlds
 		private var forthOrBack:Boolean; // When this is true the scene changes from right to left.
 		private var backgroundMusic:Sfx = new Sfx(GlobalVariables.MSC01);
 		private var fade:BlackScreen;
-		private var doneTransition:Boolean;
 		
 		public function MainMenu() 
 		{

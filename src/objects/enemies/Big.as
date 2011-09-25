@@ -6,27 +6,20 @@ package objects.enemies
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
 	import objects.Explosion;
-	import worlds.objs.Stats_Obj;
 	/**
 	 * ...
 	 * @author konsnos
 	 */
 	public class Big extends Alien 
 	{
+		public static const Points:uint = 20;
 		public static var list:Number;
 		public static var timeElapsed:Number;
-		public static var direction:Number;
 		private static var maxShots:uint; // The amount of shots Medium aliens can shoot in game.
 		private static var WhoShoots:uint; // The Medium that shoots.
 		public static var shootInterval:Number; // The interval the Medium shoots.
 		
-		private static var listUpdate:Boolean; // Checks if the list with the Big aliens needs to be updated.
-		
 		// Gets-Sets
-		public static function get listUpdateG():Boolean
-		{ 
-			return listUpdate;
-		}
 		public static function get WhoShootsG():uint
 		{
 			return WhoShoots;
@@ -48,7 +41,6 @@ package objects.enemies
 			
 			speed = 15;
 			direction = 1;
-			points = 20;
 			
 			width = image.width * image.scale;
 			height = image.height * image.scale;
@@ -121,9 +113,8 @@ package objects.enemies
 			}
 		}
 		
-		override public function destroy():void 
+		override public function destroy(points:uint = Big.Points):void 
 		{
-			Stats_Obj.scoreS = points;
 			list--;
 			listUpdateS = true;
 			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00);
@@ -131,7 +122,7 @@ package objects.enemies
 			{
 				Small.calculateMaxShots();
 			}
-			super.destroy();
+			super.destroy(points);
 		}
 		
 	}
