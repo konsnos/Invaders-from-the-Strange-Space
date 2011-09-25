@@ -22,16 +22,27 @@ package worlds.objs
 	 */
 	public class MainMenu_Obj extends Menu_Obj
 	{
+		private var welcome:Text;
 		
 		public function MainMenu_Obj()
 		{
 			selection = new Array();
+			
+			welcome = new Text(String("Welcome " + GlobalVariables.USERNAME + " to"));
+			welcome.font = 'FONT_TITLE';
+			welcome.size = 20;
+			welcome.x = FP.width / 2 - welcome.width / 2;
+			welcome.y = 3;
+			welcome.color = 0x32cd32; // Green
+			menu = new Graphiclist(welcome);
+			
 			title = new Text(String("Invaders from the Strange Space"));
-			title.size = 40;
+			title.font = 'FONT_TITLE';
+			title.size = 25;
 			title.x = FP.width / 2 - title.width / 2;
-			title.y = 20;
+			title.y = 25;
 			title.color = 0xadff2f; // Green
-			menu = new Graphiclist(title);
+			menu.add(title);
 			
 			selection.push(new Text(String("New Game")));
 			selection.push(new Text(String("Select Level")));
@@ -41,7 +52,8 @@ package worlds.objs
 			
 			for (var i:Number = 0; i < selection.length; i++)
 			{
-				Text(selection[i]).size = 30;
+				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).size = 20;
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.height / (selection.length + 1) * (i + 1);
 				Text(selection[i]).color = 0xFFFFFF; // White

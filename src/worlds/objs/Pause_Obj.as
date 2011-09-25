@@ -15,6 +15,7 @@ package worlds.objs
 		{
 			selection = new Array();
 			title = new Text(String("Paused"));
+			title.font = 'FONT_TITLE';
 			title.size = 50;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
@@ -25,6 +26,7 @@ package worlds.objs
 			
 			for (var i:uint = 0; i < selection.length; i++)
 			{
+				Text(selection[i]).font = 'FONT_CHOICE';
 				Text(selection[i]).size = 30;
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.height / 4 * 2 + (i * 30);

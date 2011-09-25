@@ -30,6 +30,7 @@ package objects
 		override public function update():void 
 		{
 			title.alpha = alpha.value;
+			title.font = 'FONT_STATS';
 			this.y -= speed * FP.elapsed;
 		}
 		

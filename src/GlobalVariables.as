@@ -35,6 +35,8 @@ package
 		
 		/****************** FONTS ******************/
 		[Embed(source = '../assets/fonts/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
+		[Embed(source="../assets/fonts/Coalition_v2.ttf", embedAsCFF = "false", fontName = "FONT_TITLE")] public static const FONT_TITLE:Class;
+		[Embed(source="../assets/fonts/ethnocentric rg.ttf", embedAsCFF = "false", fontName = "FONT_CHOICE")] public static const FONT_CHOICE:Class;
 		
 		/****************** LEVELS ******************/
 		[Embed(source = '../assets/levels/level01.oel', mimeType = 'application/octet-stream')]private static const MAP01:Class;

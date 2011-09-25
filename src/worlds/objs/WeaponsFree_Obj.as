@@ -18,6 +18,7 @@ package worlds.objs
 		public function WeaponsFree_Obj() 
 		{
 			title = new Text(String("Weapons Free"));
+			title.font = 'FONT_CHOICE';
 			title.size = 30;
 			title.x = FP.halfWidth - title.width / 2;
 			title.y = FP.height / 10 * 7;

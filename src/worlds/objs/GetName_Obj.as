@@ -19,13 +19,16 @@ package worlds.objs
 		public function GetName_Obj() 
 		{
 			selection = new Array();
+			
 			title = new Text(String("Please write your name"));
+			title.font = 'FONT_TITLE';
 			title.size = 30;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = FP.height / 4;
-			title.color = 0x006400; // Green
+			title.color = 0x32cd32; // Green
 			
 			selection.push(new Text(String("")));
+			Text(selection[0]).font = 'FONT_CHOICE';
 			Text(selection[0]).size = 30;
 			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 4 * 2;

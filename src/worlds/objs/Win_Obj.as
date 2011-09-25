@@ -26,6 +26,7 @@ package worlds.objs
 			stage = tempStage++;
 			selection = new Array();
 			title = new Text(String("You Won!!!"));
+			title.font = 'FONT_TITLE';
 			title.size = 50;
 			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
@@ -39,9 +40,10 @@ package worlds.objs
 			{
 				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.scoreG) + " points to tie the high score")));
 			}
-			Text(selection[0]).size = 20;
-			Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2;
-			Text(selection[0]).y = FP.height / 4 * 2;
+			Text(selection[0]).font = 'FONT_CHOICE';
+			Text(selection[0]).size = 14;
+			Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2 + 10;
+			Text(selection[0]).y = FP.height / 5 * 2;
 			Text(selection[0]).color = 0x00bfff; // white-blue
 			
 			GlobalVariables.CALCULATESCORE();
@@ -49,12 +51,20 @@ package worlds.objs
 			selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
 			
 			selection.push(new Text(String("Press Enter to advance to the next level")));
-			Text(selection[1]).size = 20;
-			Text(selection[1]).x = FP.halfWidth - Text(selection[0]).width / 2;
-			Text(selection[1]).y = FP.height / 3 * 2;
+			Text(selection[1]).font = 'FONT_CHOICE';
+			Text(selection[1]).size = 14;
+			Text(selection[1]).x = FP.halfWidth - Text(selection[0]).width / 2 + 10;
+			Text(selection[1]).y = FP.height / 4 * 2;
 			Text(selection[1]).color = 0x00bfff; // white-blue
 			
-			menu = new Graphiclist(title, selection[0], selection[1]);
+			selection.push(new Text(String("Press enter to procceed to the next level")));
+			Text(selection[2]).font = 'FONT_CHOICE';
+			Text(selection[2]).size = 14;
+			Text(selection[2]).x = FP.halfWidth - Text(selection[0]).width / 2 + 10;
+			Text(selection[2]).y = FP.height / 5 * 3;
+			Text(selection[2]).color = 0x00bfff; // white-blue
+			
+			menu = new Graphiclist(title, selection[0], selection[1], selection[2]);
 			graphic = menu;
 			
 			// Store in playtomic

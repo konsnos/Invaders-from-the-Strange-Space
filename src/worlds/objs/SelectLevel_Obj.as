@@ -24,18 +24,19 @@ package worlds.objs
 			selection = new Array();
 			selected = null;
 			title = new Text(String("Select Level"));
-			title.size = 50;
+			title.font = 'FONT_TITLE';
+			title.size = 23;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
-			title.color = 0x006400; // Dark Green
+			title.color = 0x32cd32; // Dark Green
 			graphiclist = new Graphiclist(title);
 			updating = false;
 			
 			for (var i:uint = 0; i < GlobalVariables.MAP.length; i++)
 			{
 				selection.push(new Text(String("Level " + (i+1))));
-				
-				Text(selection[i]).size = 30;
+				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).size = 20;
 				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.halfHeight - Text(selection[i]).height / 2 + (FP.height / 5 * i);
 				Text(selection[i]).color = 0xFFFFFF; // White
@@ -45,8 +46,8 @@ package worlds.objs
 			}
 			
 			selection.push(new Text(String("Press Backspace to return")));
-			// The press backspace text.
-			Text(selection[selection.length - 1]).size = 15;
+			Text(selection[selection.length - 1]).font = 'FONT_CHOICE';
+			Text(selection[selection.length - 1]).size = 13;
 			Text(selection[selection.length - 1]).x = 10;
 			Text(selection[selection.length - 1]).y = FP.height - (Text(selection[selection.length - 1]).height +10);
 			Text(selection[selection.length - 1]).color = 0x006400;
