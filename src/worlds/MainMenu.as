@@ -131,6 +131,7 @@ package worlds
 			}else if (Input.pressed("back") && objsArray.length > 0 && !updating)
 			{
 				nextInstance = instance.selectedS = objsArray[objsArray.length -1];
+				nextInstance.updates = true;
 				updating = true;
 				forthOrBack = false;
 				
@@ -138,6 +139,7 @@ package worlds
 				nextInstance.x = FP.width;
 				prevTween.tween(instance.x, instance.x + FP.width, 1, Ease.quartInOut);
 				instance.selectedS = null;
+				instance.updates = false;
 				nextInstance.selectedS = null;
 				updating = true;
 			}

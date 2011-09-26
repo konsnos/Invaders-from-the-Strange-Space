@@ -1,6 +1,6 @@
 Invaders from the Strange Space (ISS) is a clone of Space Invaders but slightly different and with more features.
 
-Build 41 - Public Beta
+Build 42 - Public Beta
 
 NEW FEATURES
 
@@ -8,5 +8,5 @@ NEW FEATURES
 - Players' health is now a visual graphic.
 - Added a settings menu.
 - Players can now mute the sound.
-- Performance fixes.
+- Performance improvements.
 - Redesigned levels.

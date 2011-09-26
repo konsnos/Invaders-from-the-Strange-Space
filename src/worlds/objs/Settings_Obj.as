@@ -41,14 +41,14 @@ package worlds.objs
 			Text(selection[0]).alpha = 1;
 			menu.add(selection[0]);
 			
-			selection.push(new Text(String("Press Backspace to return")));
-			Text(selection[selection.length - 1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length - 1]).size = 13;
-			Text(selection[selection.length - 1]).x = 10;
-			Text(selection[selection.length - 1]).y = FP.height - (Text(selection[selection.length - 1]).height +10);
-			Text(selection[selection.length - 1]).color = 0x006400;
-			Text(selection[selection.length - 1]).alpha = 1;
-			menu.add(selection[selection.length - 1]);
+			back = new Text(String("Press Backspace to return"));
+			Text(back).font = 'FONT_CHOICE';
+			Text(back).size = 13;
+			Text(back).x = 10;
+			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(back).color = 0x006400;
+			Text(back).alpha = 1;
+			menu.add(back);
 			
 			graphic = menu;
 			

@@ -11,8 +11,9 @@ package worlds.objs
 	{
 		protected var title:Text;
 		protected var selection:Array;
+		protected var back:Text;
 		protected var selected:Menu_Obj;
-		protected var updates:Boolean; // When false the player can't press enter to choose the same option.
+		public var updates:Boolean; // When false the player can't press enter to choose the same option.
 		protected var menu:Graphiclist;
 		private var choice:Number = 1;
 		public var fadeIn:Boolean;

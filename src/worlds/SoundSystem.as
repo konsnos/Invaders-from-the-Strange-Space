@@ -36,7 +36,6 @@ package worlds
 			FP.volume = volume;
 			setVolume();
 			fader = new Fader(resetVolume);
-			//FP.world.addTween(fader);
 		}
 		
 		public static function resetVolume():void 
@@ -51,7 +50,13 @@ package worlds
 		
 		public static function setVolume():void 
 		{
-			// Nothing yet.
+			if (mute)
+			{
+				FP.volume = 0;
+			}else
+			{
+				FP.volume = volume;
+			}
 		}
 		
 		/**
@@ -67,7 +72,7 @@ package worlds
 				return xPos / FP.halfWidth;
 			}else if(xPos < FP.halfWidth)
 			{
-				return (FP.halfWidth-xPos)*(-1);
+				return (xPos/FP.halfWidth)-1;
 			}else
 			{
 				return 0;
@@ -96,7 +101,7 @@ package worlds
 		{
 			if (!mute)
 			{
-				snd.loop(volume, xPos);
+				snd.loop(volume, panSound(xPos));
 			}
 		}
 		

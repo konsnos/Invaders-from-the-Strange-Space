@@ -58,6 +58,7 @@ package
 		public static const WIN:uint = 3;
 		public static const LOST:uint = 4;
 		public static const PREPARING:uint = 5;
+		public static const CHANGING:uint = 6;
 		public static var MAP:Array;
 		public static var EXPLOSION:Array;
 		public static var SCORE:Array;

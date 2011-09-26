@@ -15,7 +15,6 @@ package worlds.objs
 	 */
 	public class SelectLevel_Obj extends Menu_Obj 
 	{
-		private var graphiclist:Graphiclist;
 		private var prevTween:NumTween;
 		private var updating:Boolean;
 		
@@ -29,8 +28,9 @@ package worlds.objs
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0x32cd32; // Dark Green
-			graphiclist = new Graphiclist(title);
+			menu = new Graphiclist(title);
 			updating = false;
+			updates = true;
 			
 			for (var i:uint = 0; i < GlobalVariables.MAP.length; i++)
 			{
@@ -42,29 +42,28 @@ package worlds.objs
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 0.5;
 				
-				graphiclist.add(selection[i]);
+				menu.add(selection[i]);
 			}
 			
-			selection.push(new Text(String("Press Backspace to return")));
-			Text(selection[selection.length - 1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length - 1]).size = 13;
-			Text(selection[selection.length - 1]).x = 10;
-			Text(selection[selection.length - 1]).y = FP.height - (Text(selection[selection.length - 1]).height +10);
-			Text(selection[selection.length - 1]).color = 0x006400;
-			Text(selection[selection.length - 1]).alpha = 1;
-			graphiclist.add(selection[selection.length - 1]);
+			back = new Text(String("Press Backspace to return"));
+			Text(back).font = 'FONT_CHOICE';
+			Text(back).size = 13;
+			Text(back).x = 10;
+			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(back).color = 0x006400;
+			Text(back).alpha = 1;
+			menu.add(back);
 			
 			prevTween = new NumTween(updated);
 			addTween(prevTween);
 			Text(selection[0]).alpha = 1;
-			menu = graphiclist;
 			choiceS = 0;
 			graphic = menu;
 		}
 		
 		override public function update():void 
 		{
-			if (selected == null)
+			if (selected == null && updates == true)
 			{
 				CheckInput();
 			}
@@ -102,6 +101,7 @@ package worlds.objs
 			if (Input.pressed("enter") && !updating)
 			{
 				fadeOut = true;
+				updates = false;
 				FP.alarm(1, startLevel);
 			}
 		}

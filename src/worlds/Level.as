@@ -145,6 +145,7 @@ package worlds
 				{
 					fade.fadeOut();
 					FP.alarm(1, returnToMainMenu);
+					GlobalVariables.gameState = GlobalVariables.CHANGING;
 				}
 			}
 			
@@ -179,6 +180,7 @@ package worlds
 				{
 					FP.alarm(1, returnToMainMenu);
 				}
+				GlobalVariables.gameState = GlobalVariables.CHANGING;
 			}
 			
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING) // Player is playing
@@ -219,7 +221,7 @@ package worlds
 			
 			if (player.hpG <= 0)
 			{
-				GlobalVariables.gameState = GlobalVariables.LOST;
+ 				GlobalVariables.gameState = GlobalVariables.LOST;
 				timeFromStart.stop();
  				Log.LevelAverageMetric("Lost", stage + 1, timeFromStart.currentCount);
 				newObj = new Lost_Obj;

@@ -9,7 +9,6 @@ package worlds.objs
 	 */
 	public class About_Obj extends Menu_Obj 
 	{
-		private var graphiclist:Graphiclist;
 		
 		public function About_Obj() 
 		{
@@ -20,7 +19,7 @@ package worlds.objs
 			title.y = 10;
 			title.x = FP.halfWidth - title.width/2;
 			title.color = 0x32cd32; // Dark Green
-			graphiclist = new Graphiclist(title);
+			menu = new Graphiclist(title);
 			
 			selection.push(new Text(String("Programming: Konstantinos Egarhos")));
 			selection.push(new Text(String("Artwork: Tonia Hoimpa")));
@@ -28,7 +27,6 @@ package worlds.objs
 			selection.push(new Text(String("Music: Genghis Attenborough from freesound project")));
 			selection.push(new Text(String("Sound effects: from sfxr by Tomas Pettersson")));
 			selection.push(new Text(String("Fonts: LiberationSans, Coalition, Ethnocentric")));
-			selection.push(new Text(String("Press Backspace to return")));
 			
 			for (var i:Number = 0; i < selection.length - 1; i++)
 			{
@@ -38,21 +36,21 @@ package worlds.objs
 				Text(selection[i]).y = FP.height / 8 * (i + 1) +50;
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 1;
-				graphiclist.add(selection[i]);
+				menu.add(selection[i]);
 			}
 			
-			// The press backspace text.
-			Text(selection[selection.length - 1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length - 1]).size = 13;
-			Text(selection[selection.length - 1]).x = 10;
-			Text(selection[selection.length - 1]).y = FP.height - (Text(selection[selection.length - 1]).height +10);
-			Text(selection[selection.length - 1]).color = 0x006400;
-			Text(selection[selection.length - 1]).alpha = 1;
-			graphiclist.add(selection[selection.length - 1]);
+			back = new Text(String("Press Backspace to return"));
+			Text(back).font = 'FONT_CHOICE';
+			Text(back).size = 13;
+			Text(back).x = 10;
+			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(back).color = 0x006400;
+			Text(back).alpha = 1;
+			menu.add(back);
 			
 			layer = 2;
 			
-			graphic = graphiclist;
+			graphic = menu;
 		}
 		
 	}

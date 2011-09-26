@@ -1,3 +1,17 @@
+Build 43
+
+- Fixed the panning returning wrong values.
+- Fixed a bug in level 9 were the client would freeze.
+- Fixed a bug in level selection, and win/loose states where the player could hit many times the enter and the game would load many times.
+- Changed the bit rate of background music. Now the game is 2MB less (from 5 to 3).
+- Made enemies Medium and Big shoot more maximum shots.
+- Changed the bullets colors to reflect the color of the player and the aliens.
+
+Build 42
+
+- Changed the way stats get points.
+- Made the code cleaner.
+
 Build 41
 
 - Redesigned assets and levels.

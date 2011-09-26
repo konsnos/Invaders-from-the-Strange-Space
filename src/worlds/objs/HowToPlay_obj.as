@@ -9,7 +9,6 @@ package worlds.objs
 	 */
 	public class HowToPlay_obj extends Menu_Obj
 	{
-		private var graphiclist:Graphiclist;
 		
 		public function HowToPlay_obj() 
 		{
@@ -21,7 +20,7 @@ package worlds.objs
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0x32cd32; // Dark Green
-			graphiclist = new Graphiclist(title);
+			menu = new Graphiclist(title);
 			
 			selection.push(new Text(String("Turn right : right arrow, D")));
 			selection.push(new Text(String("Turn left : left arrow, A")));
@@ -36,19 +35,18 @@ package worlds.objs
 				Text(selection[i]).y = FP.height / 6 * i + 150;
 				Text(selection[i]).color = 0xffffff;
 				Text(selection[i]).alpha = 1;
-				graphiclist.add(selection[i]);
+				menu.add(selection[i]);
 			}
 			
-			selection.push(new Text(String("Press Backspace to return")));
-			graphiclist.add(selection[selection.length -1 ]);
-			Text(selection[selection.length - 1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length - 1]).size = 13;
-			Text(selection[selection.length - 1]).x = 10;
-			Text(selection[selection.length - 1]).y = FP.height - (Text(selection[selection.length - 1]).height +10);
-			Text(selection[selection.length - 1]).color = 0x006400;
-			Text(selection[selection.length - 1]).alpha = 1;
+			back = new Text(String("Press Backspace to return"));
+			Text(back).font = 'FONT_CHOICE';
+			Text(back).size = 13;
+			Text(back).x = 10;
+			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(back).color = 0x006400;
+			Text(back).alpha = 1;
+			menu.add(back);
 			
-			menu = graphiclist;
 			graphic = menu;
 		}
 		
