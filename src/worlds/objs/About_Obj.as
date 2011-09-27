@@ -15,7 +15,7 @@ package worlds.objs
 			selection = new Array();
 			title = new Text(String("About"));
 			title.font = 'FONT_TITLE';
-			title.size = 23;
+			title.size = 20;
 			title.y = 10;
 			title.x = FP.halfWidth - title.width/2;
 			title.color = 0x32cd32; // Dark Green
@@ -31,8 +31,8 @@ package worlds.objs
 			for (var i:Number = 0; i < selection.length - 1; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
-				Text(selection[i]).size = 17;
-				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
+				Text(selection[i]).size = 13;
+				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2 * 0.8;
 				Text(selection[i]).y = FP.height / 8 * (i + 1) +50;
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 1;
@@ -41,9 +41,9 @@ package worlds.objs
 			
 			back = new Text(String("Press Backspace to return"));
 			Text(back).font = 'FONT_CHOICE';
-			Text(back).size = 13;
-			Text(back).x = 10;
-			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(back).size = 10;
+			Text(back).x = 5;
+			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height);
 			Text(back).color = 0x006400;
 			Text(back).alpha = 1;
 			menu.add(back);

@@ -86,7 +86,7 @@ package objects.enemies
 		
 		public function ComeCloser():void 
 		{
-			this.y += Math.abs(speed) * 2;
+			this.y += Math.abs(speed);
 		}
 		
 		override public function takeDamage(damageTaken:Number):void 

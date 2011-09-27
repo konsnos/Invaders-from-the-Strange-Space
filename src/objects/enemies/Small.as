@@ -113,7 +113,7 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350, 1, GlobalVariables.IMG_BULLET, "Bullet_Enem_Small");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 250, 1, GlobalVariables.IMG_BULLET, "Bullet_Enem_Small");
 		}
 	}
 	

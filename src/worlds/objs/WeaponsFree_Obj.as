@@ -17,7 +17,7 @@ package worlds.objs
 		{
 			title = new Text(String("Weapons Free"));
 			title.font = 'FONT_CHOICE';
-			title.size = 30;
+			title.size = 20;
 			title.x = FP.halfWidth - title.width / 2;
 			title.y = FP.height / 10 * 7;
 			title.color = 0xbff0000; // dark red

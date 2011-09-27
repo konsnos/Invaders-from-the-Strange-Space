@@ -1,6 +1,7 @@
 package 
 {
 	import flash.display.BitmapData;
+	import flash.ui.Mouse;
 	import net.flashpunk.graphics.Backdrop;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -63,6 +64,7 @@ package
 		public static var EXPLOSION:Array;
 		public static var SCORE:Array;
 		public static var GAMESCORE:uint;
+		public static var MOUSE:Boolean;
 		
 		public function GlobalVariables()
 		{
@@ -86,6 +88,22 @@ package
 		public static function GETSCORE(stage:uint ):Number 
 		{
 			return MAP[stage];
+		}
+		
+		/**
+		 * Enables/disables the mouse cursor.
+		 */
+		public static function REVERSEMOUSE():void 
+		{
+			if (MOUSE)
+			{
+				MOUSE = false;
+				Mouse.hide();
+			}else 
+			{
+				MOUSE = true;
+				Mouse.show();
+			}
 		}
 		
 		public static function FILLMAPARRAY():void 

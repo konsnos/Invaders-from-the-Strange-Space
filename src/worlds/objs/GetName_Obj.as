@@ -22,14 +22,14 @@ package worlds.objs
 			
 			title = new Text(String("Please write your name"));
 			title.font = 'FONT_TITLE';
-			title.size = 30;
+			title.size = 24;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = FP.height / 4;
 			title.color = 0x32cd32; // Green
 			
 			selection.push(new Text(String("")));
 			Text(selection[0]).font = 'FONT_CHOICE';
-			Text(selection[0]).size = 30;
+			Text(selection[0]).size = 22;
 			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 4 * 2;
 			Text(selection[0]).color = 0xFFFFFF; // White
@@ -62,7 +62,7 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("43", "version", true);
+				Log.CustomMetric("44", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)

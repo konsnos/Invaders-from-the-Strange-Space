@@ -1,3 +1,8 @@
+Build 44
+
+- Changed resolution of the game from 800x600 to 640x480.
+- Added the choice to use the mouse.
+
 Build 43
 
 - Fixed the panning returning wrong values.

@@ -47,7 +47,7 @@ package worlds.objs
 			stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
 			stats.size = 16;
 			stats.y = FP.height - 20;
-			stats.x = FP.width - stats.width + 20;
+			stats.x = FP.width - stats.width + 40;
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';
 			
@@ -56,7 +56,7 @@ package worlds.objs
 			playerlife = new Text(String("Life:       - Rank: Rookie"));
 			playerlife.size = 16;
 			playerlife.y = FP.height - 20;
-			playerlife.x = 5;
+			playerlife.x = 2;
 			playerlife.color = 0x3cb371; // green
 			playerlife.font = 'FONT_STATS';
 			graphiclist.add(playerlife);

@@ -29,7 +29,7 @@ package worlds.objs
 			
 			welcome = new Text(String("Welcome " + GlobalVariables.USERNAME + " to"));
 			welcome.font = 'FONT_TITLE';
-			welcome.size = 20;
+			welcome.size = 16;
 			welcome.x = FP.width / 2 - welcome.width / 2;
 			welcome.y = 3;
 			welcome.color = 0x32cd32; // Green
@@ -37,7 +37,7 @@ package worlds.objs
 			
 			title = new Text(String("Invaders from the Strange Space"));
 			title.font = 'FONT_TITLE';
-			title.size = 25;
+			title.size = 20;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 25;
 			title.color = 0xadff2f; // Green
@@ -52,8 +52,8 @@ package worlds.objs
 			for (var i:Number = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
-				Text(selection[i]).size = 20;
-				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
+				Text(selection[i]).size = 16;
+				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.height / (selection.length + 1) * (i + 1);
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 0.5;

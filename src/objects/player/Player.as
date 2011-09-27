@@ -1,6 +1,7 @@
 package objects.player 
 {
 	import flash.display.BitmapData;
+	import flash.ui.Mouse;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Graphiclist;
@@ -31,6 +32,7 @@ package objects.player
 		private var speed:Number;
 		public static var life:uint;
 		private var fade:BlackScreen;
+		private var mouseDelta:int;
 		
 		private var BulletsMax:Number;
 		
@@ -50,7 +52,6 @@ package objects.player
 			FP.world.add(fade);
 			
 			graphic = image = new Image(GlobalVariables.IMG_PLAYER);
-			image.scale = 0.8;
 			
 			hpS = 3;
 			life = hpG;
@@ -60,8 +61,8 @@ package objects.player
 			this.x = x - image.width / 2;
 			this.y = y;
 			
-			width = image.width * image.scale;
-			height = image.height * image.scale;
+			width = image.width;
+			height = image.height;
 			
 			type = "player";
 			
@@ -79,6 +80,12 @@ package objects.player
 				if (Input.pressed("shoot"))
 				{
 					shoot();
+				}else if (GlobalVariables.MOUSE)
+				{
+					if (Input.mousePressed)
+					{
+						shoot();
+					}
 				}
 				
 				/**************** Check if shot by enemies ****************/
@@ -102,6 +109,31 @@ package objects.player
 				if (this.x < 0)
 				{
 					this.x = 0;
+				}
+			}
+			
+			if (GlobalVariables.MOUSE)
+			{
+				mouseDelta = Input.mouseX - this.centerX
+				if (mouseDelta > 0)
+				{
+					if (mouseDelta < speed * FP.elapsed)
+					{
+						this.x = Input.mouseX - this.width /2;
+					}else 
+					{
+						this.x += speed * FP.elapsed;
+					}
+					
+				}else if (mouseDelta < 0)
+				{
+					if (Math.abs(mouseDelta) < speed * FP.elapsed)
+					{
+						this.x = Input.mouseX - this.width/2;
+					}else 
+					{
+						this.x -= speed * FP.elapsed;
+					}
 				}
 			}
 		}

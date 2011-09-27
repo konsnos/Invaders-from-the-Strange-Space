@@ -383,13 +383,11 @@ package worlds
 		
 		public function returnToMainMenu():void 
 		{
-			//FP.world.removeAll();
 			FP.world = new MainMenu;
 		}
 		
 		public function advanceToNextLevel():void 
 		{
-			//FP.world.removeAll();
 			FP.world = new Level(stage + 2);
 		}
 		

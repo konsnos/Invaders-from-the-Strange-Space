@@ -21,14 +21,14 @@ package worlds.objs
 			selection = new Array();
 			title = new Text(String("You lost"));
 			title.font = 'FONT_TITLE';
-			title.size = 50;
+			title.size = 40;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0xb22222; // dark red
 			
 			selection.push(new Text(String("Press Enter to return to the Main Menu")));
 			Text(selection[0]).font = 'FONT_CHOICE';
-			Text(selection[0]).size = 22;
+			Text(selection[0]).size = 17;
 			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 2;
 			Text(selection[0]).color = 0xcd5c5c; // White

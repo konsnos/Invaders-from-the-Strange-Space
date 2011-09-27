@@ -68,7 +68,7 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 400,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Medium");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 300,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Medium");
 		}
 		
 		public static function resetList():void // Total number of entities existing.

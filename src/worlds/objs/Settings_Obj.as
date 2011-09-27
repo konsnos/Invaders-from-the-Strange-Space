@@ -20,7 +20,7 @@ package worlds.objs
 			
 			title = new Text(String("Settings"));
 			title.font = 'FONT_TITLE';
-			title.size = 23;
+			title.size = 20;
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0x32cd32; // Dark Green
@@ -33,19 +33,31 @@ package worlds.objs
 			{
 				selection.push(new Text(String("Mute sound")));
 			}
-			Text(selection[0]).font = 'FONT_CHOICE';
-			Text(selection[0]).size = 20;
-			Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2;
-			Text(selection[0]).y = FP.height / 4 * 1 + 150;
-			Text(selection[0]).color = 0xffffff;
-			Text(selection[0]).alpha = 1;
-			menu.add(selection[0]);
+			
+			if (GlobalVariables.MOUSE)
+			{
+				selection.push(new Text(String("Disable mouse")));
+			}else
+			{
+				selection.push(new Text(String("Enable mouse")));
+			}
+			
+			for (var i:uint = 0; i < selection.length; i++)
+			{
+				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).size = 16;
+				Text(selection[i]).x = FP.halfWidth - Text(selection[0]).width / 2;
+				Text(selection[i]).y = FP.height / (selection.length + 1) * (i + 1);
+				Text(selection[i]).color = 0xffffff;
+				Text(selection[i]).alpha = 1;
+				menu.add(selection[i]);
+			}
 			
 			back = new Text(String("Press Backspace to return"));
 			Text(back).font = 'FONT_CHOICE';
-			Text(back).size = 13;
-			Text(back).x = 10;
-			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height +10);
+			Text(back).size = 10;
+			Text(back).x = 5;
+			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height);
 			Text(back).color = 0x006400;
 			Text(back).alpha = 1;
 			menu.add(back);
@@ -92,6 +104,15 @@ package worlds.objs
 							Text(selection[choiceG]).text = "Mute sound";
 						}
 						break;
+					case 1:
+						GlobalVariables.REVERSEMOUSE();
+						if (GlobalVariables.MOUSE)
+						{
+							Text(selection[choiceG]).text = "Disable mouse";
+						}else
+						{
+							Text(selection[choiceG]).text = "Disable mouse";
+						}
 					default:
 						break;
 				}
