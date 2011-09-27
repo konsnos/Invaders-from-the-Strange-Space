@@ -49,9 +49,10 @@ package worlds.objs
 				Text(selection[i]).x = FP.halfWidth - Text(selection[0]).width / 2;
 				Text(selection[i]).y = FP.height / (selection.length + 1) * (i + 1);
 				Text(selection[i]).color = 0xffffff;
-				Text(selection[i]).alpha = 1;
+				Text(selection[i]).alpha = 0.5;
 				menu.add(selection[i]);
 			}
+			Text(selection[i]).alpha = 1;
 			
 			back = new Text(String("Press Backspace to return"));
 			Text(back).font = 'FONT_CHOICE';
