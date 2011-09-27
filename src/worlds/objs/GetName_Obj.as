@@ -62,12 +62,14 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("44", "version", true);
+				Log.CustomMetric("45", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)
 				{
 					GlobalVariables.USERNAME = Text(selection[0]).text;
+					Log.CustomMetric("DisabledMouse", "settings", true);
+					Log.CustomMetric("DisabledMouse", "settings", true);
 					selected = new MainMenu_Obj;
 				}else
 				{

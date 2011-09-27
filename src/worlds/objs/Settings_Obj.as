@@ -4,6 +4,7 @@ package worlds.objs
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
+	import Playtomic.Log;
 	import worlds.SoundSystem;
 	/**
 	 * ...
@@ -52,7 +53,7 @@ package worlds.objs
 				Text(selection[i]).alpha = 0.5;
 				menu.add(selection[i]);
 			}
-			Text(selection[i]).alpha = 1;
+			Text(selection[0]).alpha = 1;
 			
 			back = new Text(String("Press Backspace to return"));
 			Text(back).font = 'FONT_CHOICE';
@@ -100,9 +101,11 @@ package worlds.objs
 						if (SoundSystem.muteG)
 						{
 							Text(selection[choiceG]).text = "Unmute sound";
+							Log.CustomMetric("UnmutedSound", "settings", true);
 						}else
 						{
 							Text(selection[choiceG]).text = "Mute sound";
+							Log.CustomMetric("MutedSound", "settings", true);
 						}
 						break;
 					case 1:
@@ -110,9 +113,11 @@ package worlds.objs
 						if (GlobalVariables.MOUSE)
 						{
 							Text(selection[choiceG]).text = "Disable mouse";
+							Log.CustomMetric("DisabledMouse", "settings", true);
 						}else
 						{
 							Text(selection[choiceG]).text = "Disable mouse";
+							Log.CustomMetric("EnabledMouse", "settings", true);
 						}
 					default:
 						break;

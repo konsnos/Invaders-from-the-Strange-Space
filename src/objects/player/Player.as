@@ -7,6 +7,8 @@ package objects.player
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Sfx;
+	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import objects.enemies.Small;
@@ -33,7 +35,7 @@ package objects.player
 		public static var life:uint;
 		private var fade:BlackScreen;
 		private var mouseDelta:int;
-		
+		private var recoilY:NumTween;
 		private var BulletsMax:Number;
 		
 		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
@@ -49,7 +51,9 @@ package objects.player
 		{
 			super();
 			fade = new BlackScreen(0xff0000);
+			recoilY = new NumTween();
 			FP.world.add(fade);
+			FP.world.addTween(recoilY);
 			
 			graphic = image = new Image(GlobalVariables.IMG_PLAYER);
 			
@@ -77,16 +81,7 @@ package objects.player
 				movement();
 				
 				/**************** SHOOT BULLET ****************/
-				if (Input.pressed("shoot"))
-				{
-					shoot();
-				}else if (GlobalVariables.MOUSE)
-				{
-					if (Input.mousePressed)
-					{
-						shoot();
-					}
-				}
+				shootInput();
 				
 				/**************** Check if shot by enemies ****************/
 				checkIfShot();
@@ -110,6 +105,11 @@ package objects.player
 				{
 					this.x = 0;
 				}
+			}
+			
+			if (recoilY.active)
+			{
+				this.y = recoilY.value;
 			}
 			
 			if (GlobalVariables.MOUSE)
@@ -138,13 +138,35 @@ package objects.player
 			}
 		}
 		
+		private function shootInput():void 
+		{
+			if (Input.pressed("shoot"))
+				{
+					shoot();
+				}else if (GlobalVariables.MOUSE)
+				{
+					if (Input.mousePressed)
+					{
+						shoot();
+					}
+				}
+		}
+		
 		public function shoot():void 
 		{
 			if (BulletPlayer.list < BulletsMax )
 			{
  				SoundSystem.play(soundShoot, this.centerX);
+				recoilY.tween(400, 405, 0.1, Ease.backOut);
+				recoilY.complete = recoilCompleted;
 				spawnBullet(this.x + halfWidth, this.y);
 			}
+		}
+		
+		private function recoilCompleted():void 
+		{
+			recoilY.tween(this.y, 400, 0.2, Ease.sineInOut);
+			recoilY.complete = null;
 		}
 		
 		public function spawnBullet(x:Number, y:Number):void 

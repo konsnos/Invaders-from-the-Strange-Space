@@ -45,6 +45,7 @@ package worlds
 			objsArray = new Array;
 			
 			addGraphic(field);
+			GlobalVariables.gameState = GlobalVariables.PLAYING;
 			fade = new BlackScreen();
 			add(fade);
 			

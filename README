@@ -1,9 +1,10 @@
 Invaders from the Strange Space (ISS) is a clone of Space Invaders but slightly different and with more features.
 
-Build 44 - Public Beta
+Build 45 - Public Beta
 
 NEW FEATURES
 
+- Improved Main Menu.
 - Changed resolution from 800x600 to 640x480.
 - Mouse can be enabled from the settings.
 - From pause the player is able to return to the main menu.

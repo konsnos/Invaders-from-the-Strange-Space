@@ -54,7 +54,7 @@ package worlds.objs
 		 * @param	density - number of stars
 		 * @param	colors - an array of unsigned integers for each star color depth
 		 */
-		public function Starfield(density:int = 300, colors:Array = null) 
+		public function Starfield(density:int = 200, colors:Array = null) 
 		{
 			if (colors == null)
 			{

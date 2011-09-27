@@ -1,3 +1,9 @@
+Build 45
+
+- Added recoil when player is shooting.
+- Performance improvements.
+- Changed the main menu with bonus enemies appearing and moving starfield.
+
 Build 44
 
 - Changed resolution of the game from 800x600 to 640x480.

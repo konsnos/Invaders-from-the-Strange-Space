@@ -78,6 +78,7 @@ package worlds
 		private var i:Number, j:Number;
 		private var alien_e:Alien;
 		private var enemyShooting:uint;
+		private var testGameState:uint;
 		
 		// Gets-Sets
 		public function get stageG():uint 
@@ -134,66 +135,23 @@ package worlds
 		
 		override public function update():void 
 		{
-			if (GlobalVariables.gameState == GlobalVariables.PREPARING)
+			switch (GlobalVariables.gameState) 
 			{
-				preparing();
-			}
-			
-			if (GlobalVariables.gameState == GlobalVariables.LOST) // Player has lost
-			{
-				if (Input.pressed("enter"))
-				{
-					fade.fadeOut();
-					FP.alarm(1, returnToMainMenu);
-					GlobalVariables.gameState = GlobalVariables.CHANGING;
-				}
-			}
-			
-			if (GlobalVariables.gameState == GlobalVariables.PAUSE)
-			{
-				if (Input.pressed("pause"))
-				{
-					GlobalVariables.gameState = GlobalVariables.PLAYING;
-					timeFromStart.start();
-					getClass(Pause_Obj, entitiesToRemove);
-					if (entitiesToRemove)
-					{
-						remove(entitiesToRemove.pop());
-					}
-					getClass(Pause_Obj, entitiesToRemove);
-					Input.clear();
-				}
-				if (Input.pressed("back"))
-				{
-					fade.fadeOut();
-					FP.alarm(1, returnToMainMenu);
-				}
-			}
-			
-			if (GlobalVariables.gameState == GlobalVariables.WIN && Input.pressed("enter")) // Player has won
-			{
-				fade.fadeOut();
-				if (stageG +1 != 10)
-				{
-					FP.alarm(1, advanceToNextLevel);
-				}else
-				{
-					FP.alarm(1, returnToMainMenu);
-				}
-				GlobalVariables.gameState = GlobalVariables.CHANGING;
-			}
-			
-			if (GlobalVariables.gameState == GlobalVariables.PLAYING) // Player is playing
-			{
-				if (Input.pressed("pause"))
-				{
-					GlobalVariables.gameState = GlobalVariables.PAUSE;
-					timeFromStart.stop();
-					add(new Pause_Obj);
-				}else
-				{
-					updateGameplay();
-				}
+				case GlobalVariables.PREPARING:
+					preparing();
+					break;
+				case GlobalVariables.PAUSE:
+					paused();
+					break;
+				case GlobalVariables.WIN:
+					won();
+					break;
+				case GlobalVariables.PLAYING:
+					playing();
+					break;
+				default:
+					testGameState = GlobalVariables.gameState;
+					break;
 			}
 			
 			super.update();
@@ -401,6 +359,56 @@ package worlds
 				timeFromStart.reset();
 				timeFromStart.start();
 				estimateBonusAppearance();
+			}
+		}
+		
+		private function paused():void 
+		{
+			if (Input.pressed("pause"))
+			{
+				GlobalVariables.gameState = GlobalVariables.PLAYING;
+				timeFromStart.start();
+				getClass(Pause_Obj, entitiesToRemove);
+				if (entitiesToRemove)
+				{
+					remove(entitiesToRemove.pop());
+				}
+				getClass(Pause_Obj, entitiesToRemove);
+				Input.clear();
+			}
+			if (Input.pressed("back"))
+			{
+				fade.fadeOut();
+				FP.alarm(1, returnToMainMenu);
+			}
+		}
+		
+		private function won():void 
+		{
+			if (Input.pressed("enter"))
+			{
+				fade.fadeOut();
+				if (stageG +1 != 10)
+				{
+					FP.alarm(1, advanceToNextLevel);
+				}else
+				{
+					FP.alarm(1, returnToMainMenu);
+				}
+				GlobalVariables.gameState = GlobalVariables.CHANGING;
+			}
+		}
+		
+		private function playing():void 
+		{
+			if (Input.pressed("pause"))
+			{
+				GlobalVariables.gameState = GlobalVariables.PAUSE;
+				timeFromStart.stop();
+				add(new Pause_Obj);
+			}else
+			{
+				updateGameplay();
 			}
 		}
 		
