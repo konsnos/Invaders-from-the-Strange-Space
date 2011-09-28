@@ -69,6 +69,18 @@ package worlds.objs
 			}
 			else
 			{
+				selection.push(new Text(String("Problem listing scores")))
+				selection.push(new Text(String("Error code : " + response.ErrorCode)));
+				for(var i:uint=0; i<selection.length -1; i++)
+				{
+					Text(selection[i]).font = 'FONT_CHOICE';
+					Text(selection[i]).size = 16;
+					Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
+					Text(selection[i]).y = FP.height / 15 * i + 100;
+					Text(selection[i]).color = 0xffffff;
+					Text(selection[i]).alpha = 1;
+					menu.add(selection[i]);
+				}
 				graphic = menu;
 				// score listing failed because of response.ErrorCode
 			}
