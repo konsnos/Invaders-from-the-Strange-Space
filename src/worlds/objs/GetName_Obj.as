@@ -62,7 +62,7 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("46", "version", true);
+				Log.CustomMetric("47", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)

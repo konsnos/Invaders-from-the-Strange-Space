@@ -45,6 +45,7 @@ package worlds.objs
 			
 			selection.push(new Text(String("New Game")));
 			selection.push(new Text(String("Select Level")));
+			selection.push(new Text(String("Highscores")));
 			selection.push(new Text(String("Settings")));
 			selection.push(new Text(String("How to play")));
 			selection.push(new Text(String("About")));
@@ -108,18 +109,22 @@ package worlds.objs
 						selected = new SelectLevel_Obj;
 						break;
 					case 2:
+						selected = new ShowHighscores_Obj;
+						break;
+					case 3:
 						selected = new Settings_Obj;
 						Log.CustomMetric("Settings", "screens");
 						break;
-					case 3:
+					case 4:
 						selected = new HowToPlay_obj;
 						Log.CustomMetric("HowToPlay", "screens");
 						break;
-					case 4:
+					case 5:
 						selected = new About_Obj;
 						Log.CustomMetric("ViewedCredits","screens");
 						break;
-					break;
+					default:
+						break;
 				}
 			}
 		}

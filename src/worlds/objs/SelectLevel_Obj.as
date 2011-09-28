@@ -25,7 +25,7 @@ package worlds.objs
 			title = new Text(String("Select Level"));
 			title.font = 'FONT_TITLE';
 			title.size = 20;
-			title.x = FP.width / 2 - title.width / 2;
+			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0x32cd32; // Dark Green
 			menu = new Graphiclist(title);
@@ -37,7 +37,7 @@ package worlds.objs
 				selection.push(new Text(String("Level " + (i+1))));
 				Text(selection[i]).font = 'FONT_CHOICE';
 				Text(selection[i]).size = 16;
-				Text(selection[i]).x = FP.width / 2 - Text(selection[i]).width / 2;
+				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.halfHeight - Text(selection[i]).height / 2 + (FP.height / 5 * i);
 				Text(selection[i]).color = 0xFFFFFF; // White
 				Text(selection[i]).alpha = 0.5;
@@ -49,7 +49,7 @@ package worlds.objs
 			Text(back).font = 'FONT_CHOICE';
 			Text(back).size = 10;
 			Text(back).x = 5;
-			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height);
+			Text(back).y = FP.height - (Text(back).height);
 			Text(back).color = 0x006400;
 			Text(back).alpha = 1;
 			menu.add(back);

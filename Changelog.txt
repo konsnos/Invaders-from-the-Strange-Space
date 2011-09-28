@@ -1,3 +1,7 @@
+Build 47
+
+- Added the Highscore screen.
+
 Build 46
 
 - The score now combines the accuracy of the player, and his remaining life.

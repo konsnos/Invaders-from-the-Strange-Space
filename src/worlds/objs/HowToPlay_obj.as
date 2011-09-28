@@ -42,7 +42,7 @@ package worlds.objs
 			Text(back).font = 'FONT_CHOICE';
 			Text(back).size = 10;
 			Text(back).x = 5;
-			Text(back).y = FP.height - (Text(selection[selection.length - 1]).height);
+			Text(back).y = FP.height - (Text(back).height);
 			Text(back).color = 0x006400;
 			Text(back).alpha = 1;
 			menu.add(back);
