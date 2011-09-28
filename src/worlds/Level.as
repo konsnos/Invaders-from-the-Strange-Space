@@ -420,7 +420,7 @@ package worlds
 					FP.alarm(1, advanceToNextLevel);
 				}else
 				{
-					FP.alarm(1, advanceToNextLevel);
+					FP.alarm(1, returnToMainMenu);
 					//FP.alarm(1, gameEnd);
 				}
 				GlobalVariables.gameState = GlobalVariables.CHANGING;

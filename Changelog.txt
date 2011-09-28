@@ -1,7 +1,12 @@
+Build 50
+
+- Changed level 10 to more difficult.
+
 Build 49
 
 - Fixed a spelling mistake in settings menu.
 - Removed the rank from the stats.
+- Increased the max shots of the player to 3.
 
 Build 48
 
