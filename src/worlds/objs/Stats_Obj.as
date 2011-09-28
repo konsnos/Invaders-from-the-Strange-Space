@@ -92,7 +92,7 @@ package worlds.objs
 			
 			graphiclist = new Graphiclist(stats);
 			
-			playerlife = new Text(String("Life:       - Rank: Rookie"));
+			playerlife = new Text(String("Life:       "));
 			playerlife.size = 16;
 			playerlife.y = FP.height - 20;
 			playerlife.x = 2;

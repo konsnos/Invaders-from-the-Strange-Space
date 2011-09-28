@@ -116,7 +116,7 @@ package worlds.objs
 							Log.CustomMetric("DisabledMouse", "settings", true);
 						}else
 						{
-							Text(selection[choiceG]).text = "Disable mouse";
+							Text(selection[choiceG]).text = "Enable mouse";
 							Log.CustomMetric("EnabledMouse", "settings", true);
 						}
 					default:

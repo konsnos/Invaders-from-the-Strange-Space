@@ -70,7 +70,7 @@ package objects.player
 			
 			type = "player";
 			
-			BulletsMax = 2;
+			BulletsMax = 3;
 		}
 		
 		override public function update():void 

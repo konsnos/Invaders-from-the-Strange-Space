@@ -1,7 +1,11 @@
+Build 49
+
+- Fixed a spelling mistake in settings menu.
+- Removed the rank from the stats.
+
 Build 48
 
 - If player choses to use the mouse he is now able to click on won/lost screens to continue.
-- The game automatically pauses if it doesn't have focus.
 - If game looses focus it pauses automatically.
 - Highscore screen now shows the players score.
 - Stats now load players highscore from the database.

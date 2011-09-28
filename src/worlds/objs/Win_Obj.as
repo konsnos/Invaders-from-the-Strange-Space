@@ -53,7 +53,7 @@ package worlds.objs
 		{
 			if (score > uint(GlobalVariables.SCORE[stage]))
 			{
-				selection.push(new Text(String("You've surpassed the previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
+				selection.push(new Text(String("You've surpassed your previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
 				GlobalVariables.SCORE[stage] = score;
 				level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
 				level_score.CustomData["Name"] = GlobalVariables.USERNAME;
