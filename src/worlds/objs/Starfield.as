@@ -25,11 +25,10 @@ package worlds.objs
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING ||
 			GlobalVariables.gameState == GlobalVariables.PREPARING)
 			{
-				// move stars from the top of the screen to the bottom
 				for each(var star:Array in stars)
 				{
 					// add speed to the star
-					Point(star[1]).y += star[3];
+					Point(star[1]).y += star[3]; // Memory intensive
 					
 					if (Point(star[1]).y > FP.height)
 					{

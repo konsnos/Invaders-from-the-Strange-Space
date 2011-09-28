@@ -14,6 +14,8 @@ package objects.enemies
 		public static const Points:uint = 40;
 		public static var list:Number;
 		public var timeThisWillShoot:Number;
+		private var speedB:uint;
+		private var directionB:int;
 		private var timeElapsed:Number;
 		
 		public function Bonus() 
@@ -23,7 +25,7 @@ package objects.enemies
 			listUpdateS = false;
 			
 			hpS = 1;
-			speed = 200;
+			speedB = 200;
 			
 			super();
 			
@@ -54,11 +56,11 @@ package objects.enemies
 		}
 		
 		/**
-		 * Moves the alien.
+		 * Moves the Bonus alien.
 		 */
 		public function move():void
 		{
-			this.x += (FP.elapsed * speed) * direction;
+			this.x += (FP.elapsed * speedB) * directionB;
 			
 			if (this.x < -this.width || this.x > FP.width)
 			{
@@ -77,16 +79,9 @@ package objects.enemies
 		/**
 		 * Checks if the entity was shot.
 		 */
-		public function CheckIfShot():void 
+		override public function CheckIfShot():void 
 		{
-			var b:Bullet = collide("bullet_P", x, y) as Bullet;
-			
-			if (b)
-			{
- 				takeDamage(b.damageG);
-				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8c8c71, 5);
-				b.destroy();
-			}
+			super.CheckIfShot();
 		}
 		
 		/**
@@ -124,17 +119,17 @@ package objects.enemies
 			}
 			Bonus.list++;
 			Alien.list++;
-			speed = 280;
+			speedB = 280;
 			timeElapsed = 0;
-			direction = FP.random;
-			if (direction > 0.5)
+			directionB = FP.random;
+			if (directionB > 0.5)
 			{
-				direction = 1;
+				directionB = 1;
 				this.x = -this.width;
 				this.y = 10;
 			}else
 			{
-				direction = -1;
+				directionB = -1;
 				this.x = FP.width;
 				this.y = 10;
 			}

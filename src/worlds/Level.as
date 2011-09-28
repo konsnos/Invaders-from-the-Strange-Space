@@ -137,17 +137,20 @@ package worlds
 		{
 			switch (GlobalVariables.gameState) 
 			{
-				case GlobalVariables.PREPARING:
-					preparing();
+				case GlobalVariables.PLAYING:
+					playing();
 					break;
 				case GlobalVariables.PAUSE:
 					paused();
 					break;
+				case GlobalVariables.PREPARING:
+					preparing();
+					break;
 				case GlobalVariables.WIN:
 					won();
 					break;
-				case GlobalVariables.PLAYING:
-					playing();
+				case GlobalVariables.LOST:
+					lost();
 					break;
 				default:
 					testGameState = GlobalVariables.gameState;
@@ -173,6 +176,9 @@ package worlds
 			aliens_e = smalls_e.concat(mediums_e, bigs_e);
 		}
 		
+		/**
+		 * Updates gameState, enemies.
+		 */
 		private function updateGameplay():void 
 		{
 			timeElapsed += FP.elapsed;
@@ -191,7 +197,7 @@ package worlds
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
 				timeFromStart.stop();
 				Log.LevelAverageMetric("Won", stage + 1, timeFromStart.currentCount);
-				newObj = new Win_Obj(stage)
+				newObj = new Win_Obj(stage, BulletPlayer.findAcc(), Player.getlife())
 				add(newObj);
 			}
 			
@@ -228,7 +234,7 @@ package worlds
 			{
 				for (i = 0, alien_e = aliens_e[i] as Alien; i < aliens_e.length; i++, alien_e = aliens_e[i] as Alien)
 				{
-					alien_e.walkOn();
+					alien_e.walkOn(Alien.speed, Alien.direction);
 					
 					if ((alien_e.right + alien_e.width > FP.width || alien_e.x < alien_e.width ) && (!changeLine))
 					{
@@ -248,13 +254,18 @@ package worlds
 			
 			if (changeLine && timeElapsed > (enemiesMoveTime / 2))
 			{
+				Alien.reverseDirection();
 				for (j = 0, alien_e = aliens_e[j] as Alien; j < aliens_e.length; j++, alien_e = aliens_e[j] as Alien)
 				{
-					alien_e.reverseDirection();
-					alien_e.ComeCloser();
+					alien_e.ComeCloser(Alien.speed);
 				}
 				changeLine = false
 			}
+		}
+		
+		public function changeAlienMovSpeed(deadRatio:Number):void 
+		{
+			enemiesMoveTime = deadRatio; 
 		}
 		
 		public function resetAllLists():void 
@@ -341,6 +352,7 @@ package worlds
 		
 		public function returnToMainMenu():void 
 		{
+			removeAll();
 			FP.world = new MainMenu;
 		}
 		
@@ -399,6 +411,15 @@ package worlds
 			}
 		}
 		
+		private function lost():void 
+		{
+			if (Input.pressed("enter"))
+			{
+				fade.fadeOut();
+				FP.alarm(1, returnToMainMenu);
+			}
+		}
+		
 		private function playing():void 
 		{
 			if (Input.pressed("pause"))
@@ -443,11 +464,14 @@ package worlds
 			{
 				Big(create(Big)).reset(b.@x, b.@y);
 			}
+			
+			Alien.speed = 15;
+			Alien.direction = 1;
+			Alien.levelList = Alien.list;
 		}
 		
 		override public function end():void 
 		{
-			removeAll();
 			super.end();
 		}
 	}

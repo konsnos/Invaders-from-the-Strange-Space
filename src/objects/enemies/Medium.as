@@ -37,9 +37,6 @@ package objects.enemies
 			
 			super();
 			
-			speed = 15;
-			direction = 1;
-			
 			width = image.width;
 			height = image.height;
 			
@@ -92,16 +89,9 @@ package objects.enemies
 			return WhoShoots = FP.random * list;
 		}
 		
-		public function CheckIfShot():void 
+		override public function CheckIfShot():void 
 		{
-			var b:Bullet = collide("bullet_P", x, y) as Bullet;
-			
-			if (b)
-			{
- 				takeDamage(b.damageG);
-				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x0044b5, 4);
-				b.destroy();
-			}
+			super.CheckIfShot();
 		}
 		
 		override public function destroy(points:uint = Medium.Points):void 

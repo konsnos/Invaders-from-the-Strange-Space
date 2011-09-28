@@ -160,6 +160,7 @@ package objects.player
 				recoilY.tween(400, 405, 0.1, Ease.backOut);
 				recoilY.complete = recoilCompleted;
 				spawnBullet(this.x + halfWidth, this.y);
+				BulletPlayer.bulletsShot++;
 			}
 		}
 		

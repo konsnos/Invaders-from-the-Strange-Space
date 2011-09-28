@@ -20,8 +20,6 @@ package worlds.objs
 		private static var playerlife:Text;
 		private static var score:uint;
 		private static var level:uint;
-		//private static const hpRect:Image = new Image(GlobalVariables.IMG_HEALTHRECT);
-		//private static const hpFill:Image = new Image(GlobalVariables.IMG_HEALTHFILL);
 		private static var hparray:Array;
 		private static var graphiclist:Graphiclist;
 		

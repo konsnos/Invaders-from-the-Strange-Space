@@ -16,10 +16,10 @@ package objects.bullets
 		public static var list:uint;
 		protected var image:Image;
 		protected var speed:int;
-		protected var damage:Number;
+		protected var damage:uint;
 		
 		// Gets-Sets
-		public function get damageG():Number 
+		public function get damageG():uint 
 		{
 			return damage;
 		}

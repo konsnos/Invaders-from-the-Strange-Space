@@ -8,6 +8,8 @@ package objects.bullets
 	public class BulletPlayer extends Bullet 
 	{
 		public static var list:uint;
+		public static var bulletsShot:uint; // For accuracy.
+		public static var bulletsHitT:uint; // Bullets that hit the target.
 		
 		public function BulletPlayer()
 		{
@@ -46,6 +48,17 @@ package objects.bullets
 		public static function resetList():void 
 		{
 			list = 0;
+		}
+		
+		public static function resetBulletsAcc():void 
+		{
+			bulletsShot = 0;
+			bulletsHitT = 0;
+		}
+		
+		public static function findAcc():Number 
+		{
+			return bulletsHitT / bulletsShot;
 		}
 	}
 }

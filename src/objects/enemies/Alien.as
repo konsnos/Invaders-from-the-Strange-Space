@@ -1,14 +1,16 @@
 package objects.enemies 
 {
 	import flash.media.Sound;
-	import flash.sampler.NewObjectSample;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.Sfx;
 	import objects.Actor;
+	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
+	import objects.bullets.BulletPlayer;
 	import objects.FloatingText;
+	import worlds.Level;
 	import worlds.objs.Stats_Obj;
 	import worlds.SoundSystem;
 	
@@ -18,10 +20,11 @@ package objects.enemies
 	 */
 	public class Alien extends Actor 
 	{
-		public static var list:Number; // Total number of aliens in the game.
+		public static var list:uint; // Total number of aliens in the game.
+		public static var levelList:uint; // Starting number of aliens in the level.
 		
-		protected var speed:Number;
-		protected var direction:Number;
+		public static var speed:uint;
+		public static var direction:int;
 		
 		protected var soundExplosion:Sfx;
 		protected var soundHit:Sfx;
@@ -74,22 +77,34 @@ package objects.enemies
 			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Small");
 		}
 		
-		public function walkOn():void 
+		public function walkOn(speed:uint, direction:int):void 
 		{
 			this.x += speed * direction;
 		}
 		
-		public function reverseDirection():void 
+		public static function reverseDirection():void 
 		{
 			direction *= -1;
 		}
 		
-		public function ComeCloser():void 
+		public function ComeCloser(speed:uint):void 
 		{
-			this.y += Math.abs(speed);
+			this.y += speed;
 		}
 		
-		override public function takeDamage(damageTaken:Number):void 
+		public function CheckIfShot():void 
+		{
+			var b:Bullet = collide("bullet_P", x, y) as Bullet;
+			
+			if (b)
+			{
+ 				takeDamage(b.damageG);
+				BulletPlayer.bulletsHitT++;
+				b.destroy();
+			}
+		}
+		
+		override public function takeDamage(damageTaken:uint):void 
 		{
 			SoundSystem.play(soundHit, this.centerX);
 			super.takeDamage(damageTaken);
@@ -104,6 +119,8 @@ package objects.enemies
 			SoundSystem.play(soundExplosion, this.centerX);
 			FloatingText(world.create(FloatingText)).reset(this.x + this.halfWidth, this.y+halfHeight, points.toString());
 			list--;
+			var deadRatio:Number = (list + ((list - levelList) / -2)) / levelList;
+			Level(FP.world).changeAlienMovSpeed(deadRatio);
 			super.destroy();
 		}
 		

@@ -16,10 +16,13 @@ package worlds.objs
 	public class Win_Obj extends Menu_Obj 
 	{
 		private var stage:uint;
+		private var score:uint;
+		private var acc:uint;
+		private var life:uint;
 		private var level_score:PlayerScore;
 		private var overall_score:PlayerScore;
 		
-		public function Win_Obj(tempStage:uint ) 
+		public function Win_Obj(tempStage:uint, tempAcc:Number, tempLife:uint ) 
 		{
 			layer = -1;
 			
@@ -31,39 +34,41 @@ package worlds.objs
 			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0x0000ff; // blue
+			menu = new Graphiclist(title);
 			
-			if (Stats_Obj.scoreG > uint(GlobalVariables.SCORE[stage]))
+			score = Stats_Obj.scoreG;
+			acc = uint(score * tempAcc);
+			life = uint(tempLife * 40);
+			
+			selection.push(new Text(String("Your score: " + score)));
+			selection.push(new Text(String("Points for your accuracy: " + acc)));
+			selection.push(new Text(String("Points for your remaining life: " + life)));
+			
+			score += acc + life;
+			if (score > uint(GlobalVariables.SCORE[stage]))
 			{
-				selection.push(new Text(String("You've surpassed the previous score by " + (Stats_Obj.scoreG - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
-				GlobalVariables.SCORE[stage] = Stats_Obj.scoreG;
+				selection.push(new Text(String("You've surpassed the previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
+				GlobalVariables.SCORE[stage] = score;
 			}else
 			{
-				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.scoreG) + " points to tie the high score")));
+				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie the high score")));
 			}
-			Text(selection[0]).font = 'FONT_CHOICE';
-			Text(selection[0]).size = 11;
-			Text(selection[0]).x = FP.halfWidth - (Text(selection[0]).width / 2 *0.7);
-			Text(selection[0]).y = FP.height / 5 * 2;
-			Text(selection[0]).color = 0x00bfff; // white-blue
 			
 			GlobalVariables.CALCULATESCORE();
 			
 			selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
 			selection.push(new Text(String("Press Enter to advance to the next level")));
 			
-			Text(selection[1]).font = 'FONT_CHOICE';
-			Text(selection[1]).size = 11;
-			Text(selection[1]).x = FP.halfWidth - (Text(selection[1]).width / 2 *0.8);
-			Text(selection[1]).y = FP.height / 4 * 2;
-			Text(selection[1]).color = 0x00bfff; // white-blue
+			for (var i:uint = 0; i < selection.length; i++)
+			{
+				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).size = 11;
+				Text(selection[i]).x = FP.halfWidth - (Text(selection[i]).width / 2 *0.7);
+				Text(selection[i]).y = ((FP.height - 200) / selection.length) * i + 100;
+				Text(selection[i]).color = 0x00bfff; // white-blue
+				menu.add(selection[i]);
+			}
 			
-			Text(selection[2]).font = 'FONT_CHOICE';
-			Text(selection[2]).size = 11;
-			Text(selection[2]).x = FP.halfWidth - (Text(selection[2]).width / 2 *0.8);
-			Text(selection[2]).y = FP.height / 5 * 3;
-			Text(selection[2]).color = 0x00bfff; // white-blue
-			
-			menu = new Graphiclist(title, selection[0], selection[1], selection[2]);
 			graphic = menu;
 			
 			// Store in playtomic

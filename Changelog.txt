@@ -1,3 +1,9 @@
+Build 46
+
+- The score now combines the accuracy of the player, and his remaining life.
+- Performance improvements.
+- Enemies will move faster as they get fewer.
+
 Build 45
 
 - Added recoil when player is shooting.

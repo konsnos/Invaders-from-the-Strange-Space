@@ -3,6 +3,7 @@ package objects.enemies
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Sfx;
+	import objects.bullets.BulletPlayer;
 	import objects.Explosion;
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
@@ -38,8 +39,6 @@ package objects.enemies
 			super();
 			
 			hpS = 1;
-			speed = 15;
-			direction = 1;
 			
 			width = image.width;
 			height = image.height;
@@ -88,15 +87,9 @@ package objects.enemies
 			return WhoShoots = FP.random * list;
 		}
 		
-		public function CheckIfShot():void 
+		override public function CheckIfShot():void 
 		{
-			var b:Bullet = collide("bullet_P", x, y) as Bullet;
-			
-			if (b)
-			{
- 				takeDamage(b.damageG);
-				b.destroy();
-			}
+			super.CheckIfShot();
 		}
 		
 		override public function destroy(points:uint = Small.Points):void 

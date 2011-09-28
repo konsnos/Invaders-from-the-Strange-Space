@@ -38,7 +38,7 @@ package objects
 			hp = 0;
 		}
 		
-		public function takeDamage(damageTaken:Number):void 
+		public function takeDamage(damageTaken:uint):void 
 		{
 			hpS = -damageTaken;
 		}
