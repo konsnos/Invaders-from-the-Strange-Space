@@ -107,9 +107,11 @@ package worlds.objs
 						break;
 					case 1:
 						selected = new SelectLevel_Obj;
+						Log.CustomMetric("LevelSelection", "screens");
 						break;
 					case 2:
 						selected = new ShowHighscores_Obj;
+						Log.CustomMetric("Highscores", "screens");
 						break;
 					case 3:
 						selected = new Settings_Obj;
