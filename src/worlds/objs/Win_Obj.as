@@ -45,13 +45,22 @@ package worlds.objs
 			selection.push(new Text(String("Points for your remaining life: " + life)));
 			
 			score += acc + life;
+			
+			showScore();
+		}
+		
+		private function showScore():void 
+		{
 			if (score > uint(GlobalVariables.SCORE[stage]))
 			{
 				selection.push(new Text(String("You've surpassed the previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
 				GlobalVariables.SCORE[stage] = score;
+				level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
+				level_score.CustomData["Name"] = GlobalVariables.USERNAME;
+				Leaderboards.Save(level_score, String(stage+1));
 			}else
 			{
-				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie the high score")));
+				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie your high score")));
 			}
 			
 			GlobalVariables.CALCULATESCORE();
@@ -72,9 +81,8 @@ package worlds.objs
 			graphic = menu;
 			
 			// Store in playtomic
-			level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
-			Leaderboards.Save(level_score, String(stage + 1));
 			overall_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.GAMESCORE);
+			overall_score.CustomData["Name"] = GlobalVariables.USERNAME;
 			Leaderboards.Save(overall_score, "highscores");
 		}
 		

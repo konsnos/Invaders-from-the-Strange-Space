@@ -7,6 +7,8 @@ package worlds.objs
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	import objects.player.Player;
+	import Playtomic.Leaderboards;
+	import Playtomic.PlayerScore;
 	
 	import GlobalVariables;
 	
@@ -42,6 +44,45 @@ package worlds.objs
 		{
 			score = 0;
 			
+			Leaderboards.List(String(level), this.levelListComplete, { customfilters: { "Name": GlobalVariables.USERNAME}} );
+		}
+		
+		public static function resetScore():void 
+		{
+			score = 0;
+		}
+		
+		/**
+		 * Updates the score and player life texts.
+		 */
+		public static function updateStats():void 
+		{
+			if (stats != null)
+			{
+				stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+			}
+			//playerlife.text = new String("Life:       - Rank: Rookie")
+			switch (Player.getlife()) 
+			{
+				case 2:
+					Image(hparray[2][1]).visible = false;
+					break;
+				case 1:
+					Image(hparray[2][1]).visible = false;
+					Image(hparray[1][1]).visible = false;
+					break;
+				case 0:
+					Image(hparray[2][1]).visible = false;
+					Image(hparray[1][1]).visible = false;
+					Image(hparray[0][1]).visible = false;
+					break;
+				default:
+					break;
+			}
+		}
+		
+		private function showStats():void 
+		{
 			stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
 			stats.size = 16;
 			stats.y = FP.height - 20;
@@ -83,35 +124,20 @@ package worlds.objs
 			graphic = graphiclist;
 		}
 		
-		public static function resetScore():void 
+		private function levelListComplete(scores:Array, numscores:int, response:Object):void 
 		{
-			score = 0;
-		}
-		
-		/**
-		 * Updates the score and player life texts.
-		 */
-		public static function updateStats():void 
-		{
-			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
-			//playerlife.text = new String("Life:       - Rank: Rookie")
-			switch (Player.getlife()) 
+			if (response.Success)
 			{
-				case 2:
-					Image(hparray[2][1]).visible = false;
-					break;
-				case 1:
-					Image(hparray[2][1]).visible = false;
-					Image(hparray[1][1]).visible = false;
-					break;
-				case 0:
-					Image(hparray[2][1]).visible = false;
-					Image(hparray[1][1]).visible = false;
-					Image(hparray[0][1]).visible = false;
-					break;
-				default:
-					break;
+				var score:PlayerScore = scores[0];
+				if (score != null)
+				{
+					GlobalVariables.SCORE[level -1] = score.Points;
+				}
+			}else 
+			{
+				
 			}
+			showStats();
 		}
 		
 	}

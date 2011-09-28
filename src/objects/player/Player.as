@@ -115,7 +115,7 @@ package objects.player
 			if (GlobalVariables.MOUSE)
 			{
 				mouseDelta = Input.mouseX - this.centerX
-				if (mouseDelta > 0)
+				if (mouseDelta > 0)						// Right
 				{
 					if (mouseDelta < speed * FP.elapsed)
 					{
@@ -124,8 +124,11 @@ package objects.player
 					{
 						this.x += speed * FP.elapsed;
 					}
-					
-				}else if (mouseDelta < 0)
+					if (this.x > FP.width - this.width) // Out of screen
+					{
+						this.x = FP.width - this.width;
+					}
+				}else if (mouseDelta < 0)				// Left
 				{
 					if (Math.abs(mouseDelta) < speed * FP.elapsed)
 					{
@@ -133,6 +136,10 @@ package objects.player
 					}else 
 					{
 						this.x -= speed * FP.elapsed;
+					}
+					if (this.x < 0)
+					{
+						this.x = 0;
 					}
 				}
 			}

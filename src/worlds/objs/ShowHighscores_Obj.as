@@ -11,7 +11,7 @@ package worlds.objs
 	 */
 	public class ShowHighscores_Obj extends Menu_Obj 
 	{
-		
+		private var i:uint;
 		public function ShowHighscores_Obj() 
 		{
 			selection = new Array();
@@ -25,7 +25,7 @@ package worlds.objs
 			title.color = 0x32cd32; // Dark Green
 			menu = new Graphiclist(title);
 			
-			Leaderboards.List("highscores", this.ListComplete);
+			Leaderboards.List("highscores", this.globalListComplete);
 			
 			back = new Text(String("Press Backspace to return"));
 			Text(back).font = 'FONT_CHOICE';
@@ -39,13 +39,39 @@ package worlds.objs
 			graphic = menu;
 		}
 		
-		private function ListComplete(scores:Array, numscores:int, response:Object):void
+		private function userListComplete(scores:Array, numscores:int, response:Object):void
+		{
+			if (response.Success)
+			{
+				var score:PlayerScore = scores[0];
+				if (score == null)
+				{
+					selection.push(new Text(String("You don't have a score yet.")));
+				}else
+				{
+					selection.push(new Text(String(score.Name + " - " + score.Points)));
+				}
+			}else
+			{
+				
+			}
+			
+			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
+			Text(selection[selection.length -1]).size = 16;
+			Text(selection[selection.length -1]).x = FP.halfWidth - Text(selection[i]).width / 2;
+			Text(selection[selection.length -1]).y = FP.height / 15 * 10 + 100;
+			Text(selection[selection.length -1]).color = 0x00bfff; // white blue
+			Text(selection[selection.length -1]).alpha = 1;
+			
+			menu.add(selection[selection.length -1]);
+			graphic = menu;
+		}
+		
+		private function globalListComplete(scores:Array, numscores:int, response:Object):void
 		{
 			if(response.Success)
 			{
-				trace(scores.length + " scores returned out of " + numscores);
-						
-				for(var i:uint=0; i<10; i++)
+				for ( i = 0; i < 10; i++)
 				{
 					var score:PlayerScore = scores[i];
 					if (score == null)
@@ -59,11 +85,9 @@ package worlds.objs
 					Text(selection[i]).size = 16;
 					Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
 					Text(selection[i]).y = FP.height / 15 * i + 100;
-					Text(selection[i]).color = 0xffffff;
+					Text(selection[i]).color = 0xffffff; // white blue
 					Text(selection[i]).alpha = 1;
 					menu.add(selection[i]);
-					
-					// including custom data?  score.CustomData.property
 				}
 				graphic = menu;
 			}
@@ -71,7 +95,7 @@ package worlds.objs
 			{
 				selection.push(new Text(String("Problem listing scores")))
 				selection.push(new Text(String("Error code : " + response.ErrorCode)));
-				for(var i:uint=0; i<selection.length -1; i++)
+				for (i = 0; i < selection.length -1; i++)
 				{
 					Text(selection[i]).font = 'FONT_CHOICE';
 					Text(selection[i]).size = 16;
@@ -82,8 +106,9 @@ package worlds.objs
 					menu.add(selection[i]);
 				}
 				graphic = menu;
-				// score listing failed because of response.ErrorCode
+				
 			}
+			Leaderboards.List("highscores", this.userListComplete, { customfilters: { "Name": GlobalVariables.USERNAME }} );
 		}
 		
 	}

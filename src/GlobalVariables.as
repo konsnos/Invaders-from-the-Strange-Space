@@ -63,6 +63,7 @@ package
 		public static var MAP:Array;
 		public static var EXPLOSION:Array;
 		public static var SCORE:Array;
+		public static var GLSCORE:Array;
 		public static var GAMESCORE:uint;
 		public static var MOUSE:Boolean;
 		
@@ -110,6 +111,7 @@ package
 		{
 			MAP = new Array(MAP01, MAP02, MAP03, MAP04, MAP05, MAP06, MAP07, MAP08, MAP09, MAP10);
 			SCORE = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+			GLSCORE = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		}
 		
 		public static function FILLEXPLOSIONARRAY():void

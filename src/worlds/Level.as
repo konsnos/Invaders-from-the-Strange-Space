@@ -18,6 +18,7 @@ package worlds
 	import objects.enemies.Medium;
 	import Playtomic.Log;
 	import worlds.objs.BlackScreen;
+	import worlds.objs.GameWon_Obj;
 	import worlds.objs.Starfield;
 	
 	import objects.Actor;
@@ -138,6 +139,10 @@ package worlds
 			switch (GlobalVariables.gameState) 
 			{
 				case GlobalVariables.PLAYING:
+					if (!FP.focused)
+					{
+						pauseGame();
+					}
 					playing();
 					break;
 				case GlobalVariables.PAUSE:
@@ -361,6 +366,15 @@ package worlds
 			FP.world = new Level(stage + 2);
 		}
 		
+		public function gameEnd():void 
+		{
+			remove(newObj);
+			fade.fadeIn()
+			newObj = new GameWon_Obj;
+			add(newObj);
+			
+		}
+		
 		public function preparing():void 
 		{
 			timeElapsed += FP.elapsed;
@@ -379,13 +393,14 @@ package worlds
 			if (Input.pressed("pause"))
 			{
 				GlobalVariables.gameState = GlobalVariables.PLAYING;
+				remove(newObj);
 				timeFromStart.start();
-				getClass(Pause_Obj, entitiesToRemove);
+				/*getClass(Pause_Obj, entitiesToRemove);
 				if (entitiesToRemove)
 				{
 					remove(entitiesToRemove.pop());
 				}
-				getClass(Pause_Obj, entitiesToRemove);
+				getClass(Pause_Obj, entitiesToRemove);*/
 				Input.clear();
 			}
 			if (Input.pressed("back"))
@@ -397,7 +412,7 @@ package worlds
 		
 		private function won():void 
 		{
-			if (Input.pressed("enter"))
+			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				fade.fadeOut();
 				if (stageG +1 != 10)
@@ -405,7 +420,8 @@ package worlds
 					FP.alarm(1, advanceToNextLevel);
 				}else
 				{
-					FP.alarm(1, returnToMainMenu);
+					FP.alarm(1, advanceToNextLevel);
+					//FP.alarm(1, gameEnd);
 				}
 				GlobalVariables.gameState = GlobalVariables.CHANGING;
 			}
@@ -413,7 +429,7 @@ package worlds
 		
 		private function lost():void 
 		{
-			if (Input.pressed("enter"))
+			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				fade.fadeOut();
 				FP.alarm(1, returnToMainMenu);
@@ -424,13 +440,19 @@ package worlds
 		{
 			if (Input.pressed("pause"))
 			{
-				GlobalVariables.gameState = GlobalVariables.PAUSE;
-				timeFromStart.stop();
-				add(new Pause_Obj);
+				pauseGame();
 			}else
 			{
 				updateGameplay();
 			}
+		}
+		
+		private function pauseGame():void 
+		{
+			GlobalVariables.gameState = GlobalVariables.PAUSE;
+			timeFromStart.stop();
+			newObj = new Pause_Obj;
+			add(newObj);
 		}
 		
 		public function loadLevel(map:Class):void 
