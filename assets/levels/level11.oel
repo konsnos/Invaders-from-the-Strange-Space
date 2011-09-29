@@ -39,15 +39,11 @@
     <tile id="0" x="520" y="78"/>
   </mediums>
   <bigs set="big">
-    <tile id="0" x="52" y="26"/>
-    <tile id="0" x="104" y="26"/>
+    <tile id="0" x="78" y="26"/>
     <tile id="0" x="156" y="26"/>
-    <tile id="0" x="208" y="26"/>
-    <tile id="0" x="260" y="26"/>
+    <tile id="0" x="234" y="26"/>
     <tile id="0" x="312" y="26"/>
-    <tile id="0" x="364" y="26"/>
-    <tile id="0" x="416" y="26"/>
+    <tile id="0" x="390" y="26"/>
     <tile id="0" x="468" y="26"/>
-    <tile id="0" x="520" y="26"/>
   </bigs>
 </level>
