@@ -69,7 +69,6 @@ package worlds
 		private var smalls_e:Array;
 		private var mediums_e:Array;
 		private var bigs_e:Array;
-		private var entitiesToRemove:Array;
 		
 		private var bullets_s:Array;
 		private var bullets_m:Array;
@@ -93,7 +92,6 @@ package worlds
 			changeLine = false;
 			
 			getEnemies();
-			entitiesToRemove = new Array();
 			
 			Stats_Obj.levelS = selectedlevel;
 			stage = selectedlevel - 1;
@@ -395,12 +393,6 @@ package worlds
 				GlobalVariables.gameState = GlobalVariables.PLAYING;
 				remove(newObj);
 				timeFromStart.start();
-				/*getClass(Pause_Obj, entitiesToRemove);
-				if (entitiesToRemove)
-				{
-					remove(entitiesToRemove.pop());
-				}
-				getClass(Pause_Obj, entitiesToRemove);*/
 				Input.clear();
 			}
 			if (Input.pressed("back"))

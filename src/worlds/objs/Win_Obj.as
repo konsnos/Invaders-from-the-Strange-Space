@@ -41,8 +41,8 @@ package worlds.objs
 			life = uint(tempLife * 40);
 			
 			selection.push(new Text(String("Your score: " + score)));
-			selection.push(new Text(String("Points for your accuracy: " + acc)));
-			selection.push(new Text(String("Points for your remaining life: " + life)));
+			selection.push(new Text(String(int(tempAcc*100) + "% accuracy: +" + acc)));
+			selection.push(new Text(String("Remaining life: +" + life)));
 			
 			score += acc + life;
 			
@@ -53,14 +53,14 @@ package worlds.objs
 		{
 			if (score > uint(GlobalVariables.SCORE[stage]))
 			{
-				selection.push(new Text(String("You've surpassed your previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points. Well done!")));
+				selection.push(new Text(String("You've surpassed your previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points!")));
 				GlobalVariables.SCORE[stage] = score;
 				level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
 				level_score.CustomData["Name"] = GlobalVariables.USERNAME;
 				Leaderboards.Save(level_score, String(stage+1));
 			}else
 			{
-				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie your high score")));
+				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie your high score.")));
 			}
 			
 			GlobalVariables.CALCULATESCORE();
@@ -71,7 +71,7 @@ package worlds.objs
 			for (var i:uint = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
-				Text(selection[i]).size = 11;
+				Text(selection[i]).size = 12;
 				Text(selection[i]).x = FP.halfWidth - (Text(selection[i]).width / 2 *0.7);
 				Text(selection[i]).y = ((FP.height - 200) / selection.length) * i + 100;
 				Text(selection[i]).color = 0x00bfff; // white-blue
