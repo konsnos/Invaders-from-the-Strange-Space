@@ -277,6 +277,7 @@ package worlds
 			Bullet.resetList();
 			BulletEnemy.resetList();
 			BulletPlayer.resetList();
+			BulletPlayer.resetBulletsAcc();
 			Alien.resetList();
 			Small.resetList();
 			Medium.resetList();

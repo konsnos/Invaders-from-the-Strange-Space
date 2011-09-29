@@ -1,3 +1,7 @@
+Build 52
+
+- Fixed the bug that caused accuracy miscalculated.
+
 Build 51
 
 - Changed the text of the win screen.
