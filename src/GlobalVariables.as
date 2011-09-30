@@ -59,7 +59,8 @@ package
 		public static const WIN:uint = 3;
 		public static const LOST:uint = 4;
 		public static const PREPARING:uint = 5;
-		public static const CHANGING:uint = 6;
+		public static const WONGAME:uint = 6;
+		public static const CHANGING:uint = 7; // Just to change the state and not repeat the previous.
 		public static var MAP:Array;
 		public static var EXPLOSION:Array;
 		public static var SCORE:Array;

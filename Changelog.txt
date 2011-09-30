@@ -1,3 +1,9 @@
+Build 53
+
+- Added the game won screen.
+- To avoid duplicates all highscores are stored in upper case.
+- When player has lost he can restart the level.
+
 Build 52
 
 - Fixed the bug that caused accuracy miscalculated.

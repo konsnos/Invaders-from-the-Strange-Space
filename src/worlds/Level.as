@@ -13,21 +13,20 @@ package worlds
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import objects.Actor;
+	import objects.bullets.Bullet;
+	import objects.bullets.BulletEnemy;
+	import objects.bullets.BulletPlayer;
+	import objects.enemies.Alien;
 	import objects.enemies.Big;
 	import objects.enemies.Bonus;
 	import objects.enemies.Medium;
+	import objects.enemies.Small;
+	import objects.player.Player;
 	import Playtomic.Log;
 	import worlds.objs.BlackScreen;
 	import worlds.objs.GameWon_Obj;
 	import worlds.objs.Starfield;
-	
-	import objects.Actor;
-	import objects.enemies.Alien;
-	import objects.enemies.Small;
-	import objects.player.Player;
-	import objects.bullets.Bullet;
-	import objects.bullets.BulletEnemy;
-	import objects.bullets.BulletPlayer;
 	import worlds.objs.WeaponsFree_Obj;
 	import worlds.objs.Menu_Obj;
 	import worlds.objs.Lost_Obj;
@@ -154,6 +153,9 @@ package worlds
 					break;
 				case GlobalVariables.LOST:
 					lost();
+					break;
+				case GlobalVariables.WONGAME:
+					wonGame();
 					break;
 				default:
 					testGameState = GlobalVariables.gameState;
@@ -365,13 +367,26 @@ package worlds
 			FP.world = new Level(stage + 2);
 		}
 		
+		public function restart():void 
+		{
+			FP.world = new Level(stage + 1);
+		}
+		
 		public function gameEnd():void 
 		{
 			remove(newObj);
 			fade.fadeIn()
 			newObj = new GameWon_Obj;
 			add(newObj);
-			
+		}
+		
+		public function wonGame():void 
+		{
+			if (Input.pressed("enter") || Input.mousePressed)
+			{
+				fade.fadeOut();
+				FP.alarm(1, returnToMainMenu);
+			}
 		}
 		
 		public function preparing():void 
@@ -411,12 +426,13 @@ package worlds
 				if (stageG +1 != 10)
 				{
 					FP.alarm(1, advanceToNextLevel);
+					GlobalVariables.gameState = GlobalVariables.CHANGING;
 				}else
 				{
-					FP.alarm(1, returnToMainMenu);
-					//FP.alarm(1, gameEnd);
+					FP.alarm(1, gameEnd);
+					GlobalVariables.gameState = GlobalVariables.WONGAME;
+					Input.clear();
 				}
-				GlobalVariables.gameState = GlobalVariables.CHANGING;
 			}
 		}
 		
@@ -425,7 +441,13 @@ package worlds
 			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				fade.fadeOut();
+				FP.alarm(1, restart);
+				GlobalVariables.gameState = GlobalVariables.CHANGING;
+			}else if (Input.pressed("back"))
+			{
+				fade.fadeOut();
 				FP.alarm(1, returnToMainMenu);
+				GlobalVariables.gameState = GlobalVariables.CHANGING;
 			}
 		}
 		

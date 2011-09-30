@@ -25,15 +25,20 @@ package worlds.objs
 			title.x = FP.width / 2 - title.width / 2;
 			title.y = 20;
 			title.color = 0xb22222; // dark red
+			menu = new Graphiclist(title);
 			
-			selection.push(new Text(String("Press Enter to return to the Main Menu")));
-			Text(selection[0]).font = 'FONT_CHOICE';
-			Text(selection[0]).size = 17;
-			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
-			Text(selection[0]).y = FP.height / 2;
-			Text(selection[0]).color = 0xcd5c5c; // White
+			selection.push(new Text(String("Press Enter to restart")));
+			selection.push(new Text(String("Press Backspace to return to the main menu")));
+			for (var i:uint = 0; i < selection.length; i++)
+			{
+				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).size = 16;
+				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
+				Text(selection[i]).y = FP.height /5 * (i+2);
+				Text(selection[i]).color = 0xcd5c5c; // White
+				menu.add(selection[i]);
+			}
 			
-			menu = new Graphiclist(title, selection[0]);
 			graphic = menu;
 		}
 		

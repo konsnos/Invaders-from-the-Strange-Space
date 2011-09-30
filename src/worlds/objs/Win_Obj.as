@@ -28,7 +28,7 @@ package worlds.objs
 			
 			stage = tempStage++;
 			selection = new Array();
-			title = new Text(String("You Won!!!"));
+			title = new Text(String("You Won!"));
 			title.font = 'FONT_TITLE';
 			title.size = 40;
 			title.x = FP.halfWidth - title.width / 2;
