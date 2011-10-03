@@ -30,7 +30,8 @@ package worlds.objs
 			welcome = new Text(String("Welcome " + GlobalVariables.USERNAME + " to"));
 			welcome.font = 'FONT_TITLE';
 			welcome.size = 16;
-			welcome.x = FP.width / 2 - welcome.width / 2;
+			welcome.align = "center";
+			welcome.x = FP.halfWidth - welcome.width / 2;
 			welcome.y = 3;
 			welcome.color = 0x32cd32; // Green
 			menu = new Graphiclist(welcome);
@@ -38,7 +39,8 @@ package worlds.objs
 			title = new Text(String("Invaders from the Strange Space"));
 			title.font = 'FONT_TITLE';
 			title.size = 20;
-			title.x = FP.width / 2 - title.width / 2;
+			title.align = "center";
+			title.x = FP.halfWidth - title.width / 2;
 			title.y = 25;
 			title.color = 0xadff2f; // Green
 			menu.add(title);
@@ -54,6 +56,7 @@ package worlds.objs
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
 				Text(selection[i]).size = 16;
+				Text(selection[i]).align = "center";
 				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.height / (selection.length + 1) * (i + 1);
 				Text(selection[i]).color = 0xFFFFFF; // White

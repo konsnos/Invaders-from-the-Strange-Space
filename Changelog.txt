@@ -1,3 +1,8 @@
+Build 55
+
+- In level selection you can see your scores and the highest scores for each level.
+- Fixed the word wrapping in game won screen.
+
 Build 54
 
 - Pixel perfect collision detection for player.

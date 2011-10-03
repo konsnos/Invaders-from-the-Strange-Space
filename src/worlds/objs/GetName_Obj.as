@@ -62,7 +62,7 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("53", "version", true);
+				Log.CustomMetric("55", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)
@@ -71,6 +71,10 @@ package worlds.objs
 					Log.CustomMetric("DisabledMouse", "settings", true);
 					Log.CustomMetric("DisabledMouse", "settings", true);
 					selected = new MainMenu_Obj;
+					for (var i:uint = 1; i < 11; i++)
+					{
+						new ListLeaderboards(i);
+					}
 				}else
 				{
 					Text(title).text = "Please provide a name";

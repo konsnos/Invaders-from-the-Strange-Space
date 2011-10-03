@@ -22,7 +22,7 @@ package worlds.objs
 			title = new Text(String("You lost"));
 			title.font = 'FONT_TITLE';
 			title.size = 40;
-			title.x = FP.width / 2 - title.width / 2;
+			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0xb22222; // dark red
 			menu = new Graphiclist(title);
@@ -32,6 +32,7 @@ package worlds.objs
 			for (var i:uint = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).align = "center";
 				Text(selection[i]).size = 16;
 				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
 				Text(selection[i]).y = FP.height /5 * (i+2);

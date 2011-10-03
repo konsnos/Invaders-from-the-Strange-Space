@@ -17,6 +17,7 @@ package worlds.objs
 	{
 		private var prevTween:NumTween;
 		private var updating:Boolean;
+		protected var levelScores:Array;
 		
 		public function SelectLevel_Obj() 
 		{
@@ -34,15 +35,34 @@ package worlds.objs
 			
 			for (var i:uint = 0; i < GlobalVariables.MAP.length; i++)
 			{
-				selection.push(new Text(String("Level " + (i+1))));
-				Text(selection[i]).font = 'FONT_CHOICE';
-				Text(selection[i]).size = 16;
-				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
-				Text(selection[i]).y = FP.halfHeight - Text(selection[i]).height / 2 + (FP.height / 5 * i);
-				Text(selection[i]).color = 0xFFFFFF; // White
-				Text(selection[i]).alpha = 0.5;
+				selection.push(new Array(new Text(String("Level " + (i + 1))), new Text(String(GlobalVariables.SCORE[i])), new Text(String(GlobalVariables.GLSCORE[i]))));
+				// Level
+				Text(selection[i][0]).font = 'FONT_CHOICE';
+				Text(selection[i][0]).size = 16;
+				Text(selection[i][0]).x = FP.halfWidth - Text(selection[i][0]).width / 2 - 30;
+				Text(selection[i][0]).y = FP.halfHeight - Text(selection[i][0]).height / 2 + (FP.height / 5 * i);
+				Text(selection[i][0]).color = 0xFFFFFF; // White
+				Text(selection[i][0]).alpha = 0.5;
 				
-				menu.add(selection[i]);
+				// User score
+				Text(selection[i][0]).font = 'FONT_CHOICE';
+				Text(selection[i][1]).size = 10;
+				Text(selection[i][1]).x = Text(selection[i][0]).x + 100;
+				Text(selection[i][1]).y = Text(selection[i][0]).y;
+				Text(selection[i][1]).color = 0x00bfff; // White
+				Text(selection[i][1]).alpha = 0.5;
+				
+				// Global score
+				Text(selection[i][2]).font = 'FONT_CHOICE';
+				Text(selection[i][2]).size = 10;
+				Text(selection[i][2]).x = Text(selection[i][0]).x + 100;
+				Text(selection[i][2]).y = Text(selection[i][0]).y + 7;
+				Text(selection[i][2]).color = 0xFF0000; // White
+				Text(selection[i][2]).alpha = 0.5;
+				
+				menu.add(selection[i][0]);
+				menu.add(selection[i][1]);
+				menu.add(selection[i][2]);
 			}
 			
 			back = new Text(String("Press Backspace to return"));
@@ -56,7 +76,9 @@ package worlds.objs
 			
 			prevTween = new NumTween(updated);
 			addTween(prevTween);
-			Text(selection[0]).alpha = 1;
+			Text(selection[0][0]).alpha = 1;
+			Text(selection[0][1]).alpha = 1;
+			Text(selection[0][2]).alpha = 1;
 			choiceS = 0;
 			graphic = menu;
 		}
@@ -70,11 +92,15 @@ package worlds.objs
 			
 			if (updating)
 			{
-				Text(selection[0]).y = prevTween.value;
+				Text(selection[0][0]).y = prevTween.value;
+				Text(selection[0][1]).y = Text(selection[0][0]).y;
+				Text(selection[0][2]).y = Text(selection[0][0]).y + 7;
 				
 				for (var i:uint = 1; i < GlobalVariables.MAP.length; i++)
 				{
-					Text(selection[i]).y = prevTween.value + 95 * i;
+					Text(selection[i][0]).y = prevTween.value + 95 * i;
+					Text(selection[i][1]).y = Text(selection[i][0]).y;
+					Text(selection[i][2]).y = Text(selection[i][0]).y + 7;
 				}
 			}
 		}
@@ -83,19 +109,27 @@ package worlds.objs
 		{
 			if (Input.check("down") && !updating && choiceG != selection.length - 1)
 			{
-				prevTween.tween(Text(selection[0]).y, Text(selection[0]).y - FP.height / 5, 0.3, Ease.sineInOut);
+				prevTween.tween(Text(selection[0][0]).y, Text(selection[0][0]).y - FP.height / 5, 0.3, Ease.sineInOut);
 				updating = true;
-				Text(selection[choiceG]).alpha = 0.5;
+				Text(selection[choiceG][0]).alpha = 0.5;
+				Text(selection[choiceG][1]).alpha = 0.5;
+				Text(selection[choiceG][2]).alpha = 0.5;
 				choiceS = 1;
-				Text(selection[choiceG]).alpha = 1;
+				Text(selection[choiceG][0]).alpha = 1;
+				Text(selection[choiceG][1]).alpha = 1;
+				Text(selection[choiceG][2]).alpha = 1;
 			}
 			else if (Input.check("up") && !updating && choiceG != 0)
 			{
-				prevTween.tween(Text(selection[0]).y, Text(selection[0]).y + FP.height / 5, 0.3, Ease.sineInOut);
+				prevTween.tween(Text(selection[0][0]).y, Text(selection[0][0]).y + FP.height / 5, 0.3, Ease.sineInOut);
 				updating = true;
-				Text(selection[choiceG]).alpha = 0.5;
+				Text(selection[choiceG][0]).alpha = 0.5;
+				Text(selection[choiceG][1]).alpha = 0.5;
+				Text(selection[choiceG][2]).alpha = 0.5;
 				choiceS = -1;
-				Text(selection[choiceG]).alpha = 1;
+				Text(selection[choiceG][0]).alpha = 1;
+				Text(selection[choiceG][1]).alpha = 1;
+				Text(selection[choiceG][2]).alpha = 1;
 			}
 			
 			if (Input.pressed("enter") && !updating)

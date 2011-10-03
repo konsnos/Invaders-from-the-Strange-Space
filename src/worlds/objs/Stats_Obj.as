@@ -29,7 +29,7 @@ package worlds.objs
 		public static function set scoreS(setValue:uint):void 
 		{
 			score += setValue;
-			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+ 			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
 		}
 		public static function get scoreG():uint
 		{
@@ -43,8 +43,8 @@ package worlds.objs
 		public function Stats_Obj()
 		{
 			score = 0;
-			
-			Leaderboards.List(String(level), this.levelListComplete, { customfilters: { "Name": GlobalVariables.USERNAME}} );
+			showStats();
+			//Leaderboards.List(String(level), this.levelListComplete, { customfilters: { "Name": GlobalVariables.USERNAME}} );
 		}
 		
 		public static function resetScore():void 

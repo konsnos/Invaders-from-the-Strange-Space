@@ -31,8 +31,11 @@ package worlds.objs
 			for (var i:uint = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
+				Text(selection[i]).wordWrap = true;
+				Text(selection[i]).align = "center";
 				Text(selection[i]).size = 12;
-				Text(selection[i]).x = FP.halfWidth - (Text(selection[i]).width / 2 *0.7);
+				Text(selection[i]).width = 600;
+				Text(selection[i]).x = FP.halfWidth - (Text(selection[i]).width / 2);
 				Text(selection[i]).y = ((FP.height - 200) / selection.length) * i + 100;
 				Text(selection[i]).color = 0x00bfff; // white-blue
 				menu.add(selection[i]);
