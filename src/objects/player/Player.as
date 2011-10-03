@@ -49,7 +49,7 @@ package objects.player
 			return life;
 		}
 		
-		public function Player(x:Number, y:Number) 
+		public function Player() 
 		{
 			super();
 			fade = new BlackScreen(0xff0000);
@@ -66,17 +66,40 @@ package objects.player
 			this.mask = maskObj;
 			image.render(maskBmp, FP.zero, FP.zero);
 			
-			hpS = 3;
-			life = hpG;
-			Stats_Obj.updateStats();
 			speed = 300;
-			
-			this.x = x - image.width / 2;
-			this.y = y;
 			
 			type = "player";
 			
 			BulletsMax = 3;
+		}
+		
+		public function reset(x:Number, y:Number, dif:Boolean = false, hp:uint = 3):void 
+		{
+			this.x = x - image.width / 2;
+			this.y = y;
+			if (dif)
+			{
+				resetHp(hp);
+			}else
+			{
+				resetHp(3);
+			}
+		}
+		
+		public function resetHp(hp:uint = 3):void 
+		{
+			while (hpG != hp) 
+			{
+				if (hpG < hp)
+				{
+					hpS = 1;
+				}else if (hpG > hp)
+				{
+					hpS = -1;
+				}
+			}
+			life = hpG;
+			Stats_Obj.updateStats();
 		}
 		
 		override public function update():void 

@@ -1,3 +1,9 @@
+Build 57
+
+- Player now is not added but created.
+- Added the Brutal difficulty.
+- Highscores screen shows both normal and brutal highscores.
+
 Build 56
 
 - Added documentation for the player on how the accuracy and life bonus are calculated.

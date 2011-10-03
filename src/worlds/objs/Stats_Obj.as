@@ -22,6 +22,7 @@ package worlds.objs
 		private static var playerlife:Text;
 		private static var score:uint;
 		private static var level:uint;
+		private static var difficulty:Boolean;
 		private static var hparray:Array;
 		private static var graphiclist:Graphiclist;
 		
@@ -39,12 +40,15 @@ package worlds.objs
 		{
 			level = setValue;
 		}
+		public static function set difS(setValue:Boolean):void 
+		{
+			difficulty = setValue;
+		}
 		
 		public function Stats_Obj()
 		{
 			score = 0;
 			showStats();
-			//Leaderboards.List(String(level), this.levelListComplete, { customfilters: { "Name": GlobalVariables.USERNAME}} );
 		}
 		
 		public static function resetScore():void 
@@ -61,8 +65,8 @@ package worlds.objs
 			{
 				stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
 			}
-			//playerlife.text = new String("Life:       - Rank: Rookie")
-			switch (Player.getlife()) 
+			
+ 			switch (Player.getlife()) 
 			{
 				case 2:
 					Image(hparray[2][1]).visible = false;
@@ -124,7 +128,7 @@ package worlds.objs
 			graphic = graphiclist;
 		}
 		
-		private function levelListComplete(scores:Array, numscores:int, response:Object):void 
+		/*private function levelListComplete(scores:Array, numscores:int, response:Object):void 
 		{
 			if (response.Success)
 			{
@@ -138,7 +142,7 @@ package worlds.objs
 				
 			}
 			showStats();
-		}
+		}*/
 		
 	}
 

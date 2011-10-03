@@ -6,6 +6,8 @@ package worlds.objs
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Graphiclist;
+	import Playtomic.Leaderboards;
+	import Playtomic.PlayerScore;
 	import worlds.MainMenu;
 	
 	/**
@@ -14,9 +16,13 @@ package worlds.objs
 	 */
 	public class Lost_Obj extends Menu_Obj 
 	{
-		public function Lost_Obj() 
+		private var difficulty:Boolean;
+		private var overallBrutalScore:PlayerScore;
+		
+		public function Lost_Obj(difficultyTemp:Boolean ) 
 		{
 			layer = -1;
+			difficulty = difficultyTemp;
 			
 			selection = new Array();
 			title = new Text(String("You lost"));
@@ -27,7 +33,19 @@ package worlds.objs
 			title.color = 0xb22222; // dark red
 			menu = new Graphiclist(title);
 			
-			selection.push(new Text(String("Press Enter to restart")));
+			if (!difficulty)
+			{
+				selection.push(new Text(String("Press Enter to restart")));
+			}else
+			{	// Store brutal high scores.
+				GlobalVariables.BRUTALSCORE += Stats_Obj.scoreG;
+				selection.push(new Text(String("You lost with score : " + GlobalVariables.BRUTALSCORE)));
+				selection.push(new Text(String("Better luck next time")));
+				overallBrutalScore = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.BRUTALSCORE);
+				overallBrutalScore.CustomData["Name"] = GlobalVariables.BRUTALSCORE;
+				Leaderboards.Save(overallBrutalScore, "brutalhighscores");
+			}
+			
 			selection.push(new Text(String("Press Backspace to return to the main menu")));
 			for (var i:uint = 0; i < selection.length; i++)
 			{

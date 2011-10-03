@@ -53,9 +53,11 @@ package worlds
 		private var newObj:Menu_Obj;
 		private var fade:BlackScreen;
 		private var timeFromStart:Timer;
+		public var brutal:Boolean;
 		
 		// PLAYER
 		private var player:Player;
+		private var life:uint;
 		
 		// ENEMIES
 		private var timeElapsed:Number;
@@ -85,14 +87,17 @@ package worlds
 			return stage;
 		}
 		
-		public function Level(selectedlevel:uint) 
+		public function Level(selectedlevel:uint, Difficulty:Boolean = false, hp:uint = 3 ) 
 		{
 			timeElapsed = 0;
 			changeLine = false;
+			brutal = Difficulty;
+			life = hp;
 			
 			getEnemies();
 			
 			Stats_Obj.levelS = selectedlevel;
+			Stats_Obj.difS = brutal;
 			stage = selectedlevel - 1;
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
@@ -190,10 +195,10 @@ package worlds
 			
 			if (player.hpG <= 0)
 			{
- 				GlobalVariables.gameState = GlobalVariables.LOST;
+ 				GlobalVariables.gameState = GlobalVariables.LOST; // LOST!!!
 				timeFromStart.stop();
  				Log.LevelAverageMetric("Lost", stage + 1, timeFromStart.currentCount);
-				newObj = new Lost_Obj;
+				newObj = new Lost_Obj(brutal);
 				add(newObj);
 			}
 			
@@ -202,7 +207,7 @@ package worlds
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
 				timeFromStart.stop();
 				Log.LevelAverageMetric("Won", stage + 1, timeFromStart.currentCount);
-				newObj = new Win_Obj(stage, BulletPlayer.findAcc(), Player.getlife())
+				newObj = new Win_Obj(stage, BulletPlayer.findAcc(), Player.getlife(), brutal)
 				add(newObj);
 			}
 			
@@ -249,7 +254,7 @@ package worlds
 					if (alien_e.bottom > player.y) // Player has lost.
 					{
 						GlobalVariables.gameState = GlobalVariables.LOST;
-						newObj = new Lost_Obj;
+						newObj = new Lost_Obj(brutal);;
 						add(newObj);
 					}
 				}
@@ -364,7 +369,7 @@ package worlds
 		
 		public function advanceToNextLevel():void 
 		{
-			FP.world = new Level(stage + 2);
+			FP.world = new Level(stage + 2, brutal, player.hpG);
 		}
 		
 		public function restart():void 
@@ -376,7 +381,7 @@ package worlds
 		{
 			remove(newObj);
 			fade.fadeIn()
-			newObj = new GameWon_Obj;
+			newObj = new GameWon_Obj(brutal);;
 			add(newObj);
 		}
 		
@@ -438,7 +443,7 @@ package worlds
 		
 		private function lost():void 
 		{
-			if (Input.pressed("enter") || Input.mousePressed)
+			if ((Input.pressed("enter") || Input.mousePressed) && !brutal)
 			{
 				fade.fadeOut();
 				FP.alarm(1, restart);
@@ -480,8 +485,8 @@ package worlds
 			dataList = xml.startPlace.player;
 			for each(var p:XML in dataList)
 			{
-				player = new Player(p.@x, p.@y);
-				add(player);
+				player = Player(create(Player));
+				player.reset(p.@x, p.@y, brutal, life);
 			}
 			
 			dataList = xml.smalls.tile;

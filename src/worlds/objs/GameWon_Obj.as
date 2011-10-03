@@ -10,7 +10,7 @@ package worlds.objs
 	public class GameWon_Obj extends Menu_Obj 
 	{
 		
-		public function GameWon_Obj() 
+		public function GameWon_Obj(brutal:Boolean = false) 
 		{
 			selection = new Array();
 			title = new Text(String("Congratulations!!!"));
@@ -21,9 +21,16 @@ package worlds.objs
 			title.color = 0x0000ff; // blue
 			menu = new Graphiclist(title);
 			
-			GlobalVariables.CALCULATESCORE();
+			if (!brutal)
+			{
+				GlobalVariables.CALCULATESCORE();
+				
+				selection.push(new Text(String("You finished the game with " + GlobalVariables.GAMESCORE + " points.")));
+			}else
+			{
+				selection.push(new Text(String("You finished game in Brutal with " + GlobalVariables.BRUTALSCORE + " points! WOW!!!")));
+			}
 			
-			selection.push(new Text(String("You finished the game with " + GlobalVariables.GAMESCORE + " points.")));
 			selection.push(new Text(String("To check your ranking with other players look at the highscores in the main menu.")));
 			selection.push(new Text(String("To improve your score you can try improve your accuracy, and avoid enemies bullets.")));
 			selection.push(new Text(String("We hope you had fun :) ~ The development team")));

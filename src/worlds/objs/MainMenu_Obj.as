@@ -103,10 +103,8 @@ package worlds.objs
 				switch (choiceG)
 				{
 					case 0:
-						fadeOut = true;
-						FP.alarm(1, newGame);
-						Log.CustomMetric("NewGame");
-						updates = false;
+						selected = new DifSel_Obj;
+						Log.CustomMetric("SelectDifficulty");
 						break;
 					case 1:
 						selected = new SelectLevel_Obj;

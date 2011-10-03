@@ -21,10 +21,19 @@ package worlds.objs
 		private var life:uint;
 		private var level_score:PlayerScore;
 		private var overall_score:PlayerScore;
+		private var difficulty:Boolean;
 		
-		public function Win_Obj(tempStage:uint, tempAcc:Number, tempLife:uint ) 
+		/**
+		 * Creates a Win screen.
+		 * @param	tempStage The level the player has won.
+		 * @param	tempAcc The accuracy of the player from 0 to 1.
+		 * @param	tempLife The remaining life of the player.
+		 * @param	difficultyTemp The difficulty of the level.
+		 */
+		public function Win_Obj(tempStage:uint, tempAcc:Number, tempLife:uint, difficultyTemp:Boolean = false ) 
 		{
 			layer = -1;
+			difficulty = difficulty;
 			
 			stage = tempStage++;
 			selection = new Array();
@@ -49,23 +58,33 @@ package worlds.objs
 			showScore();
 		}
 		
+		/**
+		 * Shows the score.
+		 */
 		private function showScore():void 
 		{
-			if (score > uint(GlobalVariables.SCORE[stage]))
+			if (difficulty)
 			{
-				selection.push(new Text(String("You've surpassed your previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points!")));
-				GlobalVariables.SCORE[stage] = score;
-				level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
-				level_score.CustomData["Name"] = GlobalVariables.USERNAME;
-				Leaderboards.Save(level_score, String(stage+1));
+				if (score > uint(GlobalVariables.SCORE[stage]))
+				{
+					selection.push(new Text(String("You've surpassed your previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points!")));
+					GlobalVariables.SCORE[stage] = score;
+					level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
+					level_score.CustomData["Name"] = GlobalVariables.USERNAME;
+					Leaderboards.Save(level_score, String(stage+1));
+				}else
+				{
+					selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie your high score.")));
+				}
+				
+				GlobalVariables.CALCULATESCORE();
+				
+				selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
 			}else
-			{
-				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie your high score.")));
+			{	// Game is in Brutal difficulty
+				GlobalVariables.BRUTALSCORE += score;
+				selection.push(new Text(String("Your total score is " + GlobalVariables.BRUTALSCORE + ".")));
 			}
-			
-			GlobalVariables.CALCULATESCORE();
-			
-			selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
 			selection.push(new Text(String("Press Enter to advance to the next level")));
 			
 			for (var i:uint = 0; i < selection.length; i++)
