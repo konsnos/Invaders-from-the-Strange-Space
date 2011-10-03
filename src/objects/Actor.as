@@ -1,9 +1,11 @@
 package objects 
 {
+	import flash.display.BitmapData;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.masks.Pixelmask;
 	
 	/**
 	 * ...
@@ -12,6 +14,8 @@ package objects
 	public class Actor extends Entity 
 	{
 		protected var image:Image;
+		protected var maskObj:Pixelmask;
+		protected var maskBmp:BitmapData;
 		private var hp:Number;
 		public static var list:Number; // Total number of actors instantiated.
 		

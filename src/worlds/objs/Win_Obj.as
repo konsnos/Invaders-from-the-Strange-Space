@@ -38,7 +38,7 @@ package worlds.objs
 			
 			score = Stats_Obj.scoreG;
 			acc = uint(score * tempAcc);
-			life = uint(tempLife * 40);
+			life = uint(tempLife * (stage * 8));
 			
 			selection.push(new Text(String("Your score: " + score)));
 			selection.push(new Text(String(int(tempAcc*100) + "% accuracy: +" + acc)));

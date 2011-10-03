@@ -1,11 +1,13 @@
 package objects.player 
 {
 	import flash.display.BitmapData;
+	import flash.geom.Point;
 	import flash.ui.Mouse;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.masks.Pixelmask;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.misc.NumTween;
 	import net.flashpunk.utils.Ease;
@@ -56,6 +58,13 @@ package objects.player
 			FP.world.addTween(recoilY);
 			
 			graphic = image = new Image(GlobalVariables.IMG_PLAYER);
+			image.smooth = true;
+			var size:int = Math.ceil(Math.sqrt(image.width * image.width + image.height * image.height));
+			maskBmp = new BitmapData(size, size, true, 0);
+			maskObj = new Pixelmask(maskBmp);
+			maskBmp.fillRect(maskBmp.rect, 0);
+			this.mask = maskObj;
+			image.render(maskBmp, FP.zero, FP.zero);
 			
 			hpS = 3;
 			life = hpG;
@@ -64,9 +73,6 @@ package objects.player
 			
 			this.x = x - image.width / 2;
 			this.y = y;
-			
-			width = image.width;
-			height = image.height;
 			
 			type = "player";
 			
@@ -191,7 +197,8 @@ package objects.player
 				takeDamage(b.damageG);
 				fade.fadeOut(0.2, 0.8, true);
 				SoundSystem.play(soundExplosionm, this.centerX);
-				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
+				//Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
+				Explosion(world.create(Explosion)).reset(b.x, b.y, -1, 0xffff00, 5);
 				b.destroy();
 				life = hpG;
 				Stats_Obj.updateStats();

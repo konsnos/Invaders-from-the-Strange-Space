@@ -1,3 +1,8 @@
+Build 54
+
+- Pixel perfect collision detection for player.
+- Changed the bonus score from life calculation. It's now life * level * 8.
+
 Build 53
 
 - Added the game won screen.
