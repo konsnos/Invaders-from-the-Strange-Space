@@ -1,3 +1,7 @@
+Build 56
+
+- Added documentation for the player on how the accuracy and life bonus are calculated.
+
 Build 55
 
 - In level selection you can see your scores and the highest scores for each level.
@@ -18,7 +22,7 @@ Build 52
 
 - Fixed the bug that caused accuracy miscalculated.
 
-Build 51
+Build 51 - Beta 02
 
 - Changed the text of the win screen.
 

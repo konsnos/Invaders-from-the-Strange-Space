@@ -10,6 +10,10 @@ package worlds.objs
 	{
 		private var level:uint;
 		
+		/**
+		 * Lists and saves players' and the highest score to GlobalVariables.SCORE and GLSCORE.
+		 * @param	levelTemp The level from which will parse the score.
+		 */
 		public function ListLeaderboards(levelTemp:uint) 
 		{
 			level = levelTemp;
