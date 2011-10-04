@@ -1,11 +1,12 @@
 Invaders from the Strange Space (ISS) is a clone of Space Invaders but slightly different and with more features.
 
-Build 57 - Beta 03
+Build 58 - Beta 03
 
 NEW FEATURES
 
+- Changed player image with a better animated image.
 - When player has lost he can restart the level.
 - Added the game won screen.
 - Pixel perfect collision detection for player.
 - In level selection you can view your scores and the highest.
-- Added a Brutal difficulty.
+- Added a Brutal difficulty in which you can't restart the level and the player continues with the lives he has left. There is a different leaderboard for Brutal difficulty.

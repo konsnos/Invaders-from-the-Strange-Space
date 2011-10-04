@@ -2,11 +2,13 @@ package objects.player
 {
 	import flash.display.BitmapData;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.ui.Mouse;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.masks.Pixelmask;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.misc.NumTween;
@@ -39,6 +41,7 @@ package objects.player
 		private var mouseDelta:int;
 		private var recoilY:NumTween;
 		private var BulletsMax:Number;
+		private var playerSpr:Spritemap = new Spritemap(GlobalVariables.IMG_PLAYER, 64, 64);;
 		
 		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
 		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
@@ -57,7 +60,9 @@ package objects.player
 			FP.world.add(fade);
 			FP.world.addTween(recoilY);
 			
-			graphic = image = new Image(GlobalVariables.IMG_PLAYER);
+			playerSpr.add("idle", [0, 1, 2, 1], 15, true);
+			image = new Image(GlobalVariables.IMG_PLAYER, new Rectangle(0, 0, 64, 64));
+			playerSpr.smooth = true;
 			image.smooth = true;
 			var size:int = Math.ceil(Math.sqrt(image.width * image.width + image.height * image.height));
 			maskBmp = new BitmapData(size, size, true, 0);
@@ -71,6 +76,9 @@ package objects.player
 			type = "player";
 			
 			BulletsMax = 3;
+			
+			graphic = playerSpr;
+			playerSpr.play("idle");
 		}
 		
 		public function reset(x:Number, y:Number, dif:Boolean = false, hp:uint = 3):void 
@@ -106,6 +114,10 @@ package objects.player
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
+				if (playerSpr.locked)
+				{
+					playerSpr.unlock();
+				}
 				/**************** MOVEMENT ****************/
 				movement();
 				
@@ -114,6 +126,15 @@ package objects.player
 				
 				/**************** Check if shot by enemies ****************/
 				checkIfShot();
+			}else
+			{
+				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
+				{
+					if (!playerSpr.locked)
+					{
+						playerSpr.lock();
+					}
+				}
 			}
 		}
 		
@@ -195,7 +216,7 @@ package objects.player
  				SoundSystem.play(soundShoot, this.centerX);
 				recoilY.tween(400, 405, 0.1, Ease.backOut);
 				recoilY.complete = recoilCompleted;
-				spawnBullet(this.x + halfWidth, this.y);
+				spawnBullet(this.x + image.width / 2, this.y);
 				BulletPlayer.bulletsShot++;
 			}
 		}

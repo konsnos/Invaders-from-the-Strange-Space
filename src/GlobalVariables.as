@@ -13,7 +13,8 @@ package
 	public class GlobalVariables 
 	{
 		/****************** IMAGES ******************/
-		[Embed(source = '../assets/images/player.png')] public static const IMG_PLAYER:Class;
+		//[Embed(source = '../assets/images/player.png')] public static const IMG_PLAYER:Class;
+		[Embed(source = "../assets/images/playerShip_64x64.gif")] public static const IMG_PLAYER:Class;
 		[Embed(source = '../assets/images/small_enemy.png')] public static const IMG_ENEMY_S:Class;
 		[Embed(source = '../assets/images/medium_enemy.png')] public static const IMG_ENEMY_M:Class;
 		[Embed(source = '../assets/images/big_enemy.png')] public static const IMG_ENEMY_L:Class;

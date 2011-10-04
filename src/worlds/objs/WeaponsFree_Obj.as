@@ -36,7 +36,8 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
+			if (GlobalVariables.gameState == GlobalVariables.PLAYING ||
+			GlobalVariables.gameState == GlobalVariables.PAUSE)
 			{
 				title.alpha -= FP.elapsed;
 				

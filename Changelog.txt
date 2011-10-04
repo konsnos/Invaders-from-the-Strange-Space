@@ -1,3 +1,8 @@
+Build 58
+
+- Player now is an animated sprite.
+- Weapons free now fades out even in pause.
+
 Build 57
 
 - Player now is not added but created.
