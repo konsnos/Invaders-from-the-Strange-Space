@@ -24,7 +24,15 @@ package objects
 		
 		override public function update():void
 		{
-			if (explosion.particleCount == 0)
+			if ((GlobalVariables.gameState == GlobalVariables.PAUSE) && explosion.active)
+			{
+				explosion.active = false;
+			}else if (!explosion.active && GlobalVariables.gameState != GlobalVariables.PAUSE)
+			{
+				explosion.active = true;
+			}
+			
+			if (explosion.active && explosion.particleCount == 0)
 			{
 				this.world.recycle(this);
 			}

@@ -357,8 +357,11 @@ package worlds
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
-				Bonus(FP.world.create(Bonus)).reset(0,0);
-				estimateBonusAppearance();
+				if (Small.list > 0 || Medium.list > 0 || Big.list > 0) // Makes sure to check all except Bonus.
+				{
+					Bonus(FP.world.create(Bonus)).reset(0,0);
+					estimateBonusAppearance();
+				}
 			}
 		}
 		

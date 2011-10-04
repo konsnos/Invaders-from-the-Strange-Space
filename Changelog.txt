@@ -1,3 +1,7 @@
+Build 61
+
+- Fixed the particles to pause when the game is paused.
+
 Build 60
 
 - Added a flashpunk splash screen.

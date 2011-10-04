@@ -89,7 +89,7 @@ package objects.enemies
 		 */
 		public function calculateShootTime():void
 		{
-			timeThisWillShoot = FP.rand(4);
+			timeThisWillShoot = FP.rand(3);
 		}
 		
 		override public function Shoot():void 
