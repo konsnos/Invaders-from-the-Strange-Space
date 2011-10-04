@@ -89,6 +89,7 @@ package worlds
 		
 		public function Level(selectedlevel:uint, Difficulty:Boolean = false, hp:uint = 3 ) 
 		{
+			FP.screen.color = 0x000000;
 			timeElapsed = 0;
 			changeLine = false;
 			brutal = Difficulty;
@@ -132,7 +133,7 @@ package worlds
 			
 			fade = new BlackScreen();
 			add(fade);
-			fade.fadeIn(0.5);
+			fade.fadeIn(1);
 			SoundSystem.resetVolume();
 		}
 		

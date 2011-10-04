@@ -1,3 +1,7 @@
+Build 60
+
+- Added a flashpunk splash screen.
+
 Build 59
 
 - Fixed minor bugs.

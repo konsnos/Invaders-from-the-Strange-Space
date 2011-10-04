@@ -44,18 +44,28 @@ package worlds
 			
 			objsArray = new Array;
 			
+			if (GlobalVariables.USERNAME == null)
+			{
+				var s:Splash = new Splash();
+				FP.world.add(s);
+				s.start(splashComplete);
+				var splash:Splash = new Splash();
+				FP.world.add(splash);
+				s.start(splashComplete);
+			}else
+			{
+				instance = new MainMenu_Obj;
+				continueBegin();
+			}
+		}
+		
+		private function continueBegin():void 
+		{
 			addGraphic(field);
 			GlobalVariables.gameState = GlobalVariables.PLAYING;
 			fade = new BlackScreen();
 			add(fade);
 			
-			if (GlobalVariables.USERNAME == null)
-			{
-				instance = new GetName_Obj;
-			}else
-			{
-				instance = new MainMenu_Obj;
-			}
 			add(instance);
 			
 			prevTween = new NumTween(changeInstances);
@@ -70,13 +80,22 @@ package worlds
 			fade.fadeIn();
 		}
 		
+		private function splashComplete():void 
+		{
+			instance = new GetName_Obj;
+			continueBegin();
+		}
+		
 		override public function update():void 
 		{
-			selected();
-			
-			changingScreen();
-			
-			checkTransitioning();
+			if (instance != null)
+			{
+				selected();
+				
+				changingScreen();
+				
+				checkTransitioning();
+			}
 			
 			super.update();
 		}

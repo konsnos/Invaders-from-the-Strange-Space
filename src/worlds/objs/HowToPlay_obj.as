@@ -29,15 +29,16 @@ package worlds.objs
 			selection.push(new Text(String("Shoot : Space, Z, X, C, mouse click")));
 			selection.push(new Text(String("Pause : P")));
 			selection.push(new Text(String("")));
+			selection.push(new Text(String("In brutal difficulty life loss is permanent to the next levels.")));
 			selection.push(new Text(String("Mouse can be enabled from the settings.")));
-			selection.push(new Text(String("Accuracy bonus is calculated from the score multiplied by the ratio.")));
+			selection.push(new Text(String("Accuracy bonus is calculated from the score multiplied by the accuracy ratio.")));
 			selection.push(new Text(String("Life bonus is dependant to the difficulty of the level.")));
 			
 			for (var i:uint = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
 				Text(selection[i]).wordWrap = true;
-				Text(selection[i]).size = 14;
+				Text(selection[i]).size = 12;
 				Text(selection[i]).align = "center";
 				Text(selection[i]).width = 580
 				Text(selection[i]).x = FP.halfWidth - Text(selection[i]).width / 2;
