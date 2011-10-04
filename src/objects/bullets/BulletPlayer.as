@@ -1,6 +1,7 @@
 package objects.bullets 
 {
 	import net.flashpunk.graphics.Image;
+	import worlds.objs.Stats_Obj;
 	/**
 	 * ...
 	 * @author konsnos
@@ -59,6 +60,12 @@ package objects.bullets
 		public static function findAcc():Number 
 		{
 			return bulletsHitT / bulletsShot;
+		}
+		
+		override public function destroy():void 
+		{
+			super.destroy();
+			Stats_Obj.updateAcc();
 		}
 	}
 }

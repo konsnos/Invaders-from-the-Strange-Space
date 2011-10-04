@@ -68,6 +68,7 @@ package
 		public static var GLSCORE:Array;
 		public static var GAMESCORE:uint;
 		public static var BRUTALSCORE:uint;
+		public static var BRUTALHIGHSCORE:uint;
 		public static var MOUSE:Boolean;
 		
 		public function GlobalVariables()

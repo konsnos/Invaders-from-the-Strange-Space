@@ -1,3 +1,8 @@
+Build 59
+
+- Fixed minor bugs.
+- Stats in brutal difficulty show only the final score and the highest.
+
 Build 58
 
 - Player now is an animated sprite.

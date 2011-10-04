@@ -6,6 +6,7 @@ package worlds.objs
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
+	import objects.bullets.BulletPlayer;
 	import objects.player.Player;
 	import Playtomic.Leaderboards;
 	import Playtomic.PlayerScore;
@@ -22,7 +23,7 @@ package worlds.objs
 		private static var playerlife:Text;
 		private static var score:uint;
 		private static var level:uint;
-		private static var difficulty:Boolean;
+		private static var brutal:Boolean;
 		private static var hparray:Array;
 		private static var graphiclist:Graphiclist;
 		
@@ -30,7 +31,7 @@ package worlds.objs
 		public static function set scoreS(setValue:uint):void 
 		{
 			score += setValue;
- 			stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+ 			updateStatsText();
 		}
 		public static function get scoreG():uint
 		{
@@ -42,7 +43,7 @@ package worlds.objs
 		}
 		public static function set difS(setValue:Boolean):void 
 		{
-			difficulty = setValue;
+			brutal = setValue;
 		}
 		
 		public function Stats_Obj()
@@ -61,12 +62,28 @@ package worlds.objs
 		 */
 		public static function updateStats():void 
 		{
+			updateStatsText();
+			
+			updatePlayerLife();
+		}
+		
+		private static function updateStatsText():void 
+		{
 			if (stats != null)
 			{
-				stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+				if (!brutal)
+				{
+					stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+				}else
+				{
+					stats.text = new String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + score) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE);
+				}
 			}
-			
- 			switch (Player.getlife()) 
+		}
+		
+		private static function updatePlayerLife():void 
+		{
+			switch (Player.getlife()) 
 			{
 				case 2:
 					Image(hparray[2][1]).visible = false;
@@ -85,9 +102,20 @@ package worlds.objs
 			}
 		}
 		
+		public static function updateAcc():void 
+		{
+			playerlife.text = String("Life:       - Accuracy: " + uint(BulletPlayer.findAcc()*100) + "%");
+		}
+		
 		private function showStats():void 
 		{
-			stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
+			if (!brutal)
+			{
+				stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
+			}else
+			{
+				stats = new Text(String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + score) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE));
+			}
 			stats.size = 16;
 			stats.y = FP.height - 20;
 			stats.x = FP.width - stats.width + 40;
@@ -96,7 +124,7 @@ package worlds.objs
 			
 			graphiclist = new Graphiclist(stats);
 			
-			playerlife = new Text(String("Life:       "));
+			playerlife = new Text(String("Life:       - Accuracy: - %"));
 			playerlife.size = 16;
 			playerlife.y = FP.height - 20;
 			playerlife.x = 2;
@@ -127,22 +155,6 @@ package worlds.objs
 			
 			graphic = graphiclist;
 		}
-		
-		/*private function levelListComplete(scores:Array, numscores:int, response:Object):void 
-		{
-			if (response.Success)
-			{
-				var score:PlayerScore = scores[0];
-				if (score != null)
-				{
-					GlobalVariables.SCORE[level -1] = score.Points;
-				}
-			}else 
-			{
-				
-			}
-			showStats();
-		}*/
 		
 	}
 

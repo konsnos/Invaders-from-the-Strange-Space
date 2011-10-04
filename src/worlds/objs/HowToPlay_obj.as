@@ -19,7 +19,7 @@ package worlds.objs
 			title.font = 'FONT_TITLE';
 			title.size = 20;
 			title.align = "center";
-			title.x = FP.width / 2 - title.width / 2;
+			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0x32cd32; // Dark Green
 			menu = new Graphiclist(title);

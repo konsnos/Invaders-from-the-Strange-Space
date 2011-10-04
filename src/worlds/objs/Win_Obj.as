@@ -21,7 +21,7 @@ package worlds.objs
 		private var life:uint;
 		private var level_score:PlayerScore;
 		private var overall_score:PlayerScore;
-		private var difficulty:Boolean;
+		private var brutal:Boolean;
 		
 		/**
 		 * Creates a Win screen.
@@ -30,10 +30,10 @@ package worlds.objs
 		 * @param	tempLife The remaining life of the player.
 		 * @param	difficultyTemp The difficulty of the level.
 		 */
-		public function Win_Obj(tempStage:uint, tempAcc:Number, tempLife:uint, difficultyTemp:Boolean = false ) 
+		public function Win_Obj(tempStage:uint, tempAcc:Number, tempLife:uint, difficulty:Boolean = false ) 
 		{
 			layer = -1;
-			difficulty = difficulty;
+			brutal = difficulty;
 			
 			stage = tempStage++;
 			selection = new Array();
@@ -63,7 +63,7 @@ package worlds.objs
 		 */
 		private function showScore():void 
 		{
-			if (difficulty)
+			if (!brutal)
 			{
 				if (score > uint(GlobalVariables.SCORE[stage]))
 				{

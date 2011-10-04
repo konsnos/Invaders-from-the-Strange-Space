@@ -8,7 +8,7 @@ package worlds.objs
 	
 	/**
 	 * Implements a simple starfield
-	 * @author Richard Marks
+	 * @author Richard Marks, Konstantinos Egarhos
 	 */
 	public class Starfield extends Graphic
 	{
@@ -23,7 +23,9 @@ package worlds.objs
 		override public function update():void 
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING ||
-			GlobalVariables.gameState == GlobalVariables.PREPARING)
+			GlobalVariables.gameState == GlobalVariables.PREPARING ||
+			GlobalVariables.gameState == GlobalVariables.WIN ||
+			GlobalVariables.gameState == GlobalVariables.LOST)
 			{
 				for each(var star:Array in stars)
 				{

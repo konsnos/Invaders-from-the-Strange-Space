@@ -6,7 +6,9 @@ package worlds.objs
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import Playtomic.GeoIP;
+	import Playtomic.Leaderboards;
 	import Playtomic.Log;
+	import Playtomic.PlayerScore;
 	import worlds.SoundSystem;
 	/**
 	 * ...
@@ -62,7 +64,7 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("58", "version", true);
+				Log.CustomMetric("59", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)
@@ -75,6 +77,7 @@ package worlds.objs
 					{
 						new ListLeaderboards(i);
 					}
+					Leaderboards.List("brutalhighscores", this.brutalListComplete);
 				}else
 				{
 					Text(title).text = "Please provide a name";
@@ -93,6 +96,21 @@ package worlds.objs
 			{
 				Log.CustomMetric("UnableToRetrieveCountry", "country", true);
 				// request failed because of response.ErrorCode
+			}
+		}
+		
+		public function brutalListComplete(scores:Array, numscores:int, response:Object):void 
+		{
+			if (response.Success)
+			{
+				var score:PlayerScore = scores[0];
+				if (score != null)
+				{
+					GlobalVariables.BRUTALHIGHSCORE = score.Points;
+				}
+			}else
+			{
+				
 			}
 		}
 	}

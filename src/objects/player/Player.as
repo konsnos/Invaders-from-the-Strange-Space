@@ -195,20 +195,26 @@ package objects.player
 			}
 		}
 		
+		/**
+		 * Checks if player shoots.
+		 */
 		private function shootInput():void 
 		{
 			if (Input.pressed("shoot"))
+			{
+				shoot();
+			}else if (GlobalVariables.MOUSE)
+			{
+				if (Input.mousePressed)
 				{
 					shoot();
-				}else if (GlobalVariables.MOUSE)
-				{
-					if (Input.mousePressed)
-					{
-						shoot();
-					}
 				}
+			}
 		}
 		
+		/**
+		 * Spawns a player bullet.
+		 */
 		public function shoot():void 
 		{
 			if (BulletPlayer.list < BulletsMax )
