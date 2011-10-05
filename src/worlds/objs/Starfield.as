@@ -26,7 +26,8 @@ package worlds.objs
 			GlobalVariables.gameState == GlobalVariables.PREPARING ||
 			GlobalVariables.gameState == GlobalVariables.WIN ||
 			GlobalVariables.gameState == GlobalVariables.LOST ||
-			GlobalVariables.gameState == GlobalVariables.WONGAME)
+			GlobalVariables.gameState == GlobalVariables.WONGAME ||
+			GlobalVariables.gameState == GlobalVariables.CHANGING)
 			{
 				for each(var star:Array in stars)
 				{

@@ -76,7 +76,7 @@ package worlds.objs
 			}
 			
 			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length -1]).size = 14;
+			Text(selection[selection.length -1]).size = 13;
 			Text(selection[selection.length -1]).align = "center";
 			Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) - 150;
 			Text(selection[selection.length -1]).y = FP.height / 15 * 10 + 100;
@@ -197,7 +197,7 @@ package worlds.objs
 			}
 			
 			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length -1]).size = 14;
+			Text(selection[selection.length -1]).size = 13;
 			Text(selection[selection.length -1]).align = "center";
 			Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) + 150;
 			Text(selection[selection.length -1]).y = FP.height / 15 * 10 + 100;

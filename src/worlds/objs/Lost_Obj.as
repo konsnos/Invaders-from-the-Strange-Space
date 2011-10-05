@@ -16,13 +16,13 @@ package worlds.objs
 	 */
 	public class Lost_Obj extends Menu_Obj 
 	{
-		private var difficulty:Boolean;
+		private var brutal:Boolean;
 		private var overallBrutalScore:PlayerScore;
 		
-		public function Lost_Obj(difficultyTemp:Boolean ) 
+		public function Lost_Obj(difficulty:Boolean ) 
 		{
 			layer = -1;
-			difficulty = difficultyTemp;
+			brutal = difficulty;
 			
 			selection = new Array();
 			title = new Text(String("You lost"));
@@ -33,7 +33,7 @@ package worlds.objs
 			title.color = 0xb22222; // dark red
 			menu = new Graphiclist(title);
 			
-			if (!difficulty)
+			if (!brutal)
 			{
 				selection.push(new Text(String("Press Enter to restart")));
 			}else
@@ -41,6 +41,7 @@ package worlds.objs
 				GlobalVariables.BRUTALSCORE += Stats_Obj.scoreG;
 				selection.push(new Text(String("You lost with score : " + GlobalVariables.BRUTALSCORE)));
 				selection.push(new Text(String("Better luck next time")));
+				
 				overallBrutalScore = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.BRUTALSCORE);
 				overallBrutalScore.CustomData["Name"] = GlobalVariables.USERNAME;
 				Leaderboards.Save(overallBrutalScore, "brutalhighscores");

@@ -21,7 +21,7 @@ package worlds.objs
 			title.y = 20;
 			title.color = 0xffd700; // yellow 
 			
-			selection.push(new Text(String("Press 'P' to continue")));
+			selection.push(new Text(String("Press 'SPACEBAR' to continue")));
 			selection.push(new Text(String("Press 'BACKSPACE' to exit")));
 			
 			for (var i:uint = 0; i < selection.length; i++)

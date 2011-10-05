@@ -203,7 +203,7 @@ package worlds
 				add(newObj);
 			}
 			
-			if(Alien.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
+			if(Alien.list == 0 && BulletEnemy.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
 				timeFromStart.stop();
@@ -413,7 +413,7 @@ package worlds
 		
 		private function paused():void 
 		{
-			if (Input.pressed("pause"))
+			if (Input.pressed("pause") || Input.pressed("shoot"))
 			{
 				GlobalVariables.gameState = GlobalVariables.PLAYING;
 				remove(newObj);

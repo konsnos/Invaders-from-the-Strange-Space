@@ -63,7 +63,7 @@ package worlds.objs
 		 */
 		private function showScore():void 
 		{
-			if (!brutal)
+			if (brutal == false)
 			{
 				if (score > uint(GlobalVariables.SCORE[stage]))
 				{

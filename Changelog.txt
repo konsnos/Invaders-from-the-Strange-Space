@@ -1,3 +1,9 @@
+Build 63
+
+- The player can now continue from pause by "shooting".
+- Fixed bug with the score saving.
+- Game now finished when the last enemy bullet disappears.
+
 Build 62
 
 - Fixed a bug saving brutal highscores.
