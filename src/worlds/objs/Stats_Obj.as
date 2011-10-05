@@ -135,14 +135,15 @@ package worlds.objs
 		{
 			if (!brutal)
 			{
-				stats = new Text(String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
+				stats = new Text(String("Level " + level + " - Score: " + finalScore + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
 			}else
 			{
-				stats = new Text(String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + score) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE));
+				stats = new Text(String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + finalScore) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE));
 			}
 			stats.size = 16;
+			stats.align = "left";
 			stats.y = FP.height - 20;
-			stats.x = FP.width - stats.width + 35;
+			stats.x = 350;
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';
 			

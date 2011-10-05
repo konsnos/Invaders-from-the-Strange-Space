@@ -3,6 +3,8 @@ package worlds.objs
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Text;
+	import Playtomic.Leaderboards;
+	import Playtomic.PlayerScore;
 	/**
 	 * ...
 	 * @author konsnos
@@ -25,10 +27,13 @@ package worlds.objs
 			{
 				GlobalVariables.CALCULATESCORE();
 				
-				selection.push(new Text(String("You finished the game with " + GlobalVariables.GAMESCORE + " points.")));
+				selection.push(new Text(String("You finished the game with " + GlobalVariables.GAMESCORE + " points!")));
 			}else
 			{
 				selection.push(new Text(String("You finished game in Brutal with " + GlobalVariables.BRUTALSCORE + " points! WOW!!!")));
+				var overallBrutalScore:PlayerScore = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.BRUTALSCORE);
+				overallBrutalScore.CustomData["Name"] = GlobalVariables.USERNAME;
+				Leaderboards.Save(overallBrutalScore, "brutalhighscores");
 			}
 			
 			selection.push(new Text(String("To check your ranking with other players look at the highscores in the main menu.")));

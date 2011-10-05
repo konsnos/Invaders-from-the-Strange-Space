@@ -1,10 +1,11 @@
 Invaders from the Strange Space (ISS) is a clone of Space Invaders but slightly different and with more features.
 
-Build 65 - Beta 03
+Build 66 - Beta 03
 
 NEW FEATURES
 
 - Changed player image with a better animated image.
+- Changed big enemies image with a better animated image.
 - When player has lost he can restart the level.
 - Added the game won screen.
 - Pixel perfect collision detection for player.

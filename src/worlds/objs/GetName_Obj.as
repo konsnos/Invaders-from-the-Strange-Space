@@ -66,7 +66,7 @@ package worlds.objs
 			if (Input.pressed("enter"))
 			{
 				Log.Play();
-				Log.CustomMetric("v65", "version", true);
+				Log.CustomMetric("v66", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)
@@ -90,7 +90,7 @@ package worlds.objs
 		private function cleanText(value:int):String
 		{
 			var target:String = String.fromCharCode(value).toLocaleUpperCase();
-			if (target >= 'A' && target <= 'Z')
+			if ((target >= 'A' && target <= 'Z') || (target >= '0' && target <= '9'))
 			{
 				return target;
 			}else 

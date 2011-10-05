@@ -87,18 +87,17 @@ package worlds
 			return stage;
 		}
 		
-		public function Level(selectedlevel:uint, Difficulty:Boolean = false, hp:uint = 3 ) 
+		public function Level(selectedlevel:uint, difficulty:Boolean = false, hp:uint = 3 ) 
 		{
 			FP.screen.color = 0x000000;
 			timeElapsed = 0;
 			changeLine = false;
-			brutal = Difficulty;
+			brutal = difficulty;
 			life = hp;
 			
 			getEnemies();
-			
-			Stats_Obj.levelS = selectedlevel;
 			Stats_Obj.difS = brutal;
+			Stats_Obj.levelS = selectedlevel;
 			stage = selectedlevel - 1;
 			
 			GlobalVariables.gameState = GlobalVariables.PREPARING;

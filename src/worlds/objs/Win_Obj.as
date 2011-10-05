@@ -61,7 +61,7 @@ package worlds.objs
 		{
 			if (brutal == false)
 			{
-				if (score > uint(GlobalVariables.SCORE[stage]))
+				if (Stats_Obj.finalScoreG > uint(GlobalVariables.SCORE[stage]))
 				{
 					selection.push(new Text(String("You've surpassed your previous score by " + (Stats_Obj.finalScoreG - uint(GlobalVariables.SCORE[stage])) + " points!")));
 					GlobalVariables.SCORE[stage] = Stats_Obj.finalScoreG;
@@ -84,7 +84,7 @@ package worlds.objs
 				selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
 			}else
 			{	// Game is in Brutal difficulty
-				GlobalVariables.BRUTALSCORE += score;
+				GlobalVariables.BRUTALSCORE += Stats_Obj.finalScoreG;
 				selection.push(new Text(String("Your total score is " + GlobalVariables.BRUTALSCORE + ".")));
 			}
 			selection.push(new Text(String("Press Enter to advance to the next level")));

@@ -1,3 +1,8 @@
+Build 66 - Beta 03
+
+- Fixed a bug in the win screen when the player didn't have a previous score.
+- Fixed a bug in the brutal win screen and stats where the score wasn't calculated properly.
+
 Build 65
 
 - The stats now show the final score.
