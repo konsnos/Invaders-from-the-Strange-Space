@@ -3,6 +3,7 @@ package objects.enemies
 	import flash.media.Sound;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.Sfx;
 	import objects.Actor;
@@ -20,6 +21,8 @@ package objects.enemies
 	 */
 	public class Alien extends Actor 
 	{
+		protected var sprite:Spritemap;
+		
 		public static var list:uint; // Total number of aliens in the game.
 		public static var levelList:uint; // Starting number of aliens in the level.
 		
@@ -67,7 +70,7 @@ package objects.enemies
 			list = 0;
 		}
 		
-		public function Shoot():void 
+		public function shoot():void 
 		{
 			spawnBullet(this.x + halfWidth, this.y + height);
 		}

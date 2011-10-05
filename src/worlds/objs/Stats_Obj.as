@@ -22,6 +22,9 @@ package worlds.objs
 		private static var stats:Text;
 		private static var playerlife:Text;
 		private static var score:uint;
+		private static var acc:uint;
+		private static var life:uint;
+		private static var finalScore:uint;
 		private static var level:uint;
 		private static var brutal:Boolean;
 		private static var hparray:Array;
@@ -37,6 +40,18 @@ package worlds.objs
 		{
 			return score;
 		}
+		public static function get accG():uint 
+		{
+			return acc;
+		}
+		public static function get lifeG():uint 
+		{
+			return life;
+		}
+		public static function get finalScoreG():uint 
+		{
+			return finalScore;
+		}
 		public static function set levelS(setValue:uint):void 
 		{
 			level = setValue;
@@ -49,6 +64,7 @@ package worlds.objs
 		public function Stats_Obj()
 		{
 			score = 0;
+			updateStatsText();
 			showStats();
 		}
 		
@@ -67,18 +83,26 @@ package worlds.objs
 			updatePlayerLife();
 		}
 		
-		private static function updateStatsText():void 
+		public static function updateStatsText():void 
 		{
 			if (stats != null)
 			{
+				calculateBonusScores();
 				if (!brutal)
 				{
-					stats.text = new String("Level " + level + " - Score: " + score + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
+					stats.text = new String("Level " + level + " - Score: " + finalScore + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
 				}else
 				{
-					stats.text = new String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + score) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE);
+					stats.text = new String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + finalScore) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE);
 				}
 			}
+		}
+		
+		public static function calculateBonusScores():void 
+		{
+			acc = uint(score * BulletPlayer.findAcc());
+			life = uint(Player.getlife() * (level * 8));
+			finalScore = score + acc + life;
 		}
 		
 		private static function updatePlayerLife():void 
@@ -118,7 +142,7 @@ package worlds.objs
 			}
 			stats.size = 16;
 			stats.y = FP.height - 20;
-			stats.x = FP.width - stats.width + 40;
+			stats.x = FP.width - stats.width + 35;
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';
 			

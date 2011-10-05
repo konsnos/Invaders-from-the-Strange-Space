@@ -2,6 +2,7 @@ package objects.enemies
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.Sfx;
 	import objects.bullets.Bullet;
 	import objects.bullets.BulletEnemy;
@@ -31,18 +32,21 @@ package objects.enemies
 		
 		public function Big() 
 		{
-			graphic = image = new Image(GlobalVariables.IMG_ENEMY_L);
-			
-			image.scale *= 0.7;
+			sprite = new Spritemap(GlobalVariables.IMG_ENEMY_L, 32, 32);
+			sprite.smooth = true;
+			sprite.add("idle", [0, 1, 2, 3, 4, 3, 2, 1], 8, true);
+			sprite.add("shoot", [5, 6, 7, 8, 9, 8, 7, 6], 60, false);
 			
 			listUpdateS = false;
 			
 			super();
 			
-			width = image.width * image.scale;
-			height = image.height * image.scale;
+			width = sprite.width;
+			height = sprite.height;
 			
 			type = "Big";
+			graphic = sprite;
+			sprite.play("idle");
 		}
 		
 		override public function reset(x:Number,y:Number):void 
@@ -68,13 +72,36 @@ package objects.enemies
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
+				if (sprite.locked)
+				{
+					sprite.unlock();
+				}
+				if (sprite.currentAnim == "shoot" && sprite.complete)
+				{
+					sprite.play("idle");
+				}
 				CheckIfShot();
+			}else
+			{
+				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
+				{
+					if (!sprite.locked)
+					{
+						sprite.lock();
+					}
+				}
 			}
+		}
+		
+		override public function shoot():void 
+		{
+			sprite.play("shoot");
+			super.shoot();
 		}
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 400,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Big");
+			BulletEnemy(world.create(BulletEnemy)).reset(x, y - 20, 400, 1, GlobalVariables.IMG_BULLET, "Bullet_Enem_Big");
 		}
 		
 		public static function resetList():void // Total number of entities existing.
@@ -105,7 +132,7 @@ package objects.enemies
 		
 		override public function takeDamage(damageTaken:uint):void 
 		{
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00, 5);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x01B300, 5);
 			super.takeDamage(damageTaken);
 		}
 		
@@ -113,7 +140,7 @@ package objects.enemies
 		{
 			list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x00FF00);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x01B300);
 			if (list % 2 == 0)
 			{
 				Small.calculateMaxShots();

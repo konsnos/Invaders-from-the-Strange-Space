@@ -37,23 +37,19 @@ package worlds.objs
 			
 			stage = tempStage++;
 			selection = new Array();
-			title = new Text(String("You Won!"));
+			title = new Text(String("Mission Accomplished"));
 			title.font = 'FONT_TITLE';
-			title.size = 40;
+			title.size = 30;
 			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0x0000ff; // blue
 			menu = new Graphiclist(title);
 			
-			score = Stats_Obj.scoreG;
-			acc = uint(score * tempAcc);
-			life = uint(tempLife * ((stage+1) * 8));
+			Stats_Obj.calculateBonusScores();
 			
-			selection.push(new Text(String("Your score: " + score)));
-			selection.push(new Text(String(int(tempAcc*100) + "% accuracy: +" + acc)));
-			selection.push(new Text(String("Remaining life: +" + life)));
-			
-			score += acc + life;
+			selection.push(new Text(String("Your score: " + Stats_Obj.scoreG)));
+			selection.push(new Text(String(int(tempAcc*100) + "% accuracy: +" + Stats_Obj.accG)));
+			selection.push(new Text(String("Remaining life: +" + Stats_Obj.lifeG)));
 			
 			showScore();
 		}
@@ -67,8 +63,8 @@ package worlds.objs
 			{
 				if (score > uint(GlobalVariables.SCORE[stage]))
 				{
-					selection.push(new Text(String("You've surpassed your previous score by " + (score - uint(GlobalVariables.SCORE[stage])) + " points!")));
-					GlobalVariables.SCORE[stage] = score;
+					selection.push(new Text(String("You've surpassed your previous score by " + (Stats_Obj.finalScoreG - uint(GlobalVariables.SCORE[stage])) + " points!")));
+					GlobalVariables.SCORE[stage] = Stats_Obj.finalScoreG;
 					
 					level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
 					level_score.CustomData["Name"] = GlobalVariables.USERNAME;
@@ -82,7 +78,7 @@ package worlds.objs
 				}else
 				{
 					GlobalVariables.CALCULATESCORE();
-					selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - score) + " points to tie your high score.")));
+					selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.finalScoreG) + " points to tie your high score.")));
 				}
 				
 				selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));

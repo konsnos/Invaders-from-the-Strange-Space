@@ -25,9 +25,9 @@ package worlds.objs
 			brutal = difficulty;
 			
 			selection = new Array();
-			title = new Text(String("You lost"));
+			title = new Text(String("Mission Failed"));
 			title.font = 'FONT_TITLE';
-			title.size = 40;
+			title.size = 30;
 			title.x = FP.halfWidth - title.width / 2;
 			title.y = 20;
 			title.color = 0xb22222; // dark red

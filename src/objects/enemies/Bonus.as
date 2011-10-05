@@ -45,8 +45,8 @@ package objects.enemies
 				
 				if (timeElapsed > timeThisWillShoot)
 				{
-					Shoot();
-					timeThisWillShoot = FP.rand(4);
+					shoot();
+					timeThisWillShoot = FP.rand(3);
 					timeElapsed -= timeThisWillShoot;
 					
 				}
@@ -92,9 +92,9 @@ package objects.enemies
 			timeThisWillShoot = FP.rand(3);
 		}
 		
-		override public function Shoot():void 
+		override public function shoot():void 
 		{
-			super.Shoot();
+			super.shoot();
 		}
 		
 		/**
@@ -132,6 +132,11 @@ package objects.enemies
 				directionB = -1;
 				this.x = FP.width;
 				this.y = 10;
+			}
+			
+			if (y != 0)
+			{
+				this.y = y;
 			}
 			
 			listUpdateS = true;

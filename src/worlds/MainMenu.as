@@ -8,6 +8,8 @@ package worlds
 	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
+	import objects.enemies.Big;
+	import objects.enemies.Bonus;
 	import worlds.objs.BlackScreen;
 	import worlds.objs.GetName_Obj;
 	import worlds.objs.MainMenu_Obj;
@@ -90,6 +92,8 @@ package worlds
 		{
 			if (instance != null)
 			{
+				background();
+				
 				selected();
 				
 				changingScreen();
@@ -98,6 +102,14 @@ package worlds
 			}
 			
 			super.update();
+		}
+		
+		private function background():void 
+		{
+			if (FP.random < 0.005)
+			{
+				Bonus(FP.world.create(Bonus)).reset(0,FP.random*FP.height);
+			}
 		}
 		
 		private function checkTransitioning():void 

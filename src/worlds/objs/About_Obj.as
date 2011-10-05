@@ -22,7 +22,7 @@ package worlds.objs
 			menu = new Graphiclist(title);
 			
 			selection.push(new Text(String("Programming: Konstantinos Egarhos")));
-			selection.push(new Text(String("Artwork: Tonia Hoimpa")));
+			selection.push(new Text(String("Artwork: Tonia Hoimpa, Theodore Barlas")));
 			selection.push(new Text(String("Tester: Theodore Barlas")));
 			selection.push(new Text(String("Music: Genghis Attenborough from freesound project")));
 			selection.push(new Text(String("Sound effects: from sfxr by Tomas Pettersson")));

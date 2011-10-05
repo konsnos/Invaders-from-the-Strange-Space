@@ -314,7 +314,7 @@ package worlds
 				alien_e = smalls_e[enemyShooting];
 				if (alien_e != null)
 				{
-					alien_e.Shoot();
+					alien_e.shoot();
 				}
 				Small.timeElapsed = 0;
 			}
@@ -325,7 +325,7 @@ package worlds
 				alien_e = mediums_e[enemyShooting];
 				if (alien_e != null)
 				{
-					alien_e.Shoot();
+					alien_e.shoot();
 				}
 				Medium.timeElapsed = 0;
 			}
@@ -336,7 +336,7 @@ package worlds
 				alien_e = bigs_e[enemyShooting];
 				if (alien_e != null)
 				{
-					alien_e.Shoot();
+					alien_e.shoot();
 				}
 				Big.timeElapsed = 0;
 			}

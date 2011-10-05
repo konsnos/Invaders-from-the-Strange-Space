@@ -59,6 +59,10 @@ package objects.bullets
 		
 		public static function findAcc():Number 
 		{
+			if (bulletsShot == 0)
+			{
+				return 0;
+			}
 			return bulletsHitT / bulletsShot;
 		}
 		
@@ -66,6 +70,7 @@ package objects.bullets
 		{
 			super.destroy();
 			Stats_Obj.updateAcc();
+			Stats_Obj.updateStatsText();
 		}
 	}
 }

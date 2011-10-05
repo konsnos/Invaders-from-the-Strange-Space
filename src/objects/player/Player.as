@@ -41,7 +41,7 @@ package objects.player
 		private var mouseDelta:int;
 		private var recoilY:NumTween;
 		private var BulletsMax:Number;
-		private var playerSpr:Spritemap = new Spritemap(GlobalVariables.IMG_PLAYER, 64, 64);;
+		private var sprite:Spritemap = new Spritemap(GlobalVariables.IMG_PLAYER, 64, 64);
 		
 		private var soundShoot:Sfx = new Sfx(GlobalVariables.SHOOT);
 		private var soundExplosion:Sfx = new Sfx(GlobalVariables.EXPLOSIONP);
@@ -60,9 +60,9 @@ package objects.player
 			FP.world.add(fade);
 			FP.world.addTween(recoilY);
 			
-			playerSpr.add("idle", [0, 1, 2, 1], 15, true);
+			sprite.add("idle", [0, 1, 2, 1], 16, true);
 			image = new Image(GlobalVariables.IMG_PLAYER, new Rectangle(0, 0, 64, 64));
-			playerSpr.smooth = true;
+			sprite.smooth = true;
 			image.smooth = true;
 			var size:int = Math.ceil(Math.sqrt(image.width * image.width + image.height * image.height));
 			maskBmp = new BitmapData(size, size, true, 0);
@@ -77,8 +77,8 @@ package objects.player
 			
 			BulletsMax = 3;
 			
-			graphic = playerSpr;
-			playerSpr.play("idle");
+			graphic = sprite;
+			sprite.play("idle");
 		}
 		
 		public function reset(x:Number, y:Number, dif:Boolean = false, hp:uint = 3):void 
@@ -114,9 +114,9 @@ package objects.player
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
-				if (playerSpr.locked)
+				if (sprite.locked)
 				{
-					playerSpr.unlock();
+					sprite.unlock();
 				}
 				/**************** MOVEMENT ****************/
 				movement();
@@ -130,9 +130,9 @@ package objects.player
 			{
 				if (GlobalVariables.gameState == GlobalVariables.PAUSE)
 				{
-					if (!playerSpr.locked)
+					if (!sprite.locked)
 					{
-						playerSpr.lock();
+						sprite.lock();
 					}
 				}
 			}
@@ -247,8 +247,7 @@ package objects.player
 				takeDamage(b.damageG);
 				fade.fadeOut(0.2, 0.8, true);
 				SoundSystem.play(soundExplosionm, this.centerX);
-				//Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
-				Explosion(world.create(Explosion)).reset(b.x, b.y, -1, 0xffff00, 5);
+				Explosion(world.create(Explosion)).reset(b.x, b.y, -1, 0xB0B2B2, 5);
 				b.destroy();
 				life = hpG;
 				Stats_Obj.updateStats();
@@ -259,7 +258,7 @@ package objects.player
 		{
 			if (world)
 			{
-				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xffff00);
+				Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, -1, 0xB0B2B2);
 				SoundSystem.play(soundExplosion, this.centerX);
 				super.destroy();
 			}
