@@ -52,7 +52,7 @@ package worlds.objs
 		{
 			if (prevkeys != Input.keyString && Text(selection[0]).text.length < 20)
 			{
-				Text(selection[0]).text += String.fromCharCode(Input.lastKey).toLocaleUpperCase();
+				Text(selection[0]).text += cleanText(Input.lastKey);
 				prevkeys = Input.keyString;
 				
 				Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2;
@@ -84,6 +84,18 @@ package worlds.objs
 				{
 					Text(title).text = "Please provide a name";
 				}
+			}
+		}
+		
+		private function cleanText(value:int):String
+		{
+			var target:String = String.fromCharCode(value).toLocaleUpperCase();
+			if (target >= 'A' && target <= 'Z')
+			{
+				return target;
+			}else 
+			{
+				return '';
 			}
 		}
 		

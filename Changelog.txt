@@ -1,3 +1,7 @@
+Build 64
+
+- In GetName screen the text input now is cleaned.
+
 Build 63
 
 - The player can now continue from pause by "shooting".

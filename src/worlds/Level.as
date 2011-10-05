@@ -208,7 +208,8 @@ package worlds
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
 				timeFromStart.stop();
 				Log.LevelAverageMetric("Won", stage + 1, timeFromStart.currentCount);
-				newObj = new Win_Obj(stage, BulletPlayer.findAcc(), Player.getlife(), brutal)
+				newObj = new Win_Obj(stage, BulletPlayer.findAcc(), Player.getlife(), brutal); // I think i fixed that.
+				// It was the reason the game stops.
 				add(newObj);
 			}
 			
