@@ -42,7 +42,7 @@ package worlds.objs
 				selection.push(new Text(String("You lost with score : " + GlobalVariables.BRUTALSCORE)));
 				selection.push(new Text(String("Better luck next time")));
 				overallBrutalScore = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.BRUTALSCORE);
-				overallBrutalScore.CustomData["Name"] = GlobalVariables.BRUTALSCORE;
+				overallBrutalScore.CustomData["Name"] = GlobalVariables.USERNAME;
 				Leaderboards.Save(overallBrutalScore, "brutalhighscores");
 			}
 			

@@ -15,7 +15,7 @@ package objects.enemies
 		public static var list:Number;
 		public var timeThisWillShoot:Number;
 		private var speedB:uint;
-		private var directionB:int;
+		private var directionB:Number;
 		private var timeElapsed:Number;
 		
 		public function Bonus() 

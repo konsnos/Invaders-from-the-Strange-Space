@@ -12,7 +12,8 @@ package
 	
 	/**
 	 * ...
-	 * @author konsnos
+	 * @author Konstantinos Egarhos
+	 * @version 61
 	 */
 	public class SpaceInvaders extends Engine 
 	{

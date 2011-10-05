@@ -384,8 +384,8 @@ package worlds
 		public function gameEnd():void 
 		{
 			remove(newObj);
-			fade.fadeIn()
-			newObj = new GameWon_Obj(brutal);;
+			fade.fadeIn();
+			newObj = new GameWon_Obj(brutal);
 			add(newObj);
 		}
 		

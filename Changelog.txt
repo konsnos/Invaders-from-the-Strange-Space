@@ -1,3 +1,9 @@
+Build 62
+
+- Fixed a bug saving brutal highscores.
+- Fixed a bug in win screen.
+- Fixed a bug with bonus spawning only from the right.
+
 Build 61
 
 - Fixed the particles to pause when the game is paused.
