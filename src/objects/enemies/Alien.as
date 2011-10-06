@@ -115,6 +115,7 @@ package objects.enemies
 		
 		/**
 		 * Recycles the Alien. Plays the explosion sound and removes 1 from the list.
+		 * Then it calculates the dead ratio to increase the movement speed.
 		 */
 		override public function destroy(points:uint = 0):void 
 		{

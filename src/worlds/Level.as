@@ -87,6 +87,12 @@ package worlds
 			return stage;
 		}
 		
+		/**
+		 * Creates a level world. Sets background color to black. Reset player, enemies and stats.
+		 * @param	selectedlevel The level starting from 1.
+		 * @param	difficulty If the level is normal or brutal.
+		 * @param	hp The starting life of the player.
+		 */
 		public function Level(selectedlevel:uint, difficulty:Boolean = false, hp:uint = 3 ) 
 		{
 			FP.screen.color = 0x000000;
@@ -103,6 +109,9 @@ package worlds
 			GlobalVariables.gameState = GlobalVariables.PREPARING;
 		}
 		
+		/**
+		 * Initiates pause, enemies position and movement, lists, fade screen, volume.
+		 */
 		override public function begin():void 
 		{
 			super.begin();
@@ -112,7 +121,7 @@ package worlds
 			wasPaused = false;
 			
 			resetAllLists();
-			resetAllBullets();
+			resetAllBulletArrays();
 			
 			addGraphic(field);
 			add(new Stats_Obj);
@@ -230,7 +239,7 @@ package worlds
 				Alien.listUpdateS = false;
 			}
 			
-			resetAllBullets();
+			resetAllBulletArrays();
 			calculateEnemiesShots();
 			
 			movement();
@@ -274,11 +283,25 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Changes alien move time according to how many alive are remaining.
+		 * @param	deadRatio The ratio of dead/all to 1.
+		 */
 		public function changeAlienMovSpeed(deadRatio:Number):void 
 		{
-			enemiesMoveTime = deadRatio; 
+			if (brutal)
+			{
+				enemiesMoveTime = deadRatio * 0.6;
+			}else
+			{
+				enemiesMoveTime = deadRatio; 
+			}
+			trace(enemiesMoveTime);
 		}
 		
+		/**
+		 * Resets Actor, Bullets, and Enemies.
+		 */
 		public function resetAllLists():void 
 		{
 			Actor.resetList();
@@ -292,7 +315,10 @@ package worlds
 			Big.resetList();
 		}
 		
-		public function resetAllBullets():void
+		/**
+		 * Resets bullet lists.
+		 */
+		public function resetAllBulletArrays():void
 		{
 			bullets_s = new Array();
 			bullets_m = new Array();
@@ -303,7 +329,7 @@ package worlds
 		}
 		
 		/*
-		 * Checks to see which enemy shoots
+		 * Checks to see which enemy shoots.
 		 */
 		public function calculateEnemiesShots():void
 		{
@@ -365,22 +391,34 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Removes all entities and sets to world to MainMenu.
+		 */
 		public function returnToMainMenu():void 
 		{
 			removeAll();
 			FP.world = new MainMenu;
 		}
 		
+		/**
+		 * Loads a new level world with the next map.
+		 */
 		public function advanceToNextLevel():void 
 		{
 			FP.world = new Level(stage + 2, brutal, player.hpG);
 		}
 		
+		/**
+		 * Restarts the map.
+		 */
 		public function restart():void 
 		{
 			FP.world = new Level(stage + 1);
 		}
 		
+		/**
+		 * Player has won. Shows Won Screen.
+		 */
 		public function gameEnd():void 
 		{
 			remove(newObj);
@@ -389,6 +427,9 @@ package worlds
 			add(newObj);
 		}
 		
+		/**
+		 * Update in case player has won.
+		 */
 		public function wonGame():void 
 		{
 			if (Input.pressed("enter") || Input.mousePressed)
@@ -398,6 +439,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Delaying the level start.
+		 */
 		public function preparing():void 
 		{
 			timeElapsed += FP.elapsed;
@@ -411,6 +455,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Updates in case of Pause. Checks if player wishes to continue or go back to the menu.
+		 */
 		private function paused():void 
 		{
 			if (Input.pressed("pause") || Input.pressed("shoot"))
@@ -427,6 +474,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Updates in case of Win. If this is not the last map, advances to the next or it shows the gamewon screen.
+		 */
 		private function won():void 
 		{
 			if (Input.pressed("enter") || Input.mousePressed)
@@ -445,6 +495,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Updates in case of Lost. Checks if the player wants to restart or go back.
+		 */
 		private function lost():void 
 		{
 			if ((Input.pressed("enter") || Input.mousePressed) && !brutal)
@@ -460,6 +513,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Updates in case of Playing. Checks if pause was pressed, else it updates gameplay.
+		 */
 		private function playing():void 
 		{
 			if (Input.pressed("pause"))
@@ -471,6 +527,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Sets the game in pause state.
+		 */
 		private function pauseGame():void 
 		{
 			GlobalVariables.gameState = GlobalVariables.PAUSE;
@@ -479,6 +538,10 @@ package worlds
 			add(newObj);
 		}
 		
+		/**
+		 * Loads the map from the xml.
+		 * @param	map The xml Class the map has been stored.
+		 */
 		public function loadLevel(map:Class):void 
 		{
 			var xml:XML = FP.getXML(map);
@@ -516,6 +579,9 @@ package worlds
 			Alien.levelList = Alien.list;
 		}
 		
+		/**
+		 * Last frame of the level.
+		 */
 		override public function end():void 
 		{
 			super.end();

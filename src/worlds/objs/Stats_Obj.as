@@ -141,9 +141,10 @@ package worlds.objs
 				stats = new Text(String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + finalScore) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE));
 			}
 			stats.size = 16;
-			stats.align = "left";
+			stats.align = "right";
 			stats.y = FP.height - 20;
-			stats.x = 350;
+			stats.x = FP.width - stats.textWidth;
+			stats.width = stats.textWidth;
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';
 			

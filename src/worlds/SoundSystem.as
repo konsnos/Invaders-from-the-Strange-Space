@@ -32,7 +32,7 @@ package worlds
 		public static function reset():void 
 		{
 			mute = false;
-			volume = 0.5;
+			volume = 0.7;
 			FP.volume = volume;
 			setVolume();
 			fader = new Fader(resetVolume);
