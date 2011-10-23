@@ -11,42 +11,59 @@ package objects
 	
 	/**
 	 * ...
-	 * @author konsnos
+	 * @author Konstantinos Egarhos
 	 */
 	public class FloatingText extends Entity 
 	{
 		public var title:Text;
-		public var speed:Number;
+		public var speed:int;
 		public var image:Image;
 		public var duration:Number;
 		public var timeElapsed:Number;
 		public var alpha:NumTween;
 		
+		/**
+		 * Creates a floating text.
+		 */
 		public function FloatingText() 
 		{
+			title = new Text("");
+			title.font = 'FONT_STATS';
+			speed = 50;
 			super();
 		}
 		
+		/**
+		 * Fades the floating text, and lifts it up.
+		 */
 		override public function update():void 
 		{
 			title.alpha = alpha.value;
-			title.font = 'FONT_STATS';
 			this.y -= speed * FP.elapsed;
 		}
 		
+		/**
+		 * Recycles the floating text.
+		 */
 		public function disappeared():void 
 		{
 			FP.world.recycle(this);
 		}
 		
+		/**
+		 * Resets the floating text.
+		 * @param	x Location in the x (right-left) axis.
+		 * @param	y Location in the y (top-bottom) axis.
+		 * @param	text The number concatenated with a '+' in front.
+		 * @param	duration The time it takes to fade out.
+		 */
 		public function reset(x:Number,y:Number, text:String, duration:Number=0.6):void 
 		{
-			title = new Text("+" + text);
+			title.text = String("+" + text);
 			this.duration = duration;
 			timeElapsed = 0;
-			title.size = 18;
 			title.color = 0x999999;
-			speed = 50;
+			title.size = 18;
 			alpha = new NumTween(disappeared);
 			alpha.tween(1, 0, duration, Ease.cubeIn);
 			addTween(alpha);

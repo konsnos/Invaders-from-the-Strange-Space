@@ -2,8 +2,8 @@ package objects.enemies
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import objects.bullets.Bullet;
-	import objects.bullets.BulletEnemy;
 	import objects.Explosion;
 	/**
 	 * ...
@@ -20,7 +20,9 @@ package objects.enemies
 		
 		public function Bonus() 
 		{
-			graphic = image = new Image(GlobalVariables.IMG_ENEMY_B);
+			sprite = new Spritemap(GlobalVariables.IMG_ENEMY_B, 32, 32);
+			sprite.smooth = true;
+			sprite.add("idle", [0], 1, false);
 			
 			listUpdateS = false;
 			
@@ -29,11 +31,12 @@ package objects.enemies
 			
 			super();
 			
-			width = image.width * image.scale;
-			height = image.height * image.scale;
+			setHitbox(sprite.width, sprite.height - 14, 0, -6);
 			
 			layer = 0;
 			type = "Bonus";
+			graphic = sprite;
+			sprite.play("idle");
 		}
 		
 		override public function update():void 
@@ -104,8 +107,7 @@ package objects.enemies
 		 */
 		override public function spawnBullet(x:Number, y:Number):void
 		{
-			// Fix it
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 500, 3, GlobalVariables.IMG_BULLET, "Bullet_Enem_Bonus");
+			Bullet(world.create(Bullet)).reset(x, y, 500, 3, "Bullet_Enem_Bonus");
 		}
 		
 		/**
@@ -150,7 +152,7 @@ package objects.enemies
 		{
 			Bonus.list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8c8c71);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8dc61c);
 			super.destroy(points);
 		}
 		

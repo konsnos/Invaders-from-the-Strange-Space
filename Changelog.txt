@@ -1,3 +1,23 @@
+Build 70
+- Made the menu clickable with mouse.
+
+Build 69 - Relase Candidate
+- Changed small, medium, and bonus enemies images.
+- Documented code
+- Cleaned code
+
+Build 68
+
+- Changed the bullets' image with a spritesheet.
+- Erased classes of player and enemie bullets.
+
+Build 67
+
+- Fixed the placement of the stats at the right.
+- In brutal the enemies accelarate faster.
+- Documented a lot of functions.
+- Made the code cleaner.
+
 Build 66 - Beta 03
 
 - Fixed a bug in the win screen when the player didn't have a previous score.

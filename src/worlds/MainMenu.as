@@ -1,5 +1,6 @@
 package worlds 
 {
+	import flash.ui.Mouse;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Sfx;
@@ -43,7 +44,7 @@ package worlds
 		override public function begin():void 
 		{
 			super.begin();
-			
+			Mouse.show();
 			objsArray = new Array;
 			
 			if (GlobalVariables.USERNAME == null)

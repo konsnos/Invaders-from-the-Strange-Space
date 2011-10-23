@@ -52,7 +52,7 @@ package worlds.objs
 			selection.push(new Text(String("How to play")));
 			selection.push(new Text(String("About")));
 			
-			for (var i:Number = 0; i < selection.length; i++)
+			for (var i:uint = 0; i < selection.length; i++)
 			{
 				Text(selection[i]).font = 'FONT_CHOICE';
 				Text(selection[i]).size = 16;
@@ -74,31 +74,21 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			if (selected == null && updates)
+			/*if (selected == null && updates)
 			{
-				CheckInput();
-			}
+				checkInput();
+			}*/
+			super.update()
 		}
 		
 		/**
 		 * Checks the input.
 		 */
-		public function CheckInput():void 
+		override public function checkInput():void 
 		{
-			if (Input.pressed("down"))
-			{
-				Text(selection[choiceG]).alpha = 0.5;
-				choiceS = 1;
-				Text(selection[choiceG]).alpha = 1;
-			}
-			else if (Input.pressed("up"))
-			{
-				Text(selection[choiceG]).alpha = 0.5;
-				choiceS = -1;
-				Text(selection[choiceG]).alpha = 1;
-			}
+			super.checkInput();
 			
-			if (Input.pressed("enter"))
+			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				switch (choiceG)
 				{

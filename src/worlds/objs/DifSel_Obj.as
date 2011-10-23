@@ -61,26 +61,14 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			if (selected == null && updates)
-			{
-				CheckInput();
-			}
+			super.update();
 		}
 		
-		public function CheckInput():void 
+		override public function checkInput():void 
 		{
-			if (Input.pressed("down"))
-			{
-				Text(selection[choiceG]).alpha = 0.5;
-				choiceS = 1;
-				Text(selection[choiceG]).alpha = 1;
-			}
-			else if (Input.pressed("up"))
-			{
-				Text(selection[choiceG]).alpha = 0.5;
-				choiceS = -1;
-				Text(selection[choiceG]).alpha = 1;
-			}else if (Input.pressed("enter"))
+			super.checkInput();
+			
+			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				switch (choiceG)
 				{

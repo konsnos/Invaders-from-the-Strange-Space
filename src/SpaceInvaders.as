@@ -13,7 +13,7 @@ package
 	/**
 	 * ...
 	 * @author Konstantinos Egarhos
-	 * @version 61
+	 * @version 70
 	 */
 	public class SpaceInvaders extends Engine 
 	{
@@ -22,8 +22,8 @@ package
 		{
 			super(640, 480);
 			
-			Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
-			//Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
+			//Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
+			Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
 		}
 		
 		override public function init():void 
@@ -31,7 +31,7 @@ package
 			super.init();
 			
 			Mouse.hide();
-			GlobalVariables.MOUSE = false;
+			//GlobalVariables.MOUSE = false;
 			//FP.console.enable();
 			
 			Input.define("right", Key.RIGHT, Key.D);

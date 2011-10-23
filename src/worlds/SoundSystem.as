@@ -1,12 +1,11 @@
 package worlds 
 {
-	import flash.events.KeyboardEvent;
 	import net.flashpunk.FP;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.sound.Fader;
 	/**
 	 * ...
-	 * @author konsnos
+	 * @author Konstantinos Egarhos
 	 */
 	public class SoundSystem
 	{
@@ -21,33 +20,44 @@ package worlds
 			return mute;
 		}
 		
+		/**
+		 * Constructor of a static class.
+		 */
 		public function SoundSystem() 
 		{
 			
 		}
 		
 		/**
-		 * Sets mute to false, and volume to max volume.
+		 * Sets mute to false, and volume to 0.7.
 		 */
 		public static function reset():void 
 		{
 			mute = false;
 			volume = 0.7;
-			FP.volume = volume;
 			setVolume();
 			fader = new Fader(resetVolume);
 		}
 		
+		/**
+		 * Resets volume.
+		 */
 		public static function resetVolume():void 
 		{
 			FP.volume = volume;
 		}
 		
+		/**
+		 * Adds the fader(in case the world is changed).
+		 */
 		public static function addFader():void
 		{
 			FP.world.addTween(fader);
 		}
 		
+		/**
+		 * Sets the volume, or if it's muted it zeroes it.
+		 */
 		public static function setVolume():void 
 		{
 			if (mute)
@@ -84,7 +94,7 @@ package worlds
 		 * @param	snd The sound you want to hear.
 		 * @param	xPos The source of the sound in the x axis for panning.
 		 */
- 		public static function play(snd:Sfx, xPos:Number = 400):void 
+ 		public static function play(snd:Sfx, xPos:Number = 320):void 
 		{
 			if (!mute)
 			{
@@ -97,7 +107,7 @@ package worlds
 		 * @param	snd The sound you want to hear.
 		 * @param	xPos The source of the sound in the x axis for panning.
 		 */
-		public static function loop(snd:Sfx, xPos:Number = 400):void 
+		public static function loop(snd:Sfx, xPos:Number = 320):void 
 		{
 			if (!mute)
 			{
@@ -129,6 +139,11 @@ package worlds
 			setVolume();
 		}
 		
+		/**
+		 * Increases/decreases gradually to targetVolume all the sounds.
+		 * @param	targetVolume The volume to be set.
+		 * @param	time The duration the change will take.
+		 */
 		public static function fadeOut(targetVolume:Number, time:Number):void 
 		{
 			fader.fadeTo(targetVolume, time);

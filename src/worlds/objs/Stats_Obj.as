@@ -6,7 +6,7 @@ package worlds.objs
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
-	import objects.bullets.BulletPlayer;
+	import objects.bullets.Bullet;
 	import objects.player.Player;
 	import Playtomic.Leaderboards;
 	import Playtomic.PlayerScore;
@@ -100,7 +100,7 @@ package worlds.objs
 		
 		public static function calculateBonusScores():void 
 		{
-			acc = uint(score * BulletPlayer.findAcc());
+			acc = uint(score * Bullet.findAcc());
 			life = uint(Player.getlife() * (level * 8));
 			finalScore = score + acc + life;
 		}
@@ -128,7 +128,7 @@ package worlds.objs
 		
 		public static function updateAcc():void 
 		{
-			playerlife.text = String("Life:       - Accuracy: " + uint(BulletPlayer.findAcc()*100) + "%");
+			playerlife.text = String("Life:       - Accuracy: " + uint(Bullet.findAcc()*100) + "%");
 		}
 		
 		private function showStats():void 

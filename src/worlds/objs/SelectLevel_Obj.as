@@ -85,10 +85,7 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			if (selected == null && updates == true)
-			{
-				CheckInput();
-			}
+			super.update()
 			
 			if (updating)
 			{
@@ -105,7 +102,7 @@ package worlds.objs
 			}
 		}
 		
-		public function CheckInput():void 
+		override public function checkInput():void 
 		{
 			if (Input.check("down") && !updating && choiceG != selection.length - 1)
 			{
@@ -132,7 +129,7 @@ package worlds.objs
 				Text(selection[choiceG][2]).alpha = 1;
 			}
 			
-			if (Input.pressed("enter") && !updating)
+			if ((Input.pressed("enter") || Input.mousePressed) && !updating)
 			{
 				fadeOut = true;
 				updates = false;

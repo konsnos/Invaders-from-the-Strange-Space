@@ -2,11 +2,9 @@ package objects.enemies
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
-	import net.flashpunk.Sfx;
-	import objects.bullets.BulletPlayer;
+	import net.flashpunk.graphics.Spritemap;
 	import objects.Explosion;
 	import objects.bullets.Bullet;
-	import objects.bullets.BulletEnemy;
 	import GlobalVariables;
 	/**
 	 * ...
@@ -32,7 +30,9 @@ package objects.enemies
 		
 		public function Small()
 		{
-			graphic = image = new Image(GlobalVariables.IMG_ENEMY_S);
+			sprite = new Spritemap(GlobalVariables.IMG_ENEMY_S, 32, 32);
+			sprite.smooth = true;
+			sprite.add("idle", [0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 5], 16, true);
 			
 			listUpdateS = false;
 			
@@ -40,8 +40,10 @@ package objects.enemies
 			
 			hpS = 1;
 			
-			width = image.width;
-			height = image.height;
+			setHitbox(sprite.width - 12, sprite.height - 4, -6, -1);
+			
+			graphic = sprite;
+			sprite.play("idle");
 			
 			type = "Small";
 		}
@@ -62,7 +64,17 @@ package objects.enemies
 		{
 			if (GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
+				if (sprite.locked)
+				{
+					sprite.unlock();
+				}
 				CheckIfShot();
+			}else if (GlobalVariables.gameState == GlobalVariables.PAUSE)
+			{
+				if (!sprite.locked)
+				{
+					sprite.lock();
+				}
 			}
 		}
 		
@@ -96,7 +108,7 @@ package objects.enemies
 		{
 			list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x7138c6, 10);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x8d388d, 10);
 			if (list % 10 == 0)
 			{
 				Small.calculateMaxShots();
@@ -106,7 +118,7 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 250, 1, GlobalVariables.IMG_BULLET, "Bullet_Enem_Small");
+			Bullet(world.create(Bullet)).reset(x, y, 250, 1, "Bullet_Enem_Small");
 		}
 	}
 	

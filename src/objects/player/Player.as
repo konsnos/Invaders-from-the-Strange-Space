@@ -17,14 +17,12 @@ package objects.player
 	import net.flashpunk.utils.Key;
 	import objects.enemies.Small;
 	import worlds.objs.BlackScreen;
+	import worlds.objs.Lost_Obj;
 	import worlds.objs.Stats_Obj;
 	import worlds.SoundSystem;
-	
-	import worlds.objs.Lost_Obj;
 	import worlds.Level;
 	import objects.Actor;
 	import objects.Explosion;
-	import objects.bullets.BulletPlayer;
 	import objects.bullets.Bullet;
 	import objects.enemies.Small;
 	import GlobalVariables;
@@ -73,7 +71,7 @@ package objects.player
 			
 			speed = 300;
 			
-			type = "player";
+			type = "Player";
 			
 			BulletsMax = 3;
 			
@@ -217,13 +215,12 @@ package objects.player
 		 */
 		public function shoot():void 
 		{
-			if (BulletPlayer.list < BulletsMax )
+			if (Bullet.listP < BulletsMax )
 			{
  				SoundSystem.play(soundShoot, this.centerX);
 				recoilY.tween(400, 405, 0.1, Ease.backOut);
 				recoilY.complete = recoilCompleted;
 				spawnBullet(this.x + image.width / 2, this.y);
-				BulletPlayer.bulletsShot++;
 			}
 		}
 		
@@ -235,7 +232,7 @@ package objects.player
 		
 		public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletPlayer(world.create(BulletPlayer)).reset(x, y, -700, 1, GlobalVariables.IMG_BULLET_PLAYER, "bullet_P");
+			Bullet(world.create(Bullet)).reset(x, y, -700, 1, "Bullet_P");
 		}
 		
 		public function checkIfShot():void

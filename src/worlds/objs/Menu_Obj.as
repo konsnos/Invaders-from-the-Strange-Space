@@ -3,9 +3,10 @@ package worlds.objs
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Graphiclist;
+	import net.flashpunk.utils.Input;
 	/**
 	 * ...
-	 * @author ...
+	 * @author Konstantinos Egarhos
 	 */
 	public class Menu_Obj extends Entity 
 	{
@@ -24,7 +25,7 @@ package worlds.objs
 		{
 			return choice;
 		}
-		protected function set choiceS(setValue:Number):void 
+		protected function set choiceS(setValue:int):void 
 		{
 			if (setValue == 0)
 			{
@@ -41,6 +42,10 @@ package worlds.objs
 				}
 			}
 		}
+		protected function set choiceSM(setValue:int):void 
+		{
+			choice = setValue;
+		}
 		public function get selectedG():Menu_Obj 
 		{
 			return selected;
@@ -54,6 +59,57 @@ package worlds.objs
 		{
 			selected = null;
 			updates = true;
+		}
+		
+		override public function update():void 
+		{
+			if (selected == null && updates)
+			{
+				checkInput();
+			}
+		}
+		
+		/**
+		 * Checks the input.
+		 */
+		public function checkInput():void 
+		{
+			if (Input.pressed("down"))
+			{
+				Text(selection[choiceG]).alpha = 0.5;
+				choiceS = 1;
+				Text(selection[choiceG]).alpha = 1;
+			}
+			else if (Input.pressed("up"))
+			{
+				Text(selection[choiceG]).alpha = 0.5;
+				choiceS = -1;
+				Text(selection[choiceG]).alpha = 1;
+			}
+			
+			for (var i:uint = 0; i < selection.length; i++)
+			{
+				if (Input.mouseX >= Text(selection[i]).x && Input.mouseX <=  Text(selection[i]).width + Text(selection[i]).x)
+				{
+					if (Input.mouseY >= Text(selection[i]).y && Input.mouseY <=  Text(selection[i]).height + Text(selection[i]).y)
+					{
+						if (choiceG != i)
+						{
+							for (var j:uint = 0; j < selection.length; j++)
+							{
+								if (j != i)
+								{
+									Text(selection[j]).alpha = 0.5;
+								}else
+								{
+									Text(selection[j]).alpha = 1;
+									choiceSM = j;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		
 	}

@@ -37,6 +37,11 @@ package worlds.objs
 			graphic = menu;
 		}
 		
+		override public function update():void 
+		{
+			
+		}
+		
 	}
 
 }

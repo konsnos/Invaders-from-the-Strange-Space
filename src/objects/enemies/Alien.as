@@ -8,8 +8,6 @@ package objects.enemies
 	import net.flashpunk.Sfx;
 	import objects.Actor;
 	import objects.bullets.Bullet;
-	import objects.bullets.BulletEnemy;
-	import objects.bullets.BulletPlayer;
 	import objects.FloatingText;
 	import worlds.Level;
 	import worlds.objs.Stats_Obj;
@@ -17,7 +15,7 @@ package objects.enemies
 	
 	/**
 	 * ...
-	 * @author konsnos
+	 * @author Konstantinos Egarhos
 	 */
 	public class Alien extends Actor 
 	{
@@ -77,7 +75,7 @@ package objects.enemies
 		
 		public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 350,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Small");
+			// Overriden.
 		}
 		
 		public function walkOn(speed:uint, direction:int):void 
@@ -97,12 +95,12 @@ package objects.enemies
 		
 		public function CheckIfShot():void 
 		{
-			var b:Bullet = collide("bullet_P", x, y) as Bullet;
+			var b:Bullet = collide("Bullet_P", x, y) as Bullet;
 			
 			if (b)
 			{
  				takeDamage(b.damageG);
-				BulletPlayer.bulletsHitT++;
+				Bullet.bulletsHitT++;
 				b.destroy();
 			}
 		}

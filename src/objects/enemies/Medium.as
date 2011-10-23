@@ -2,9 +2,8 @@ package objects.enemies
 {
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
-	import net.flashpunk.Sfx;
+	import net.flashpunk.graphics.Spritemap;
 	import objects.bullets.Bullet;
-	import objects.bullets.BulletEnemy;
 	import objects.Explosion;
 	/**
 	 * ...
@@ -31,16 +30,19 @@ package objects.enemies
 		
 		public function Medium() 
 		{
-			graphic = image = new Image(GlobalVariables.IMG_ENEMY_M);
+			sprite = new Spritemap(GlobalVariables.IMG_ENEMY_M, 32, 32);
+			sprite.smooth = true;
+			sprite.add("idle", [0], 1, false);
 			
 			listUpdateS = false;
 			
 			super();
 			
-			width = image.width;
-			height = image.height;
+			setHitbox(sprite.width - 6, sprite.height - 10, -3, -5);
 			
 			type = "Medium";
+			graphic = sprite;
+			sprite.play("idle");
 		}
 		
 		override public function reset(x:Number, y:Number):void 
@@ -65,7 +67,7 @@ package objects.enemies
 		
 		override public function spawnBullet(x:Number, y:Number):void 
 		{
-			BulletEnemy(world.create(BulletEnemy)).reset(x, y, 300,1,GlobalVariables.IMG_BULLET,"Bullet_Enem_Medium");
+			Bullet(world.create(Bullet)).reset(x, y, 300, 1, "Bullet_Enem_Medium");
 		}
 		
 		public static function resetList():void // Total number of entities existing.
@@ -98,7 +100,7 @@ package objects.enemies
 		{
 			list--;
 			listUpdateS = true;
-			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0x0044b5, 10);
+			Explosion(world.create(Explosion)).reset(this.x + this.halfWidth, this.y + this.halfHeight, 1, 0xe28d38, 10);
 			if (list % 5 == 0)
 			{
 				Small.calculateMaxShots();

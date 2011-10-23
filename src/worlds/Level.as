@@ -2,6 +2,7 @@ package worlds
 {
 	import flash.display.BitmapData;
 	import flash.events.TimerEvent;
+	import flash.ui.Mouse;
 	import flash.utils.Timer;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -15,8 +16,6 @@ package worlds
 	import net.flashpunk.utils.Key;
 	import objects.Actor;
 	import objects.bullets.Bullet;
-	import objects.bullets.BulletEnemy;
-	import objects.bullets.BulletPlayer;
 	import objects.enemies.Alien;
 	import objects.enemies.Big;
 	import objects.enemies.Bonus;
@@ -95,6 +94,14 @@ package worlds
 		 */
 		public function Level(selectedlevel:uint, difficulty:Boolean = false, hp:uint = 3 ) 
 		{
+			if (!GlobalVariables.MOUSE)
+			{
+				Mouse.hide();
+			}else
+			{
+				Mouse.show();
+			}
+			
 			FP.screen.color = 0x000000;
 			timeElapsed = 0;
 			changeLine = false;
@@ -211,12 +218,12 @@ package worlds
 				add(newObj);
 			}
 			
-			if(Alien.list == 0 && BulletEnemy.list == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
+			if(Alien.list == 0 && Bullet.listEnem == 0 && GlobalVariables.gameState == GlobalVariables.PLAYING)
 			{
 				GlobalVariables.gameState = GlobalVariables.WIN; // WIN!!!
 				timeFromStart.stop();
 				Log.LevelAverageMetric("Won", stage + 1, timeFromStart.currentCount);
-				newObj = new Win_Obj(stage, BulletPlayer.findAcc(), Player.getlife(), brutal); // I think i fixed that.
+				newObj = new Win_Obj(stage, Bullet.findAcc(), Player.getlife(), brutal); // I think i fixed that.
 				// It was the reason the game stops.
 				add(newObj);
 			}
@@ -296,7 +303,6 @@ package worlds
 			{
 				enemiesMoveTime = deadRatio; 
 			}
-			trace(enemiesMoveTime);
 		}
 		
 		/**
@@ -305,10 +311,8 @@ package worlds
 		public function resetAllLists():void 
 		{
 			Actor.resetList();
-			Bullet.resetList();
-			BulletEnemy.resetList();
-			BulletPlayer.resetList();
-			BulletPlayer.resetBulletsAcc();
+			Bullet.resetLists();
+			Bullet.resetBulletsAcc();
 			Alien.resetList();
 			Small.resetList();
 			Medium.resetList();
