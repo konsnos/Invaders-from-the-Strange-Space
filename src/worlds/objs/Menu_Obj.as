@@ -17,11 +17,12 @@ package worlds.objs
 		public var updates:Boolean; // When false the player can't press enter to choose the same option.
 		protected var menu:Graphiclist;
 		private var choice:Number = 1;
+		protected var focus:Boolean; // To lose focus if no choice has been selected.
 		public var fadeIn:Boolean;
 		public var fadeOut:Boolean;
 		
 		// Gets-Sets
-		protected function get choiceG():Number
+		public function get choiceG():Number
 		{
 			return choice;
 		}
@@ -87,12 +88,16 @@ package worlds.objs
 				Text(selection[choiceG]).alpha = 1;
 			}
 			
+			focus = false;
+			
 			for (var i:uint = 0; i < selection.length; i++)
 			{
 				if (Input.mouseX >= Text(selection[i]).x && Input.mouseX <=  Text(selection[i]).width + Text(selection[i]).x)
 				{
 					if (Input.mouseY >= Text(selection[i]).y && Input.mouseY <=  Text(selection[i]).height + Text(selection[i]).y)
 					{
+						focus = true;
+						
 						if (choiceG != i)
 						{
 							for (var j:uint = 0; j < selection.length; j++)
@@ -110,8 +115,42 @@ package worlds.objs
 					}
 				}
 			}
+			if (back != null)
+			{
+				if (Input.mouseX >= Text(back).x && Input.mouseX <= Text(back).x + Text(back).width)
+				{
+					if (Input.mouseY >= Text(back).y && Input.mouseY <= Text(back).y + Text(back).height)
+					{
+						focus = true;
+						if (Text(back).alpha != 1)
+						{
+							Text(back).alpha = 1;
+							choiceSM = 50;
+						}
+					}else
+					{
+						if (Text(back).alpha != 0.5)
+						{
+							Text(back).alpha = 0.5;
+						}
+					}
+				}
+			}
+			
+			if (!focus)
+			{
+				for (var d:uint = 0; j < selection.length; j++)
+				{
+					if (Text(selection[j]).alpha != 0.5)
+					{
+						Text(selection[j]).alpha = 0.5;
+					}
+				}
+				if (choiceG != 100)
+				{
+					choiceSM = 100;
+				}
+			}
 		}
-		
 	}
-
 }

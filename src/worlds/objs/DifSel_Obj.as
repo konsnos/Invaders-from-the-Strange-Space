@@ -42,7 +42,7 @@ package worlds.objs
 				menu.add(selection[i]);
 			}
 			
-			back = new Text(String("Press Backspace to return"));
+			back = new Text(String("back"));
 			Text(back).font = 'FONT_CHOICE';
 			Text(back).size = 10;
 			Text(back).x = 5;
@@ -51,7 +51,7 @@ package worlds.objs
 			Text(back).alpha = 1;
 			menu.add(back);
 			
-			Text(selection[0]).alpha = 1;
+			Text(selection[0]).alpha = 0.5;
 			
 			fadeIn = fadeOut = false;
 			

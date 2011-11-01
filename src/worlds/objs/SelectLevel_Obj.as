@@ -65,7 +65,7 @@ package worlds.objs
 				menu.add(selection[i][2]);
 			}
 			
-			back = new Text(String("Press Backspace to return"));
+			back = new Text(String("back"));
 			Text(back).font = 'FONT_CHOICE';
 			Text(back).size = 10;
 			Text(back).x = 5;

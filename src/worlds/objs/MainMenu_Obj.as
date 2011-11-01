@@ -74,10 +74,6 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			/*if (selected == null && updates)
-			{
-				checkInput();
-			}*/
 			super.update()
 		}
 		

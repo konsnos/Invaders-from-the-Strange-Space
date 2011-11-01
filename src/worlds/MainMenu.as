@@ -161,7 +161,7 @@ package worlds
 					prevTween.tween(instance.x, instance.x - FP.width, 1, Ease.quartInOut);
 					updating = true;
 				}
-			}else if (Input.pressed("back") && objsArray.length > 0 && !updating)
+			}else if ((Input.pressed("back") || (Input.mousePressed && instance.choiceG == 50)) && objsArray.length > 0 && !updating)
 			{
 				nextInstance = instance.selectedS = objsArray[objsArray.length -1];
 				nextInstance.updates = true;

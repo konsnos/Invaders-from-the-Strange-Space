@@ -1,7 +1,10 @@
+Build 71 - Relase Candidate
+- Made possible to return to the previous menu by pressing the back option.
+
 Build 70
 - Made the menu clickable with mouse.
 
-Build 69 - Relase Candidate
+Build 69
 - Changed small, medium, and bonus enemies images.
 - Documented code
 - Cleaned code

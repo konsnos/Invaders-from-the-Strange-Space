@@ -4,6 +4,7 @@ package worlds.objs
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Text;
+	import net.flashpunk.utils.Input;
 	/**
 	 * ...
 	 * @author konsnos
@@ -48,13 +49,13 @@ package worlds.objs
 				menu.add(selection[i]);
 			}
 			
-			back = new Text(String("Press Backspace to return"));
+			back = new Text(String("back"));
 			Text(back).font = 'FONT_CHOICE';
 			Text(back).size = 10;
 			Text(back).x = 5;
 			Text(back).y = FP.height - (Text(back).height);
 			Text(back).color = 0x006400;
-			Text(back).alpha = 1;
+			Text(back).alpha = 0.5;
 			menu.add(back);
 			
 			graphic = menu;
@@ -62,7 +63,28 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			
+			if (back != null)
+			{
+				if (Input.mouseX >= Text(back).x && Input.mouseX <= Text(back).x + Text(back).width)
+				{
+					if (Input.mouseY >= Text(back).y && Input.mouseY <= Text(back).y + Text(back).height)
+					{
+						focus = true;
+						if (Text(back).alpha != 1)
+						{
+							Text(back).alpha = 1;
+							choiceSM = 50;
+							trace(choiceG)
+						}
+					}else
+					{
+						if (Text(back).alpha != 0.5)
+						{
+							Text(back).alpha = 0.5;
+						}
+					}
+				}
+			}
 		}
 		
 	}

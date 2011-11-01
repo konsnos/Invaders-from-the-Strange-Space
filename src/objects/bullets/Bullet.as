@@ -127,6 +127,8 @@ package objects.bullets
 			}else if (this.type == "Bullet_P")
 			{
 				listP--;
+				Stats_Obj.updateAcc();
+				Stats_Obj.updateStatsText();
 			}
 			Bullet.list--;
 		}
