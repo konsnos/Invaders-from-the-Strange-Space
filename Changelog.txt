@@ -1,4 +1,7 @@
-Build 71 - Relase Candidate
+Build 72 - Relase Candidate
+- Changed back the bullets assets but in spritesheet.
+
+Build 71
 - Made possible to return to the previous menu by pressing the back option.
 
 Build 70

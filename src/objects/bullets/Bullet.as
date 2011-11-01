@@ -21,7 +21,7 @@ package objects.bullets
 		public static var listEnemB:uint;
 		public static var listEnemBon:uint;
 		public static var listP:uint; // Player bullets
-		protected var sprite:Spritemap = new Spritemap(GlobalVariables.IMG_BULLET, 2, 6);
+		protected var sprite:Spritemap = new Spritemap(GlobalVariables.IMG_BULLET, 3, 7);
 		protected var speed:int;
 		protected var damage:uint;
 		

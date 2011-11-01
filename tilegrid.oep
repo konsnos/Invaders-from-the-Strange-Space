@@ -1,5 +1,5 @@
 <project>
-	<name>Space Invaders example project</name>
+	<name>Invaders from the Strange Space editor</name>
 	
 	<settings>
 		<defaultWidth>640</defaultWidth>
@@ -11,14 +11,14 @@
 	</values>
 	
 	<tilesets>
-		<tileset name="small" image="assets/images/small_enemy.png" tileWidth="31" tileHeight="25"/>
-		<tileset name="medium" image="assets/images/medium_enemy.png" tileWidth="36" tileHeight="20"/>
-		<tileset name="big" image="assets/images/big_enemy.png" tileWidth="38" tileHeight="27"/>
-		<tileset name="bonus" image="assets/images/bonus_enemy.png" tileWidth="63" tileHeight="32"/>
+		<tileset name="small" image="assets/images/enemySmall_32x32.png" tileWidth="31" tileHeight="25"/>
+		<tileset name="medium" image="assets/images/enemyMedium_32x32.png" tileWidth="36" tileHeight="20"/>
+		<tileset name="big" image="assets/images/enemyBig_32x32.gif" tileWidth="38" tileHeight="27"/>
+		<tileset name="bonus" image="assets/images/enemyBonus_32x32.png" tileWidth="63" tileHeight="32"/>
 	</tilesets>
 	
 	<objects>
-		<object name="player" image="assets/images/player.png" width="60" height="60" limit="1"/>
+		<object name="player" image="assets/images/playerShip_64x64.gif" width="60" height="60" limit="1"/>
 	</objects>
 	
 	<layers>

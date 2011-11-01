@@ -1,8 +1,8 @@
 Invaders from the Strange Space (ISS) is a clone of Space Invaders but slightly different and with more features.
 
-Build 66 - RC
+Build 72 - RC
 
 NEW FEATURES
 
-- Changed bullets' image.
+- Players are now able to use mouse in the menus.
 - Performance improvements.
