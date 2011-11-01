@@ -31,7 +31,6 @@ package
 			super.init();
 			
 			Mouse.hide();
-			//GlobalVariables.MOUSE = false;
 			//FP.console.enable();
 			
 			Input.define("right", Key.RIGHT, Key.D);

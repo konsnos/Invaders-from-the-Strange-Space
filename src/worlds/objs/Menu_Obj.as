@@ -13,6 +13,7 @@ package worlds.objs
 		protected var title:Text;
 		protected var selection:Array;
 		protected var back:Text;
+		protected var returnBack:Boolean;
 		protected var selected:Menu_Obj;
 		public var updates:Boolean; // When false the player can't press enter to choose the same option.
 		protected var menu:Graphiclist;
@@ -22,6 +23,10 @@ package worlds.objs
 		public var fadeOut:Boolean;
 		
 		// Gets-Sets
+		public function get returnBackG():Boolean 
+		{
+			return returnBack;
+		}
 		public function get choiceG():Number
 		{
 			return choice;
@@ -42,10 +47,12 @@ package worlds.objs
 					choice = selection.length -1;
 				}
 			}
+			trace(choice)
 		}
 		protected function set choiceSM(setValue:int):void 
 		{
 			choice = setValue;
+			trace(choice)
 		}
 		public function get selectedG():Menu_Obj 
 		{
@@ -60,6 +67,7 @@ package worlds.objs
 		{
 			selected = null;
 			updates = true;
+			returnBack = false;
 		}
 		
 		override public function update():void 
@@ -125,13 +133,14 @@ package worlds.objs
 						if (Text(back).alpha != 1)
 						{
 							Text(back).alpha = 1;
-							choiceSM = 50;
+							returnBack = true;
 						}
 					}else
 					{
 						if (Text(back).alpha != 0.5)
 						{
 							Text(back).alpha = 0.5;
+							returnBack = false;
 						}
 					}
 				}

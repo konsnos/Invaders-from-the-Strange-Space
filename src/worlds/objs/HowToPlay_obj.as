@@ -73,7 +73,7 @@ package worlds.objs
 						if (Text(back).alpha != 1)
 						{
 							Text(back).alpha = 1;
-							choiceSM = 50;
+							returnBack = true;
 							trace(choiceG)
 						}
 					}else
@@ -81,6 +81,7 @@ package worlds.objs
 						if (Text(back).alpha != 0.5)
 						{
 							Text(back).alpha = 0.5;
+							returnBack = false;
 						}
 					}
 				}

@@ -81,7 +81,7 @@ package worlds.objs
 		{
 			super.checkInput();
 			
-		if (Input.pressed("enter") || Input.mousePressed)
+			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				switch (choiceG) 
 				{

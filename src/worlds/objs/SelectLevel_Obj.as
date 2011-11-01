@@ -71,7 +71,7 @@ package worlds.objs
 			Text(back).x = 5;
 			Text(back).y = FP.height - (Text(back).height);
 			Text(back).color = 0x006400;
-			Text(back).alpha = 1;
+			Text(back).alpha = 0.5;
 			menu.add(back);
 			
 			prevTween = new NumTween(updated);
@@ -104,7 +104,7 @@ package worlds.objs
 		
 		override public function checkInput():void 
 		{
-			if (Input.check("down") && !updating && choiceG != selection.length - 1)
+			if ((Input.check("down") || (Input.mouseY > FP.height / 4 * 3)) && !updating && choiceG != selection.length - 1)
 			{
 				prevTween.tween(Text(selection[0][0]).y, Text(selection[0][0]).y - FP.height / 5, 0.3, Ease.sineInOut);
 				updating = true;
@@ -116,7 +116,7 @@ package worlds.objs
 				Text(selection[choiceG][1]).alpha = 1;
 				Text(selection[choiceG][2]).alpha = 1;
 			}
-			else if (Input.check("up") && !updating && choiceG != 0)
+			else if (Input.check("up") || (Input.mouseY < FP.height / 4) && !updating && choiceG != 0)
 			{
 				prevTween.tween(Text(selection[0][0]).y, Text(selection[0][0]).y + FP.height / 5, 0.3, Ease.sineInOut);
 				updating = true;
@@ -129,11 +129,40 @@ package worlds.objs
 				Text(selection[choiceG][2]).alpha = 1;
 			}
 			
-			if ((Input.pressed("enter") || Input.mousePressed) && !updating)
+			if ((Input.pressed("enter") || Input.mousePressed) && !updating && !returnBackG)
 			{
 				fadeOut = true;
 				updates = false;
 				FP.alarm(1, startLevel);
+			}
+			
+			if (back != null)
+			{
+				if (Input.mouseX >= Text(back).x && Input.mouseX <= Text(back).x + Text(back).width)
+				{
+					if (Input.mouseY >= Text(back).y && Input.mouseY <= Text(back).y + Text(back).height)
+					{
+						focus = true;
+						if (Text(back).alpha != 1)
+						{
+							Text(back).alpha = 1;
+							if (!returnBackG)
+							{
+								returnBack = true;
+							}
+						}
+					}else
+					{
+						if (Text(back).alpha != 0.5)
+						{
+							Text(back).alpha = 0.5;
+						}
+						if (returnBackG)
+						{
+							returnBack = false;
+						}
+					}
+				}
 			}
 		}
 		
