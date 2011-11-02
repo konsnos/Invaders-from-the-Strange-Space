@@ -1,4 +1,10 @@
-Build 72 - Relase Candidate
+Build 74 - 1.1 version
+- Fixed a bug where the keyboard keys would hung the menu.
+
+Build 73 - Release Candidate 1.0 version
+- Fixed the level selection with the mouse.
+
+Build 72
 - Changed back the bullets assets but in spritesheet.
 
 Build 71
