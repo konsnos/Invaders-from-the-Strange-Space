@@ -13,15 +13,12 @@ package
 	public class GlobalVariables 
 	{
 		/****************** IMAGES ******************/
-		//[Embed(source = '../assets/images/player.png')] public static const IMG_PLAYER:Class;
 		[Embed(source = "../assets/images/playerShip_64x64.gif")] public static const IMG_PLAYER:Class;
 		[Embed(source = "../assets/images/enemySmall_32x32.png")] public static const IMG_ENEMY_S:Class;
 		[Embed(source="../assets/images/enemyMedium_32x32.png")] public static const IMG_ENEMY_M:Class;
 		[Embed(source = "../assets/images/enemyBig_32x32.gif")] public static const IMG_ENEMY_L:Class;
 		[Embed(source="../assets/images/enemyBonus_32x32.png")] public static const IMG_ENEMY_B:Class;
 		[Embed(source="../assets/images/bullets.png")] public static const IMG_BULLET:Class;
-		//[Embed(source = '../assets/images/bullet.png')] public static const IMG_BULLET:Class;
-		//[Embed(source="../assets/images/bullet_P.png")] public static const IMG_BULLET_PLAYER:Class;
 		public static const IMG_PARTICLE:BitmapData = new BitmapData(2, 2, false);
 		public static const IMG_HEALTHRECT:BitmapData = new BitmapData(5, 12, false, 0xb22222); // Dark red
 		public static const IMG_HEALTHFILL:BitmapData = new BitmapData(3, 10, false, 0xadff2f); // Green
