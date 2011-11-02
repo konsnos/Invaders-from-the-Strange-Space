@@ -104,7 +104,7 @@ package worlds.objs
 		
 		override public function checkInput():void 
 		{
-			if ((Input.check("down") || (Input.mouseY > FP.height / 4 * 3)) && !updating && choiceG != selection.length - 1)
+			if ((Input.mouseY > FP.height / 4 * 3) && !updating && choiceG != selection.length - 1)
 			{
 				prevTween.tween(Text(selection[0][0]).y, Text(selection[0][0]).y - FP.height / 5, 0.3, Ease.sineInOut);
 				updating = true;
@@ -116,7 +116,7 @@ package worlds.objs
 				Text(selection[choiceG][1]).alpha = 1;
 				Text(selection[choiceG][2]).alpha = 1;
 			}
-			else if (Input.check("up") || (Input.mouseY < FP.height / 4) && !updating && choiceG != 0)
+			else if ((Input.mouseY < FP.height / 4) && !updating && choiceG != 0)
 			{
 				prevTween.tween(Text(selection[0][0]).y, Text(selection[0][0]).y + FP.height / 5, 0.3, Ease.sineInOut);
 				updating = true;

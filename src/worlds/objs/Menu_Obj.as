@@ -47,12 +47,10 @@ package worlds.objs
 					choice = selection.length -1;
 				}
 			}
-			trace(choice)
 		}
 		protected function set choiceSM(setValue:int):void 
 		{
 			choice = setValue;
-			trace(choice)
 		}
 		public function get selectedG():Menu_Obj 
 		{
@@ -83,7 +81,7 @@ package worlds.objs
 		 */
 		public function checkInput():void 
 		{
-			if (Input.pressed("down"))
+			/*if (Input.pressed("down"))
 			{
 				Text(selection[choiceG]).alpha = 0.5;
 				choiceS = 1;
@@ -94,7 +92,7 @@ package worlds.objs
 				Text(selection[choiceG]).alpha = 0.5;
 				choiceS = -1;
 				Text(selection[choiceG]).alpha = 1;
-			}
+			}*/
 			
 			focus = false;
 			

@@ -1,6 +1,7 @@
 package 
 {
 	import flash.ui.Mouse;
+	import mochi.as3.MochiServices;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
@@ -17,13 +18,16 @@ package
 	 */
 	public class SpaceInvaders extends Engine 
 	{
+		private var _mochiads_game_id:String = "a5741d193f8a5bd9";
 		
 		public function SpaceInvaders() 
 		{
 			super(640, 480);
 			
-			//Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
-			Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
+			Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
+			//Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
+			
+			MochiServices.connect("a5741d193f8a5bd9", root, onConnectError);
 		}
 		
 		override public function init():void 
@@ -50,6 +54,10 @@ package
 			FP.screen.color = 0x111111;
 		}
 		
+		public function onConnectError(status:String):void 
+		{
+			
+		}
 	}
 	
 }

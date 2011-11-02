@@ -47,8 +47,8 @@ package worlds.objs
 			Text(back).size = 10;
 			Text(back).x = 5;
 			Text(back).y = FP.height - (Text(back).height);
-			Text(back).color = 0x006400;
-			Text(back).alpha = 1;
+			Text(back).color = 0x00CC00;
+			Text(back).alpha = 0.5;
 			menu.add(back);
 			
 			Text(selection[0]).alpha = 0.5;
