@@ -1,7 +1,10 @@
 package worlds.objs 
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -17,6 +20,7 @@ package worlds.objs
 	public class GetName_Obj extends Menu_Obj 
 	{
 		private var prevkeys:String;
+		private static const TEXT_BACKGROUND:Image = new Image(new BitmapData(250, 30, true, 0x55555555));
 		
 		public function GetName_Obj() 
 		{
@@ -30,18 +34,30 @@ package worlds.objs
 			title.y = FP.height / 4;
 			title.color = 0x32cd32; // Green
 			
+			TEXT_BACKGROUND.x = FP.halfWidth - TEXT_BACKGROUND.width / 2;
+			TEXT_BACKGROUND.y = FP.height / 4 * 2;
+			
 			selection.push(new Text(String("")));
 			Text(selection[0]).font = 'FONT_CHOICE';
 			Text(selection[0]).align = "center";
 			Text(selection[0]).size = 22;
-			Text(selection[0]).x = FP.width / 2 - Text(selection[0]).width / 2;
+			Text(selection[0]).x = FP.halfWidth - Text(selection[0]).width / 2;
 			Text(selection[0]).y = FP.height / 4 * 2;
 			Text(selection[0]).color = 0xFFFFFF; // White
 			Text(selection[0]).alpha = 1;
 			
+			selection.push(new Text(String("Ok")));
+			Text(selection[1]).font = 'FONT_CHOICE';
+			Text(selection[1]).align = "center";
+			Text(selection[1]).size = 22;
+			Text(selection[1]).x = FP.width / 2 - Text(selection[1]).width / 2;
+			Text(selection[1]).y = FP.height / 4 * 3;
+			Text(selection[1]).color = 0x006400; // White
+			Text(selection[1]).alpha = 0.5;
+			
 			prevkeys = Input.keyString;
 			
-			menu = new Graphiclist(title, selection[0]);
+			menu = new Graphiclist(title, selection[0], TEXT_BACKGROUND, selection[1]);
 			choiceS = 0;
 			graphic = menu;
 			
@@ -50,7 +66,7 @@ package worlds.objs
 		
 		override public function update():void 
 		{
-			if (prevkeys != Input.keyString && Text(selection[0]).text.length < 20)
+			if (prevkeys != Input.keyString && Text(selection[0]).text.length < 10)
 			{
 				Text(selection[0]).text += cleanText(Input.lastKey);
 				prevkeys = Input.keyString;
@@ -60,13 +76,28 @@ package worlds.objs
 			
 			if (Input.pressed(Key.BACKSPACE))
 			{
-				Text(selection[0]).text = "";
+				Text(selection[0]).text = Text(selection[0]).text.slice(0, Text(selection[0]).text.length -1 );
 			}
 			
-			if (Input.pressed("enter"))
+			if((Input.mouseX >= Text(selection[1]).x && Input.mouseX <= Text(selection[1]).x + Text(selection[1]).width) && 
+			(Input.mouseY >= Text(selection[1]).y && Input.mouseY <= Text(selection[1]).y + Text(selection[1]).height))
+			{
+				if (Text(selection[1]).alpha != 1)
+				{
+					Text(selection[1]).alpha = 1;
+				}
+			}else
+			{
+				if (Text(selection[1]).alpha != 0.5)
+				{
+					Text(selection[1]).alpha = 0.5;
+				}
+			}
+			
+			if (Input.pressed("enter") || (Input.mousePressed && Text(selection[1]).alpha == 1))
 			{
 				Log.Play();
-				Log.CustomMetric("v66", "version", true);
+				Log.CustomMetric("v1.2", "version", true);
 				GeoIP.Lookup(SetPlayerCountry);
 				
 				if (Text(selection[0]).text.length > 0)

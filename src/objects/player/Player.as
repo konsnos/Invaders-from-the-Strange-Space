@@ -62,8 +62,8 @@ package objects.player
 			image = new Image(GlobalVariables.IMG_PLAYER, new Rectangle(0, 0, 64, 64));
 			sprite.smooth = true;
 			image.smooth = true;
-			var size:int = Math.ceil(Math.sqrt(image.width * image.width + image.height * image.height));
-			maskBmp = new BitmapData(size, size, true, 0);
+			//var size:int = Math.ceil(Math.sqrt(image.width * image.width + image.height * image.height));
+			maskBmp = new BitmapData(64, 64, true, 0);
 			maskObj = new Pixelmask(maskBmp);
 			maskBmp.fillRect(maskBmp.rect, 0);
 			this.mask = maskObj;

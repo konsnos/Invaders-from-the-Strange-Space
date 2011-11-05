@@ -1,4 +1,10 @@
-Build 74 - 1.1 version
+Build 75 - 1.2v
+- Fixed a bug in moving the player with the mouse and not having the right positioning.
+- Added an Ok button in the GetName menu.
+- Changed the available characters for name from 20 to 10.
+- Backspace in GetName will now remove only the last character instead of erasing the whole text.
+
+Build 74 - 1.1v
 - Fixed a bug where the keyboard keys would hung the menu.
 
 Build 73 - Release Candidate 1.0 version

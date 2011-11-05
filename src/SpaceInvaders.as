@@ -8,6 +8,7 @@ package
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import Playtomic.Log;
+	//import com.newgrounds.API;
 	
 	import worlds.MainMenu;
 	
@@ -18,7 +19,7 @@ package
 	 */
 	public class SpaceInvaders extends Engine 
 	{
-		private var _mochiads_game_id:String = "a5741d193f8a5bd9";
+		//private var _mochiads_game_id:String = "a5741d193f8a5bd9";
 		
 		public function SpaceInvaders() 
 		{
@@ -27,7 +28,8 @@ package
 			Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
 			//Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
 			
-			MochiServices.connect("a5741d193f8a5bd9", root, onConnectError);
+			//API.connect(root, "21203:tPywpP16", "XnCnyQDWahIt5sQhPOydL1D7P2i4Ao9T");
+			//MochiServices.connect("a5741d193f8a5bd9", root, onConnectError);
 		}
 		
 		override public function init():void 
@@ -49,6 +51,7 @@ package
 			GlobalVariables.FILLMAPARRAY();
 			GlobalVariables.FILLEXPLOSIONARRAY();
 			GlobalVariables.RESETSCORE();
+			//GlobalVariables.MOUSE = true;
 			
 			FP.world = new MainMenu;
 			FP.screen.color = 0x111111;

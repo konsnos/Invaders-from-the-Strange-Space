@@ -17,7 +17,7 @@ package worlds.objs
 		private var stars:Array;
 		
 		// number of stars
-		private var fieldDensity:int;
+		private var fieldDensity:uint;
 		private var fieldColors:Array;
 		
 		override public function update():void 
@@ -61,7 +61,7 @@ package worlds.objs
 		{
 			if (colors == null)
 			{
-				colors = [0x444444, 0x999999, 0xBBBBBB, 0xFFFFFF];
+				colors = [0x444444, 0x777777, 0x999999, 0xCCCCCC];
 			}
 			
 			if (density > 1000)

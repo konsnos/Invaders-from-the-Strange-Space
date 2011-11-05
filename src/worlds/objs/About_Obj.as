@@ -65,7 +65,6 @@ package worlds.objs
 						{
 							Text(back).alpha = 1;
 							returnBack = true;
-							trace(choiceG)
 						}
 					}else
 					{
