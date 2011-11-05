@@ -2,6 +2,7 @@ package worlds.objs
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import mochi.as3.MochiSocial;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
@@ -20,7 +21,7 @@ package worlds.objs
 	public class GetName_Obj extends Menu_Obj 
 	{
 		private var prevkeys:String;
-		private static const TEXT_BACKGROUND:Image = new Image(new BitmapData(250, 30, true, 0x55555555));
+		private static const TEXT_BACKGROUND:Image = new Image(new BitmapData(250, 30, true, 0x44444444));
 		
 		public function GetName_Obj() 
 		{
@@ -62,6 +63,11 @@ package worlds.objs
 			graphic = menu;
 			
 			SoundSystem.reset();
+			
+			MochiSocial.addEventListener(MochiSocial.ERROR, handleError);
+			MochiSocial.addEventListener(MochiSocial.LOGGED_IN, loggedIn);
+			
+			MochiSocial.showLoginWidget();
 		}
 		
 		override public function update():void 
@@ -111,9 +117,18 @@ package worlds.objs
 						new ListLeaderboards(i);
 					}
 					Leaderboards.List("brutalhighscores", this.brutalListComplete);
+					MochiSocial.hideLoginWidget();
 				}else
 				{
 					Text(title).text = "Please provide a name";
+				}
+			}
+			
+			if (MochiSocial.loggedIn)
+			{
+				if (Text(selection[0]).text == "") 
+				{
+					Text(selection[0]).text = MochiSocial._user_info.name;
 				}
 			}
 		}
@@ -157,6 +172,17 @@ package worlds.objs
 			{
 				
 			}
+		}
+		
+		private function loggedIn(event:Object):void 
+		{
+			Text(selection[0]).text = event.name;
+			trace("Hello " + event.name + "!!!!!!!!!!!!!!");
+		}
+		
+		private function handleError():void 
+		{
+			
 		}
 	}
 

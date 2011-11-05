@@ -29,7 +29,7 @@ package
 			//Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
 			
 			//API.connect(root, "21203:tPywpP16", "XnCnyQDWahIt5sQhPOydL1D7P2i4Ao9T");
-			//MochiServices.connect("a5741d193f8a5bd9", root, onConnectError);
+			MochiServices.connect("a5741d193f8a5bd9", root, onConnectError);
 		}
 		
 		override public function init():void 

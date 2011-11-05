@@ -1,3 +1,6 @@
+Build 76 - 1.2v
+- If user is logged in in Mochi, game uses his user name.
+
 Build 75 - 1.2v
 - Fixed a bug in moving the player with the mouse and not having the right positioning.
 - Added an Ok button in the GetName menu.
