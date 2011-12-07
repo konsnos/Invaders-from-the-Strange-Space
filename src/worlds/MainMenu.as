@@ -13,6 +13,7 @@ package worlds
 	import objects.enemies.Big;
 	import objects.enemies.Bonus;
 	import worlds.objs.BlackScreen;
+	import worlds.objs.ListLeaderboards;
 	import worlds.objs.MainMenu_Obj;
 	import worlds.objs.Menu_Obj;
 	import worlds.objs.MuteBtn;
@@ -84,6 +85,11 @@ package worlds
 		
 		private function continueBegin():void 
 		{
+			for (var i:uint = 1; i < 11; i++)
+            {
+                new ListLeaderboards(i);
+            }
+			
 			addGraphic(field);
 			GlobalVariables.gameState = GlobalVariables.PLAYING;
 			fade = new BlackScreen();
