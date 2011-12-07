@@ -32,18 +32,9 @@ package worlds.objs
 			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
 			Text(selection[selection.length -1]).size = 18;
 			Text(selection[selection.length -1]).align = "center";
-			Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) - 150;
+			Text(selection[selection.length -1]).x = FP.halfWidth - Text(selection[selection.length -1]).width / 2;
 			Text(selection[selection.length -1]).y = 70;
 			Text(selection[selection.length -1]).color = 0xcd5c5c; // white blue
-			Text(selection[selection.length -1]).alpha = 1;
-			menu.add(selection[selection.length -1]);
-			selection.push(new Text(String("Brutal")));
-			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length -1]).size = 18;
-			Text(selection[selection.length -1]).align = "center";
-			Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) + 150;
-			Text(selection[selection.length -1]).y = 70;
-			Text(selection[selection.length -1]).color = 0xb22222; // white blue
 			Text(selection[selection.length -1]).alpha = 1;
 			menu.add(selection[selection.length -1]);
 			
@@ -79,15 +70,13 @@ package worlds.objs
 			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
 			Text(selection[selection.length -1]).size = 13;
 			Text(selection[selection.length -1]).align = "center";
-			Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) - 150;
+			Text(selection[selection.length -1]).x = FP.halfWidth - Text(selection[selection.length -1]).width / 2;
 			Text(selection[selection.length -1]).y = FP.height / 15 * 10 + 100;
 			Text(selection[selection.length -1]).color = 0x00bfff; // white blue
 			Text(selection[selection.length -1]).alpha = 1;
 			
 			menu.add(selection[selection.length -1]);
 			graphic = menu;
-			
-			Leaderboards.List("brutalhighscores", this.globalBrutalListComplete);
 		}
 		
 		private function globalListComplete(scores:Array, numscores:int, response:Object):void
@@ -107,7 +96,7 @@ package worlds.objs
 					Text(selection[selection.length -1]).font = 'FONT_CHOICE';
 					Text(selection[selection.length -1]).size = 16;
 					Text(selection[selection.length -1]).align = "center";
-					Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) - 150;
+					Text(selection[selection.length -1]).x = FP.halfWidth - Text(selection[selection.length -1]).width / 2;
 					Text(selection[selection.length -1]).y = FP.height / 15 * i + 100;
 					Text(selection[selection.length -1]).color = 0xffffff; // white blue
 					Text(selection[selection.length -1]).alpha = 1;
@@ -133,80 +122,6 @@ package worlds.objs
 				
 			}
 			Leaderboards.List("highscores", this.userListComplete, { customfilters: { "Name": GlobalVariables.USERNAME }} );
-		}
-		
-		private function globalBrutalListComplete(scores:Array, numscores:int, response:Object):void
-		{
-			if(response.Success)
-			{
-				for ( i = 0; i < 10; i++)
-				{
-					var score:PlayerScore = scores[i];
-					if (score == null)
-					{
-						selection.push(new Text(String((i + 1) + ". ")));
-					}else
-					{
-						selection.push(new Text(String((i + 1) + ". " + score.Name + " - " + score.Points)));
-					}
-					Text(selection[selection.length -1]).font = 'FONT_CHOICE';
-					Text(selection[selection.length -1]).size = 16;
-					Text(selection[selection.length -1]).align = "center";
-					Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) + 150;
-					Text(selection[selection.length -1]).y = FP.height / 15 * i + 100;
-					Text(selection[selection.length -1]).color = 0xffffff; // white blue
-					Text(selection[selection.length -1]).alpha = 1;
-					menu.add(selection[selection.length -1]);
-				}
-				graphic = menu;
-			}
-			else
-			{
-				selection.push(new Text(String("Problem listing scores")))
-				selection.push(new Text(String("Error code : " + response.ErrorCode)));
-				for (i = 0; i < selection.length -1; i++)
-				{
-					Text(selection[selection.length -1]).font = 'FONT_CHOICE';
-					Text(selection[selection.length -1]).size = 16;
-					Text(selection[selection.length -1]).x = FP.halfWidth - Text(selection[selection.length -1]).width / 2;
-					Text(selection[selection.length -1]).y = FP.height / 15 * i + 200;
-					Text(selection[selection.length -1]).color = 0xffffff;
-					Text(selection[selection.length -1]).alpha = 1;
-					menu.add(selection[selection.length -1]);
-				}
-				graphic = menu;
-				
-			}
-			Leaderboards.List("brutalhighscores", this.userBrutalListComplete, { customfilters: { "Name": GlobalVariables.USERNAME }} );
-		}
-		
-		private function userBrutalListComplete(scores:Array, numscores:int, response:Object):void
-		{
-			if (response.Success)
-			{
-				var score:PlayerScore = scores[0];
-				if (score == null)
-				{
-					selection.push(new Text(String("You don't have a score yet.")));
-				}else
-				{
-					selection.push(new Text(String(score.Name + " - " + score.Points)));
-				}
-			}else
-			{
-				
-			}
-			
-			Text(selection[selection.length -1]).font = 'FONT_CHOICE';
-			Text(selection[selection.length -1]).size = 13;
-			Text(selection[selection.length -1]).align = "center";
-			Text(selection[selection.length -1]).x = (FP.halfWidth - Text(selection[selection.length -1]).width / 2) + 150;
-			Text(selection[selection.length -1]).y = FP.height / 15 * 10 + 100;
-			Text(selection[selection.length -1]).color = 0x00bfff; // white blue
-			Text(selection[selection.length -1]).alpha = 1;
-			
-			menu.add(selection[selection.length -1]);
-			graphic = menu;
 		}
 		
 		override public function update():void 

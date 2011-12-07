@@ -23,18 +23,10 @@ package worlds.objs
 			title.color = 0x0000ff; // blue
 			menu = new Graphiclist(title);
 			
-			if (!brutal)
-			{
-				GlobalVariables.CALCULATESCORE();
-				
-				selection.push(new Text(String("You finished the game with " + GlobalVariables.GAMESCORE + " points!")));
-			}else
-			{
-				selection.push(new Text(String("You finished game in Brutal with " + GlobalVariables.BRUTALSCORE + " points! WOW!!!")));
-				var overallBrutalScore:PlayerScore = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.BRUTALSCORE);
-				overallBrutalScore.CustomData["Name"] = GlobalVariables.USERNAME;
-				Leaderboards.Save(overallBrutalScore, "brutalhighscores");
-			}
+			GlobalVariables.CALCULATESCORE();
+			
+			selection.push(new Text(String("You finished the game with " + GlobalVariables.GAMESCORE + " points!")));
+			//Kongregate.submit("normalHighScores", GlobalVariables.GAMESCORE)
 			
 			selection.push(new Text(String("To check your ranking with other players look at the highscores in the main menu.")));
 			selection.push(new Text(String("To improve your score you can try improve your accuracy, and avoid enemies bullets.")));

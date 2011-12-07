@@ -218,7 +218,7 @@ package objects.player
 			if (Bullet.listP < BulletsMax )
 			{
  				SoundSystem.play(soundShoot, this.centerX);
-				recoilY.tween(400, 405, 0.1, Ease.backOut);
+				recoilY.tween(416, 420, 0.1, Ease.backOut);
 				recoilY.complete = recoilCompleted;
 				spawnBullet(this.x + image.width / 2, this.y);
 			}
@@ -226,7 +226,7 @@ package objects.player
 		
 		private function recoilCompleted():void 
 		{
-			recoilY.tween(this.y, 400, 0.2, Ease.sineInOut);
+			recoilY.tween(this.y, 416, 0.2, Ease.sineInOut);
 			recoilY.complete = null;
 		}
 		
@@ -242,7 +242,7 @@ package objects.player
 			if (b)
 			{
 				takeDamage(b.damageG);
-				fade.fadeOut(0.2, 0.8, true);
+				fade.fadeOut(0.4, 0.8, true);
 				SoundSystem.play(soundExplosionm, this.centerX);
 				Explosion(world.create(Explosion)).reset(b.x, b.y, -1, 0xB0B2B2, 5);
 				b.destroy();

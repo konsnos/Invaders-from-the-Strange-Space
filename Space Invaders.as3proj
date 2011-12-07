@@ -7,7 +7,7 @@
     <movie path="bin\SpaceInvaders.swf" />
     <movie fps="60" />
     <movie width="640" />
-    <movie height="480" />
+    <movie height="500" />
     <movie version="10" />
     <movie minorVersion="0" />
     <movie platform="Flash Player" />
@@ -21,7 +21,7 @@
   <build>
     <option accessible="False" />
     <option allowSourcePathOverlap="False" />
-    <option benchmark="False" />
+    <option benchmark="True" />
     <option es="False" />
     <option locale="" />
     <option loadConfig="" />
@@ -50,7 +50,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="src\NewgroundsAPI.swc" />
+    <!-- example: <element path="..." /> -->
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

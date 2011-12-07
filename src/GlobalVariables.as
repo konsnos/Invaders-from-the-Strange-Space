@@ -13,12 +13,13 @@ package
 	public class GlobalVariables 
 	{
 		/****************** IMAGES ******************/
-		[Embed(source = "../assets/images/playerShip_64x64.gif")] public static const IMG_PLAYER:Class;
-		[Embed(source = "../assets/images/enemySmall_32x32.png")] public static const IMG_ENEMY_S:Class;
-		[Embed(source="../assets/images/enemyMedium_32x32.png")] public static const IMG_ENEMY_M:Class;
-		[Embed(source = "../assets/images/enemyBig_32x32.gif")] public static const IMG_ENEMY_L:Class;
-		[Embed(source="../assets/images/enemyBonus_32x32.png")] public static const IMG_ENEMY_B:Class;
-		[Embed(source="../assets/images/bullets.png")] public static const IMG_BULLET:Class;
+		[Embed(source = '../assets/images/playerShip_64x64.gif')] public static const IMG_PLAYER:Class;
+		[Embed(source = '../assets/images/enemySmall_32x32.png')] public static const IMG_ENEMY_S:Class;
+		[Embed(source='../assets/images/enemyMedium_32x32.png')] public static const IMG_ENEMY_M:Class;
+		[Embed(source = '../assets/images/enemyBig_32x32.gif')] public static const IMG_ENEMY_L:Class;
+		[Embed(source='../assets/images/enemyBonus_32x32.png')] public static const IMG_ENEMY_B:Class;
+		[Embed(source = '../assets/images/bullets.png')] public static const IMG_BULLET:Class;
+		[Embed(source = "../assets/images/sound.png")] public static const IMG_SOUND:Class;
 		public static const IMG_PARTICLE:BitmapData = new BitmapData(2, 2, false);
 		public static const IMG_HEALTHRECT:BitmapData = new BitmapData(5, 12, false, 0xb22222); // Dark red
 		public static const IMG_HEALTHFILL:BitmapData = new BitmapData(3, 10, false, 0xadff2f); // Green
@@ -34,9 +35,9 @@ package
 		[Embed(source='../assets/sounds/effects/shoot.mp3')] public static const SHOOT:Class;
 		
 		/****************** FONTS ******************/
-		[Embed(source = '../assets/fonts/LiberationSans-Regular.ttf', embedAsCFF = "false", fontName = "FONT_STATS")] public static const FONT_STATS:Class;
-		[Embed(source="../assets/fonts/Coalition_v2.ttf", embedAsCFF = "false", fontName = "FONT_TITLE")] public static const FONT_TITLE:Class;
-		[Embed(source="../assets/fonts/ethnocentric rg.ttf", embedAsCFF = "false", fontName = "FONT_CHOICE")] public static const FONT_CHOICE:Class;
+		[Embed(source = '../assets/fonts/LiberationSans-Regular.ttf', embedAsCFF = 'false', fontName = 'FONT_STATS')] public static const FONT_STATS:Class;
+		[Embed(source='../assets/fonts/Coalition_v2.ttf', embedAsCFF = 'false', fontName = 'FONT_TITLE')] public static const FONT_TITLE:Class;
+		[Embed(source='../assets/fonts/ethnocentric_rg.ttf', embedAsCFF = 'false', fontName = 'FONT_CHOICE')] public static const FONT_CHOICE:Class;
 		
 		/****************** LEVELS ******************/
 		[Embed(source = '../assets/levels/level01.oel', mimeType = 'application/octet-stream')]private static const MAP01:Class;
@@ -65,8 +66,6 @@ package
 		public static var SCORE:Array;
 		public static var GLSCORE:Array;
 		public static var GAMESCORE:uint;
-		public static var BRUTALSCORE:uint;
-		public static var BRUTALHIGHSCORE:uint;
 		public static var MOUSE:Boolean;
 		
 		public function GlobalVariables()

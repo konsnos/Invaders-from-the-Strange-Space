@@ -8,33 +8,30 @@ package
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import Playtomic.Log;
-	//import com.newgrounds.API;
 	
 	import worlds.MainMenu;
 	
 	/**
 	 * ...
 	 * @author Konstantinos Egarhos
-	 * @version 70
+	 * @version 1.5
 	 */
-	public class SpaceInvaders extends Engine 
+	dynamic public class SpaceInvaders extends Engine 
 	{
-		//private var _mochiads_game_id:String = "a5741d193f8a5bd9";
+		private var _mochiads_game_id:String = "a5741d193f8a5bd9";
 		
 		public function SpaceInvaders() 
 		{
-			super(640, 480);
-			
-			Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
-			//Log.View(4427, "bef6d9b33abf4e4c", "5022c37998b0439d98bc31247e6941", root.loaderInfo.loaderURL); // dev
-			
-			//API.connect(root, "21203:tPywpP16", "XnCnyQDWahIt5sQhPOydL1D7P2i4Ao9T");
-			MochiServices.connect("a5741d193f8a5bd9", root, onConnectError);
+			super(640, 500);
 		}
 		
 		override public function init():void 
 		{
 			super.init();
+			
+			Log.View(4391, "28a1f27e1ff34ceb", "14d426b6794c478f813040f8312975", root.loaderInfo.loaderURL);
+			MochiServices.connect("a5741d193f8a5bd9", root);
+			//Kongregate.connect(FP.stage);
 			
 			Mouse.hide();
 			//FP.console.enable();
@@ -45,21 +42,15 @@ package
 			Input.define("down", Key.DOWN, Key.S);
 			Input.define("shoot", Key.SPACE, Key.Z, Key.X, Key.C);
 			Input.define("enter", Key.ENTER);
-			Input.define("pause", Key.P);
+			Input.define("pause", Key.P, Key.ESCAPE);
 			Input.define("back", Key.BACKSPACE);
 			
 			GlobalVariables.FILLMAPARRAY();
 			GlobalVariables.FILLEXPLOSIONARRAY();
 			GlobalVariables.RESETSCORE();
-			//GlobalVariables.MOUSE = true;
 			
 			FP.world = new MainMenu;
-			FP.screen.color = 0x111111;
-		}
-		
-		public function onConnectError(status:String):void 
-		{
-			
+			FP.screen.color = 0x010001;
 		}
 	}
 	

@@ -33,19 +33,7 @@ package worlds.objs
 			title.color = 0xb22222; // dark red
 			menu = new Graphiclist(title);
 			
-			if (!brutal)
-			{
-				selection.push(new Text(String("Press Enter to restart")));
-			}else
-			{	// Store brutal high scores.
-				GlobalVariables.BRUTALSCORE += Stats_Obj.scoreG;
-				selection.push(new Text(String("You lost with score : " + GlobalVariables.BRUTALSCORE)));
-				selection.push(new Text(String("Better luck next time")));
-				
-				overallBrutalScore = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.BRUTALSCORE);
-				overallBrutalScore.CustomData["Name"] = GlobalVariables.USERNAME;
-				Leaderboards.Save(overallBrutalScore, "brutalhighscores");
-			}
+			selection.push(new Text(String("Press Enter to restart")));
 			
 			selection.push(new Text(String("Press Backspace to return to the main menu")));
 			for (var i:uint = 0; i < selection.length; i++)

@@ -15,6 +15,7 @@ package worlds.objs
 		// stars is [star1, star2, star3, etc]
 		// star# is [graphic, Point(x, y), color, speed]
 		private var stars:Array;
+		private var star:Array;
 		
 		// number of stars
 		private var fieldDensity:uint;
@@ -29,7 +30,7 @@ package worlds.objs
 			GlobalVariables.gameState == GlobalVariables.WONGAME ||
 			GlobalVariables.gameState == GlobalVariables.CHANGING)
 			{
-				for each(var star:Array in stars)
+				for each(star in stars)
 				{
 					// add speed to the star
 					Point(star[1]).y += star[3]; // Memory intensive

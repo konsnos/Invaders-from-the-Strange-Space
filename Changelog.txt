@@ -1,3 +1,6 @@
+Build 77 - 1.3v
+- Maintenance.
+
 Build 76 - 1.2v
 - If user is logged in in Mochi, game uses his user name.
 

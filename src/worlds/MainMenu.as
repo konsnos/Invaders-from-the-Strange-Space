@@ -1,6 +1,7 @@
 package worlds 
 {
 	import flash.ui.Mouse;
+	import mochi.as3.MochiSocial;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Sfx;
@@ -12,9 +13,9 @@ package worlds
 	import objects.enemies.Big;
 	import objects.enemies.Bonus;
 	import worlds.objs.BlackScreen;
-	import worlds.objs.GetName_Obj;
 	import worlds.objs.MainMenu_Obj;
 	import worlds.objs.Menu_Obj;
+	import worlds.objs.MuteBtn;
 	import worlds.objs.Starfield;
 	
 	import GlobalVariables;
@@ -44,22 +45,41 @@ package worlds
 		override public function begin():void 
 		{
 			super.begin();
+			add(new MuteBtn);
+			
+			MochiSocial.showLoginWidget({y:-4});
+			
 			Mouse.show();
 			objsArray = new Array;
+			SoundSystem.reset();
 			
 			if (GlobalVariables.USERNAME == null)
-			{
-				var s:Splash = new Splash();
-				FP.world.add(s);
-				s.start(splashComplete);
-				var splash:Splash = new Splash();
-				FP.world.add(splash);
-				s.start(splashComplete);
-			}else
-			{
-				instance = new MainMenu_Obj;
-				continueBegin();
-			}
+            {
+                var s:Splash = new Splash();
+                FP.world.add(s);
+                s.start(splashComplete);
+                var splash:Splash = new Splash();
+                FP.world.add(splash);
+                s.start(splashComplete);
+            }else
+            {
+				if (MochiSocial.loggedIn)
+				{
+					GlobalVariables.USERNAME = MochiSocial._user_info.name;
+				}else
+				{
+					GlobalVariables.USERNAME = "Guest";
+					MochiSocial.addEventListener(MochiSocial.LOGGED_IN, loggedIn);
+				}
+				
+                instance = new MainMenu_Obj;
+                continueBegin();
+            }
+		}
+		
+		private function loggedIn(event:Object):void 
+		{
+			GlobalVariables.USERNAME = event.name;
 		}
 		
 		private function continueBegin():void 
@@ -81,11 +101,21 @@ package worlds
 			updating = false;
 			
 			fade.fadeIn();
+			//add(new MuteBtn);
 		}
 		
 		private function splashComplete():void 
 		{
-			instance = new GetName_Obj;
+			//GlobalVariables.USERNAME = Kongregate.getUsername;
+			if (MochiSocial.loggedIn)
+			{
+				GlobalVariables.USERNAME = MochiSocial._user_info.name;
+			}else
+			{
+				GlobalVariables.USERNAME = "Guest";
+				MochiSocial.addEventListener(MochiSocial.LOGGED_IN, loggedIn);
+			}
+			instance = new MainMenu_Obj;
 			continueBegin();
 		}
 		

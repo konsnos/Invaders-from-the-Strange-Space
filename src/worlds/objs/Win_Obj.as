@@ -1,5 +1,6 @@
 package worlds.objs 
 {
+	import mochi.as3.MochiScores;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
@@ -59,34 +60,33 @@ package worlds.objs
 		 */
 		private function showScore():void 
 		{
-			if (brutal == false)
+			if (Stats_Obj.finalScoreG > uint(GlobalVariables.SCORE[stage]))
 			{
-				if (Stats_Obj.finalScoreG > uint(GlobalVariables.SCORE[stage]))
-				{
-					selection.push(new Text(String("You've surpassed your previous score by " + (Stats_Obj.finalScoreG - uint(GlobalVariables.SCORE[stage])) + " points!")));
-					GlobalVariables.SCORE[stage] = Stats_Obj.finalScoreG;
-					
-					level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
-					level_score.CustomData["Name"] = GlobalVariables.USERNAME;
-					Leaderboards.Save(level_score, String(stage + 1));
-					
-					GlobalVariables.CALCULATESCORE();
-					// Store in playtomic
-					overall_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.GAMESCORE);
-					overall_score.CustomData["Name"] = GlobalVariables.USERNAME;
-					Leaderboards.Save(overall_score, "highscores");
-				}else
-				{
-					GlobalVariables.CALCULATESCORE();
-					selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.finalScoreG) + " points to tie your high score.")));
-				}
+				selection.push(new Text(String("You've surpassed your previous score by " + (Stats_Obj.finalScoreG - uint(GlobalVariables.SCORE[stage])) + " points!")));
+				GlobalVariables.SCORE[stage] = Stats_Obj.finalScoreG;
 				
-				selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
+				level_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.SCORE[stage]);
+				level_score.CustomData["Name"] = GlobalVariables.USERNAME;
+				Leaderboards.Save(level_score, String(stage + 1));
+				
+				GlobalVariables.CALCULATESCORE();
+				// Store in playtomic
+				overall_score = new PlayerScore(GlobalVariables.USERNAME, GlobalVariables.GAMESCORE);
+				overall_score.CustomData["Name"] = GlobalVariables.USERNAME;
+				Leaderboards.Save(overall_score, "highscores");
 			}else
-			{	// Game is in Brutal difficulty
-				GlobalVariables.BRUTALSCORE += Stats_Obj.finalScoreG;
-				selection.push(new Text(String("Your total score is " + GlobalVariables.BRUTALSCORE + ".")));
+			{
+				GlobalVariables.CALCULATESCORE();
+				selection.push(new Text(String("You needed " + (uint(GlobalVariables.SCORE[stage]) - Stats_Obj.finalScoreG) + " points to tie your high score.")));
 			}
+			
+			selection.push(new Text(String("Your total score is " + GlobalVariables.GAMESCORE + ".")));
+			
+			// MOCHI
+			MochiScores.setBoardID("1ef2b7d769343baf");
+			MochiScores.submit(GlobalVariables.GAMESCORE, GlobalVariables.USERNAME);
+			//Kongregate.submit("normalHighScores", GlobalVariables.GAMESCORE);
+			
 			selection.push(new Text(String("Press Enter to advance to the next level")));
 			
 			for (var i:uint = 0; i < selection.length; i++)

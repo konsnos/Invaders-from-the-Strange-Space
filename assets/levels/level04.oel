@@ -1,8 +1,8 @@
 <level bonusfrequency="30">
   <width>640</width>
-  <height>480</height>
+  <height>500</height>
   <startPlace>
-    <player x="288" y="400"/>
+    <player x="288" y="416"/>
   </startPlace>
   <smalls set="small">
     <tile id="0" x="52" y="52"/>

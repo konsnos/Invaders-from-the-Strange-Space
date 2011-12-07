@@ -88,13 +88,7 @@ package worlds.objs
 			if (stats != null)
 			{
 				calculateBonusScores();
-				if (!brutal)
-				{
-					stats.text = new String("Level " + level + " - Score: " + finalScore + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
-				}else
-				{
-					stats.text = new String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + finalScore) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE);
-				}
+				stats.text = new String("Level " + level + " - Score: " + finalScore + " - Previous score: " + GlobalVariables.SCORE[level - 1]);
 			}
 		}
 		
@@ -133,17 +127,11 @@ package worlds.objs
 		
 		private function showStats():void 
 		{
-			if (!brutal)
-			{
-				stats = new Text(String("Level " + level + " - Score: " + finalScore + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
-			}else
-			{
-				stats = new Text(String("Level " + level + " - Score: " + (GlobalVariables.BRUTALSCORE + finalScore) + " - High score: " + GlobalVariables.BRUTALHIGHSCORE));
-			}
+			stats = new Text(String("Level " + level + " - Score: " + finalScore + " - Previous score: " + GlobalVariables.SCORE[level - 1]));
 			stats.size = 16;
 			stats.align = "right";
 			stats.y = FP.height - 20;
-			stats.x = FP.width - stats.textWidth;
+			stats.x = FP.width - stats.textWidth - 50;
 			stats.width = stats.textWidth;
 			stats.color = 0xffdead; // blue
 			stats.font = 'FONT_STATS';

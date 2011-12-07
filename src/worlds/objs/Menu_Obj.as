@@ -13,9 +13,9 @@ package worlds.objs
 		protected var title:Text;
 		protected var selection:Array;
 		protected var back:Text;
-		protected var returnBack:Boolean;
-		protected var selected:Menu_Obj;
-		public var updates:Boolean; // When false the player can't press enter to choose the same option.
+		protected var returnBack:Boolean; // When text back is highlighted.
+		protected var selected:Menu_Obj; // Returns the menu to which to change the screen.
+		public var updates:Boolean; // When false the player can't press enter to choose the same option probably because the screen is doing something.
 		protected var menu:Graphiclist;
 		private var choice:Number = 1;
 		protected var focus:Boolean; // To lose focus if no choice has been selected.

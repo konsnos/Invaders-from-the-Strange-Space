@@ -1,6 +1,8 @@
 package worlds.objs
 {
 	import flash.events.TextEvent;
+	import mochi.as3.MochiScores;
+	import mochi.as3.MochiSocial;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Graphiclist;
@@ -48,7 +50,7 @@ package worlds.objs
 			selection.push(new Text(String("New Game")));
 			selection.push(new Text(String("Select Level")));
 			selection.push(new Text(String("Highscores")));
-			selection.push(new Text(String("Settings")));
+			//selection.push(new Text(String("Settings")));
 			selection.push(new Text(String("How to play")));
 			selection.push(new Text(String("About")));
 			
@@ -84,31 +86,31 @@ package worlds.objs
 		{
 			super.checkInput();
 			
+			
+			
 			if (Input.pressed("enter") || Input.mousePressed)
 			{
 				switch (choiceG)
 				{
 					case 0:
-						selected = new DifSel_Obj;
-						Log.CustomMetric("SelectDifficulty");
+						fadeOut = true;
+						FP.alarm(1, normalGame);
+						Log.CustomMetric("NewGame");
+						updates = false;
 						break;
 					case 1:
 						selected = new SelectLevel_Obj;
 						Log.CustomMetric("LevelSelection", "screens");
 						break;
 					case 2:
-						selected = new ShowHighscores_Obj;
+						MochiScores.showLeaderboard( { boardID: "1ef2b7d769343baf" } );
 						Log.CustomMetric("Highscores", "screens");
 						break;
 					case 3:
-						selected = new Settings_Obj;
-						Log.CustomMetric("Settings", "screens");
-						break;
-					case 4:
 						selected = new HowToPlay_obj;
 						Log.CustomMetric("HowToPlay", "screens");
 						break;
-					case 5:
+					case 4:
 						selected = new About_Obj;
 						Log.CustomMetric("ViewedCredits","screens");
 						break;
@@ -116,6 +118,14 @@ package worlds.objs
 						break;
 				}
 			}
+		}
+		
+		/**
+		 * Starts level 1 from normal difficulty.
+		 */
+		public function normalGame():void 
+		{
+			FP.world = new Level(1,false);
 		}
 		
 		/**

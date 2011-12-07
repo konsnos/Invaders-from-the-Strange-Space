@@ -4,6 +4,7 @@ package worlds
 	import flash.events.TimerEvent;
 	import flash.ui.Mouse;
 	import flash.utils.Timer;
+	import mochi.as3.MochiSocial;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
@@ -25,6 +26,7 @@ package worlds
 	import Playtomic.Log;
 	import worlds.objs.BlackScreen;
 	import worlds.objs.GameWon_Obj;
+	import worlds.objs.MuteBtn;
 	import worlds.objs.Starfield;
 	import worlds.objs.WeaponsFree_Obj;
 	import worlds.objs.Menu_Obj;
@@ -94,13 +96,13 @@ package worlds
 		 */
 		public function Level(selectedlevel:uint, difficulty:Boolean = false, hp:uint = 3 ) 
 		{
-			if (!GlobalVariables.MOUSE)
+			/*if (!GlobalVariables.MOUSE)
 			{
 				Mouse.hide();
 			}else
 			{
 				Mouse.show();
-			}
+			}*/
 			
 			FP.screen.color = 0x000000;
 			timeElapsed = 0;
@@ -122,6 +124,7 @@ package worlds
 		override public function begin():void 
 		{
 			super.begin();
+			MochiSocial.hideLoginWidget();
 			
 			// RESET EVERYTHING
 			pause = false;
@@ -150,6 +153,8 @@ package worlds
 			add(fade);
 			fade.fadeIn(1);
 			SoundSystem.resetVolume();
+			
+			add(new MuteBtn);
 		}
 		
 		override public function update():void 

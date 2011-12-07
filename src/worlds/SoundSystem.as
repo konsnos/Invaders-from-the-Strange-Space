@@ -92,7 +92,7 @@ package worlds
 		/**
 		 * Plays sounds.
 		 * @param	snd The sound you want to hear.
-		 * @param	xPos The source of the sound in the x axis for panning.
+		 * @param	xPos The source of the sound in the x axis for panning. Default value is the center.
 		 */
  		public static function play(snd:Sfx, xPos:Number = 320):void 
 		{
@@ -105,7 +105,7 @@ package worlds
 		/**
 		 * Loops sounds.
 		 * @param	snd The sound you want to hear.
-		 * @param	xPos The source of the sound in the x axis for panning.
+		 * @param	xPos The source of the sound in the x axis for panning. Default value is the center.
 		 */
 		public static function loop(snd:Sfx, xPos:Number = 320):void 
 		{
